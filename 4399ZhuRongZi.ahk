@@ -50,7 +50,7 @@ For index, value in ArraySeq
 		if (ZorR="Z")
 		{
 			if (Mod(index,2) = 1)
-				ZhuZi2(15)
+				ZhuZi1(15)
 			else 
 				ZhuZi3(15)
 		}
@@ -59,7 +59,7 @@ For index, value in ArraySeq
 		Else if (ZorR="ZR" or ZorR="RZ")
 		{
 			if (Mod(index,2) = 1)
-				ZhuZi2(15)
+				ZhuZi1(15)
 			else 
 				ZhuZi3(15)
 
@@ -86,6 +86,33 @@ sleep 200
 WinClose 360游戏大厅
 ExitApp
 
+ZhuZi1(zhu)
+{
+	click % HB[5] ;商会button
+    sleep, % s["short"]
+    click % SB[1] ;注资button
+    sleep, % s["long"]
+	Gosub, isResultWinshow
+	if PixelColorExist("0xFFF8CE",272, 302,100) ; 还没有注过资.
+	{
+		loop %zhu%
+		{
+			click % StockPos[1]
+			sleep 50
+		}
+		sleep % s["short"]
+		click % BtnArray["rzok"]
+		sleep, % s["short"] 
+		Gosub, isResultWinshow
+		click % BtnArray["okbtn"]
+		LogToFile("zhuzi1 done.")
+	}	
+	else
+	{
+		LogToFile("ZhuZi already done yet, no need do again.")
+	}
+    sleep, % s["short"]
+}
 
 ZhuZi2(zhu)
 {

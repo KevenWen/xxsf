@@ -104,8 +104,10 @@ IfWinExist xiaoxiaoshoufu
     sleep, % s["long"]
     click % Arrayhome["okbtn"]
     LogToFile("xiaoxiaoshoufu Clicked OK")
+    CaptureScreenAll()	
     if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
         click % Arrayhome["clobtn"]
+    
     winclose, xxsf
     sleep, % s["short"]
     winclose, xhhz
@@ -115,7 +117,7 @@ IfWinExist xiaoxiaoshoufu
     ;LogToFile("xiaoxiaoshoufu Clicked OK and 5 lines ready")    
     sleep, % s["short"]
     ;runwait "4399OpenShangJi.ahk"
-    CaptureScreen()	
+    ;CaptureScreen()	
     runwait "4399Shopping_Pan.ahk"
     sleep, % s["short"]
 }

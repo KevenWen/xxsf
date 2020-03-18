@@ -72,14 +72,14 @@ IfWinExist ahk_exe mstsc.exe
 runwait "4399PrepareRongZi.ahk" "24" "xiaoxiaoshoufu" "3" "Nocz_Y" ;yun
 LogToFile("RongZiTask02.ahk for 24")
 
+runwait "QHPrepareRongZi.ahk" "2" "Nocz_Y"
+LogToFile("QHPrepareRongZi.ahk for 2")
+
 runwait "4399PrepareRongZi.ahk" "26" "hou" "1" "Nocz_Y"
 LogToFile("RongZiTask02.ahk for 26")
 
 runwait "4399PrepareRongZi.ahk" "18" "xhhz" "4" "Nocz_Y"
 LogToFile("RongZiTask02.ahk for 18")
-
-runwait "QHPrepareRongZi.ahk" "2" "Nocz_Y"
-LogToFile("QHPrepareRongZi.ahk for 2")
 
 ;runwait "4399PrepareRongZi.ahk" "20" "song" "5" "Nocz_Y"
 ;LogToFile("RongZiTask02.ahk for 20")

@@ -109,7 +109,7 @@ StartZhuanPan:
 	WaitPixelColorAndClickThrowErr("0xD1762",505, 387,2000) ;ZhuanPan
 	sleep 200
 	n=1  ; 10 x n times
-	while (n<6)
+	while (n<7)
 	{
 		WaitPixelColorAndClickThrowErr("0xF4452A",395,746,2000) ;Ten Times Button
 		sleep 200

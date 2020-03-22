@@ -25,11 +25,11 @@ if (Arrayflag = "L")
 Else if (Arrayflag = "S")  ;special
 	ArraySeq := [26,20,25]
 Else if (Arrayflag = "XL")
-	ArraySeq := [24,20,25,19,21,22,23,35]	
+	ArraySeq := [20,25,19,21,22,23,35]	
 Else if (Arrayflag = "XXL")
-	ArraySeq := [24,20,19,21,22,23,35]
+	ArraySeq := [20,19,21,22,23,35]
 Else if (Arrayflag = "M") ;only xhhz
-	ArraySeq := [24,20]
+	ArraySeq := [20]
 
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"

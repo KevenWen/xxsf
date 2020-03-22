@@ -451,7 +451,7 @@ FixRDPConn()
 		if A_Index > 2
 			Return 0
 
-		if PixelColorExist("0xFFFFF3",217, 589,200) ;the white color in the left pop up OK window
+		if PixelColorExist("0xFFFCF8",217, 589,200) ;the white color in the left pop up OK window
 			Break
 		Else
 		{

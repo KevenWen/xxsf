@@ -50,18 +50,18 @@ For index, value in ArraySeq
 		if (ZorR="Z")
 		{
 			if (Mod(index,2) = 1)
-				ZhuZi1(15)
+				ZhuZi1(16)
 			else 
-				ZhuZi3(15)
+				ZhuZi3(16)
 		}
 		Else if (ZorR="R")
 			RongZi()
 		Else if (ZorR="ZR" or ZorR="RZ")
 		{
 			if (Mod(index,2) = 1)
-				ZhuZi1(15)
+				ZhuZi1(16)
 			else 
-				ZhuZi3(15)
+				ZhuZi3(16)
 
 			RongZi()	
 		}
@@ -90,7 +90,7 @@ ZhuZi1(zhu)
 {
 	click % HB[5] ;商会button
     sleep, % s["short"]
-    click % SB[1] ;注资button
+    click % SB[2] ;注资button
     sleep, % s["long"]
 	Gosub, isResultWinshow
 	if PixelColorExist("0xFFF8CE",272, 302,100) ; 还没有注过资.
@@ -184,42 +184,42 @@ RongZi()
 	{
 		click % BC[1]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi1 done.")
 	}
 	else if PixelColorNotExist("0xABA9A5",166, 737,500) ;NengYuan
 	{
 		click % BC[4]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi4 done.")		
 	}
 	else if PixelColorNotExist("0xCCCCCC",252, 631,500) ;JingRong
 	{
 		click % BC[3]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi3 done.")		
 	}
 	else if PixelColorNotExist("0x7DAECA",321, 734,500) ;JiuDian
 	{
 		click % BC[5]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi5 done.")		
 	}
 	else if PixelColorNotExist("0xCCCCCC",362, 483,500) ;KeJi
 	{
 		click % BC[2]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi2 done.")		
 	}
 	Else
 	{
 		click % BC[3]
 		sleep , % s["short"]
-		RongZiOper(14)
+		RongZiOper(15)
 		LogToFile("RongZi3 done.")		
 	}
 }

@@ -104,7 +104,7 @@ Task202003:
                 runwait "RongZiTask02.ahk"                 
             }
             
-            runwait "4399TouLie.ahk" "lieshou" "launch" "XL"
+            runwait "4399TouLie.ahk" "lieshou" "launch" "S"
         }
     }
     ;Task for no Rong Zi days
@@ -116,11 +116,9 @@ Task202003:
             if onlyOpenShangJi = 1
                runwait "4399OpenShangJi.ahk"  
 
-            runwait "4399TouLie.ahk" "lieshou" "launch" "XL"
+            runwait "4399TouLie.ahk" "lieshou" "launch" "M"
         }
 
-        If (TimeToMeet = 061000 ) ; Rong zi task for 01-06
-            runwait "4399ZhuRongZi.ahk" "R" "L" 
     }
 
     ;Task for every days
@@ -133,10 +131,13 @@ Task202003:
     If (TimeToMeet = 200100) ; Bussniss war started
     {        
         runwait "ShangZhanReport.ahk"
-        sleep 120000
-        runwait "4399ZhuRongZi.ahk" "Z" "L" 
     }
 
+    If (TimeToMeet = 001500 ) ; Rong zi task for 01-06
+    {
+        runwait "4399ZhuRongZi.ahk" "ZR" "L" 
+        runwait "4399TouLie.ahk" "black" "launch" "L"     
+    }    
 Return
 
 global toggle := 0

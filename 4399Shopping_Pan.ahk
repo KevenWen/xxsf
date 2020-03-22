@@ -124,3 +124,6 @@ StartZhuanPan:
 		n++  
 	}
 return
+
+F10::Pause   ;pause the script
+F11::ExitApp ;stop the script

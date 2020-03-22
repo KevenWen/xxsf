@@ -29,7 +29,7 @@ Else if (Arrayflag = "XL")
 Else if (Arrayflag = "XXL")
 	ArraySeq := [20,19,21,22,23,35]
 Else if (Arrayflag = "M") ;only xhhz
-	ArraySeq := [20]
+	ArraySeq := [20,25]
 
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"

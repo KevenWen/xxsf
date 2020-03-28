@@ -109,92 +109,6 @@ WaitPixelColorAndClick(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0,p_GetMode="RGB")
     }
 }
 
-
-ResizeWindow()
-{
-	;CoordMode, Pixel, window  
-	;CoordMode, Mouse, window
-	
-	IfWinExist xiaoxiaoshoufu
-	{
-		Winmove,xiaoxiaoshoufu,,1229,23,600,959
-	}
-
-	IfWinExist SF27_Long | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_Long | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_Long
-	}
-
-		IfWinExist SF27_Supper | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_Supper | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_Supper
-	}
-
-		IfWinExist SF27_Hou | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_Hou | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_Hou
-	}
-
-		IfWinExist SF27_01 | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_01 | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_01
-	}
-
-		IfWinExist SF27_02 | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_02 | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_02
-	}
-
-		IfWinExist SF27_03 | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_03 | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_03
-	}
-		IfWinExist SF27_04 | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_04 | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_04
-	}
-		IfWinExist SF27_05 | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_05 | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_05
-	}
-		IfWinExist SF27_Yun | xiaoxiaoshoufu
-	{
-		WinActivate
-		Winmove,SF27_Yun | xiaoxiaoshoufu,,1229,23,600,959
-		WinSetTitle, SF27_Yun
-	}	
-
-		IfWinExist xxsf
-	{
-		WinActivate
-		Winmove,xxsf,,933,19,628,937
-	}		
-
-/*	
-	WinActivate xxsf
-	sleep 200
-WinGetActiveStats, Title, Width, Height, X, Y
-MsgBox, The active window "%Title%" is %Width% wide`, %Height% tall`, and positioned at %X%`,%Y%.
-*/
-}
-
-
 CaptureScreen()
 {
 	try
@@ -286,38 +200,38 @@ Launch4399Game(Sequ,windowname)
 		WinWaitActive, %Title%
 		WinSetTitle, %windowname%
 		WinSet, AlwaysOnTop, On, %windowname%
-		Winmove,%windowname%,,1229,23,600,959
-		;Waiting for up array
-		if (WaitPixelColor("0x232D4D",544, 84,20000)=0)
+		Winmove,%windowname%,,1229,23,600,959				
+		if (WaitPixelColor("0x232D4D",544, 84,15000)=0)			;Waiting for up array
 		{
 			Click 566, 83
 			sleep 500		
 		}
 		Else
-		{
-			;CaptureScreen()
 			Continue
-		}
 
-		;Sometimes click the array not get respond,click again if exist
-		if (WaitPixelColor("0x232D4D",544, 84,200)=0)
+		sleep 2000 
+		if PixelColorExist("0x232D4D",544, 84,20)				;Click again, some times the first click not get any response.
 		{
 			Click 566, 83
-			sleep 200		
-		}
+			sleep 500		
+		} 			
 
-		sleep 2000 ;Waiting for start button
 		if !(WaitPixelColorAndClick("0x3BB1B2",343, 766,12000)=0)
-		{
-			;CaptureScreen()
 			Continue
+
+		WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
+		sleep 2000
+		loop 3
+		{
+			sleep 1000
+			if !PixelColorExist("0xAFC387",473, 105,10)
+			{
+				CloseAnySubWindow()
+				break 1
+			}
 		}
 
-		sleep 5000 ;Waiting for pop out window
-
-		CloseAnySubWindow()
 		WinSet, AlwaysOnTop, off, %windowname%
-		;CaptureScreen()
 		break
 	}	
 }
@@ -396,30 +310,32 @@ Save_Refresh4399()
 
 CloseAnySubWindow()
 {
-	sleep 1000
-	loop 2
+	loop 5
 	{
-		if PixelColorExist("0xFBFBFB",471, 214,100) ;限时活动
+		ImageSearch, Px, Py, 400, 169, 511, 609, E:\\AhkScriptManager-master\\scripts\\blockofwhite.bmp
+		if (ErrorLevel = 2)  ;Execption when conduct the search
+			throw "ImageSearch not work, please check." 
+		else if (ErrorLevel = 1) ;Image not found 
+			Break
+		else if (ErrorLevel = 0) ;Image found
 		{
-			click 449, 471
-			sleep 100
-			click 471, 214
-			sleep 100
-			click 426, 302
+			if PixelColorExist("0x1657B0",324, 418,10) ;Daily awards
+			{
+				click 403, 573
+				sleep 100
+				click 402, 493
+				sleep 100
+				click 401, 415
+			}
+			if PixelColorExist("0xFBFBFB",471, 214,100) ;限时活动
+			{
+				click 449, 471
+				sleep 100
+			}
+			
+			click %Px%, %Py%
+			sleep 200
 		}
-		if PixelColorExist("0xFBFBFB",493, 345,100) ; Qian dao award 签到奖励
-		{
-			click 403, 573
-			sleep 100
-			click 402, 493
-			sleep 100
-			click 401, 415
-		}
-		WaitPixelColorAndClick("0xFBFBFB",450, 396,20) ;商战胜场提示
-		WaitPixelColorAndClick("0xFBFBFB",479, 333,20)
-		WaitPixelColorAndClick("0xFBFBFB",469, 213,20)
-		WaitPixelColorAndClick("0xFBFBFB",458, 296,20)
-		WaitPixelColorAndClick("0xFBFBFB",481, 267,20)		
 		sleep 100
 	}	
 }
@@ -430,7 +346,7 @@ LogToFile(TextToLog)
     FileAppend, %TextToLog%`n, %LogFileName%
 }
 
-GetCaiTuanMoney()
+GetConsortiumMoney()
 {
 	WaitPixelColorAndClickThrowErr("0x3E515C",307, 879,2000) ;cai tuan button
 	sleep 200

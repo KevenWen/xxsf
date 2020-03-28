@@ -6,7 +6,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 #SingleInstance force  
 #Include Functions.ahk
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\Shopping-ZhuanPan" . A_now  . ".txt"
+logfilename := % logPath . "\\Shopping-ZhuanPan" . A_now  . ".txt"
 
 LogToFile("Log started, 4399Shopping_Pan.ahk")
 

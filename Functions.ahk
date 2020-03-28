@@ -4,8 +4,24 @@ SetBatchLines, -1
 
 global rdppw = ""
 global rdpdomain = ""
-IniRead, rdppw, credentials.ini, passwords, RDPpw
-IniRead, rdpdomain, credentials.ini, passwords, RDPdm
+global 4399GamePath = ""
+global LDGamePath = ""
+global gifskipath = ""
+global emailPSFilePath = ""
+global logPath = ""
+global i_viewpath = ""
+global logArchivePath = ""
+
+IniRead, rdppw, config.ini, passwords, RDPpw
+IniRead, rdpdomain, config.ini, passwords, RDPdm
+IniRead, logPath, config.ini, path, logPath
+IniRead, logArchivePath, config.ini, path, logArchivePath
+IniRead, emailPSFilePath, config.ini, path, emailPSFilePath
+IniRead, LDGamePath, config.ini, path, LDGamePath
+IniRead, 4399GamePath, config.ini, path, 4399GamePath
+IniRead, gifskipath, config.ini, path, gifskipath
+IniRead, i_viewpath, config.ini, path, i_viewpath
+
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0) 
 {
@@ -113,8 +129,8 @@ CaptureScreen()
 {
 	try
 	{
-		path := % "E:\\AhkScriptManager-master\\log\\" . A_now . ".png"
-		RunWait, "C:\Program Files\IrfanView\i_view64.exe" /capture=3 /convert=%path%
+		path := % logPath . "\\" . A_now . ".png"
+		RunWait, % i_viewpath . " /capture=3" . " /convert=" . path
 	}
 	catch e
 	{
@@ -128,8 +144,8 @@ CaptureScreenAll()
 {
 	try
 	{
-		path := % "E:\\AhkScriptManager-master\\log\\fullScreen\\" . A_now . ".png"
-		RunWait, "C:\Program Files\IrfanView\i_view64.exe" /capture=0 /convert=%path%
+		path := % logPath . "\\fullScreen\\" . A_now . ".png"
+		RunWait, % i_viewpath . " /capture=0" . " /convert=" . path
 	}
 	catch e
 	{
@@ -139,48 +155,31 @@ CaptureScreenAll()
 
 }
 
-MadeGif(named)
+MadeGif1(named="unknown")
 {
 	try
 	{
-	FileMove, E:\\AhkScriptManager-master\\log\\gif_output\\*.gif, E:\\AhkScriptManager-master\\log\\Arch_gif
-	name := % "E:\\AhkScriptManager-master\\log\\gif_output\\" . named . "_" . A_now . ".gif"
-	RunWait, "E:\AhkScriptManager-master\ext\gifski.exe" E:\\AhkScriptManager-master\\log\\*.png --quality 90 -W 400 -H 640 --fps 1 -o %name% --fast
-	FileMove, E:\\AhkScriptManager-master\\log\\*.png, E:\\AhkScriptManager-master\\log_archive\\Arch
+		FileMove,  % logPath . "\\gif_output\\*.gif", % logPath . "\\Arch_gif", 1
+		name := % logPath . "\\gif_output\\" . named . "_" . A_now . ".gif"
+		RunWait, % gifskipath . " " . logPath . "\\*.png --quality 90 -W 400 -H 640 --fps 1 -o " . name . " --fast"
+		FileMove, % logPath . "\\*.png", % logArchivePath . "\\Arch", 1
 	}
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile(e)
+		LogToFile("MadeGif exception: " . e)
 	}
 }
 
 SendAlertEmail()
 {
-	Run "powershell.exe" -ExecutionPolicy Bypass -File E:\\AhkScriptManager-master\\3rd\\EmailTestScript.ps1 
+	Run "powershell.exe" -ExecutionPolicy Bypass -File %emailPSFilePath%
 }
 
 SendSlackEmail()
 {
 	;run "E:\AhkScriptManager-master\libblat.exe" -body "See Attached file" -attach "C:\Users\kwen\Downloads\output.txt" -subject "New SR was raised in the last xx hours" -to "q4q3m9g3r6f7u1d1@quest.slack.com" -server relay.quest.com -f SRNotification@quest.com
 	run "E:\AhkScriptManager-master\lib\blat.exe" -body "testing" -subject "New SR was raised in the last xx hours" -to "keven.wen@quest.com" -server relay.quest.com -f SRNotification@quest.com
-}
-
-SendMsgToTIM()
-{
-	send, ^!{z} 
-	WinWaitActive ahk_exe TIM.exe,,5
-	click 108, 200
-	sleep 200 
-	send, ^{v} 
-	sleep 200
-	send, !{s}
-	sleep 300
-	click right 400,300
-	sleep 100
-	click, 468, 451
-	sleep 200
-	send !{F4}  
 }
 
 Launch4399Game(Sequ,windowname)
@@ -192,9 +191,8 @@ Launch4399Game(Sequ,windowname)
 				break
 				throw "Cannot launch Game!"
 			}
-			
 		WinClose, %windowname%
-		run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:%Sequ%
+		run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
 		sleep 3000
 		WinGetActiveTitle, Title
 		WinWaitActive, %Title%
@@ -221,16 +219,16 @@ Launch4399Game(Sequ,windowname)
 
 		WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
 		sleep 2000
+		MsgBox, 1
 		loop 3
 		{
 			sleep 1000
 			if !PixelColorExist("0xAFC387",473, 105,10)
 			{
 				CloseAnySubWindow()
-				break 1
+				break
 			}
 		}
-
 		WinSet, AlwaysOnTop, off, %windowname%
 		break
 	}	
@@ -312,7 +310,7 @@ CloseAnySubWindow()
 {
 	loop 5
 	{
-		ImageSearch, Px, Py, 400, 169, 511, 609, E:\\AhkScriptManager-master\\scripts\\blockofwhite.bmp
+		ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			throw "ImageSearch not work, please check." 
 		else if (ErrorLevel = 1) ;Image not found 

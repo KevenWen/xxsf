@@ -10,7 +10,7 @@ CoordMode, Mouse, window
 
 Arrayflag = % (A_Args[1]="") ? "S" : A_Args[1]  ;ArraySeq value
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\LandBusiness" . A_now . ".txt"
+logfilename := % logPath. "\\LandBusiness" . A_now . ".txt"
 LogToFile("Log file started...")
 LogToFile("Params: " . A_Args[1])
 
@@ -98,7 +98,7 @@ Dican(num)
 	loop 15
 	{
 		CloseAnySubWindow()
-		ImageSearch, Px, Py, 113, 429, 504, 827, E:\\AhkScriptManager-master\\scripts\\blockofyellow.bmp
+		ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			throw "ImageSearch not work, please check." 
 		else if (ErrorLevel = 1) ;Image not found 

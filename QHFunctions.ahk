@@ -3,7 +3,7 @@ SetBatchLines, -1
 ;SendMode Input ; Forces Send and SendRaw to use SendInput buffering for speed.
 
 global qhpw = ""
-IniRead, qhpw, credentials.ini, passwords, QHpw
+IniRead, qhpw, config.ini, passwords, QHpw
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0) 
 {
@@ -192,7 +192,7 @@ CloseAnySubWindow()
 {
 	loop 5
 	{
-		ImageSearch, Px, Py, 370, 140, 610, 575, E:\\AhkScriptManager-master\\scripts\\blockofwhite.bmp
+		ImageSearch, Px, Py, 370, 140, 610, 575, % A_ScriptDir . "\\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			throw "ImageSearch not work, please check." 
 		else if (ErrorLevel = 1) ;Image not found 
@@ -249,10 +249,10 @@ MadeGif(named)
 {
 	try
 	{
-	FileMove, E:\\AhkScriptManager-master\\log\\gif_output\\*.gif, E:\\AhkScriptManager-master\\log\\Arch_gif
+	FileMove, E:\\AhkScriptManager-master\\log\\gif_output\\*.gif, E:\\AhkScriptManager-master\\log\\Arch_gif,1
 	name := % "E:\\AhkScriptManager-master\\log\\gif_output\\" . named . "_" . A_now . ".gif"
 	RunWait, "E:\AhkScriptManager-master\ext\gifski.exe" E:\\AhkScriptManager-master\\log\\*.png --quality 90 -W 400 -H 640 --fps 1 -o %name% --fast
-	FileMove, E:\\AhkScriptManager-master\\log\\*.png, E:\\AhkScriptManager-master\\log_archive\\Arch
+	FileMove, E:\\AhkScriptManager-master\\log\\*.png, E:\\AhkScriptManager-master\\log_archive\\Arch,1
 	}
 	catch e
 	{

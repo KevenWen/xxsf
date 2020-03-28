@@ -8,7 +8,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\OpenShangJi" . A_now . ".txt"
+logfilename := % logPath . "\\OpenShangJi" . A_now . ".txt"
 LogToFile("Log file started...")
 winName := "xiaoxiaoshoufu" ;wintitle
 

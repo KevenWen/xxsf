@@ -70,7 +70,7 @@ Dican()
 	loop 25
 	{
 		CloseAnySubWindow()
-		ImageSearch, Px, Py, 113, 429, 504, 817, E:\\AhkScriptManager-master\\scripts\\blockofyellow.bmp
+		ImageSearch, Px, Py, 113, 429, 504, 817, % A_ScriptDir . "\\blockofyellow.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			throw "ImageSearch not work, please check." 
 		else if (ErrorLevel = 1) ;Image not found 

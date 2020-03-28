@@ -12,23 +12,28 @@ fromList = % (InStr("blacklieshou", A_Args[1]) and A_Args[1] !="") ? A_Args[1] :
 isLaunch = % (A_Args[2]="") ? "launch" : A_Args[2]   ;launch/launch2/nolaunch
 Arrayflag = % (A_Args[3]="") ? "XL" : A_Args[3]  ;ArraySeq value
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\Toulie_blackList" . A_now . ".txt"
+logfilename := % logPath . "\\Toulie_blackList" . A_now . ".txt"
 LogToFile("Log file started...")
 logcontent := % fromList . isLaunch . winName
 LogToFile("Params: " . logcontent)
 
-ArraySeq := []
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-if (Arrayflag = "L")
-	ArraySeq := [19,21,22,23,35] 
-Else if (Arrayflag = "S")  ;special
-	ArraySeq := [26,18,25]
-Else if (Arrayflag = "XL")
-	ArraySeq := [20,25,19,21,22,23,35]	
-Else if (Arrayflag = "XXL")
-	ArraySeq := [20,19,21,22,23,35]
-Else if (Arrayflag = "M") ;only one user
-	ArraySeq := [27]
+if (Arrayflag = "M")		;just one user
+	IniRead, SeqList, config.ini, account, M
+Else if (Arrayflag = "L") 	;xiao hao list;
+	IniRead, SeqList, config.ini, account, L
+Else if (Arrayflag = "S") 	;use S after rong zi task
+	IniRead, SeqList, config.ini, account, S
+Else if (Arrayflag = "SL") 	;use S after rong zi task
+	IniRead, SeqList, config.ini, account, SL
+Else if (Arrayflag = "XL") 	;use for the morning and mid-noon task
+	IniRead, SeqList, config.ini, account, XL	
+Else 
+	SeqList :=""
+ArraySeq := StrSplit(SeqList,",")
+
+;for index, element in ArraySeq ; Enumeration is the recommended approach in most cases.
+;    MsgBox % "Element number " . index . " is " . element
 
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"

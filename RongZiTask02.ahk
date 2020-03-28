@@ -15,7 +15,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\RongZiTask" . A_now  . ".txt"
+logfilename := % logPath . "\\RongZiTask" . A_now  . ".txt"
 
 LogToFile("Log started, RongZiTask.ahk")
 global HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons

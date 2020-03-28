@@ -74,7 +74,7 @@ Task202003:
             runwait "RongZiTask.ahk" 
             runwait "4399TouLie.ahk" "lieshou" "launch" "S"
             runwait "QHLandBusiness.ahk"
-            runwait "4399LandBusiness.ahk" "L"
+            runwait "4399LandBusiness.ahk" "XXXL"
         }
 
     }
@@ -108,7 +108,7 @@ Task202003:
             
             runwait "RongZiTask02.ahk" 
             runwait "QHLandBusiness.ahk"
-            runwait "4399LandBusiness.ahk" "L"
+            runwait "4399LandBusiness.ahk" "XXXL"
             runwait "4399TouLie.ahk" "lieshou" "launch" "S"
         }
     }
@@ -122,20 +122,19 @@ Task202003:
                runwait "4399OpenShangJi.ahk"  
 
             runwait "QHLandBusiness.ahk"
-            runwait "4399LandBusiness.ahk" "L"
-            runwait "4399TouLie.ahk" "lieshou" "launch" "M"
+            runwait "4399LandBusiness.ahk" "XXL"
         }
 
     }
 
     ;Task for every days
     If (TimeToMeet = 062000) ; TouLie from black list
-        runwait "4399TouLie.ahk" "black" "launch" "XXL"     
+        runwait "4399TouLie.ahk" "black" "launch" "XL"     
 
     If (TimeToMeet = 123000) ; TouLie from black list
-        runwait "4399TouLie.ahk" "black" "launch" "XXL"     
+        runwait "4399TouLie.ahk" "black" "launch" "XL"     
 
-    If (TimeToMeet = 200100) ; Bussniss war started
+    If (TimeToMeet = 200400) ; Bussniss war started
     {        
         runwait "ShangZhanReport.ahk"
     }
@@ -170,41 +169,32 @@ return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count
 ^Numpad1::      ;Yun
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:24 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:24 
 return
 ^Numpad2::     ;02
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:20 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:20 
 return
 ^Numpad3::     ;Long
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:25 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:25 
 return
 ^Numpad4::     ;Long
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:19
+    run %4399GamePath% -action:opengame -gid:1 -gaid:19
 return
 ^Numpad5::     ;Long
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:21
-return
-^Numpad0::     ;Long
-    run "C:\ChangZhi\LDPlayer\dnconsole.exe" launchex --index 0 --packagename "com.wydsf2.ewan" 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:21
 return
 ^Numpad6::     ;Long
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:35 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:35 
 return
 ^Numpad7::    ;SF27_Hou
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:26 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:26 
 return
 ^Numpad8::    ;88888
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30 
+    run %4399GamePath% -action:opengame -gid:4 -gaid:30 
 return
 ^Numpad9::    ;SF27_Supper
-    run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:1 -gaid:27 
+    run %4399GamePath% -action:opengame -gid:1 -gaid:27 
 return
-
-
-/*
-    If (TimeToMeet = 215500 and isRongZi00 = 1) ; Rong zi task prepare
-    {
-        runwait "4399PrepareRongZi.ahk" "27" "xiaoxiaoshoufu" "4"
-        runwait "QHPrepareRongZi.ahk" "3"
-    }
-*/
+^Numpad0::     ;Long
+    run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
+return

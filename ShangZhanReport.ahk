@@ -119,7 +119,7 @@ Finally
 	sleep 2000
 	MadeGif("ShangZhan")
 	sleep 1000
-	FileMove, E:\\AhkScriptManager-master\\log\\gif_output\\*.gif, E:\\AhkScriptManager-master\\log\\homebackup
+	FileMove, % logPath . "\\gif_output\\*.gif", % logPath . "\\homebackup",1
 }
 
 ExitApp

@@ -10,7 +10,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\CalculateRZ" . A_now  . ".txt"
+logfilename := % logPath . "\\CalculateRZ" . A_now  . ".txt"
 
 LogToFile("Log started, CalculateRZ.ahk")
 
@@ -60,7 +60,7 @@ if (CloseAtEnd = 1)
     WinClose, %winName%
     sleep, % s["long"]
     WinClose, 360游戏大厅
-    FileMove, E:\\AhkScriptManager-master\\log\\*.png, E:\\AhkScriptManager-master\\log\\rongzitrack
+    FileMove, % logPath . "\\*.png", % logPath . "\\rongzitrack",1
 }    
 
 LogToFile("CalculateRZ task done!")	

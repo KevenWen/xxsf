@@ -15,7 +15,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\RongZiTask" . A_now  . ".txt"
+logfilename := % logPath . "\\RongZiTask" . A_now  . ".txt"
 
 LogToFile("Log started, RongZiTask.ahk")
 ; btn1 肉沫茄子 btn2 - btn4 4399, btn_2 - btn_4 4399 weekly order button,前一个窗口刚好挡住下一个的确认两个字。

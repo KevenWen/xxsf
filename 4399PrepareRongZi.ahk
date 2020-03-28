@@ -28,7 +28,7 @@ winTitle := A_Args[2]   ;Title need change after launch
 RZCom := A_Args[3]      ;Which company
 OnlyZZ = % (A_Args[4]="") ? "N" : A_Args[4]  ;Only need Zhu Zi, do not need cezhi, Nocz_Y or Y,Nocz_Y stand for no chezi
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\4399PrepareRongZi" . winTitle . A_now  . ".txt"
+logfilename := % logPath . "\\4399PrepareRongZi" . winTitle . A_now  . ".txt"
 
 LogToFile("Log started, 4933PrepareRongZi.ahk ")
 LogToFile("seq := " seq)

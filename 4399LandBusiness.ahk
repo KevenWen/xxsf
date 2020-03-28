@@ -10,18 +10,20 @@ CoordMode, Mouse, window
 
 Arrayflag = % (A_Args[1]="") ? "S" : A_Args[1]  ;ArraySeq value
 
-logfilename := % logPath. "\\LandBusiness" . A_now . ".txt"
+logfilename := % logPath . "\\LandBusiness" . A_now . ".txt"
 LogToFile("Log file started...")
 LogToFile("Params: " . A_Args[1])
 
-ArraySeq := []
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-if (Arrayflag = "L")
-	ArraySeq := [27,20,24,25,26,18] 
-Else if (Arrayflag = "M")  ;special
-	ArraySeq := [27,20,24,25]	
-Else if (Arrayflag = "S")  ;special
-	ArraySeq := [24]
+if (Arrayflag = "M")		;just one user
+	IniRead, SeqList, config.ini, account, M
+Else if (Arrayflag = "XXL") 	;land bussiness account list
+	IniRead, SeqList, config.ini, account, XXL
+Else if (Arrayflag = "XXXL") 	;land bussiness account list, not rong zi day list
+	IniRead, SeqList, config.ini, account, XXXL		
+Else 
+	SeqList :=""
+ArraySeq := StrSplit(SeqList,",")
 
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"

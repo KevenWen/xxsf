@@ -155,7 +155,7 @@ CaptureScreenAll()
 
 }
 
-MadeGif1(named="unknown")
+MadeGif(named="unknown")
 {
 	try
 	{
@@ -219,7 +219,6 @@ Launch4399Game(Sequ,windowname)
 
 		WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
 		sleep 2000
-		MsgBox, 1
 		loop 3
 		{
 			sleep 1000

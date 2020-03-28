@@ -1,5 +1,4 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 ;#NoTrayIcon				; No system tray icon
 #SingleInstance force  
@@ -9,7 +8,7 @@ SetBatchLines -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-fromList = % (InStr("blackchatlieshou", A_Args[1]) and A_Args[1] !="") ? A_Args[1] : "black"  ;black/chat/lieshou
+fromList = % (InStr("blacklieshou", A_Args[1]) and A_Args[1] !="") ? A_Args[1] : "black"  ;black/lieshou
 isLaunch = % (A_Args[2]="") ? "launch" : A_Args[2]   ;launch/launch2/nolaunch
 Arrayflag = % (A_Args[3]="") ? "XL" : A_Args[3]  ;ArraySeq value
 
@@ -23,13 +22,13 @@ ArraySeq := []
 if (Arrayflag = "L")
 	ArraySeq := [19,21,22,23,35] 
 Else if (Arrayflag = "S")  ;special
-	ArraySeq := [26,20,25]
+	ArraySeq := [26,18,25]
 Else if (Arrayflag = "XL")
 	ArraySeq := [20,25,19,21,22,23,35]	
 Else if (Arrayflag = "XXL")
 	ArraySeq := [20,19,21,22,23,35]
-Else if (Arrayflag = "M") ;only xhhz
-	ArraySeq := [20,25]
+Else if (Arrayflag = "M") ;only one user
+	ArraySeq := [27]
 
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"
@@ -38,11 +37,7 @@ For index, value in ArraySeq
 {
 	Try 
 	{
-		if (isLaunch="launch2")
-			Gosub, PrepareStolenLaunch2
-		Else
-			Gosub, PrepareStolenLaunch
-
+		Gosub, PrepareStolenLaunch
 		Gosub, NiuShiOpen
 		Gosub, SelectPeopleAndstolen 
 	}
@@ -56,22 +51,16 @@ For index, value in ArraySeq
 	sleep 200
 }
 
-
 CaptureScreen()	
 WinSet, AlwaysOnTop, off, %winName%	
-LogToFile("Footer text to appear at the very end of your log, which you are done with.")
-MadeGif("TouLie")
+LogToFile("Log end.")
 WinClose, % winName
 sleep 200
 WinClose 360游戏大厅
+MadeGif("TouLie")
 ExitApp
 
 PrepareStolenLaunch:
-	/*WinClose, %winName%
-	sleep 200
-	Launch4399Game(value,%winName%)
-	WinSet, AlwaysOnTop, on, %winName%	
-	*/
 	IfWinNotExist, %winName%
 	{
 		Launch4399Game(value,winName)
@@ -80,35 +69,15 @@ PrepareStolenLaunch:
 	{
 		WinActivate, %winName%
 		sleep 200
+		CloseAnySubWindow()	
 	}	
 
 	LogToFile("Launch4399Game done")
 	sleep 200
 	try 
 	{		
-		GetCaiTuanMoney()
-		LogToFile("GetCaiTuanMoney done!")
-	}
-	catch e
-	{
-		LogToFile(e)
-	}
-Return
-
-PrepareStolenLaunch2:
-	WinClose, %winName%
-	sleep 200
-	Launch4399Game(value,winName) ; launch twice, In case too many pop out window.
-	sleep 10000
-	WinClose, %winName%
-	sleep 200	
-	Launch4399Game(value,winName)
-	WinSet, AlwaysOnTop, on, %winName%	
-	LogToFile("Launch4399Game done")
-	sleep 200
-	try 
-	{
-		GetCaiTuanMoney()
+		GetDailayTaskMoney()
+		GetConsortiumMoney()
 		LogToFile("GetCaiTuanMoney done!")
 	}
 	catch e
@@ -125,8 +94,7 @@ NiuShiOpen:
 	catch e
 	{				
 		CaptureScreen()	
-		WaitPixelColorAndClick("0xFBFBFB",463, 396,20)
-		WaitPixelColorAndClick("0xFBFBFB",480, 229,20)
+		CloseAnySubWindow()
 		sleep 100
 		click 91, 891	
 		sleep 100			
@@ -144,9 +112,7 @@ while (n<7 and SuccessCount<6)
 	sleeptime := n=1? 500:600
 	sleep %sleeptime%
 
-	(fromList = "lieshou")?(OpenTouLiePage(n))
-	:((fromList = "chat")?(OpenTouLiePageFromChatList(n))
-	:(OpenTouLiePageFromBlackList(n)))
+	(fromList = "lieshou")?(OpenTouLiePage(n)):(OpenTouLiePageFromBlackList(n))
 
 	CaptureScreen()	
 	try
@@ -154,7 +120,7 @@ while (n<7 and SuccessCount<6)
 		sleep 500
 		TouLieOpration()	
 		SuccessCount++	
-		LogToFile("Stolen one`n")
+		LogToFile("Hunter one`n")
 	}
 	catch e ;Ignore any error during one operation and go ahead to next one.
 	{
@@ -172,9 +138,7 @@ return
 ;Functions:
 OpenTouLiePage(Num)
 {
-	;if (%Num%>5) throw "Num bigger than 5" 
-	click 461, 321 ;Close card page
-	;WaitPixelColorAndClickThrowErr("0xECD924",90,895,1000) ;Shop button
+	CloseAnySubWindow()	
 	sleep 300
 	click 90,895
 	sleep 200
@@ -207,15 +171,8 @@ OpenTouLiePage(Num)
 
 OpenTouLiePageFromBlackList(Num)
 {
-	;if (%Num%>5) throw "Num bigger than 5" 
-	click 461, 321 ;Close card page
+	CloseAnySubWindow()	
 	sleep 200
-	if PixelColorExist("0xFBFBFB",459,399,100) ; Hongbao window or shangzhan window if exist.
-	{
-		click 459,399
-		sleep 300
-	}	
-
 	click 90,895
 	sleep 400
 	;click 501,252
@@ -230,7 +187,7 @@ OpenTouLiePageFromBlackList(Num)
 			sleep 300
 		}	
 
-	; Click corresponding people FFF8CE
+	; Click corresponding people
 
 	if Num=1
 	{ 
@@ -285,93 +242,10 @@ OpenTouLiePageFromBlackList(Num)
 	}
 }
 
-OpenTouLiePageFromChatList(Num)
-{
-	click 461, 321 ;Close card page
-	sleep 200
-	if PixelColorExist("0xFBFBFB",459,399,100) ; Hongbao window or shangzhan window if exist.
-	{
-		click 459,399
-		sleep 300
-	}	
-
-	click 90,895
-	sleep 300
-	;click 501,252
-	WaitPixelColorAndClickThrowErr("0xD26D24",500, 250,2000) ;HaoYou button
-	sleep 500
-	WaitPixelColorAndClickThrowErr("0xFFFFFF",358, 776,2000) ;Chat List button
-	sleep 1000
-	;MouseClickDrag, Left, 371, 691,371, 688,30
-	;sleep 1000
-
-	if PixelColorExist("0xFBFBFB",459,399,20) ; Hongbao window or shangzhan window if exist.
-		{
-			click 459,399
-			sleep 300
-		}	
-
-	LogToFile("close any sub window")
-	; Click corresponding people FFF8CE  675 608 540 472
-	if Num=1
-	{ 
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",426, 603,1000) ;Click people in the Chat list
-		sleep 500	
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	} 
-
-	if Num=2
-	{
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",440, 536,1000) ;Click people in the Chat list
-		sleep 500
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	}
-
-	if Num=3
-	{
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",440, 468,1000) ;Click people in the Chat list
-		sleep 500
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	} 
-	
-	if Num=4
-	{
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",440, 401,1000) ;Click people in the Chat list
-		sleep 500
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	} 		
-	
-	if Num=5 
-	{
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",440, 333,1000) ;Click people in the Chat list
-		sleep 500
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	}
-
-	if Num=6 
-	{
-		WaitPixelColorAndClickThrowErr("0xFFFFF3",440, 266,1000) ;Click people in the Chat list
-		sleep 500
-		WaitPixelColorAndClickThrowErr("0x6DE9CF",204, 608,2000) ;TouLie Button	in People Page
-		sleep 100
-		return 
-	}
-}
-
-
 TouLieOpration()
 {
-	if !PixelColorExist("0x74BDFA",431, 530,3000)
+	CloseAnySubWindow()
+	if !PixelColorExist("0x74BDFA",431, 530,2000)
 		throw "Not able to open people Stolen page!"
 
 	if PixelColorExist("0xFFFEF5",262, 617,10) and PixelColorExist("0xFFFFFF",318, 784,10)

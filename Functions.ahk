@@ -354,6 +354,23 @@ GetConsortiumMoney()
 	sleep 100
 }
 
+GetDailayTaskMoney()
+{
+	if PixelColorExist("0xD12A06",473, 308,20) ;每日任务,如偷满10次
+	{
+		Click 495, 315
+		sleep 200
+		Click 420, 420 ;Task 1
+		sleep 50
+		Click 420, 500 ;Task 2
+		sleep 50		
+		Click 420, 580 ;Task 3
+		sleep 100
+		Click 479, 344 ;Close Button
+		sleep 200
+	}
+}
+
 FixRDPConn()
 {
 	WinActivate ahk_exe mstsc.exe

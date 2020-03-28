@@ -44,8 +44,9 @@ IfWinExist ahk_exe mstsc.exe
     ;LDplayer
     click, % Arrayphy["btn1"]
     sleep, % s["short"]
+    click, % Arrayphy["btn1"]
+    sleep, % s["short"]    
     sendinput {y}
-    ;click 792, 656
 
     ;Supper
     if PixelColorExist("0xFFFFF3",798,633,10)
@@ -121,6 +122,7 @@ GetRongZiList()
     {
         WinActivate xiaoxiaoshoufu
         sleep, % s["long"]
+        CloseAnySubWindow()
         click % HB[5]
         sleep, % s["long"]
         click % SB[4]

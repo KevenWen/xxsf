@@ -55,6 +55,9 @@ Task202003:
         If (TimeToMeet = 224000) ; Double check
             CaptureScreenAll()	
 
+        If (TimeToMeet = 233000) ; Double check
+            CaptureScreenAll()	
+
         If (TimeToMeet = 235000) ; Rong zi task prepare for xhhz
             runwait "4399PrepareRongZi.ahk" "18" "xhhz" "5"
 
@@ -70,6 +73,8 @@ Task202003:
         {
             runwait "RongZiTask.ahk" 
             runwait "4399TouLie.ahk" "lieshou" "launch" "S"
+            runwait "QHLandBusiness.ahk"
+            runwait "4399LandBusiness.ahk" "L"
         }
 
     }
@@ -99,11 +104,11 @@ Task202003:
                sleep 60000
             }
             else
-            {
-                sleep 90000
-                runwait "RongZiTask02.ahk"                 
-            }
+                sleep 90000 
             
+            runwait "RongZiTask02.ahk" 
+            runwait "QHLandBusiness.ahk"
+            runwait "4399LandBusiness.ahk" "L"
             runwait "4399TouLie.ahk" "lieshou" "launch" "S"
         }
     }
@@ -116,6 +121,8 @@ Task202003:
             if onlyOpenShangJi = 1
                runwait "4399OpenShangJi.ahk"  
 
+            runwait "QHLandBusiness.ahk"
+            runwait "4399LandBusiness.ahk" "L"
             runwait "4399TouLie.ahk" "lieshou" "launch" "M"
         }
 
@@ -154,7 +161,7 @@ return
 Timer_click:
     click    
     countN+=1
-    if (countN > 35)
+    if (countN > 36)
     {
         toggle := !toggle
         SetTImer, Timer_click, Off

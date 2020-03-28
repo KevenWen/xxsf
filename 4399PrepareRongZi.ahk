@@ -57,6 +57,7 @@ loop 3  ;Try 3 times
             WinActivate %wintitle%
             Winmove,%wintitle%,,1229,23,600,959
             sleep, % s["short"]
+            CloseAnySubWindow()
             LogToFile("Game window Found.")
             if PixelColorExist("0xB0B0B0",481, 266,100) ;Already prepared 
             {

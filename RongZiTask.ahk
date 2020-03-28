@@ -122,7 +122,7 @@ IfWinExist xiaoxiaoshoufu
     if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
         click % Arrayhome["clobtn"]
     
-    winclose, xxsf
+    ;winclose, xxsf     ;Won't close, waiting for land bussiness done.
     sleep, % s["short"]
     winclose, xhhz
 

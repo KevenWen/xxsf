@@ -55,11 +55,8 @@ loop 3  ;Try 3 times
             WinActivate %wintitle%
             Winmove,%wintitle%,,933,19,628,937
             sleep, % s["short"]
-            if PixelColorExist("0xB0B0B0",509, 259,100) ;Already prepared 
-            {
-                LogToFile("Already prepared!")
-                ExitApp	 
-            }
+            CloseAnySubWindow()
+            sleep, % s["short"]          
             click % HB[5]
             sleep, % s["short"]
             click % SB[4]

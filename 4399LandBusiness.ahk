@@ -107,7 +107,7 @@ Dican(num)
 		{
 			Mousemove,510, 825
 			send {LButton down}
-			Mousemove,523, 345,10
+			Mousemove,523, 345,15
 			send {LButton up}
 			click 510, 825			
 			sleep 200

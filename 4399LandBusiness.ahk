@@ -79,6 +79,7 @@ PrepareGame:
 	Else
 	{
 		WinActivate, %winName%
+		Winmove,%winName%,,1229,23,600,959
 		sleep 200
 	}
 	LogToFile("Launch4399Game done")

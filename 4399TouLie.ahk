@@ -22,8 +22,10 @@ if (Arrayflag = "M")		;just one user
 	IniRead, SeqList, config.ini, account, M
 Else if (Arrayflag = "L") 	;xiao hao list;
 	IniRead, SeqList, config.ini, account, L
-Else if (Arrayflag = "S") 	;use S after rong zi task
+Else if (Arrayflag = "S") 	;需要偷猎的大号,融资日使用
 	IniRead, SeqList, config.ini, account, S
+Else if (Arrayflag = "SS") 	;需要偷猎的大号，hou除外
+	IniRead, SeqList, config.ini, account, SS	
 Else if (Arrayflag = "SL") 	;use S after rong zi task
 	IniRead, SeqList, config.ini, account, SL
 Else if (Arrayflag = "XL") 	;use for the morning and mid-noon task

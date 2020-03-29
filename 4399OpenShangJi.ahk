@@ -15,15 +15,15 @@ winName := "xiaoxiaoshoufu" ;wintitle
 try
 {	
 	IfWinNotExist, %winName%
-		Launch4399Game(27,%winName%)	
+		Launch4399Game(27,winName)	
 		
 	IfWinExist %winName%
 		{
 			WinActivate %winName%
-			;sleep 1200
+			Winmove,%winName%,,1229,23,600,959
 			sleep 200
 			CaptureScreen()
-			;CloseAnySubWindow()
+			CloseAnySubWindow()
 			LogToFile("CloseAnySubWindow done")
 			sleep 100
 
@@ -68,7 +68,7 @@ catch e
 }
 
 ;Restart the Game to check if the shangJi is all opened:
-Launch4399Game(27,%winName%)
+Launch4399Game(27,winName)
 LogToFile("Restart the game to check if all shangji Opened.")
 sleep 1000
 WaitPixelColorAndClick("0xFF4841", 377, 909,1000) ; click shang hui button
@@ -92,7 +92,7 @@ else
 	OpenSJ()
 }
 
-Launch4399Game(27,%winName%)
+Launch4399Game(27,winName)
 sleep 1000
 WaitPixelColorAndClick("0xFF4841", 377, 909,1000) ; click shang hui button
 PixelColorExist("0xF7D7AD",194, 522,2000)

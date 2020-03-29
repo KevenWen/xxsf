@@ -198,7 +198,7 @@ Launch4399Game(Sequ,windowname)
 		WinWaitActive, %Title%
 		WinSetTitle, %windowname%
 		WinSet, AlwaysOnTop, On, %windowname%
-		Winmove,%windowname%,,1229,23,600,959				
+		Winmove,%windowname%,,1229,23,600,959
 		if (WaitPixelColor("0x232D4D",544, 84,15000)=0)			;Waiting for up array
 		{
 			Click 566, 83

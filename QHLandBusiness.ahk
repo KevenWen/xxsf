@@ -46,6 +46,7 @@ PrepareGame:
 	Else
 	{
 		WinActivate, %winName%
+		Winmove,%winName%,,933,19,628,937		
 		CloseAnySubWindow()
 		sleep 200
 	}	

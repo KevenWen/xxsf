@@ -123,6 +123,7 @@ Task202003:
 
             runwait "QHLandBusiness.ahk"
             runwait "4399LandBusiness.ahk" "XXL"
+            runwait "4399TouLie.ahk" "lieshou" "launch" "SS"            
         }
 
     }
@@ -198,3 +199,5 @@ return
 ^Numpad0::     ;Long
     run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
 return
+
+F12::ExitApp ;stop the script

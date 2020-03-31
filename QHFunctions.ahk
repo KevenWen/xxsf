@@ -116,10 +116,14 @@ ResizeQHWindow()
 		IfWinExist xxsf
 	{
 		WinActivate
-		Winmove,xxsf,,933,19,628,937
+		;Winmove,xxsf,,933,19,628,937
+		Winmove,xxsf,,933,19,600,959
 	}		
 
 }
+
+
+
 LaunchqhGame()
 {
 	Loop
@@ -135,12 +139,11 @@ LaunchqhGame()
 		WinGetActiveTitle, xxsf
 		WinWaitActive, xxsf
 		WinSet, AlwaysOnTop, On, xxsf
-		Winmove,xxsf,,933,19,628,937
+		Winmove,xxsf,,933,19,600,959
 
 		sleep 3000 ;Waiting for start button
-		if PixelColorExist("0x3AB0B4",368, 783,18000)
+		if PixelColorExist("0x41B6AC",368, 783,18000)
 		{
-
 			CloseQHMenu()	
 			sleep 200
 			click 368, 783 ;click the start button
@@ -152,7 +155,7 @@ LaunchqhGame()
 			click 356, 545 ;click the manully login button
 			sleep 500
 
-			if PixelColorExist("0x3AB0B4",368, 783,10000)
+			if PixelColorExist("0x41B6AC",368, 783,18000)
 			{
 				CloseQHMenu()	
 				sleep 200
@@ -169,7 +172,7 @@ LaunchqhGame()
 		CloseAnySubWindow()
 		sleep 200
 
-		if !(PixelColorExist("0xFFFEF5",288, 323,1000)=0) ; double check again on the caituan page
+		if !PixelColorExist("0xEFFEFF",56, 920,100) ; double check again on the shop button
 		{
 			CaptureScreen()
 			Continue
@@ -182,9 +185,9 @@ LaunchqhGame()
 
 GetQHCaiTuanMoney()
 {
-	WaitPixelColorAndClickThrowErr("0x3E515C",305, 897,2000) ;cai tuan button
+	WaitPixelColorAndClickThrowErr("0x3E515C",290, 914,2000) ;cai tuan button
 	sleep 200
-	WaitPixelColorAndClickThrowErr("0xFFFCF7",580, 226,2000) ;Shou Ru button	
+	WaitPixelColorAndClickThrowErr("0xFFFCF6",552, 230,2000) ;Shou Ru button	
 	sleep 100
 }
 
@@ -192,20 +195,20 @@ CloseAnySubWindow()
 {
 	loop 5
 	{
-		ImageSearch, Px, Py, 370, 140, 610, 575, % A_ScriptDir . "\\blockofwhite.bmp"
+		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			throw "ImageSearch not work, please check." 
 		else if (ErrorLevel = 1) ;Image not found 
 			Break
 		else if (ErrorLevel = 0) ;Image found
 		{
-			if PixelColorExist("0x1657B0",348, 413,10) ;Daily awards
+			if PixelColorExist("0x1657B0",335, 421,10) ;Daily awards
 			{
-				click 462, 407
+				click 446, 416
 				sleep 100
-				click 462, 492
+				click 446, 503
 				sleep 100
-				click 462, 580
+				click 446, 589
 				sleep 100
 			}
 			if PixelColorExist("0xFBFBFB",508, 213,20) ;限时活动
@@ -223,10 +226,10 @@ CloseAnySubWindow()
 
 CloseQHMenu()
 {
-	if PixelColorExist("0xF8F161",596, 559,1000) ;群黑图标
-	click 596, 559
+	if PixelColorExist("0xF7EF5F",566, 572,1000) ;群黑图标
+	click 566, 572
 	sleep 500
-	click 586, 633
+	click 561, 639
 	sleep 200
 }
 

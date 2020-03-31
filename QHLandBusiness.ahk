@@ -46,7 +46,7 @@ PrepareGame:
 	Else
 	{
 		WinActivate, %winName%
-		Winmove,%winName%,,933,19,628,937		
+		Winmove,%winName%,,933,19,600,959		
 		CloseAnySubWindow()
 		sleep 200
 	}	
@@ -58,14 +58,15 @@ Return
 Dican()
 {
 	CloseAnySubWindow()
-	click 131, 899
-	sleep 1000
-	Mousemove,600, 825
+	click 131, 925
+	PixelColorExist("0xFFFEF5",400, 182,1000)
+	sleep 100
+	Mousemove,570, 824
 	send {LButton down}
-	Mousemove,600, 95,2
+	Mousemove,570, 95,2
 	send {LButton up}
-	sleep 120
-	click 600, 825
+	sleep 100
+	click 570, 824
 	sleep 400
 	CaptureScreen()	
 	loop 25
@@ -73,17 +74,17 @@ Dican()
 		CloseAnySubWindow()
 		ImageSearch, Px, Py, 113, 429, 504, 817, % A_ScriptDir . "\\blockofyellow.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
-			throw "ImageSearch not work, please check." 
+			throw "ImageSearch not work, please check." 		
 		else if (ErrorLevel = 1) ;Image not found 
 		{
-			Mousemove,600, 825
+			Mousemove,570, 824
 			send {LButton down}
-			Mousemove,600, 375,2
+			Mousemove,570, 500,2
 			send {LButton up}
-			click 600, 825
+			click 570, 824
 			sleep 200
 		}
-		else if (ErrorLevel = 0) ;Image found
+		else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
 		{
 			LogToFile("Image found when loop times: " . A_Index)
 			CaptureScreen()	
@@ -101,25 +102,25 @@ Dican()
 
 DiCcanJinzhu()
 {
-	if PixelColorExist("0xFFFEF5",207, 470,1000) 
+	if PixelColorExist("0xFFFEF5",190, 480,1000) 
 	{
-		Mousemove,275, 455 ;金币23
+		Mousemove,265, 465 ;金币23
 		click, 23 
 		sleep 100
-		Mousemove,275, 520 ;金币17
+		Mousemove,265, 530 ;金币17
 		click, 17
 		sleep 100
-		Mousemove,433, 516 ;资源卡6
+		Mousemove,433, 530 ;资源卡6
 		click, 6
 		sleep 100
-		Mousemove,360, 577 ;5份钻石注决策资源
+		Mousemove,350, 594 ;5份钻石注决策资源
 		click, 5		
 		CaptureScreen()	
 		sleep 100
-		click 390, 707	;确认注入
+		click 376, 723	;确认注入
 		sleep 100
-		if PixelColorExist("0xFBFBFB",490, 391,300) ;确认注入提示框
-			click 320, 597 ;点击确定
+		if PixelColorExist("0xFBFBFB",478, 396,300) ;确认注入提示框
+			click 305, 611 ;点击确定
 		else
 			throw "Exception while DiCcanJinzhu, not found OK button"
 	}

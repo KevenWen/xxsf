@@ -34,11 +34,11 @@ LogToFile("winTitle := " winTitle)
 LogToFile("RZCom := " RZCom)
 LogToFile("Need CheZi? := " OnlyZZ)
 
-global HB := ["48, 909","130, 909","215, 909","300, 909","387, 909","465, 909","555, 909"] ; home buttons
-global SB := ["75, 260","190,260","300,260","410,260"]                                     ; shanghui buttons
+global HB := ["48, 909","130, 909","215, 909","300, 909","387, 909","465, 909"]             ; home buttons
+global SB := ["75, 260","190,260","300,260","410,260"]                                      ; shanghui buttons
 global BC := ["170, 420","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
 global PopWin := {okbtn: "324, 602", clobtn: "507, 257"}                                    ; Pop out window button positions
-global RZWin := {rzarea: "225, 570", yesbtn: "360, 570", chezibtn: "450, 570"}               ; RongZi window positions
+global RZWin := {rzarea: "225, 570", yesbtn: "360, 570", chezibtn: "450, 570"}              ; RongZi window positions
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
 
 loop 3  ;Try 3 times
@@ -53,14 +53,14 @@ loop 3  ;Try 3 times
         IfWinExist, %wintitle%
         {
             WinActivate %wintitle%
-            Winmove,%wintitle%,,933,19,628,937
+            Winmove,%wintitle%,,933,19,600,959
             sleep, % s["short"]
             CloseAnySubWindow()
             sleep, % s["short"]          
             click % HB[5]
             sleep, % s["short"]
             click % SB[4]
-            sleep, % s["longer"]
+            PixelColorExist("0x91B65A",478, 345,2000)
             if not (OnlyZZ = "Nocz_Y")
               CheZi()
             sleep, % s["long"]
@@ -76,7 +76,7 @@ loop 3  ;Try 3 times
         Continue        
     }
 
-    if !PixelColorExist("0xFBFBFB",490, 389,100) ;Double check
+    if !PixelColorExist("0xFBFBFB",480, 395,100) ;Double check
     {
         LogToFile("Double check failed!")	
         CaptureScreen()    
@@ -106,13 +106,12 @@ PreRongZi(RZCom)
    ; TTCo := StrSplit(PopWin["rzarea"],",")
     mousemove, 239, 570
     sleep, % s["short"]
-    click,39
-
+    click,50
     sleep, % s["mid"]
-    if !PixelColorExist("0xFFFFFF",141, 388,10) ;存在没有更多金币提示，problem here!
+    
+    if !PixelColorExist("0xFFFFFF",121, 358,10) ;存在没有更多金币提示，problem here!
         Throw, "Not enough money warnning exist!"
 
-    sleep, % s["long"]
     click % RZWin["yesbtn"]    
 }
 
@@ -122,9 +121,9 @@ CheZi()
     {
         click % BC[A_index]
         sleep, % s["long"]
-        if PixelColorExist("0xFBFBFB",507, 257,1000)   
-        and PixelColorExist("0xFFFEF5",232, 572,20) 
-        and PixelColorExist("0xFFFEF5",251, 572,20)     ;窗口打开，没有融资，带有0，且只有两个字符
+        if PixelColorExist("0xFBFBFB",500, 265,1000)   
+        and PixelColorExist("0xFFFEF5",216, 585,20) 
+        and PixelColorExist("0xFFFEF5",235, 586,20)     ;窗口打开，没有融资，带有0，且只有两个字符
         {
             click % PopWin["clobtn"]
             sleep, % s["long"]
@@ -147,7 +146,7 @@ RongZiOK:
 {
     click % PopWin["okbtn"]
     sleep 500
-    if PixelColorExist("0xFFFEF5",420, 408,5000) ;close the sub window if the first window closed
+    if PixelColorExist("0xFFFEF5",407, 444,5000) ;close the sub window if the first window closed
         click % PopWin["clobtn"]
     
     CaptureScreen()       

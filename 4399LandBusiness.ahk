@@ -17,7 +17,9 @@ LogToFile("Params: " . A_Args[1])
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
 if (Arrayflag = "M")		;just one user
 	IniRead, SeqList, config.ini, account, M
-Else if (Arrayflag = "XXL") 	;land bussiness account list
+if (Arrayflag = "H")		;users before rong zi
+	IniRead, SeqList, config.ini, account, H	
+Else if (Arrayflag = "XXL") 	;users after rong zi
 	IniRead, SeqList, config.ini, account, XXL
 Else if (Arrayflag = "XXXL") 	;land bussiness account list, not rong zi day list
 	IniRead, SeqList, config.ini, account, XXXL		
@@ -90,7 +92,8 @@ Dican(num)
 {
 	CloseAnySubWindow()
 	click 153, 889
-	sleep 1000
+	PixelColorExist("0xFFFEF5",390, 190,1000)
+	sleep 100
 	Mousemove,510, 825
 	send {LButton down}
 	Mousemove,510, 95,10
@@ -98,7 +101,7 @@ Dican(num)
 	click 510, 825
 	sleep 200
 	CaptureScreen()
-	loop 15
+	loop 25
 	{
 		CloseAnySubWindow()
 		ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
@@ -108,12 +111,12 @@ Dican(num)
 		{
 			Mousemove,510, 825
 			send {LButton down}
-			Mousemove,523, 345,15
+			Mousemove,510, 345,15
 			send {LButton up}
 			click 510, 825			
 			sleep 200
 		}
-		else if (ErrorLevel = 0) ;Image found
+		else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",424, 286,10) ;Image found and not on the first line
 		{
 			LogToFile("Image found when loop times: " . A_Index)
 			CaptureScreen()	

@@ -30,8 +30,8 @@ global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "30
 
 
 ; 18-xhhz, 20-02,24-yun, 25-long,26-hou, 27-supper    
-GetRongZiList() ;check if anyone RongZi already.
-sleep 20000
+;GetRongZiList() ;check if anyone RongZi already.
+;sleep 20000
 
 IfWinExist ahk_exe mstsc.exe
 {
@@ -84,12 +84,12 @@ IfWinExist ahk_exe mstsc.exe
     LogToFile("Phy Com Clicked OK")
     WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
 } 
+; 18-xhhz, 20-02,24-yun, 25-long,26-hou, 27-supper   
+;runwait "4399PrepareRongZi.ahk" "24" "xiaoxiaoshoufu" "3" "Nocz_Y" ;yun
+;LogToFile("RongZiTask02.ahk for 24")
 
-runwait "4399PrepareRongZi.ahk" "24" "xiaoxiaoshoufu" "3" "Nocz_Y" ;yun
-LogToFile("RongZiTask02.ahk for 24")
-
-runwait "QHPrepareRongZi.ahk" "2" "Nocz_Y"
-LogToFile("QHPrepareRongZi.ahk for 2")
+runwait "QHPrepareRongZi.ahk" "3" "Nocz_Y"
+LogToFile("QHPrepareRongZi.ahk for 3")
 
 runwait "4399PrepareRongZi.ahk" "26" "hou" "1" "Nocz_Y"
 LogToFile("RongZiTask02.ahk for 26")
@@ -97,8 +97,8 @@ LogToFile("RongZiTask02.ahk for 26")
 runwait "4399PrepareRongZi.ahk" "18" "xhhz" "4" "Nocz_Y"
 LogToFile("RongZiTask02.ahk for 18")
 
-;runwait "4399PrepareRongZi.ahk" "20" "song" "5" "Nocz_Y"
-;LogToFile("RongZiTask02.ahk for 20")
+runwait "4399PrepareRongZi.ahk" "20" "song" "5" "Nocz_Y"
+LogToFile("RongZiTask02.ahk for 20")
 ;runwait "4399PrepareRongZi.ahk" "25" "long" "2" "Nocz_Y"
 ;LogToFile("RongZiTask02.ahk for 25")
 ;runwait "C:\ChangZhi\LDPlayer\ld.exe" -s 0 input tap 450 970  ; LDPlayer "5"

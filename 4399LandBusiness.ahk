@@ -152,7 +152,10 @@ DiCcanJinzhu(num)
 		click 361, 704			;确认注入
 		sleep 100
 		if PixelColorExist("0xFBFBFB",462, 396,500) ;确认注入提示框
-			click 302, 593 ;点击确定	
+		{
+			click 302, 593 ;点击确定
+			WaitPixelColorAndClick("0xFBFBFB",479, 192,200)
+		}	
 		else
 			throw "Exception while DiCcanJinzhu"
 	}

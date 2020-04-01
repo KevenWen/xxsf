@@ -106,7 +106,7 @@ PreRongZi(RZCom)
    ; TTCo := StrSplit(PopWin["rzarea"],",")
     mousemove, 239, 570
     sleep, % s["short"]
-    click,50
+    click,40
     sleep, % s["mid"]
     
     if !PixelColorExist("0xFFFFFF",121, 358,10) ;存在没有更多金币提示，problem here!

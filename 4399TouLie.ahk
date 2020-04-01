@@ -58,7 +58,6 @@ For index, value in ArraySeq
 	sleep 200
 }
 
-CaptureScreen()	
 WinSet, AlwaysOnTop, off, %winName%	
 LogToFile("Log end.")
 WinClose, % winName

@@ -148,9 +148,9 @@ LaunchqhGame()
 			sleep 200
 			click 368, 783 ;click the start button
 		}
-		Else If PixelColorExist("0xFE901A",368, 504,100)
+		Else If PixelColorExist("0xFE901A",365, 541,100)
 		{
-			click 368, 504 ;click the account button
+			click 365, 541 ;click the account button
 			sleep 500
 			click 356, 545 ;click the manully login button
 			sleep 500
@@ -211,10 +211,12 @@ CloseAnySubWindow()
 				click 446, 589
 				sleep 100
 			}
-			if PixelColorExist("0xFBFBFB",508, 213,20) ;限时活动
+			if PixelColorExist("0xFBFBFB",500, 216,20) ;限时活动
 			{
-				click 450, 471
-				sleep 200
+				click 445, 480
+				sleep 100
+				click 436, 383
+				sleep 100				
 			}
 			
 			click %Px%, %Py%

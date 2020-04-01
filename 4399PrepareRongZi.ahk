@@ -59,21 +59,16 @@ loop 3  ;Try 3 times
             sleep, % s["short"]
             CloseAnySubWindow()
             LogToFile("Game window Found.")
-            if PixelColorExist("0xB0B0B0",481, 266,100) ;Already prepared 
-            {
-                LogToFile("Already prepared!")
-                Return	 
-            }
             click % HB[5]
             sleep, % s["short"]
             click % SB[4]
-            sleep, % s["longer"]
+            PixelColorExist("0x91B65A",478, 345,2000)
             if not (OnlyZZ = "Nocz_Y")
             {
                 CheZi()
                 LogToFile("CheZi done.")
-            }                
-            sleep, % s["long"]
+                sleep, % s["long"]
+            }
             PreRongZi(RZCom)
             LogToFile("RZCom done.")
             sleep, % s["mid"]
@@ -122,15 +117,15 @@ PreRongZi(RZCom)
     if (A_Args[1] = 25)
         click,38
     else if (A_Args[1] = 24)
-        click,37
+        click,40
     else if (A_Args[1] = 20)
-        click,37    
+        click,38   
     else if (A_Args[1] = 18)
         click,39
     else if (A_Args[1] = 27)
         click,40        
     else if (A_Args[1] = 26)
-        click,37        
+        click,38        
     else if (A_Args[1] = 19)
         click,16
     else if A_Args[1] in 21,22,23,35

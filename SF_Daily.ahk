@@ -139,7 +139,7 @@ Task202004:
     If (TimeToMeet = 123000) ; TouLie from black list
         runwait "4399TouLie.ahk" "black" "launch" "XL"     
 
-    If (TimeToMeet = 200400) ; Bussniss war started
+    If (TimeToMeet = 200100) ; Bussniss war started
     {        
         runwait "ShangZhanReport.ahk"
     }

@@ -61,14 +61,14 @@ Dican()
 	click 131, 925
 	PixelColorExist("0xFFFEF5",400, 182,1000)
 	sleep 100
-	Mousemove,570, 824
+	Mousemove,570, 840
 	send {LButton down}
 	Mousemove,570, 95,2
 	send {LButton up}
-	sleep 100
-	click 570, 824
+	sleep 250
+	click 570, 840
 	sleep 400
-	CaptureScreen()	
+	CaptureScreen()
 	loop 25
 	{
 		CloseAnySubWindow()

@@ -37,8 +37,9 @@ IfWinExist ahk_exe mstsc.exe
     ;LDplayer
     click, % Arrayphy["btn1"]
     sleep, % s["short"]
-    sendinput {y}
-    ;click 792, 656
+    click, % Arrayphy["btn1"]
+    sleep, % s["short"]
+    sendinput {D}
 
     ;Supper
     if PixelColorExist("0xFFFFF3",798,633,10)
@@ -84,12 +85,7 @@ IfWinExist xxsf
     sleep, % s["short"]
     click % Arrayhome["okbtnxxsf"]
     sleep, % s["short"]
-    ;if PixelColorExist("0xFFFEF5", 407,420,500) ;close the sub window if the first window closed
-        ;click % Arrayhome["clobtnxxsf"]
-      ; winclose, xxsf
-
     LogToFile("xxsf Clicked OK")
-    ;ExitApp
 } 
 
 IfWinExist xhhz
@@ -101,11 +97,18 @@ IfWinExist xhhz
     sleep, % s["short"]
     click % Arrayhome["okbtn"]
     sleep, % s["short"]
-    /*
-    if PixelColorExist("0xFFFEF5", 401, 419,500) ;close the sub window if the first window closed
-        ;click % Arrayhome["clobtn"]
-        winclose, xhhz
-    */
+    LogToFile("xhhz Clicked OK")
+}
+
+IfWinExist song
+{
+    WinActivate song
+    ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
+    sleep, % s["short"]
+    click % Arrayhome["okbtn"]
+    sleep, % s["short"]
+    click % Arrayhome["okbtn"]
+    sleep, % s["short"]
     LogToFile("xhhz Clicked OK")
 } 
 
@@ -115,7 +118,7 @@ IfWinExist xiaoxiaoshoufu
     ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
     sleep, % s["short"]
     click % Arrayhome["okbtn"]
-    sleep, % s["long"]
+    sleep, % s["short"]
     click % Arrayhome["okbtn"]
     LogToFile("xiaoxiaoshoufu Clicked OK")
     CaptureScreenAll()	
@@ -125,7 +128,8 @@ IfWinExist xiaoxiaoshoufu
     ;winclose, xxsf     ;Won't close, waiting for land bussiness done.
     sleep, % s["short"]
     winclose, xhhz
-
+    winclose, song
+    winclose, xiaoxiaoshoufu
     sleep, % s["short"]
     ;runwait "4399OpenShangJi.ahk"
     ;CaptureScreen()	
@@ -134,7 +138,7 @@ IfWinExist xiaoxiaoshoufu
 }
 winclose, xiaoxiaoshoufu
 LogToFile("RongZiTask done!")	
-sleep, % s["longer"]
+sleep, % s["short"]
 LogToFile("End of log.")    
 ExitApp
 

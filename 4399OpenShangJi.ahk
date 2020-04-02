@@ -20,7 +20,7 @@ try
 	IfWinExist %winName%
 		{
 			WinActivate %winName%
-			Winmove,%winName%,,1229,23,600,959
+			Winmove,%winName%,,829,23,600,959
 			sleep 200
 			CaptureScreen()
 			CloseAnySubWindow()

@@ -198,7 +198,7 @@ Launch4399Game(Sequ,windowname)
 		WinWaitActive, %Title%
 		WinSetTitle, %windowname%
 		WinSet, AlwaysOnTop, On, %windowname%
-		Winmove,%windowname%,,1229,23,600,959
+		Winmove,%windowname%,,829,23,600,959
 		if (WaitPixelColor("0x232D4D",544, 84,15000)=0)			;Waiting for up array
 		{
 			Click 566, 83
@@ -330,6 +330,24 @@ CloseAnySubWindow()
 				sleep 100
 			}
 			
+			click %Px%, %Py%
+			sleep 200
+		}
+		sleep 100
+	}	
+}
+
+CloseSpeSubWindow(n)
+{
+	loop %n%
+	{
+		ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
+		if (ErrorLevel = 2)  ;Execption when conduct the search
+			throw "ImageSearch not work, please check." 
+		else if (ErrorLevel = 1) ;Image not found 
+			Break
+		else if (ErrorLevel = 0) ;Image found
+		{
 			click %Px%, %Py%
 			sleep 200
 		}

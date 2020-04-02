@@ -55,7 +55,7 @@ loop 3  ;Try 3 times
         IfWinExist, %wintitle%
         {
             WinActivate %wintitle%
-            Winmove,%wintitle%,,1229,23,600,959
+            Winmove,%wintitle%,,829,23,600,959
             sleep, % s["short"]
             CloseAnySubWindow()
             LogToFile("Game window Found.")

@@ -18,6 +18,9 @@ CoordMode, Mouse, window
 
 try
 {	
+	;IfWinNotExist, %winName%
+	;	Launch4399Game(26,winName)	
+		
 	IfWinExist %winName%
 	{
 		WinActivate %winName%

@@ -20,7 +20,7 @@ logfilename := % logPath . "\\RongZiTask" . A_now  . ".txt"
 LogToFile("Log started, RongZiTask.ahk")
 ; btn1 肉沫茄子 btn2 - btn4 4399, btn_2 - btn_4 4399 weekly order button,前一个窗口刚好挡住下一个的确认两个字。
 global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633", btn_3: "522, 692", btn4: "253, 622", btn_4: "253, 692"} 
-Arrayhome := {okbtn: "324, 602", okbtnxxsf: "316, 596", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "511, 259"}
+Arrayhome := {okbtn: "324, 602", okbtnxxsf: "320, 610", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "500, 264"}
 s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}
 
 ;WinActivate ahk_exe mstsc.exe

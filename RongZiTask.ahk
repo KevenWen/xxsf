@@ -1,12 +1,8 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
-;#Include log.ahk
 #include Functions.ahk
-
-;ResizeWindow()
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;
 ; phy2 yun-1; xxsf/8888-5; 
@@ -15,16 +11,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % logPath . "\\RongZiTask" . A_now  . ".txt"
+FormatTime, DayToMeet,,d
+IniRead, shangjiday, config.ini, April, shangjiday
 
-LogToFile("Log started, RongZiTask.ahk")
 ; btn1 肉沫茄子 btn2 - btn4 4399, btn_2 - btn_4 4399 weekly order button,前一个窗口刚好挡住下一个的确认两个字。
 global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633", btn_3: "522, 692", btn4: "253, 622", btn_4: "253, 692"} 
 Arrayhome := {okbtn: "324, 602", okbtnxxsf: "320, 610", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "500, 264"}
 s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}
-
-;WinActivate ahk_exe mstsc.exe
-;WinSetTitle, ahk_exe mstsc.exe,, phy
 
 IfWinExist ahk_exe mstsc.exe
 {
@@ -74,7 +67,6 @@ IfWinExist ahk_exe mstsc.exe
     click % Arrayphy["btn4"]
     sleep, % s["short"]
 
-    LogToFile("Phy Com Clicked OK")
     WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
 } 
 
@@ -85,7 +77,6 @@ IfWinExist xxsf
     sleep, % s["short"]
     click % Arrayhome["okbtnxxsf"]
     sleep, % s["short"]
-    LogToFile("xxsf Clicked OK")
 } 
 
 IfWinExist xhhz
@@ -97,7 +88,6 @@ IfWinExist xhhz
     sleep, % s["short"]
     click % Arrayhome["okbtn"]
     sleep, % s["short"]
-    LogToFile("xhhz Clicked OK")
 }
 
 IfWinExist song
@@ -109,7 +99,6 @@ IfWinExist song
     sleep, % s["short"]
     click % Arrayhome["okbtn"]
     sleep, % s["short"]
-    LogToFile("xhhz Clicked OK")
 } 
 
 IfWinExist xiaoxiaoshoufu
@@ -120,27 +109,24 @@ IfWinExist xiaoxiaoshoufu
     click % Arrayhome["okbtn"]
     sleep, % s["short"]
     click % Arrayhome["okbtn"]
-    LogToFile("xiaoxiaoshoufu Clicked OK")
     CaptureScreenAll()	
     if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
         click % Arrayhome["clobtn"]
     
     ;winclose, xxsf     ;Won't close, waiting for land bussiness done.
-    sleep, % s["short"]
+    ;winclose, xiaoxiaoshoufu  ;Won't close if need open shang ji or by speed time plus.
     winclose, xhhz
     winclose, song
-    winclose, xiaoxiaoshoufu
-    sleep, % s["short"]
-    ;runwait "4399OpenShangJi.ahk"
-    ;CaptureScreen()	
-    runwait "4399Shopping_Pan.ahk"
     sleep, % s["short"]
 }
-winclose, xiaoxiaoshoufu
-LogToFile("RongZiTask done!")	
-sleep, % s["short"]
-LogToFile("End of log.")    
-ExitApp
+
+
+if IsItemInList(DayToMeet-1,shangjiday,",")
+    runwait "4399OpenShangJi.ahk"
+runwait "4399Shopping_Pan.ahk"
+runwait "4399TouLie.ahk" "lieshou" "launch" "S"
+runwait "QHLandBusiness.ahk"
+runwait "4399LandBusiness.ahk" "XXXL"
 
 F10::Pause   ;pause the script
 F11::ExitApp ;stop the script

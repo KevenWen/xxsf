@@ -21,11 +21,6 @@ Try
 	WinClose, %winName%
 	sleep 200
 	Launch4399Game(25,winName)
-	WinActivate, %winName%
-	sleep 1500
-
-	;Take a look the order list
-	;CaptureScreen()		
 	sleep 1000
 	;MouseClickDrag, Left, 326, 676,326,326,80
 	click 425, 896 ;Order button

@@ -8,22 +8,17 @@ SetBatchLines -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-Arrayflag = % (A_Args[1]="") ? "L" : A_Args[1]  ;ArraySeq value
-
-logfilename := % logPath . "\\Cards" . A_now . ".txt"
-LogToFile("Log file started...")
-LogToFile("Params: " . A_Args[1])
+Arrayflag = % (A_Args[1]="") ? "I" : A_Args[1]  ;ArraySeq value
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-if (Arrayflag = "L") 	;Part of the account
-	IniRead, SeqList, config.ini, account, L
-Else if (Arrayflag = "XXXL") 	;All the account
-	IniRead, SeqList, config.ini, account, XXXL		
+if (Arrayflag = "I") 	;Part of the account
+	IniRead, SeqList, config.ini, account, sharepart
+Else if (Arrayflag = "II") 	;All the account
+	IniRead, SeqList, config.ini, account, shareall		
 Else 
 	SeqList :=""
 ArraySeq := StrSplit(SeqList,",")
 
-global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 global winName := "xiaoxiaoshoufu"
 
 For index, value in ArraySeq
@@ -37,16 +32,11 @@ For index, value in ArraySeq
 	}	
 	Catch e
 	{
-		LogToFile(e)
+		;LogToFile(e)
 	}
 	WinClose, %winName%
 	sleep 200
 }
-
-WinSet, AlwaysOnTop, off, %winName%	
-LogToFile("Log end.")
-WinClose, % winName
-sleep 200
 WinClose 360游戏大厅
 MadeGif("Cards")
 ExitApp
@@ -60,47 +50,33 @@ PrepareGame:
 	{
 		WinActivate, %winName%
 		Winmove,%winName%,,629,23,600,959
+		CloseSpeSubWindow(10)
 		sleep 200
 	}
-	LogToFile("Launch4399Game done")
-	sleep 200
 Return
 
 getCard()
 {
-	CloseAnySubWindow()
-	click 246, 196	;gift pack button
+	click 246, 196	;click 礼包 button
 	sleep 500
-
-	Loop 120
-	{
-		if PixelColorExist("0x1657B0",288, 491,10)
-		{
-			click 288, 491  ;share everyday button
-			sleep 1000
-		}	
-		if PixelColorExist("0xFCFEFE",347, 640,10) ;share immediately button
-		{
-			click 344, 640
-			sleep 500
-		}
-		if PixelColorExist("0x5BD157", 285, 530,10) ;"share to" tip
+	Loop 150		;循环180次，可按需要调整
+	{	
+		WaitPixelColorAndClick("0x1657B0",288, 491,10,1000) ;click 每日分享 button
+		WaitPixelColorAndClick("0xFCFEFE",347, 640,10,500)  ;click 立即分享 button
+		if PixelColorExist("0x5BD157", 285, 530,10) 		;close "分享到" 提示
 		{
 			click 414, 432
 			sleep 200
 		}
-		if !PixelColorExist("0x97E2E4",327, 633,10)
-		{
+		if !PixelColorExist("0x97E2E4",327, 633,10)	;close 分享成功或拼图窗口
 			CloseSpeSubWindow(1)
-		}
 		sleep 200
 	}
-	CloseAnySubWindow()
+	CloseSpeSubWindow(30)	;关闭所有子窗口
 }
 
 getScreen:
-	sleep 1000
-	CloseAnySubWindow()
+	sleep 100
 	click 246, 196	;gift pack button
 	sleep 300
 	click 429, 577  ;card button

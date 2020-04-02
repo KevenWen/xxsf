@@ -46,7 +46,7 @@ IfWinExist ahk_exe mstsc.exe
     sleep, % s["short"]
     click, % Arrayphy["btn1"]
     sleep, % s["short"]    
-    sendinput {y}
+    sendinput {D}
 
     ;Supper
     if PixelColorExist("0xFFFFF3",798,633,10)

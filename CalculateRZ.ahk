@@ -37,7 +37,7 @@ IfWinNotExist, xiaoxiaoshoufu
 IfWinExist xiaoxiaoshoufu
 {
     WinActivate xiaoxiaoshoufu
-	Winmove,xiaoxiaoshoufu,,829,23,600,959
+	Winmove,%winName%,,1229,23,600,959
     sleep, % s["short"]
     click % HB[5]
     sleep, % s["short"]

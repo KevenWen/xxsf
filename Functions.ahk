@@ -106,18 +106,19 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0)
     }
 }
 
-WaitPixelColorAndClick(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0,p_GetMode="RGB") 
+WaitPixelColorAndClick(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0,wtime=100) 
 {
     l_Start := A_TickCount
     Loop {
-        PixelGetColor, l_OutputColor, %p_PosX%, %p_PosY%, %p_GetMode%	
+        PixelGetColor, l_OutputColor, %p_PosX%, %p_PosY%, RGB	
         If ( ErrorLevel )
             Return 1
         If ( l_OutputColor = p_DesiredColor )
 			{
 			Mousemove %p_PosX%, %p_PosY%
 			sleep 50	
-			click 
+			click
+			sleep %wtime% 
 			Return 0
 			}
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)
@@ -135,7 +136,7 @@ CaptureScreen()
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile(e)
+		;LogToFile(e)
 	}
 
 }
@@ -150,7 +151,7 @@ CaptureScreenAll()
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile(e)
+		;LogToFile(e)
 	}
 
 }
@@ -167,7 +168,7 @@ MadeGif(named="unknown")
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile("MadeGif exception: " . e)
+		;LogToFile("MadeGif exception: " . e)
 	}
 }
 
@@ -274,7 +275,7 @@ SuanKai()
 		and PixelColorExist("0x4BB3D9",466, 786,10) 
 		and !PixelColorExist("0xFFFDEF",447, 756,10) 
 	{
-		LogToFile("suankai done for 1,3")
+		;LogToFile("suankai done for 1,3")
 		WaitPixelColorAndClick("0xDEF7EE",471, 737,500)  ; NiuShi button
 		sleep 200
 		WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
@@ -399,7 +400,7 @@ FixRDPConn()
 		if A_Index > 2
 			Return 0
 
-		if PixelColorExist("0xFFFCF8",217, 589,200) ;the white color in the left pop up OK window
+		if PixelColorExist("0xFFFCF8",1060, 500,200) ;the white color in the left pop up OK window
 			Break
 		Else
 		{
@@ -427,4 +428,15 @@ FixRDPConn()
 		}	
 	}
 	Return 1
+}
+
+IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to read days from config.ini
+{
+   delim := (delim = "") ? "," : delim
+   Loop, Parse, list, %delim%
+   {
+      if (A_LoopField = item)
+         return true
+   }
+   return false
 }

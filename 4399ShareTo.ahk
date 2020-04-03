@@ -51,6 +51,7 @@ PrepareGame:
 		WinActivate, %winName%
 		Winmove,%winName%,,629,23,600,959
 		CloseSpeSubWindow(10)
+		click 90,895
 		sleep 200
 	}
 Return

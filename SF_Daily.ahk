@@ -137,27 +137,6 @@ Task202004:
    
 Return
 
-global toggle := 0
-F9::
-    global countN = 0
-    toggle := !toggle
-    if (toggle){        
-        SetTimer, Timer_click, 10
-    } else {
-        SetTImer, Timer_click, Off
-    }
-return
-
-Timer_click:
-    click    
-    countN+=1
-    if (countN > 36)
-    {
-        toggle := !toggle
-        SetTImer, Timer_click, Off
-    }      
-return
-
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count
 ^Numpad1::     ;02/song
     run %4399GamePath% -action:opengame -gid:1 -gaid:20

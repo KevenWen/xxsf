@@ -8,7 +8,7 @@ SetBatchLines -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-Arrayflag = % (A_Args[1]="") ? "S" : A_Args[1]  ;ArraySeq value
+Arrayflag = % (A_Args[1]="") ? "XXL" : A_Args[1]  ;ArraySeq value
 
 logfilename := % logPath . "\\LandBusiness" . A_now . ".txt"
 LogToFile("Log file started...")
@@ -82,6 +82,8 @@ PrepareGame:
 	{
 		WinActivate, %winName%
 		Winmove,%winName%,,829,23,600,959
+		CloseAnySubWindow()
+		click 85, 895
 		sleep 200
 	}
 	LogToFile("Launch4399Game done")
@@ -90,9 +92,20 @@ Return
 
 Dican(num)
 {
-	CloseAnySubWindow()
-	click 153, 889
-	PixelColorExist("0xFFFEF5",390, 190,1000)
+	loop
+	{
+		click 153, 889
+		sleep 500	
+		if PixelColorExist("0xFFFEF5",390, 190,1000) ;sometimes the close window function not work so need double check again.
+			break
+		else if A_Index > 5
+		{
+			CaptureScreen()
+			throw "Not able to open tou zi page."
+			break
+		}		
+		CloseAnySubWindow()
+	}
 	sleep 100
 	Mousemove,510, 825
 	send {LButton down}

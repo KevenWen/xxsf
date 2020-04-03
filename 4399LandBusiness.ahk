@@ -133,10 +133,19 @@ Dican(num)
 		{
 			LogToFile("Image found when loop times: " . A_Index)
 			CaptureScreen()	
-			click %Px%, %Py%
-			sleep 200
-			DiCcanJinzhu(num)
-			sleep 200
+			loop 2
+			{
+				try
+				{
+					click %Px%, %Py%
+					sleep 200
+					DiCcanJinzhu(num)
+					break					
+				}
+				Catch e
+					CloseAnySubWindow()
+			}
+
 			CaptureScreen()	
 			LogToFile("Land business done, num is " . num)
 			break
@@ -167,6 +176,10 @@ DiCcanJinzhu(num)
 		if PixelColorExist("0xFBFBFB",462, 396,500) ;确认注入提示框
 		{
 			click 302, 593 ;点击确定
+			sleep 300
+			if PixelColorExist("0x5A7965",329, 284,10)
+				throw "Exception while DiCcanJinzhu"
+			
 			WaitPixelColorAndClick("0xFBFBFB",479, 192,200)
 		}	
 		else

@@ -10,7 +10,6 @@ CoordMode, Mouse, window
 
 logfilename := % "E:\\AhkScriptManager-master\\log\\LandBusiness" . A_now . ".txt"
 LogToFile("Log file started...")
-LogToFile("Params: " . A_Args[1])
 
 global winName := "xxsf"
 
@@ -61,13 +60,16 @@ Dican()
 	click 131, 925
 	PixelColorExist("0xFFFEF5",400, 182,1000)
 	sleep 100
-	Mousemove,570, 840
-	send {LButton down}
-	Mousemove,570, 95,2
-	send {LButton up}
-	sleep 250
-	click 570, 840
-	sleep 400
+	loop 2
+	{
+		Mousemove,570, 840
+		send {LButton down}
+		Mousemove,570, 300,3
+		sleep 100	
+		send {LButton up}
+		click 570, 840
+		sleep 400
+	}
 	CaptureScreen()
 	loop 25
 	{

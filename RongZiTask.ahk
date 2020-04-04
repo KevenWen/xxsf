@@ -244,6 +244,8 @@ Rongzi_2:
         click % Arrayphy["btn4"]
         sleep, % s["short"]
 
+        ;sendinput {^NumpadSub}
+        
         WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
     } 
  

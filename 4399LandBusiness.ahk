@@ -1,11 +1,10 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-;#NoTrayIcon				; No system tray icon
-#SingleInstance force  
+#SingleInstance force
 #Include Functions.ahk
 SetBatchLines -1
 
-CoordMode, Pixel, window  
+CoordMode, Pixel, window
 CoordMode, Mouse, window
 
 Arrayflag = % (A_Args[1]="") ? "XXL" : A_Args[1]  ;ArraySeq value
@@ -96,7 +95,8 @@ Dican(num)
 	{
 		click 153, 889
 		sleep 500	
-		if PixelColorExist("0xFFFEF5",390, 190,1000) ;sometimes the close window function not work so need double check again.
+		;Sometimes the close window function not work so need double check again.
+		if PixelColorExist("0xFFFEF5",390, 190,1000)
 			break
 		else if A_Index > 5
 		{
@@ -143,10 +143,13 @@ Dican(num)
 					break					
 				}
 				Catch e
+				{
+					CaptureScreen()
 					CloseAnySubWindow()
+					LogToFile("Land business meet an exception: " e)
+				}					
 			}
 
-			CaptureScreen()	
 			LogToFile("Land business done, num is " . num)
 			break
 		}
@@ -178,12 +181,13 @@ DiCcanJinzhu(num)
 			click 302, 593 ;点击确定
 			sleep 300
 			if PixelColorExist("0x5A7965",329, 284,10)
-				throw "Exception while DiCcanJinzhu"
+				throw "Exception while DiCcanJinzhu1."
 			
 			WaitPixelColorAndClick("0xFBFBFB",479, 192,200)
+			CaptureScreen()	
 		}	
 		else
-			throw "Exception while DiCcanJinzhu"
+			throw "Exception while DiCcanJinzhu2."
 	}
 }
 

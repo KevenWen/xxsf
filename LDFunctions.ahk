@@ -204,7 +204,7 @@ CaptureScreen()
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile(e)
+		;LogToFile(e)
 	}
 
 }
@@ -221,7 +221,7 @@ MadeGif(named)
 	catch e
 	{
 		;Ignore the error here.
-		LogToFile(e)
+		;LogToFile(e)
 	}
 }
 

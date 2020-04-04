@@ -13,9 +13,6 @@ CoordMode, Mouse, window
 winName := ""
 winName := (%1% ="") ? "xiaoxiaoshoufu" : %1% 
 
-;logfilename := % "E:\\AhkScriptManager-master\\log\\ShangZhanReport" . A_now . ".txt"
-;LogToFile("Log file started...")
-
 Try 
 {
 	WinClose, %winName%

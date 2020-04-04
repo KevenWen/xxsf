@@ -8,9 +8,6 @@ SetBatchLines -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\LandBusiness" . A_now . ".txt"
-LogToFile("Log file started...")
-
 global winName := "xxsf"
 
 Try 
@@ -21,16 +18,13 @@ Try
 	SendMode Input	
 }
 Catch e
-{
 	CaptureScreen()	
-	LogToFile(e)
-}
+
 CaptureScreen()	
 ;WinClose, %winName%
 sleep 200
 
 WinSet, AlwaysOnTop, off, %winName%	
-LogToFile("Footer text to appear at the very end of your log, which you are done with.")
 MadeGif("LandBusiness")
 WinClose, % winName
 sleep 200
@@ -49,9 +43,6 @@ PrepareGame:
 		CloseAnySubWindow()
 		sleep 200
 	}	
-
-	LogToFile("LaunchQHGame done")
-	sleep 200
 Return
 
 Dican()
@@ -68,7 +59,7 @@ Dican()
 		sleep 100	
 		send {LButton up}
 		click 570, 840
-		sleep 400
+		sleep 200
 	}
 	CaptureScreen()
 	loop 25
@@ -88,14 +79,12 @@ Dican()
 		}
 		else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
 		{
-			LogToFile("Image found when loop times: " . A_Index)
 			CaptureScreen()	
 			click %Px%, %Py%
 			sleep 200
 			DiCcanJinzhu()
 			sleep 200
 			CaptureScreen()	
-			LogToFile("Land business done, num is " . num)
 			break
 		}
 		sleep 200		

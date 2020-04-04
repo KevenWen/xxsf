@@ -27,13 +27,6 @@ winTitle := "xxsf"   ;Title need change after launch
 RZCom := A_Args[1]      ;Which company
 OnlyZZ = % (A_Args[2]="") ? "N" : A_Args[2]  ;Only need Zhu Zi, do not need cezhi, Nocz_Y or Y,Nocz_Y stand for no chezi
 
-logfilename := % "E:\\AhkScriptManager-master\\log\\QHPrepareRongZi" . winTitle . A_now  . ".txt"
-
-LogToFile("Log started, QHPrepareRongZi.ahk ")
-LogToFile("winTitle := " winTitle)
-LogToFile("RZCom := " RZCom)
-LogToFile("Need CheZi? := " OnlyZZ)
-
 global HB := ["48, 909","130, 909","215, 909","300, 909","387, 909","465, 909"]             ; home buttons
 global SB := ["75, 260","190,260","300,260","410,260"]                                      ; shanghui buttons
 global BC := ["170, 420","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
@@ -70,7 +63,6 @@ loop 3  ;Try 3 times
     }
     catch e
     {
-        LogToFile("Opps exception happens! times: " A_index e)	
         CaptureScreen()    
         WinClose, %wintitle%
         Continue        
@@ -78,7 +70,6 @@ loop 3  ;Try 3 times
 
     if !PixelColorExist("0xFBFBFB",480, 395,100) ;Double check
     {
-        LogToFile("Double check failed!")	
         CaptureScreen()    
         WinClose, %wintitle%
         Continue
@@ -87,13 +78,11 @@ loop 3  ;Try 3 times
     if (OnlyZZ = "Y" or OnlyZZ = "Nocz_Y") ; if need click ok, click ok then exit, Nocz_Y stand for no chezi.
         gosub RongZiOK 
 
-    LogToFile("PrepareRongZi done for:" winTitle)
     Break
  
 }
 
 sleep, % s["longer"]
-LogToFile("Log ended.")
 WinSet, AlwaysOnTop, off, xxsf    
 ExitApp
 
@@ -149,8 +138,7 @@ RongZiOK:
     if PixelColorExist("0xFFFEF5",407, 444,5000) ;close the sub window if the first window closed
         click % PopWin["clobtn"]
     
-    CaptureScreen()       
-    LogToFile("Click RongZiOK.")	
+    CaptureScreen()
 }
 
 F10::Pause   ;pause the script

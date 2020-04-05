@@ -55,7 +55,7 @@ Dican()
 	{
 		Mousemove,570, 840
 		send {LButton down}
-		Mousemove,570, 300,3
+		Mousemove,570, 300,6
 		sleep 100	
 		send {LButton up}
 		click 570, 840

@@ -174,7 +174,6 @@ CloseLDSubWindow()
 	if PixelColorExist("0xFBFBFB",500, 200,1000) ;限时活动
 	{
 		click 500,200
-		MsgBox, 1
 	}	
 
 	WaitPixelColorAndClick("0xFBFBFB",510, 346,200) ;qian dao jiang li

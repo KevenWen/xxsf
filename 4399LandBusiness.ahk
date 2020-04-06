@@ -4,16 +4,17 @@
 #SingleInstance force
 #Include 4399sfGame.ahk
 
-supper := new 4399sfGame(27,"supper")
 Try 
 {
-    supper.DiCanJinzhu(40)
+    supper := new 4399sfGame(27,"supper")
+    supper.CaiTuanPage.GetCaiTuanMoney()
+    ;supper.LandPage.DiCanJinzhu(40)
 }
 Catch e
     MsgBox, % e
 
 
-supper := ""
+;supper := ""
 ExitApp
 
 F10::Pause   ;pause the script

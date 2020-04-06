@@ -22,7 +22,32 @@ IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath
 
+IniRead, seqname, config.ini, account, seqname
+
+/*
+uname_l :={}
+uname_a := StrSplit(seqname,",")
+Loop % uname_a.MaxIndex()
+{
+    uname_tem := StrSplit(uname_a[A_Index],":")
+    uname_l.InsertAt(1, % uname_tem[1] . ":" . uname_tem[2])
+
+    MsgBox, Color number %A_Index% is %uname_l%.
+    ExitApp
+}
+*/
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
+
+
+global	HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
+global	SB := ["140, 260","245,260","350,260","455,260"]                                     ; shanghui buttons
+global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
+global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                       ; Tooltip positions
+global	PopWin := {okbtn: "324, 602", clobtn: "480, 266"}           						 ; button positions
+global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}
+global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
+global uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
+
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {
@@ -33,7 +58,7 @@ PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10)
             Return 0
         If ( l_OutputColor = p_DesiredColor )
         {
-            sleep 100
+            sleep 50
             Return 1            
         }    
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)

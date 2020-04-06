@@ -289,6 +289,19 @@ SuanKai()
 	sleep 800
 	;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
 	Save_Refresh4399()
+
+	/*  ;phy only
+	click 458, 750
+	sleep 500
+	;WaitPixelColorAndClickThrowErr("0xFBFBFB",481, 232,2000) ; close button for testing
+	WaitPixelColorAndClickThrowErr("0x6BE8CF",445, 469,2000) ; Use button
+	sleep 200
+	click 298, 755
+	sleep 500
+	WaitPixelColorAndClickThrowErr("0x6BE8CF",445, 469,2000) ; Use button
+	sleep 200
+	Save_Refresh4399()
+	*/
 }
 
 Save_Refresh4399()

@@ -287,7 +287,7 @@ SuanKai()
 	sleep 200
 	WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
 	sleep 800
-	;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
+	CloseAnySubWindow()		
 	Save_Refresh4399()
 }
 
@@ -303,7 +303,7 @@ Save_Refresh4399()
 	sleep 100
 	click 404, 554 ;Save button
 	sleep 1000
-	Click, 476, 276 ;Close button
+    CloseAnySubWindow() ;Close window
 }
 
 CloseAnySubWindow()
@@ -382,8 +382,7 @@ GetDailayTaskMoney()
 		sleep 50		
 		Click 420, 580 ;Task 3
 		sleep 100
-		Click 479, 344 ;Close Button
-		sleep 200
+        CloseAnySubWindow()
 	}
 }
 

@@ -129,8 +129,9 @@ Rongzi_0:
     IfWinExist xhhz
     {
         WinActivate xhhz
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
         sleep, % s["short"]
+        if !PixelColorExist("0xFFE578",367, 591,10)
+            CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]
@@ -140,8 +141,9 @@ Rongzi_0:
     IfWinExist song
     {
         WinActivate song
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
         sleep, % s["short"]
+        if !PixelColorExist("0xFFE578",367, 591,10)
+            CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]
@@ -151,8 +153,9 @@ Rongzi_0:
     IfWinExist xiaoxiaoshoufu
     {
         WinActivate xiaoxiaoshoufu
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
         sleep, % s["short"]
+        if !PixelColorExist("0xFFE578",367, 591,10)
+            CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]
@@ -175,7 +178,8 @@ Rongzi_0:
     runwait "4399Shopping_Pan.ahk"
     runwait "4399TouLie.ahk" "lieshou" "launch" "S"
     runwait "QHLandBusiness.ahk"
-    runwait "4399LandBusiness.ahk" "XXXL"    
+    ;Pay attention to the first user may already opened.
+    runwait "4399LandBusiness.ahk" "XXXL"       
     ExitApp    
 Return
 

@@ -2,9 +2,9 @@
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-#Persistent
+;#Persistent
 #SingleInstance force
-#Include 4399sfGame.ahk
+#Include 4399UserTask.ahk
 
 ;ResizeWindow()
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
@@ -12,18 +12,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-sf01 := new 4399sfGame(19,"sf01")
+supper := new 4399UserTask(27,"supper")
 
-loop 2
-{
-    if !sf01.isBussinessSkillLight()
-        {
-            CaptureScreen()
-            sf01.OpenSJ()
-            CaptureScreen()
-        }
-}
 
+;Supper.OpenBusSkill()
+supper.GetLand()
 
 ;sf01.GetGiftScreen()
 ;sf01.GetCard(10)
@@ -73,4 +66,5 @@ return
     run %4399GamePath% -action:opengame -gid:1 -gaid:18
 return
 
-F12::ExitApp ;stop the script
+F10::Pause   ;pause the script
+F11::ExitApp ;stop the script

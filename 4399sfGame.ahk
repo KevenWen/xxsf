@@ -1,58 +1,12 @@
 ﻿#SingleInstance, Force
 SetBatchLines, -1
-#Include, sfGame.ahk
+#Include, Functions.ahk
+;#Include, sfGame.ahk
 ; click, % Arrayphy["btn1"]
 
 class 4399sfGame ;extends sfGame
 {
 
-; <================================  Constructure functions  ================================>
-
-	__New(seq,windowname)
-	{
-		
-		global logfilename := % logPath . "\\" . windowname  . "_" . A_now  . ".txt"
-
-		LogToFile("Log started.")
-
-		try
-		{
-			IfWinExist, %windowname%
-			{
-				WinActivate %windowname%
-				Winmove,%windowname%,,829,23,600,959
-				click % HB[1]
-				LogToFile("Find existing window named: " . windowname)
-				sleep 200
-			}
-			else
-			{
-				LogToFile("Going to open game: " . windowname)
-				this.Launch4399Game(seq,windowname)
-				LogToFile("Game opened.")
-			}	
-
-			;Assign properties:
-			WinGet IDVar,ID,A ; Get ID from Active window.		
-			this.WID := IDVar
-			this.winName := %windowname%
-			this.sequ := %seq%
-
-			LogToFile("Wid is： " . this.WID)
-		}
-		Catch, e
-			{
-				CaptureScreen()
-				LogToFile("Game open failed: " . e)
-			}
-	}
-
-    __Delete()
-    {
-		WinClose, %windowname%
-		this.LogToFile("Log Ended.")
-    }
-	
 ; <===================================  Sub Classes for each page  ================================>
 
 	#Include, .\4399Subpages\Shophomepage.ahk
@@ -94,11 +48,14 @@ class 4399sfGame ;extends sfGame
 				WinSetTitle, %windowname%
 				;WinSet, AlwaysOnTop, On, %windowname%
 				Winmove,%windowname%,,829,23,600,959
-				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array			{
+				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array			
 				sleep 2000
 				Click 566, 83
 				sleep 1000	
-				WaitPixelColorAndClickThrowErr("0x3BB1B2",343, 766,12000) ; Start game button
+				;WaitPixelColorAndClickThrowErr("0x3BB1B2",343, 766,12000) 
+				WaitPixelColor("0xFFFEF5",371, 686,12000) ;waiting for Start game button
+				sleep 500
+				click 343, 766
 				WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
 			}
 			Catch e
@@ -172,13 +129,4 @@ class 4399sfGame ;extends sfGame
 	}
 
 }
-
-
-
-
-
-
-
-
-
 

@@ -179,7 +179,7 @@ Rongzi_0:
     runwait "4399TouLie.ahk" "lieshou" "launch" "S"
     runwait "QHLandBusiness.ahk"
     ;Pay attention to the first user may already opened.
-    runwait "4399LandBusiness.ahk" "XXXL"       
+    runwait "4399LandBusiness.ahk" "XXXXL"       
     ExitApp    
 Return
 

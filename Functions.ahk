@@ -289,6 +289,19 @@ SuanKai()
 	sleep 800
 	CloseAnySubWindow()		
 	Save_Refresh4399()
+
+	/*  ;phy only
+	click 458, 750
+	sleep 500
+	;WaitPixelColorAndClickThrowErr("0xFBFBFB",481, 232,2000) ; close button for testing
+	WaitPixelColorAndClickThrowErr("0x6BE8CF",445, 469,2000) ; Use button
+	sleep 200
+	click 298, 755
+	sleep 500
+	WaitPixelColorAndClickThrowErr("0x6BE8CF",445, 469,2000) ; Use button
+	sleep 200
+	Save_Refresh4399()
+	*/
 }
 
 Save_Refresh4399()

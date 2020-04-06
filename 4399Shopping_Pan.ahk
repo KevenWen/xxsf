@@ -11,7 +11,8 @@ logfilename := % logPath . "\\Shopping-ZhuanPan" . A_now  . ".txt"
 LogToFile("Log started, 4399Shopping_Pan.ahk")
 
 winName := ""
-winName := (%1% ="") ? "xiaoxiaoshoufu" : %1% 
+;winName := (%1% ="") ? "xiaoxiaoshoufu" : %1% 
+winName := (A_Args[1] ="") ? "long" : A_Args[1] 
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
@@ -26,7 +27,7 @@ try
 		WinActivate %winName%
 		sleep 200
 		CaptureScreen()	
-		;CloseAnySubWindow()
+		CloseAnySubWindow()
 		;LogToFile("CloseAnySubWindow")
 		sleep 100
 		SuanKai() 	
@@ -35,10 +36,11 @@ try
 		Gosub, StartShopping
 		LogToFile("Shopping done")
 		sleep 100
-		Gosub, StartZhuanPan					
+		;if (winName = "long")
+			Gosub, StartZhuanPan					
 		LogToFile("ZhuanPan done")
 
-		sleep 1500
+		sleep 500
 		CaptureScreen()	
 	}
 }
@@ -51,9 +53,9 @@ catch e
 Finally 
 {
 	CaptureScreen()		
-	sleep 1000
+	sleep 100
 	LogToFile("Log End.")	
-	MadeGif("Shopping")
+	;MadeGif("Shopping")
 	ExitApp
 }
 
@@ -62,7 +64,7 @@ StartShopping:
 	click 360, 896
 	sleep 200
 	WaitPixelColorAndClickThrowErr("0xFFFFFF",370, 260,2000) ;Shop button
-	
+	sleep 300
 
 	if PixelColorExist("0x63B0FF",345, 474,100) ;1-3
 	{
@@ -78,12 +80,12 @@ StartShopping:
 		click 450, 474
 		sleep 300
 		click 323, 593
-		sleep 200		
+		sleep 200	
 		LogToFile("Shopping buy 1-4")				
 	}
 
 
-	if PixelColorExist("0x63B0FF",135, 474,100) ;Row 1-1
+	if PixelColorExist("0x63B0FF",135, 474,100) or PixelColorExist("0x62AFFE",135, 474,100) ;Row 1-1
 	{
 		click 135, 474
 		sleep 300
@@ -96,7 +98,7 @@ StartShopping:
 	if PixelColorExist("0x63B0FF",240, 600,100) ;2-2
 	{
 		click 240, 599
-		sleep 300
+		sleep 300			
 		click 323, 593
 		sleep 200
 		LogToFile("Shopping buy 2-2")				

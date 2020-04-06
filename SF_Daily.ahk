@@ -47,7 +47,7 @@ Task202004:
     {
         runwait "4399ZhuRongZi.ahk" "ZR" "L" 
         runwait "4399TouLie.ahk" "black" "launch" "L"
-        runwait "4399ShareTo.ahk" "II"    
+        ;runwait "4399ShareTo.ahk" "II"    
     } 
 
     If (TimeToMeet = 063000) ; TouLie from black list

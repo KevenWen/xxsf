@@ -420,25 +420,8 @@ FixRDPConn()
 			WinClose,ahk_exe mstsc.exe	
 			sleep 200
 			run "C:\Windows\system32\mstsc.exe" "C:\Users\keven\Documents\phy.rdp"
-			sleep 3000	
-		}	
-
-		if PixelColorExist("0xFFFFFF",1024, 655,8000) ;Login window exist, start to login!
-		{
-			click 1024, 655
-			sleep 200
-			send {Home}
-			sleep 200
-			send, % rdpdomain
-			sleep 200
-			send {Tab}
-			sleep 200
-			send, % rdppw
-			sleep 1000
-			send {Enter}
-			if PixelColorExist("0xFFFFF3",217, 589,4000)
-				Break	
-		}	
+			sleep 10000	
+		}
 	}
 	Return 1
 }

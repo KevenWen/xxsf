@@ -162,7 +162,7 @@ Rongzi_0:
             click % Arrayhome["clobtn"]
         
         ;winclose, xxsf     ;Won't close, waiting for land bussiness done.
-        ;winclose, xiaoxiaoshoufu  ;Won't close if need open shang ji or by speed time plus.
+        ;winclose, xiaoxiaoshoufu  ;Won't close if still need.
         winclose, xhhz
         winclose, song
         sleep, % s["short"]

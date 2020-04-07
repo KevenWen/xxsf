@@ -45,6 +45,8 @@ global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]           
 global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                       ; Tooltip positions
 global	PopWin := {okbtn: "324, 602", clobtn: "480, 266"}           						 ; button positions
 global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}
+global StockPos := ["184, 415","292, 415","440, 415","202, 572"]                       		; 注资的三个框
+global BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", rzyes:"329,555", rzok: "483, 320"} ;button positions
 global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
 global uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
 

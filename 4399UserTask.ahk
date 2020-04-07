@@ -12,10 +12,17 @@ class 4399UserTask extends 4399sfGame
 
 	__New(seq,windowname)
 	{
-		
+		this.winName := windowname
+		this.sequ := seq
 		global logfilename := % logPath . "\\" . windowname  . "_" . A_now  . ".txt"
 
 		LogToFile("Log started.")
+		if !this.CheckName()
+		{
+			LogToFile("seq and windowname not consistent, stop further process: " 
+			. seq . " is seq and windowname is: " . windowname)
+			ExitApp
+		}
 
 		try
 		{
@@ -37,8 +44,6 @@ class 4399UserTask extends 4399sfGame
 			;Assign properties:
 			WinGet IDVar,ID,A ; Get ID from Active window.		
 			this.WID := IDVar
-			this.winName := windowname
-			this.sequ := seq
 
 			LogToFile("Wid is： " . this.WID)
 		}
@@ -61,21 +66,8 @@ class 4399UserTask extends 4399sfGame
 	
 	GetLand()
 	{
-		Switch % this.sequ
-		{
-			Case 18:
-				this.LandPage.DiCanJinzhu(40)
-			Case 20:
-				this.LandPage.DiCanJinzhu(38)
-			Case 24:
-				this.LandPage.DiCanJinzhu(40)				
-			Case 25:
-				this.LandPage.DiCanJinzhu(38)
-			Case 26:
-				this.LandPage.DiCanJinzhu(38)							
-			Case 27:
-				this.LandPage.DiCanJinzhu(40)
-		}
+		this.LandPage.DiCanJinzhu(this.Getzhushu())
+		LogtoFile("DiCanJinzhu done: " . this.winName . "sequ: " . this.sequ)
 	}
 
 ; <========================  每周商技开启  ===========================>
@@ -110,8 +102,40 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-; <========================  每周商技开启  ===========================>
+; <========================  偷猎  ===========================>
 
+	Hunter(fromList)
+	{	
+		this.LandPage.SuanKai()	
+		this.ShopHomepage.Save_Refresh4399()
+		this.HunterPage.SelectPeopleAndstolen(fromList)
+	}
+
+; <========================  注融资  ===========================>
+
+	ZhuZi(which)
+	{
+		if which > 3
+		{
+			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
+			Return
+		}
+		this.GroupPage.GroupZhuZi(which)
+	}
+
+	CheZi()
+	{
+		this.GroupPage.GroupCheZi()
+	}
+
+	RongZi(which)
+	{
+		this.GroupPage.PreRongZi(which)
+		this.GroupPage.RongZiOK()
+	}
+
+	ClickRongZiOK()
+	{
+		this.GroupPage.RongZiOK()
+	}	
 }
-
-

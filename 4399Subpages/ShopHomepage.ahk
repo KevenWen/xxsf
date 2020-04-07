@@ -50,14 +50,14 @@ class ShopHomePage{
 
 	GetGiftScreen()
 	{
-		this.CloseAnySubWindow()
+		4399sfGame.CloseAnySubWindow()
 		sleep 100
 		click 246, 196	;gift pack button
 		sleep 300
 		click 429, 577  ;card button
 		sleep 500
 		CaptureScreen()
-		this.CloseAnySubWindow()
+		4399sfGame.CloseAnySubWindow()
 	}
 
 	GetCard(times=150)

@@ -79,7 +79,7 @@ class LandPage{
         CaptureScreen()
         loop 25
         {
-            this.CloseAnySubWindow()
+            4399sfGame.CloseAnySubWindow()
             ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
             if (ErrorLevel = 2)  ;Execption when conduct the search
                 throw "ImageSearch not work, please check." 

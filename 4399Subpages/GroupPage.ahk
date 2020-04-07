@@ -3,7 +3,7 @@ class GroupPage{
 	
     GetGroupPage()
 	{
-		this.closeAnySubWindow()
+		4399sfGame.closeAnySubWindow()
 		click % HB[5]
 		WaitPixelColor("0xFFFEF5",492, 354,2000)			;白色人数框
 	}
@@ -104,5 +104,100 @@ class GroupPage{
 		click 492, 249  ; 关闭subwindow
 		sleep 100
 	}
+
+	GroupZhuZi(which)
+	{
+		this.GetGroupPage2()
+		CaptureScreen()
+		loop 8		;有可能有红包挡住，等几秒钟再试
+		{
+			if PixelColorExist("0xFFF8CE",272, 320,10)
+				Break
+			else
+				sleep, % s["mid"]
+		}
+		if PixelColorExist("0xFFF8CE",272, 302,100) ; 还没有注过资.
+		{
+			num := % 4399sfGame.Getzhushu()
+			loop %num%
+			{
+				click % StockPos[which]
+				sleep 50
+			}
+			sleep % s["short"]
+			click % BtnArray["rzok"]
+			sleep, % s["short"] 
+			click % BtnArray["okbtn"]
+			LogToFile("zhuzi done for which: " which)
+		}	
+		else
+		{
+			LogToFile("ZhuZi already done yet, no need do again.")
+		}
+		sleep, % s["short"]
+		CaptureScreen()
+	}
+
+	GroupCheZi()
+	{
+		this.GetGroupPage4()
+		Loop 5
+		{
+			click % BC[A_index]
+			sleep, % s["long"]
+			if PixelColorExist("0xFBFBFB",480, 269,1000)   
+			and PixelColorExist("0xFDFBF0",212, 573,10) ;FDFBF0
+			and PixelColorExist("0xFFFEF5",230, 574,10)     ;窗口打开，没有融资，带有0，且只有两个字符
+			{
+				click % PopWin["clobtn"]
+				sleep, % s["long"]
+				Continue
+			}
+			Else
+			{
+				click % RZWin["chezibtn"]
+				sleep, % s["long"]
+				click % PopWin["okbtn"] 
+				sleep, % s["longer"]
+				click % PopWin["clobtn"]
+				sleep, % s["longer"]
+				Break   
+			}
+		}
+	}
+
+	PreRongZi(RZCom)
+	{		
+		this.GetGroupPage4()
+
+		click, % BC[RZCom]
+		sleep, % s["long"]		
+
+		mousemove, 200, 574
+		sleep, % s["short"]
+		click, % 4399sfGame.Getzhushu()
+		sleep, % s["mid"]
+
+		if !PixelColorExist("0xFFFFFF",254, 399,10) ;存在没有更多金币提示，problem here!
+			Throw, "Not enough money warnning exist!"    
+
+		sleep, % s["mid"]
+		click % RZWin["yesbtn"]
+	}
+
+	RongZiOK()
+	{
+		click % PopWin["okbtn"]
+		sleep, % s["mid"]
+		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
+			click % PopWin["clobtn"]
+	}
+
+
+
+
+
+
+
 
 }

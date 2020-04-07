@@ -128,5 +128,53 @@ class 4399sfGame ;extends sfGame
 		}	
 	}
 
+   Getzhushu()
+	{
+		Switch % this.winName
+		{
+			Case "song":
+				return 38
+			Case "long":
+				return 39
+			Case "hou":
+				return 38				
+			Case "yun":
+				return 38
+			Case "supper":
+				return 41							
+			Case "xxhz":
+				return 40
+			Case "xhhz":
+				return 40
+			Default:
+				return 16	
+		}
+	}
+
+   CheckName()
+	{
+		;18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
+		Switch % this.winName
+		{
+			Case "song":
+				return % (this.sequ = 20)?1:0
+			Case "long":
+				return % (this.sequ = 25)?1:0
+			Case "hou":
+				return % (this.sequ = 26)?1:0				
+			Case "yun":
+				return % (this.sequ = 24)?1:0
+			Case "supper":
+				return % (this.sequ = 27)?1:0							
+			Case "xxhz":
+				return % (this.sequ = 18)?1:0
+			Case "xhhz":
+				return % (this.sequ = 18)?1:0
+			Default:
+				return 1	
+		}
+	}
+
+
 }
 

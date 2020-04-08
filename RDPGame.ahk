@@ -16,6 +16,8 @@ class RDPGame ;extends sfGame
 		{
 			run "C:\Windows\system32\mstsc.exe" "C:\Users\keven\Documents\phy.rdp"
 			sleep 10000
+			Winmove,ahk_exe mstsc.exe,,585,111,1120,872
+			sleep 200			
 		}
 
 		WinGet IDVar,ID,A ; Get ID from Active window.		

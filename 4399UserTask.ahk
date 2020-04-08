@@ -57,6 +57,7 @@ class 4399UserTask extends 4399sfGame
     __Delete()
     {
 		WinClose, %windowname%
+		WinClose, 360游戏大厅
 		this.LogToFile("Log Ended.")
     }
 	
@@ -66,8 +67,15 @@ class 4399UserTask extends 4399sfGame
 	
 	GetLand()
 	{
+		try{
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
-		LogtoFile("DiCanJinzhu done: " . this.winName . "sequ: " . this.sequ)
+		LogtoFile("GetLand() done: " . this.winName . "sequ: " . this.sequ)
+		}
+		Catch e
+		{
+		LogtoFile("GetLand() get exception: " . e)
+		CaptureScreen()
+		}
 	}
 
 ; <========================  每周商技开启  ===========================>
@@ -104,11 +112,27 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  偷猎  ===========================>
 
-	Hunter(fromList)
+	Hunter(islieshou) ; 1 will from lieshou, 0 or others will from blacklist
 	{	
+		try{
+		LogToFile("start to hunter, islieshou: " . islieshou)
 		this.LandPage.SuanKai()	
+		LogToFile("this.LandPage.SuanKai() done. ")
 		this.ShopHomepage.Save_Refresh4399()
-		this.HunterPage.SelectPeopleAndstolen(fromList)
+		LogToFile("this.ShopHomepage.Save_Refresh4399() done. ")		
+		}
+		Catch e{
+		LogToFile("excetion while Sunkai or save_refresh: " . e)
+		CaptureScreen()
+		}
+		try{
+		this.HunterPage.SelectPeopleAndstolen(islieshou)
+		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")	
+		}
+		Catch e{
+		LogToFile("excetion while Sunkai or save_refresh: " . e)
+		CaptureScreen()
+		}
 	}
 
 ; <========================  注融资  ===========================>
@@ -120,7 +144,14 @@ class 4399UserTask extends 4399sfGame
 			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
 			Return
 		}
+		try{
 		this.GroupPage.GroupZhuZi(which)
+		}
+		Catch e
+		{
+			LogToFile("this.GroupPage.GroupZhuZi get exception: " . e)
+			CaptureScreen()
+		}
 	}
 
 	CheZi()

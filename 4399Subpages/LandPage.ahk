@@ -12,6 +12,8 @@ class LandPage{
 	GetLandPage()
 	{
 		4399sfGame.closeAnySubWindow()
+        click % HB[1]
+        sleep 200
 		click % HB[2]
 		WaitPixelColor("0x706B59",398, 288,2000)		;升级button 旁边的灰色条	
 	}
@@ -111,56 +113,56 @@ class LandPage{
             {
                 LogToFile("Image found when loop times: " . A_Index)
                 CaptureScreen()	
-                loop 2
+
+                click %Px%, %Py%
+                sleep 200                        
+                if PixelColorExist("0xFFFEF5",169, 472,1000)    ;经营资源输入框存在
+                and PixelColorExist("0x5A7965",331, 353,10)     ;且上面图片显示是闲置土地
                 {
-                    try
+                    Mousemove,255, 460
+                    click, % round(num/2)+2 ;金币注经营资源
+                    sleep 100
+                    Mousemove,255, 520
+                    click, % round(num/2)-3 ;金币注管理资源
+                    sleep 100
+                    Mousemove,414, 520
+                    click, 3				;资源卡注管理资源
+                    sleep 100
+                    Mousemove,330,580
+                    click, 3				;5份钻石注决策资源
+                    CaptureScreen()	
+                    sleep 100
+                    click 361, 704			;确认注入
+                    sleep 100
+                    if PixelColorExist("0xFBFBFB",462, 396,500)     ;确定提示框存在
+                    and PixelColorExist("0x909090",187, 363,10)     ;没有金钱不够提示                      
                     {
-                        click %Px%, %Py%
-                        sleep 200
-                        if PixelColorExist("0xFFFEF5",185, 469,1000) 
-                        {
-                            Mousemove,255, 460
-                            click, % round(num/2)+2 ;金币注经营资源
-                            sleep 100
-                            Mousemove,255, 520
-                            click, % round(num/2)-3 ;金币注管理资源
-                            sleep 100
-                            Mousemove,414, 520
-                            click, 6				;资源卡注管理资源
-                            sleep 100
-                            Mousemove,330,580
-                            click, 5				;5份钻石注决策资源
-                            CaptureScreen()	
-                            sleep 100
-                            click 361, 704			;确认注入
-                            sleep 100
-                            if PixelColorExist("0xFBFBFB",462, 396,500) ;确认注入提示框
-                            {
-                                click 302, 593 ;点击确定
-                                sleep 300
-                                if PixelColorExist("0x5A7965",329, 284,10)
-                                    throw "Exception while DiCcanJinzhu1."
-                                
-                                WaitPixelColorAndClick("0xFBFBFB",479, 192,200)
-                                CaptureScreen()	
-                            }	
-                            else
-                                throw "Exception while DiCcanJinzhu2."
-                        }
-                        break					
-                    }
-                    Catch e
+                        click 302, 593 ;点击确定
+                        sleep 500
+                        ;if PixelColorExist("0x5A7965",329, 284,10)  ; Very dengrous at doing this!
+                        ;    throw "Exception while DiCcanJinzhu1, still show geen after click one time."
+                        
+                        WaitPixelColorAndClick("0xFBFBFB",479, 192,1000)
+                        CaptureScreen()
+                        LogToFile("Land business done, num is " . num)
+                    }	
+                    else
                     {
                         CaptureScreen()
-                        4399sfGame.CloseAnySubWindow()
-                        LogToFile("Land business meet an exception: " e)
-                    }					
+                        LogToFile("Exception while DiCcanJinzhu2: 0xFBFBFB or 0x909090") 
+                    }
                 }
-                LogToFile("Land business done, num is " . num)
-                break
-            }
-            sleep 200        
+                else
+                {
+                    LogToFile("0xFFFEF5 and 0x5A7965 exception.")
+                    CaptureScreen()
+                }
+            
+                Break    
+            }  
         }
         SendMode Input			
     }
+
+
 }

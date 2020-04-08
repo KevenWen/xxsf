@@ -7,25 +7,24 @@ class HunterPage{
 	GetHunterPage()
 	{
 		4399sfGame.closeAnySubWindow()
-		click % HB[3]
-		WaitPixelColor("0xFFFEF5",494, 703,2000)			;The white in Hunt failure count area
+        click % HB[1]
+        sleep 200
+        click % HB[3]		
+        WaitPixelColor("0xFFFEF5",494, 703,2000)			;The white in Hunt failure count area
 	}
 
-    SelectPeopleAndstolen(fromList)
+    SelectPeopleAndstolen(islieshou)
     {
         n :=1
         SuccessCount :=1
         while (n<7 and SuccessCount<6)
         {
-            ;CloseAnySubWindow()
-            sleeptime := n=1? 500:600
-            sleep %sleeptime%
-
-            (fromList = "lieshou")?(this.OpenTouLiePage(n)):(4399sfGame.ShopHomePage.OpenTouLiePageFromBlackList(n))
-
-            CaptureScreen()	
             try
             {
+                sleep 500
+                (islieshou = 1)?(this.OpenTouLiePage(n)):(4399sfGame.ShopHomePage.OpenTouLiePageFromBlackList(n))
+
+                CaptureScreen()	
                 sleep 500
                 this.TouLieOpration()	
                 SuccessCount++	
@@ -46,22 +45,14 @@ class HunterPage{
 
     OpenTouLiePage(Num)
     {
-        this.GetHunterPage()
-        ;click 501,252
-        WaitPixelColorAndClickThrowErr("0x2E3030",212, 879,2000) ;LieShou button
-        sleep 500
-
         if PixelColorExist("0xF39181",126, 187,100) ;Return button if exist.
-            {
-                click 126, 187
-                sleep 500
-            }
-        
-        if PixelColorExist("0xFBFBFB",459,399,100) ; Houbao window or shangzhan window if exist.
-            {
-                click 459,399
-                sleep 500
-            }	
+        {
+            click 126, 187
+            sleep 500
+        }
+        Else
+            this.GetHunterPage()
+    
         ; Click corresponding people 
         click % (Num=1)?(LieshoucoList[1])
         :((Num=2)?(LieshoucoList[2])
@@ -106,8 +97,6 @@ class HunterPage{
             click 461, 321 ; Close the get card page
         }
         Else
-        {
             throw "Already stoled in hours or the target is full!"
-        }
     }
 }

@@ -16,7 +16,7 @@ class ShopHomePage{
         ;Setting Button
         WaitPixelColorAndClickThrowErr("0xFFFFFF",496, 198,3000)
         ;Setting page
-        if !(WaitPixelColor("0xFFFFF3",405, 321,3000) = 0)
+        if !PixelColorExist("0xFFFFF3",405, 321,3000) ;off上面的空白
             throw "Setting page cannot found!"
 
         sleep 100

@@ -17,7 +17,7 @@ Return
 Task202004:
 
     FormatTime, TimeToMeet,,HHmmss
-    FormatTime, DayToMeet,,d
+/*  FormatTime, DayToMeet,,d
 
     IniRead, RongZi00, config.ini, April, RongZi00
 
@@ -30,18 +30,11 @@ Task202004:
 
     If (TimeToMeet = 235000) and IsItemInList(DayToMeet,RongZi00) ; Rong zi task prepare for xhhz
         runwait "4399PrepareRongZi.ahk" "18" "xhhz" "5"
-
-    If (TimeToMeet = 235400) ; Check if the remote desktop is opened, if not send alert.
-    {
-        CaptureScreenAll()
-        sleep 1000
-        if !FixRDPConn()
-            SendAlertEmail()
-    }
-
-    If (TimeToMeet = 235958 ) ; Rong zi task, and also shopping / zhuanpan / openshangji
+*/
+    If (TimeToMeet = 235500 ) ; Rong zi task, and also shopping / zhuanpan / openshangji
         runwait "RongZiTask.ahk" 
 
+    /*
     ;Task for every days    
     If (TimeToMeet = 002500 ) ; Rong zi task for 01-06
     {
@@ -55,7 +48,7 @@ Task202004:
 
     If (TimeToMeet = 123000) ; TouLie from black list
         runwait "4399TouLie.ahk" "black" "launch" "XL"     
-   
+   */
 Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count

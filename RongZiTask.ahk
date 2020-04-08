@@ -2,7 +2,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
-#include Functions.ahk
+#include 4399UserTask.ahk
+#include RDPGame.ahk
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;
 ; phy2 yun-1; xxsf/8888-5; 
@@ -21,7 +22,7 @@ global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3
 Arrayhome := {okbtn: "324, 602", okbtnxxsf: "320, 610", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "500, 264"}
 s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}
 
-sleep 3000
+sleep 1000
 
 if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
     Gosub, Rongzi_0
@@ -35,30 +36,47 @@ ExitApp
 ;<===================The sub tasks==========================>
 
 ;<========================================= Sub Tasks N ================================================>
-
+; 19-01, 21-03, 22-04,23-05,35-06, 
+; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
-    IfWinExist ahk_exe mstsc.exe
-    {
-        WinActivate ahk_exe mstsc.exe
-        sleep, % s["short"]
-        CaptureScreen()	
-        sleep, % s["short"]
+    supper := new 4399UserTask(27,"supper")
+    xhhz := new 4399UserTask(18,"xhhz")
+    rdp := new RDPGame()
 
-        ;LDplayer
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]    
-        sendinput {D}
-    } 
+    Loop 300    ;Make sure we are start after 00:00, total 10 mins
+    {
+        FormatTime, MinToMeet,,mm
+        if MinToMeet < 50
+            Break
+        sleep 2000
+    }
+
+	rdp.RDP_N()
 
     if IsItemInList(DayToMeet,shangjiday)
-        runwait "4399OpenShangJi.ahk"
+        new 4399UserTask(27,"supper").OpenBusSkill()
 
-    runwait "QHLandBusiness.ahk"   
-    runwait "4399LandBusiness.ahk" "XXXL"
-    runwait "4399TouLie.ahk" "lieshou" "launch" "SS"
-    ExitApp
+    runwait "QHLandBusiness.ahk"
+
+    supper.GetLand()
+    supper := ""
+    xhhz.GetLand()
+
+    long := new 4399UserTask(25,"long")
+    long.GetLand()
+
+    song := new 4399UserTask(20,"song")
+    song.GetLand()
+    
+    long.Hunter(1)
+    long := ""
+
+    song.Hunter(1)
+    song := ""
+
+    xhhz.Hunter(1)
+    xhhz := ""
+
 Return
 
 
@@ -66,56 +84,6 @@ Return
 
 
 Rongzi_0:
-    IfWinExist ahk_exe mstsc.exe
-    {
-        WinActivate ahk_exe mstsc.exe
-        WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
-        sleep 1000
-        CaptureScreen()	
-        sleep 200
-
-        ;LDplayer
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]
-        sendinput {D}
-
-        ;Supper
-        if PixelColorExist("0xFFFFF3",798,633,10)
-        {
-            click % Arrayphy["btn_2"]
-            sleep, % s["short"]
-        }    
-        click % Arrayphy["btn2"]
-        sleep, % s["short"]
-        click % Arrayphy["btn2"]
-        sleep, % s["short"]
-
-        ;Long
-        if PixelColorExist("0xFFFFF3",522,633,10)
-        {
-            click % Arrayphy["btn_3"]
-            sleep, % s["short"]
-        }    
-        click % Arrayphy["btn3"]
-        sleep, % s["short"]
-        click % Arrayphy["btn3"]
-        sleep, % s["short"]
-
-        ;Song
-        if PixelColorExist("0xFFFFF3",253,633,10)
-        {
-            click % Arrayphy["btn_4"]
-            sleep, % s["short"]
-        }
-        click % Arrayphy["btn4"]
-        sleep, % s["short"]
-        click % Arrayphy["btn4"]
-        sleep, % s["short"]
-
-        WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
-    } 
 
     IfWinExist xxsf
     {
@@ -131,7 +99,7 @@ Rongzi_0:
         WinActivate xhhz
         sleep, % s["short"]
         if !PixelColorExist("0xFFE578",367, 591,10)
-            CloseSpeSubWindow(1)
+            this.CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]
@@ -143,7 +111,7 @@ Rongzi_0:
         WinActivate song
         sleep, % s["short"]
         if !PixelColorExist("0xFFE578",367, 591,10)
-            CloseSpeSubWindow(1)
+            this.CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]
@@ -155,7 +123,7 @@ Rongzi_0:
         WinActivate xiaoxiaoshoufu
         sleep, % s["short"]
         if !PixelColorExist("0xFFE578",367, 591,10)
-            CloseSpeSubWindow(1)
+            this.CloseSpeSubWindow(1)
         click % Arrayhome["okbtn"]
         sleep, % s["short"]
         click % Arrayhome["okbtn"]

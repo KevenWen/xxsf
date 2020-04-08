@@ -49,7 +49,7 @@ global StockPos := ["184, 415","292, 415","440, 415","202, 572"]                
 global BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", rzyes:"329,555", rzok: "483, 320"} ;button positions
 global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
 global uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
-
+global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {

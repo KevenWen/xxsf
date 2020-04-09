@@ -2,8 +2,6 @@
 SetBatchLines, -1
 ;SendMode Input ; Forces Send and SendRaw to use SendInput buffering for speed.
 
-global rdppw = ""
-global rdpdomain = ""
 global 4399GamePath = ""
 global LDGamePath = ""
 global gifskipath = ""
@@ -12,8 +10,19 @@ global logPath = ""
 global i_viewpath = ""
 global logArchivePath = ""
 
-IniRead, rdppw, config.ini, passwords, RDPpw
-IniRead, rdpdomain, config.ini, passwords, RDPdm
+global supper_id 
+global yun_id 
+global song_id
+global hou_id
+global long_id
+global xhhz_id
+global sf01_id 
+global sf03_id 
+global sf04_id
+global sf05_id
+global sf06_id
+
+
 IniRead, logPath, config.ini, path, logPath
 IniRead, logArchivePath, config.ini, path, logArchivePath
 IniRead, emailPSFilePath, config.ini, path, emailPSFilePath
@@ -22,7 +31,20 @@ IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath
 
-IniRead, seqname, config.ini, account, seqname
+
+IniRead, supper_id, config.ini, users, supper
+IniRead, yun_id, config.ini, users, yun
+IniRead, song_id, config.ini, users, song
+IniRead, long_id, config.ini, users, long
+IniRead, hou_id, config.ini, users, hou
+IniRead, xhhz_id, config.ini, users, xhhz
+IniRead, sf01_id, config.ini, users, sf01
+IniRead, sf03_id, config.ini, users, sf03
+IniRead, sf04_id, config.ini, users, sf04
+IniRead, sf05_id, config.ini, users, sf05
+IniRead, sf06_id, config.ini, users, sf06
+
+
 
 /*
 uname_l :={}
@@ -50,6 +72,22 @@ global BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", 
 global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
 global uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
+
+/*
+s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
+HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
+SB := ["140, 260","245,260","350,260","455,260"]                                     ; shanghui buttons
+	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
+TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                       ; Tooltip positions
+	PopWin := {okbtn: "324, 602", clobtn: "480, 266"}           						 ; button positions
+	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}
+ StockPos := ["184, 415","292, 415","440, 415","202, 572"]                       		; 注资的三个框
+ BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", rzyes:"329,555", rzok: "483, 320"} ;button positions
+	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
+ uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
+ LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
+*/
+
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {

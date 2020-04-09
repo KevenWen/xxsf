@@ -14,7 +14,8 @@ class 4399UserTask extends 4399sfGame
 	{
 		this.winName := windowname
 		this.sequ := seq
-		global logfilename := % logPath . "\\" . windowname  . "_" . A_now  . ".txt"
+		global logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"		
+		;this.logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"
 
 		LogToFile("Log started.")
 		if !this.CheckName()
@@ -67,8 +68,9 @@ class 4399UserTask extends 4399sfGame
 	
 	GetLand()
 	{
+		this.PrepareGameWindow(this.winName)
 		try{
-		this.LandPage.DiCanJinzhu(this.Getzhushu())
+		this.LandPage.DiCanJinzhu(this.Getzhushu(this.winName))
 		LogtoFile("GetLand() done: " . this.winName . "sequ: " . this.sequ)
 		}
 		Catch e
@@ -82,6 +84,7 @@ class 4399UserTask extends 4399sfGame
 
 	OpenBusSkill()
 	{	
+		this.PrepareGameWindow(this.winName)
 		loop
 		{
 			this.GroupPage.GetGroupPage2()	
@@ -114,6 +117,7 @@ class 4399UserTask extends 4399sfGame
 
 	Hunter(islieshou) ; 1 will from lieshou, 0 or others will from blacklist
 	{	
+		this.PrepareGameWindow(this.winName)
 		try{
 		LogToFile("start to hunter, islieshou: " . islieshou)
 		this.LandPage.SuanKai()	
@@ -125,6 +129,7 @@ class 4399UserTask extends 4399sfGame
 		LogToFile("excetion while Sunkai or save_refresh: " . e)
 		CaptureScreen()
 		}
+
 		try{
 		this.HunterPage.SelectPeopleAndstolen(islieshou)
 		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")	
@@ -139,6 +144,7 @@ class 4399UserTask extends 4399sfGame
 
 	ZhuZi(which)
 	{
+		this.PrepareGameWindow(this.winName)
 		if which > 3
 		{
 			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
@@ -156,20 +162,75 @@ class 4399UserTask extends 4399sfGame
 
 	CheZi()
 	{
+		try{
+		this.PrepareGameWindow(this.winName)
 		this.GroupPage.GroupCheZi()
+		}
+		Catch e
+			CaptureScreen()
+
 	}
 
-	RongZi(which)
+	PrepareRongZi(which)
 	{
+		try{
+		this.PrepareGameWindow(this.winName)
 		this.GroupPage.PreRongZi(which)
-		this.GroupPage.RongZiOK()
+		}
+		Catch e
+			CaptureScreen()
+	}
+
+	CheZiRongZi(which)
+	{
+		try{
+		this.PrepareGameWindow(this.winName)
+		this.GroupPage.PreRongZi(which)
+		this.GroupPage.RongZiOKinternal()
+		}
+		Catch e
+			CaptureScreen()
 	}
 
 	ClickRongZiOK()
 	{
-		;MsgBox, % this.winName
+		try{
+		this.PrepareGameWindow(this.winName)
 		LogToFile("Start to do ClickRongZiOK.")
 		this.GroupPage.RongZiOKpublic()
-		LogToFile("ClickRongZiOK() done.")		
+		LogToFile("ClickRongZiOK() done.")
+		}
+		Catch e
+			CaptureScreen()
 	}	
+
+; <========================  转盘  ===========================>
+
+	ZhuPan(times)
+	{
+		this.PrepareGameWindow(this.winName)
+		try{
+		LogToFile("start to ZhuPan, times: " . times)
+		this.LandPage.SuanKai()	
+		LogToFile("this.LandPage.SuanKai() done. ")
+		this.ShopHomepage.Save_Refresh4399()
+		LogToFile("this.ShopHomepage.Save_Refresh4399() done. ")		
+		}
+		Catch e{
+		LogToFile("excetion while Sunkai or save_refresh: " . e)
+		CaptureScreen()
+		}
+
+		try{			
+			this.ShopHomepage.PlayZhuanPan(times)
+		}
+		Catch e{
+		LogToFile("excetion while this.ShopHomepage.PlayZhuanPan: " . e)
+		CaptureScreen()
+		}
+	}
+
+
+
 }
+

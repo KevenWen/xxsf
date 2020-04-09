@@ -25,7 +25,7 @@ CaptureScreen()
 sleep 200
 
 WinSet, AlwaysOnTop, off, %winName%	
-MadeGif("LandBusiness")
+;MadeGif("LandBusiness")
 WinClose, % winName
 sleep 200
 WinClose 360游戏大厅

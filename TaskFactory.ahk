@@ -12,11 +12,53 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-supper := new 4399UserTask(27,"supper")
+class test{
+    __New(fname){
+        this.filename := fname        
+       ; this.logfile := fname . ".txt"
+        global logfile := fname . ".txt"
+        msgbox % "creating " . this.logfile
+    }
+
+
+    showname(){
+        return this.filename
+    }
+
+    Activedic(){
+        WinActivate, % this.filename
+        sleep 200
+        click 272, 157
+        sleep 200
+        Send, % texts . this.filename
+        sleep 200
+    }
+
+    __Delete(){
+        MsgBox, % "deleting " . logfile
+    }
+}
+
+a := new test("Untitled - Notepad")
+b := new test("ahk_exe YoudaoDict.exe")
+
+
+a.Activedic()
+sleep 1000
+b.Activedic()
+
+;msgbox, % a.showname()
+
+b := ""
+msgbox, % a.showname()
+msgbox, % b.showname()
+;a := ""
+
+;supper := new 4399UserTask(27,"supper")
 
 
 ;Supper.OpenBusSkill()
-supper.GetLand()
+;supper.GetLand()
 
 ;sf01.GetGiftScreen()
 ;sf01.GetCard(10)

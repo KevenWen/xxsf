@@ -1,11 +1,19 @@
 ﻿#SingleInstance, Force
 SetBatchLines, -1
+SetTitleMatchMode, 3
 #Include, Functions.ahk
 ;#Include, sfGame.ahk
 ; click, % Arrayphy["btn1"]
 
 class 4399sfGame ;extends sfGame
 {
+
+; <===================================  Properties declare  =======================================>
+
+WID := ""
+winName := ""
+sequ := ""
+
 
 ; <===================================  Sub Classes for each page  ================================>
 
@@ -128,6 +136,17 @@ class 4399sfGame ;extends sfGame
 		}	
 	}
 
+	SubWindowExist()
+	{
+		ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
+		if (ErrorLevel = 2)  ;Execption when conduct the search
+			return 0
+		else if (ErrorLevel = 1) ;Image not found 
+			return 0
+		else if (ErrorLevel = 0) ;Image found
+			return 1
+	}
+
    Getzhushu()
 	{
 		Switch % this.winName
@@ -154,18 +173,19 @@ class 4399sfGame ;extends sfGame
    CheckName()
 	{
 		;18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
+		;phy: supper=10 yun=8 song=2 long=7 hou=9 xhhz= mao=6 sf01=1 sf03=3 sf04=4 sf05=5
 		Switch % this.winName
 		{
 			Case "song":
-				return % (this.sequ = 20)?1:0
+				return % (this.sequ in 20,2)?1:0
 			Case "long":
-				return % (this.sequ = 25)?1:0
+				return % (this.sequ in 25,7)?1:0
 			Case "hou":
-				return % (this.sequ = 26)?1:0				
+				return % (this.sequ in 26,9)?1:0				
 			Case "yun":
-				return % (this.sequ = 24)?1:0
+				return % (this.sequ in 24,8)?1:0
 			Case "supper":
-				return % (this.sequ = 27)?1:0							
+				return % (this.sequ in 27,10)?1:0							
 			Case "xxhz":
 				return % (this.sequ = 18)?1:0
 			Case "xhhz":

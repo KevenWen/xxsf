@@ -16,6 +16,18 @@ FormatTime, DayToMeet,,d
 IniRead, shangjiday, config.ini, April, shangjiday
 IniRead, RongZi00, config.ini, April, RongZi00
 IniRead, RongZi02, config.ini, April, RongZi02
+;users:
+IniRead, supper_id, config.ini, users, supper
+IniRead, yun_id, config.ini, users, yun
+IniRead, song_id, config.ini, users, song
+IniRead, long_id, config.ini, users, long
+IniRead, hou_id, config.ini, users, hou
+IniRead, mao_id, config.ini, users, mao
+IniRead, sf01_id, config.ini, users, sf01
+IniRead, sf03_id, config.ini, users, sf03
+IniRead, sf04_id, config.ini, users, sf04
+IniRead, sf05_id, config.ini, users, sf05
+
 
 ; btn1 肉沫茄子 btn2 - btn4 4399, btn_2 - btn_4 4399 weekly order button,前一个窗口刚好挡住下一个的确认两个字。
 global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633", btn_3: "522, 692", btn4: "253, 622", btn_4: "253, 692"} 
@@ -39,7 +51,7 @@ ExitApp
 ; 19-01, 21-03, 22-04,23-05,35-06, 
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
-    supper := new 4399UserTask(27,"supper")
+    supper := new 4399UserTask(supper_id,"supper")
     xhhz := new 4399UserTask(18,"xhhz")
     rdp := new RDPGame()
 
@@ -84,40 +96,25 @@ Return
 
 
 Rongzi_0:
+;MsgBox, % supper_id
+    supper := new 4399UserTask(supper_id,"supper")
 
-    IfWinExist xxsf
-    {
-        WinActivate xxsf
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
-        sleep, % s["short"]
-        click % Arrayhome["okbtnxxsf"]
-        sleep, % s["short"]
-    } 
+    ;rdp := new RDPGame()
+    ;rdp.RDP_0()
 
-    IfWinExist xhhz
+    Loop 300    ;Make sure we are start after 00:00, total 10 mins
     {
-        WinActivate xhhz
-        sleep, % s["short"]
-        if !PixelColorExist("0xFFE578",367, 591,10)
-            this.CloseSpeSubWindow(1)
-        click % Arrayhome["okbtn"]
-        sleep, % s["short"]
-        click % Arrayhome["okbtn"]
-        sleep, % s["short"]
+        FormatTime, MinToMeet,,mm
+        if MinToMeet > 21
+            Break
+        sleep 2000
     }
 
-    IfWinExist song
-    {
-        WinActivate song
-        sleep, % s["short"]
-        if !PixelColorExist("0xFFE578",367, 591,10)
-            this.CloseSpeSubWindow(1)
-        click % Arrayhome["okbtn"]
-        sleep, % s["short"]
-        click % Arrayhome["okbtn"]
-        sleep, % s["short"]
-    } 
-
+    supper.ClickRongZiOK()
+    
+    long := new 4399UserTask(long_id,"long")    
+    long.ClickRongZiOK()
+/*
     IfWinExist xiaoxiaoshoufu
     {
         WinActivate xiaoxiaoshoufu
@@ -147,7 +144,9 @@ Rongzi_0:
     runwait "4399TouLie.ahk" "lieshou" "launch" "S"
     runwait "QHLandBusiness.ahk"
     ;Pay attention to the first user may already opened.
-    runwait "4399LandBusiness.ahk" "XXXXL"       
+    runwait "4399LandBusiness.ahk" "XXXXL"      
+*/
+
     ExitApp    
 Return
 

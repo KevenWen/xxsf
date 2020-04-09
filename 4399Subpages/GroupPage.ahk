@@ -185,7 +185,7 @@ class GroupPage{
 		click % RZWin["yesbtn"]
 	}
 
-	RongZiOK()
+	RongZiOKinternal()
 	{
 		click % PopWin["okbtn"]
 		sleep, % s["mid"]
@@ -194,10 +194,24 @@ class GroupPage{
 	}
 
 
-
-
-
-
+    RongZiOKpublic()
+	{	
+		4399sfGame.PrepareGameWindow()
+		loop 5
+		{
+			if !4399sfGame.SubWindowExist()
+				break
+			if !PixelColorExist("0xF4FCFC",348, 581,10)
+				4399sfGame.CloseSpeSubWindow(1)
+			if PixelColorExist("0xF4FCFC",348, 581,10)
+			{
+				click % BtnArray["okbtn"]
+				sleep, % s["short"]
+				click % BtnArray["okbtn"]
+				sleep, % s["short"]
+			}	
+		}
+	}
 
 
 }

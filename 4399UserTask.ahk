@@ -167,6 +167,9 @@ class 4399UserTask extends 4399sfGame
 
 	ClickRongZiOK()
 	{
-		this.GroupPage.RongZiOK()
+		;MsgBox, % this.winName
+		LogToFile("Start to do ClickRongZiOK.")
+		this.GroupPage.RongZiOKpublic()
+		LogToFile("ClickRongZiOK() done.")		
 	}	
 }

@@ -6,7 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 
 DetectHiddenWindows, On
-SetTitleMatchMode, 2
+SetTitleMatchMode, 3
 
 SetTimer, TaskTianTi, 300000
 ;SetTimer, TaskTianTi, 10000

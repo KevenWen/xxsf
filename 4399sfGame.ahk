@@ -2,18 +2,11 @@
 SetBatchLines, -1
 SetTitleMatchMode, 3
 #Include, Functions.ahk
-;#Include, sfGame.ahk
-; click, % Arrayphy["btn1"]
 
-class 4399sfGame ;extends sfGame
+class 4399sfGame
 {
 
 ; <===================================  Properties declare  =======================================>
-
-WID := ""
-winName := ""
-sequ := ""
-
 
 ; <===================================  Sub Classes for each page  ================================>
 
@@ -25,14 +18,13 @@ sequ := ""
 	#Include, .\4399Subpages\OrderPage.ahk
 
 ; <==================================  Command functionalities  ====================================>
-
-	PrepareGameWindow()
-	{
-		WinActivate, % ahk_id this.WID
+	PrepareGameWindow(name)
+	{	
+		WinActivate, %name%
 		sleep 100
 	}
 
-	Close4399Game()
+	Close4399Game(windowname)
 	{
 		WinClose, %windowname%
 	}
@@ -149,7 +141,8 @@ sequ := ""
 
    Getzhushu()
 	{
-		Switch % this.winName
+		WinGetActiveTitle, titlename
+		Switch titlename
 		{
 			Case "song":
 				return 38
@@ -158,13 +151,13 @@ sequ := ""
 			Case "hou":
 				return 38				
 			Case "yun":
-				return 38
+				return 40
 			Case "supper":
-				return 41							
+				return 42							
 			Case "xxhz":
-				return 40
+				return 39
 			Case "xhhz":
-				return 40
+				return 39
 			Default:
 				return 16	
 		}
@@ -186,15 +179,22 @@ sequ := ""
 				return % (this.sequ in 24,8)?1:0
 			Case "supper":
 				return % (this.sequ in 27,10)?1:0							
-			Case "xxhz":
-				return % (this.sequ = 18)?1:0
 			Case "xhhz":
 				return % (this.sequ = 18)?1:0
+			Case "sf01":
+				return % (this.sequ = 19)?1:0
+			Case "sf03":
+				return % (this.sequ = 21)?1:0
+			Case "sf04":
+				return % (this.sequ = 22)?1:0
+			Case "sf05":
+				return % (this.sequ = 23)?1:0
+			Case "sf06":
+				return % (this.sequ = 35)?1:0
 			Default:
 				return 1	
 		}
 	}
-
 
 }
 

@@ -1,7 +1,10 @@
 
 class GroupPage{    
 	
-    GetGroupPage()
+    
+	
+	
+	GetGroupPage()
 	{
 		4399sfGame.closeAnySubWindow()
 		click % HB[5]
@@ -195,8 +198,7 @@ class GroupPage{
 
 
     RongZiOKpublic()
-	{	
-		4399sfGame.PrepareGameWindow()
+	{
 		loop 5
 		{
 			if !4399sfGame.SubWindowExist()
@@ -205,6 +207,7 @@ class GroupPage{
 				4399sfGame.CloseSpeSubWindow(1)
 			if PixelColorExist("0xF4FCFC",348, 581,10)
 			{
+				;MsgBox, 1
 				click % BtnArray["okbtn"]
 				sleep, % s["short"]
 				click % BtnArray["okbtn"]

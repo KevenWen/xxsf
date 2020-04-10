@@ -258,8 +258,9 @@ SendSlackEmail()
 
 LogToFile(TextToLog)
 {
-    global LogFileName  ; This global variable was previously given a value somewhere outside this function.
-    FileAppend, %TextToLog%`n, %LogFileName%
+    FormatTime, CurrentDateTime,, HH:mm:ss
+    ;LogFileName := % logPath . "\\logfile.txt"  ; This global variable was previously given a value somewhere outside this function.
+    FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\logfile.txt"
 }
 
 IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to read days from config.ini

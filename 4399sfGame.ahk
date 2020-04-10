@@ -167,6 +167,7 @@ class 4399sfGame
 	{
 		;18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
 		;phy: supper=10 yun=8 song=2 long=7 hou=9 xhhz= mao=6 sf01=1 sf03=3 sf04=4 sf05=5
+		;MsgBox, % this.winName . this.sequ
 		Switch % this.winName
 		{
 			Case "song":
@@ -182,17 +183,17 @@ class 4399sfGame
 			Case "xhhz":
 				return % (this.sequ = 18)?1:0
 			Case "sf01":
-				return % (this.sequ = 19)?1:0
+				return % (this.sequ in 1,19)?1:0
 			Case "sf03":
-				return % (this.sequ = 21)?1:0
+				return % (this.sequ in 3,21)?1:0
 			Case "sf04":
-				return % (this.sequ = 22)?1:0
+				return % (this.sequ in 4,22)?1:0
 			Case "sf05":
-				return % (this.sequ = 23)?1:0
+				return % (this.sequ in 5,23)?1:0
 			Case "sf06":
-				return % (this.sequ = 35)?1:0
+				return % (this.sequ in 11,35)?1:0
 			Default:
-				return 1	
+				return 0	
 		}
 	}
 

@@ -28,7 +28,7 @@ class HunterPage{
                 sleep 500
                 this.TouLieOpration()	
                 SuccessCount++	
-                LogToFile("Hunter one`n")
+                LogToFile("Huntered num: " . n . "SuccessCount: " . SuccessCount)
             }
             catch e ;Ignore any error during one operation and go ahead to next one.
             {

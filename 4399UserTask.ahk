@@ -17,12 +17,12 @@ class 4399UserTask extends 4399sfGame
 		global logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"		
 		;this.logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"
 
-		LogToFile("Log started.")
+		LogToFile("Log started for :" . windowname . "seq: " . seq)
 		if !this.CheckName()
 		{
 			LogToFile("seq and windowname not consistent, stop further process: " 
 			. seq . " is seq and windowname is: " . windowname)
-			ExitApp
+			return
 		}
 
 		try
@@ -37,7 +37,7 @@ class 4399UserTask extends 4399sfGame
 			}
 			else
 			{
-				LogToFile("Going to open game: " . windowname)
+				LogToFile("Going to open game.")
 				this.Launch4399Game(seq,windowname)
 				LogToFile("Game opened.")
 			}	
@@ -58,8 +58,8 @@ class 4399UserTask extends 4399sfGame
     __Delete()
     {
 		WinClose, %windowname%
-		WinClose, 360游戏大厅
-		this.LogToFile("Log Ended.")
+		;WinClose, 360游戏大厅
+		LogToFile("Log Ended. `n")
     }
 	
 ; <==================================  Command Tasks  ====================================>

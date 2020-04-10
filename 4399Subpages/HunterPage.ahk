@@ -21,26 +21,22 @@ class HunterPage{
         {
             try
             {
-                sleep 500
+                sleep 300
                 (islieshou = 1)?(this.OpenTouLiePage(n)):(4399sfGame.ShopHomePage.OpenTouLiePageFromBlackList(n))
 
-                CaptureScreen()	
-                sleep 500
-                this.TouLieOpration()	
-                SuccessCount++	
-                LogToFile("Huntered num: " . n . "SuccessCount: " . SuccessCount)
+                this.TouLieOpration()
+                LogToFile("Huntered num: " . n . " SuccessCount: " . SuccessCount)	
+                SuccessCount++
             }
             catch e ;Ignore any error during one operation and go ahead to next one.
-            {
-                LogToFile("Exception within ToulieOpreation.")		
-                LogToFile(e)		
-            }	
+                LogToFile("Exception within ToulieOpreation:" . e)
             Finally 
             {
                 CaptureScreen()	
                 n++
             }
-        }  
+        }
+        sleep 1000  
     }
 
     OpenTouLiePage(Num)
@@ -83,7 +79,7 @@ class HunterPage{
             WaitPixelColorAndClickThrowErr("0x2A1E17",228, 744,3000)
             Loop
             {
-                if PixelColorExist("0xFEC120",440, 742,1) ;进度条到了		
+                if PixelColorExist("0xFEC120",450, 742,1) ;进度条到了		
                     break
                 if PixelColorExist("0xE2413E",334, 611,1) ;OK button
                     break
@@ -93,8 +89,6 @@ class HunterPage{
                 Mousemove 293, 805
                 click 20
             }
-            sleep 200	 
-            click 461, 321 ; Close the get card page
         }
         Else
             throw "Already stoled in hours or the target is full!"

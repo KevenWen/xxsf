@@ -32,13 +32,11 @@ class 4399sfGame
 	Launch4399Game(Sequ,windowname)
 	{
 		WinClose, %windowname%
+		WinClose, xiaoxiaoshoufu
 		Loop
 		{
-			if A_Index > 4
-				{
-					break
+			if A_Index > 4				
 					throw "Cannot launch Game!"
-				}
 			try 
 			{
 				run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
@@ -166,7 +164,7 @@ class 4399sfGame
    CheckName()
 	{
 		;18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-		;phy: supper=10 yun=8 song=2 long=7 hou=9 xhhz= mao=6 sf01=1 sf03=3 sf04=4 sf05=5
+		;phy: supper=10 yun=8 song=2 long=7 hou=9 xhhz= sf01=11 sf01=1 sf03=3 sf04=4 sf05=5
 		;MsgBox, % this.winName . this.sequ
 		Switch % this.winName
 		{

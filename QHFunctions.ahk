@@ -5,7 +5,7 @@ SetBatchLines, -1
 global qhpw = ""
 IniRead, qhpw, config.ini, passwords, QHpw
 
-PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0) 
+PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {
     l_Start := A_TickCount
     Loop {
@@ -19,7 +19,7 @@ PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0)
     }
 }
 
-PixelColorNotExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0) 
+PixelColorNotExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {
     l_Start := A_TickCount
     Loop {

@@ -98,43 +98,31 @@ Return
 ; 19-01, 21-03, 22-04,23-05,35-06, 
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
-    supper := new 4399UserTask(supper_id,"supper")
-    xhhz := new 4399UserTask(18,"xhhz")
-    rdp := new RDPGame()
 
-    Loop 300    ;Make sure we are start after 00:00, total 10 mins
-    {
+   Loop 300    ;Make sure we are start after 00:00, total 10 mins
+    {        
         FormatTime, MinToMeet,,mm
         if MinToMeet < 50
             Break
         sleep 2000
     }
 
-	rdp.RDP_N()
+    new RDPGame().RDP_N()
+
+    runwait "QHLandBusiness.ahk"  
+
+    for index,value in ["supper","yun","xhhz","long","song"]
+    {
+        new 4399UserTask(value).GetLand()
+    }
+
+    for index,value in ["xhhz","song","sf01","sf03","sf04","sf05","sf06"]
+    {
+        new 4399UserTask(value).Hunter(1)
+    }
 
     if IsItemInList(DayToMeet,shangjiday)
-        new 4399UserTask(27,"supper").OpenBusSkill()
-
-    runwait "QHLandBusiness.ahk"
-
-    supper.GetLand()
-    supper := ""
-    xhhz.GetLand()
-
-    long := new 4399UserTask(25,"long")
-    long.GetLand()
-
-    song := new 4399UserTask(20,"song")
-    song.GetLand()
-    
-    long.Hunter(1)
-    long := ""
-
-    song.Hunter(1)
-    song := ""
-
-    xhhz.Hunter(1)
-    xhhz := ""
+        new 4399UserTask("supper").OpenBusSkill()
 
 Return
 ;<========================================= Sub Tasks 2 ================================================>

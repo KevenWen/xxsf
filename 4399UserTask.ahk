@@ -10,19 +10,18 @@ class 4399UserTask extends 4399sfGame
 	;Nothing for now.
 ; <================================  Constructure functions  ================================>
 
-	__New(seq,windowname)
+	__New(windowname)
 	{
-		this.winName := windowname
-		this.sequ := seq
-		global logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"		
-		;this.logfilename := logPath . "\\" . windowname  . "_" . A_now  . ".txt"
+		this.winName := %windowname%
 
-		LogToFile("Log started for :" . windowname . "seq: " . seq)
-		if !this.CheckName()
+		IniRead, seqid, config.ini, users, %windowname%, 0
+
+		LogToFile("`nLog started for :" . windowname . ", seq: " . seqid)
+		
+		if seqid = 0
 		{
-			LogToFile("seq and windowname not consistent, stop further process: " 
-			. seq . " is seq and windowname is: " . windowname)
-			return
+			LogToFile("seq is empty, terminated. ")
+			Return
 		}
 
 		try
@@ -38,7 +37,7 @@ class 4399UserTask extends 4399sfGame
 			else
 			{
 				LogToFile("Going to open game.")
-				this.Launch4399Game(seq,windowname)
+				this.Launch4399Game(seqid,windowname)
 				LogToFile("Game opened.")
 			}	
 
@@ -58,16 +57,18 @@ class 4399UserTask extends 4399sfGame
     __Delete()
     {
 		WinClose, %windowname%
-		;WinClose, 360游戏大厅
+		WinMinimize, 360游戏大厅
 		LogToFile("Log Ended. `n")
     }
 	
 ; <==================================  Command Tasks  ====================================>
 
+
 ; <========================  地产入驻  ===========================>
 	
 	GetLand()
 	{
+		;MsgBox, % winName
 		this.PrepareGameWindow(this.winName)
 		try{
 		this.LandPage.DiCanJinzhu(this.Getzhushu(this.winName))

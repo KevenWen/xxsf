@@ -52,16 +52,15 @@ class LandPage{
         {
             ;LogToFile("suankai done for 1,3")
             WaitPixelColorAndClick("0xDEF7EE",471, 737,500)  ; NiuShi button
-            sleep 200
+            sleep 100
             WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
-            sleep 300
         }
 
         sleep 200
         WaitPixelColorAndClickThrowErr("0xDEF7EE",317, 737,1500) ; JBP button
         sleep 200
         WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
-        sleep 800
+        sleep 500
         ;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
 
         this.Save_Refresh4399()
@@ -69,7 +68,6 @@ class LandPage{
 
     DiCanJinzhu(num)
     {
-        this.PrepareGameWindow()
         this.GetLandPage()        
         SendMode Event
         sleep 100

@@ -41,18 +41,28 @@ ExitApp
 
 Rongzi_0:
 
+    ;new 4399UserTask("sf03").Hunter(0)   
+    ;new 4399UserTask("sf01").Hunter(0)   
+/*
+song := new 4399UserTask("song")
+sf04 := new 4399UserTask("sf04")
 
-    ;new 4399UserTask(sf01_id,"abc").Hunter(0)   
-    ;new 4399UserTask(sf03_id,"sf03").Hunter(0)   
-    ;new 4399UserTask(supper_id,"supper").GetLand()
-    ;new 4399UserTask(sf04_id,"sf04").Hunter(0) 
-    
-    new 4399UserTask(sf06_id,"sf06").Hunter(0)   
-    new 4399UserTask(sf05_id,"sf05").Hunter(0)  
+song.GetLand()
+sf04.Hunter(0)
+
+song := 
+sf04 :=
+*/
+       ; arrname := ["sf04","sf05","sf06"]
+    for index,value in ["sf07"]
+    {
+        new 4399UserTask(value).Hunter(0)
+    }    
+
     ExitApp
 
-    song := new 4399UserTask(song_id,"song")
-    supper := new 4399UserTask(supper_id,"supper")
+    song := new 4399UserTask("song")
+    supper := new 4399UserTask("supper")
     
     Loop 300    ;Make sure we are start after 00:00, total 10 mins
         {

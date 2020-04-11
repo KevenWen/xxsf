@@ -51,6 +51,7 @@ Dican()
 	click 131, 925
 	PixelColorExist("0xFFFEF5",400, 182,1000)
 	sleep 100
+	SendMode Event
 	loop 2
 	{
 		Mousemove,570, 840
@@ -62,7 +63,7 @@ Dican()
 		sleep 200
 	}
 	CaptureScreen()
-	loop 25
+	loop 15
 	{
 		CloseAnySubWindow()
 		ImageSearch, Px, Py, 113, 429, 504, 817, % A_ScriptDir . "\\blockofyellow.bmp"
@@ -82,40 +83,37 @@ Dican()
 			CaptureScreen()	
 			click %Px%, %Py%
 			sleep 200
-			DiCcanJinzhu()
+			if PixelColorExist("0xFFFEF5",190, 480,1000) 
+			{
+				click,265, 465, 23 ;金币23
+				sleep 100
+				click,265, 530, 17 ;金币17
+				sleep 100
+				click,433, 530, 3 ;资源卡6
+				sleep 100
+				click,350, 594, 5  ;5份钻石注决策资源
+				CaptureScreen()	
+				sleep 100
+				click 376, 723	;确认注入
+				sleep 100
+				if PixelColorExist("0xFBFBFB",478, 396,300) ;确认注入提示框
+					click 305, 611 ;点击确定
+				else
+					throw "Exception while DiCcanJinzhu, not found OK button"
+			}
+			else
+			{
+
+			}
 			sleep 200
 			CaptureScreen()	
 			break
 		}
 		sleep 200		
 	}
+	SendMode Input		
 }
 
-DiCcanJinzhu()
-{
-	if PixelColorExist("0xFFFEF5",190, 480,1000) 
-	{
-		Mousemove,265, 465 ;金币23
-		click, 23 
-		sleep 100
-		Mousemove,265, 530 ;金币17
-		click, 17
-		sleep 100
-		Mousemove,433, 530 ;资源卡6
-		click, 6
-		sleep 100
-		Mousemove,350, 594 ;5份钻石注决策资源
-		click, 5		
-		CaptureScreen()	
-		sleep 100
-		click 376, 723	;确认注入
-		sleep 100
-		if PixelColorExist("0xFBFBFB",478, 396,300) ;确认注入提示框
-			click 305, 611 ;点击确定
-		else
-			throw "Exception while DiCcanJinzhu, not found OK button"
-	}
-}
 
 F10::Pause   ;pause the script
 F11::ExitApp ;stop the script

@@ -72,7 +72,7 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		try{
 		this.LandPage.DiCanJinzhu(this.Getzhushu(this.winName))
-		LogtoFile("GetLand() done: " . this.winName . "sequ: " . this.sequ)
+		LogtoFile("GetLand() done: " . this.winName . " winname: " . this.winName)
 		}
 		Catch e
 		{
@@ -120,6 +120,15 @@ class 4399UserTask extends 4399sfGame
 	{	
 		this.PrepareGameWindow(this.winName)
 		try{
+		this.GetCaiTuanPage.GetCaiTuanMoney()	
+		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
+		}
+		Catch e{
+		LogToFile("excetion while GetCaiTuanMoney(): " . e)
+		CaptureScreen()
+		}
+
+		try{
 		LogToFile("start to hunter, islieshou: " . islieshou)
 		this.LandPage.SuanKai()	
 		LogToFile("this.LandPage.SuanKai() done. ")
@@ -133,6 +142,7 @@ class 4399UserTask extends 4399sfGame
 
 		try{
 		this.HunterPage.SelectPeopleAndstolen(islieshou)
+		this.HunterPage.GetResult()
 		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")	
 		}
 		Catch e{
@@ -145,15 +155,15 @@ class 4399UserTask extends 4399sfGame
 
 	ZhuZi(which)
 	{
+		;MsgBox, % this.winName
 		this.PrepareGameWindow(this.winName)
 		if which > 3
 		{
 			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
 			Return
 		}
-		try{
-		this.GroupPage.GroupZhuZi(which)
-		}
+		try
+			this.GroupPage.GroupZhuZi(which)
 		Catch e
 		{
 			LogToFile("this.GroupPage.GroupZhuZi get exception: " . e)
@@ -161,15 +171,19 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-	CheZi()
+	RongZi(which)
 	{
 		try{
+		LogToFile("Start to RongZi at : " . which)
 		this.PrepareGameWindow(this.winName)
-		this.GroupPage.GroupCheZi()
+		this.GroupPage.PreRongZi(which)
+		this.GroupPage.RongZiOKinternal()
+		LogToFile("RongZi done.")
 		}
-		Catch e
-			CaptureScreen()
-
+		Catch e{
+		LogToFile("this.GroupPage.RongZi() get exception: " . e)
+		CaptureScreen()
+		}
 	}
 
 	PrepareRongZi(which)
@@ -178,19 +192,10 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.PreRongZi(which)
 		}
-		Catch e
-			CaptureScreen()
-	}
-
-	CheZiRongZi(which)
-	{
-		try{
-		this.PrepareGameWindow(this.winName)
-		this.GroupPage.PreRongZi(which)
-		this.GroupPage.RongZiOKinternal()
+		Catch e{
+		LogToFile("this.GroupPage.PreRongZi() get exception: " . e)
+		CaptureScreen()
 		}
-		Catch e
-			CaptureScreen()
 	}
 
 	ClickRongZiOK()

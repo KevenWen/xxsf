@@ -1,14 +1,17 @@
 
-class GroupPage{    
-	
-    
-	
+class GroupPage{
 	
 	GetGroupPage()
 	{
-		4399sfGame.closeAnySubWindow()
-		click % HB[5]
-		WaitPixelColor("0xFFFEF5",492, 354,2000)			;白色人数框
+		loop{
+			if A_Index > 2
+				throw "Not able to GetGroupPage, PixelColorExist 0xFFFEF5 492 354 not exist."
+			4399sfGame.closeAnySubWindow()
+			click % HB[5]
+            sleep 100			
+			if PixelColorExist("0xFFFEF5",492, 354,2000)			;白色人数框
+				break
+		}
 	}
 
     GetGroupPage2()
@@ -128,15 +131,14 @@ class GroupPage{
 				sleep 50
 			}
 			sleep % s["short"]
-			click % BtnArray["rzok"]
+			click % PopWin["zhuziok"]
 			sleep, % s["short"] 
-			click % BtnArray["okbtn"]
-			LogToFile("zhuzi done for which: " which)
+			click % PopWin["okbtn"]
+			LogToFile("zhuzi done for which: " . which . " num: " . num)
 		}	
 		else
-		{
 			LogToFile("ZhuZi already done yet, no need do again.")
-		}
+
 		sleep, % s["short"]
 		CaptureScreen()
 	}
@@ -178,24 +180,27 @@ class GroupPage{
 
 		mousemove, 200, 574
 		sleep, % s["short"]
+		SetDefaultMouseSpeed 10
 		click, % 4399sfGame.Getzhushu()
+		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]
 
-		if !PixelColorExist("0xFFFFFF",254, 399,10) ;存在没有更多金币提示，problem here!
+		if !PixelColorExist("0xFFFFF3",268, 396,10) ;存在没有更多金币提示.!
 			Throw, "Not enough money warnning exist!"    
 
 		sleep, % s["mid"]
 		click % RZWin["yesbtn"]
+		sleep, % s["short"]
 	}
 
 	RongZiOKinternal()
 	{
 		click % PopWin["okbtn"]
 		sleep, % s["mid"]
+		CaptureScreen()
 		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
 			click % PopWin["clobtn"]
 	}
-
 
     RongZiOKpublic()
 	{
@@ -208,10 +213,11 @@ class GroupPage{
 			if PixelColorExist("0xF4FCFC",348, 581,10)
 			{
 				;MsgBox, 1
-				click % BtnArray["okbtn"]
+				click % PopWin["okbtn"]
 				sleep, % s["short"]
-				click % BtnArray["okbtn"]
+				click % PopWin["okbtn"]
 				sleep, % s["short"]
+				CaptureScreen()
 			}	
 		}
 	}

@@ -23,7 +23,7 @@ global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3
 Arrayhome := {okbtn: "324, 602", okbtnxxsf: "320, 610", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "500, 264"}
 s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}
 
-sleep 1000
+sleep 2000
 
 if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
     Gosub, Rongzi_0
@@ -57,40 +57,6 @@ Rongzi_0:
 
     rdp.RDP_0()
 
-    IfWinExist xxsf
-    {
-        WinActivate xxsf
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
-        sleep, % s["short"]
-        click % Arrayhome["okbtnxxsf"]
-        sleep, % s["short"]
-    } 
-    hou.ClickRongZiOK()
-    xhhz.ClickRongZiOK()
-    song.ClickRongZiOK()    
-    runwait "QHLandBusiness.ahk"
-
-    song.ZhuPan(4)
-    
-    song.Hunter(1)
-    hou.Hunter(1) 
-    xhhz.Hunter(1) 
-     
-    hou.GetLand()
-    hou := ""
-    song.GetLand()
-    song := ""
-    xhhz.GetLand()
-    xhhz := ""
-    new 4399UserTask(supper_id,"supper").GetLand()
-    new 4399UserTask(yun_id,"yun").GetLand()
-    new 4399UserTask(long_id,"long").GetLand()    
- 
-    new 4399UserTask(sf01_id,"sf01").Hunter(1)   
-    new 4399UserTask(sf03_id,"sf03").Hunter(1)   
-    new 4399UserTask(sf04_id,"sf04").Hunter(1) 
-    new 4399UserTask(sf05_id,"sf05").Hunter(1)  
-    new 4399UserTask(sf06_id,"sf06").Hunter(1)   
 
     ExitApp    
 Return
@@ -128,11 +94,11 @@ Return
 ;<========================================= Sub Tasks 2 ================================================>
 
 Rongzi_2:
-    if IsItemInList(DayToMeet,shangjiday)
-        runwait "4399OpenShangJi.ahk"
 
-    runwait "QHLandBusiness.ahk"
-    runwait "4399LandBusiness.ahk" "H"
+   xxsf := new QHUser().Getland()
+
+   For index,value in  ["song","xhhz","hou"]
+        new 4399UserTask(value).GetLand()
 
     Loop 20    ;Make sure we are start delayed from 2 mins
     {
@@ -142,76 +108,21 @@ Rongzi_2:
         sleep 5000
     }
 
-    IfWinExist ahk_exe mstsc.exe
-    {
-        WinActivate ahk_exe mstsc.exe
-        WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
-        sleep 1000
-        CaptureScreen()	
-        sleep 200
+    new QHUser().RongZi(1)
+    new RDPGame().RDP_2()
 
-        ;LDplayer
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]
-        click, % Arrayphy["btn1"]
-        sleep, % s["short"]    
-        sendinput {Y}
+   For index,value in  ["song","xhhz","hou"]
+        new 4399UserTask(value).RongZi(index)
 
-        ;Supper
-        if PixelColorExist("0xFFFFF3",798,633,10)
-        {
-            click % Arrayphy["btn_2"]
-            sleep, % s["short"]
-        }    
-        click % Arrayphy["btn2"]
-        sleep, % s["short"]
-        click % Arrayphy["btn2"]
-        sleep, % s["short"]
+   For index,value in  ["supper","yun","long"]
+        new 4399UserTask(value).GetLand()
 
-        ;Long
-        if PixelColorExist("0xFFFFF3",522,633,10)
-        {
-            click % Arrayphy["btn_3"]
-            sleep, % s["short"]
-        }    
-        click % Arrayphy["btn3"]
-        sleep, % s["short"]
-        click % Arrayphy["btn3"]
-        sleep, % s["short"]
+    for index,value in  ["xhhz","song","hou","long","sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).Hunter(1)
 
-        ;Song
-        if PixelColorExist("0xFFFFF3",253,633,10)
-        {
-            click % Arrayphy["btn_4"]
-            sleep, % s["short"]
-        }
-        click % Arrayphy["btn4"]
-        sleep, % s["short"]
-        click % Arrayphy["btn4"]
-        sleep, % s["short"]
-
-        ;sendinput {^NumpadSub}
-        
-        WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
-    } 
- 
-    runwait "QHPrepareRongZi.ahk" "3" "Nocz_Y"
-    runwait "4399PrepareRongZi.ahk" "26" "hou" "1" "Nocz_Y"
-    runwait "4399PrepareRongZi.ahk" "18" "xhhz" "4" "Nocz_Y"
-    runwait "4399PrepareRongZi.ahk" "20" "song" "5" "Nocz_Y"
-
-    runwait "4399LandBusiness.ahk" "XXL"
-    runwait "4399TouLie.ahk" "lieshou" "launch" "S"    
-    ;runwait "4399PrepareRongZi.ahk" "25" "long" "2" "Nocz_Y"
-    ;runwait "C:\ChangZhi\LDPlayer\ld.exe" -s 0 input tap 450 970  ; LDPlayer "5"
-    ;runwait "4399PrepareRongZi.ahk" "27" "xiaoxiaoshoufu" "4" "Nocz_Y"
-    ;winclose ahk_exe dnplayer.exe
-
-    winclose, xiaoxiaoshoufu
     WinClose 360游戏大厅
     ExitApp
 Return
-
 
 F10::Pause   ;pause the script
 F11::ExitApp ;stop the script

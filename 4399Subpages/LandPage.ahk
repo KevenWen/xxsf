@@ -11,12 +11,18 @@ class LandPage{
 
 	GetLandPage()
 	{
-		4399sfGame.closeAnySubWindow()
-        click % HB[1]
-        sleep 200
-		click % HB[2]
-		WaitPixelColor("0x706B59",398, 288,2000)		;升级button 旁边的灰色条	
-	}
+		loop{
+            if A_Index > 2
+                throw "Not able to GetLandPage."
+            4399sfGame.closeAnySubWindow()
+            click % HB[1]
+            sleep 200
+            click % HB[2]
+            sleep 200
+            if PixelColorExist("0x706B59",398, 288,2000)		;升级button 旁边的灰色条	
+                Break
+        }    
+    }
 
 	GetLandPage2()
 	{
@@ -78,7 +84,7 @@ class LandPage{
         click 510, 825
         sleep 200
         CaptureScreen()
-        loop 25
+        loop 15
         {
             4399sfGame.CloseAnySubWindow()
             ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
@@ -98,7 +104,7 @@ class LandPage{
             {
                 LogToFile("Image found when loop times: " . A_Index)
                 CaptureScreen()	
-
+                ;MouseMove, %Px%, %Py%
                 click %Px%, %Py%
                 sleep 200                        
                 if PixelColorExist("0xFFFEF5",169, 472,1000)    ;经营资源输入框存在
@@ -109,32 +115,26 @@ class LandPage{
                     sleep 100
                     Mousemove,255, 520
                     click, % round(num/2)-3 ;金币注管理资源
+                    sleep 500
+                    if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",466, 389,10) ;左右两边都没有显示金钱不够提示
+                        throw "Not enough money warning show!"
+
+                    click,414, 520, 2				;2资源卡注管理资源
                     sleep 100
-                    Mousemove,414, 520
-                    click, 3				;资源卡注管理资源
-                    sleep 100
-                    Mousemove,330,580
-                    click, 3				;5份钻石注决策资源
+                    click,330,580, 3				;3份钻石注决策资源
                     CaptureScreen()	
                     sleep 100
                     click 361, 704			;确认注入
                     sleep 100
-                    if PixelColorExist("0xFBFBFB",462, 396,500)     ;确定提示框存在
-                    and PixelColorExist("0x909090",187, 363,10)     ;没有金钱不够提示                      
+                    if PixelColorExist("0xFBFBFB",462, 396,3000)     ;确定提示框存在              
                     {
-                        click 302, 593 ;点击确定
-                        sleep 500
-                        ;if PixelColorExist("0x5A7965",329, 284,10)  ; Very dengrous at doing this!
-                        ;    throw "Exception while DiCcanJinzhu1, still show geen after click one time."
-                        
+                        click 302, 593      ;点击确定      
                         WaitPixelColorAndClick("0xFBFBFB",479, 192,1000)
-                        CaptureScreen()
-                        LogToFile("Land business done, num is " . num)
                     }	
                     else
                     {
                         CaptureScreen()
-                        LogToFile("Exception while DiCcanJinzhu2: 0xFBFBFB or 0x909090") 
+                        LogToFile("Exception while DiCcanJinzhu2: not found the OK button") 
                     }
                 }
                 else
@@ -142,8 +142,14 @@ class LandPage{
                     LogToFile("0xFFFEF5 and 0x5A7965 exception.")
                     CaptureScreen()
                 }
-            
-                Break    
+
+                if !PixelColorExist("0xF7D04A",Px, Py,200)  ;double check 
+                {
+                    CaptureScreen()
+                    LogToFile("Land business done, num is " . num)
+                    Break  
+                }
+                      
             }  
         }
         SendMode Input			

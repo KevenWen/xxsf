@@ -116,7 +116,7 @@ class RDPGame ;extends sfGame
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
-			WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
+			;WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
 			sleep 1000
 			CaptureScreen()	
 			sleep 200
@@ -161,7 +161,7 @@ class RDPGame ;extends sfGame
 			click % Arrayphy["btn4"]
 			sleep, % s["short"]
 
-			WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
+			;WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
 		}
 	}
 

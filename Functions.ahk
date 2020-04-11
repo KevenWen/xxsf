@@ -44,49 +44,20 @@ IniRead, sf04_id, config.ini, users, sf04
 IniRead, sf05_id, config.ini, users, sf05
 IniRead, sf06_id, config.ini, users, sf06
 
-
-
-/*
-uname_l :={}
-uname_a := StrSplit(seqname,",")
-Loop % uname_a.MaxIndex()
-{
-    uname_tem := StrSplit(uname_a[A_Index],":")
-    uname_l.InsertAt(1, % uname_tem[1] . ":" . uname_tem[2])
-
-    MsgBox, Color number %A_Index% is %uname_l%.
-    ExitApp
-}
-*/
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
 
 
-global	HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
-global	SB := ["140, 260","245,260","350,260","455,260"]                                     ; shanghui buttons
-global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
-global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                       ; Tooltip positions
-global	PopWin := {okbtn: "324, 602", clobtn: "480, 266"}           						 ; button positions
-global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}
-global StockPos := ["184, 415","292, 415","440, 415","202, 572"]                       		; 注资的三个框
-global BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", rzyes:"329,555", rzok: "483, 320"} ;button positions
-global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
-global uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
-global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
+;global	HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
+global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"] ; home buttons
 
-/*
-s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
-HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
-SB := ["140, 260","245,260","350,260","455,260"]                                     ; shanghui buttons
-	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                       ; 5个企业 coordinates
-TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                       ; Tooltip positions
-	PopWin := {okbtn: "324, 602", clobtn: "480, 266"}           						 ; button positions
-	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}
- StockPos := ["184, 415","292, 415","440, 415","202, 572"]                       		; 注资的三个框
- BtnArray := {okbtn: "324, 602", kejicomp: "690,519", clobtn: "480, 266", rzyes:"329,555", rzok: "483, 320"} ;button positions
-	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
- uname_l := {27:"supper",24:"yun",25:"long",20:"song"}
- LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
-*/
+global	SB := ["100, 260","230,260","330,260","420,260"]                                            ; shanghui buttons
+global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                              ; 5个企业 coordinates
+global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
+global	PopWin := {okbtn: "324, 602", clobtn: "480, 266",qhclobtn: "500, 266",zhuziok: "507, 320"}  ; button positions
+global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}                      ; 融资的按钮
+global StockPos := ["155, 415","310, 415","460, 415"]                       		                ; 注资的三个框
+global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
+global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
@@ -156,7 +127,7 @@ WaitPixelColorNotExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10)
     }
 }
 
-WaitPixelColorAndClick(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=0,wtime=1000) 
+WaitPixelColorAndClick(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10,wtime=100) 
 {
     l_Start := A_TickCount
     Loop {
@@ -203,7 +174,8 @@ CaptureScreen()
 {
 	try
 	{
-		path := % logPath . "\\" . A_now . ".png"
+		FormatTime, Dayfolder,, yyyyMMdd
+        path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=3" . " /convert=" . path
 	}
 	catch e
@@ -218,7 +190,8 @@ CaptureScreenAll()
 {
 	try
 	{
-		path := % logPath . "\\fullScreen\\" . A_now . ".png"
+        FormatTime, Dayfolder,, yyyyMMdd
+		path := % logPath . "\\" . Dayfolder . "Fullscreens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=0" . " /convert=" . path
 	}
 	catch e
@@ -233,10 +206,12 @@ MadeGif(named="unknown")
 {
 	try
 	{
+		FormatTime, Dayfolder,, yyyyMMdd
+        path := % logPath . "\\" . Dayfolder . "Screens\\"
 		FileMove,  % logPath . "\\gif_output\\*.gif", % logPath . "\\Arch_gif", 1
 		name := % logPath . "\\gif_output\\" . named . "_" . A_now . ".gif"
-		RunWait, % gifskipath . " " . logPath . "\\*.png --quality 90 -W 400 -H 640 --fps 1 -o " . name . " --fast"
-		FileMove, % logPath . "\\*.png", % logArchivePath . "\\Arch", 1
+		RunWait, % gifskipath . " " . path . "\\*.png --quality 90 -W 400 -H 640 --fps 1 -o " . name . " --fast"
+		;FileMove, % logPath . "\\*.png", % logArchivePath . "\\Arch", 1
 	}
 	catch e
 	{

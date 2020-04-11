@@ -6,9 +6,17 @@ class CaiTuanPage{
 
 	GetCaiTuanPage()
 	{
-		4399sfGame.closeAnySubWindow()
-		click % HB[4]
-		WaitPixelColor("0xFFFEF5",497, 333,2000)			;白色公关资金框
+		loop{
+			if A_Index > 2
+				throw "Not able to GetCaiTuanPage.PixelColorExist 0xFFFEF5 497 333 not exist."
+			4399sfGame.closeAnySubWindow()
+			click % HB[1]
+			sleep 100
+			click % HB[4]
+			sleep 200
+			if PixelColorExist("0xFFFEF5",497, 333,2000)			;白色公关资金框
+				Break
+		}	
 	}
 
 	GetCaiTuanMoney()

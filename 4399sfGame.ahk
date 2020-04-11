@@ -7,6 +7,14 @@ class 4399sfGame
 {
 
 ; <===================================  Properties declare  =======================================>
+Wname[]{
+	get{
+		MsgBox, get
+	}
+	set{
+		MsgBox, Set
+	}
+}
 
 ; <===================================  Sub Classes for each page  ================================>
 
@@ -31,10 +39,11 @@ class 4399sfGame
 
 	Launch4399Game(Sequ,windowname)
 	{
-		WinClose, %windowname%
-		WinClose, xiaoxiaoshoufu
+		WinClose, xiaoxiaoshoufu  ; Never use the default name, otherwise cannot get correct zhushu
 		Loop
 		{
+			WinClose, %windowname%
+			
 			if A_Index > 4				
 					throw "Cannot launch Game!"
 			try 
@@ -47,8 +56,12 @@ class 4399sfGame
 				;WinSet, AlwaysOnTop, On, %windowname%
 				Winmove,%windowname%,,829,23,600,959
 				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array			
-				sleep 2000
-				Click 566, 83
+				MouseMove, 566, 83
+				sleep 500				
+				send {LButton down}
+				sleep 100	
+				send {LButton up}
+				;Click 566, 83
 				sleep 1000	
 				;WaitPixelColorAndClickThrowErr("0x3BB1B2",343, 766,12000) 
 				WaitPixelColor("0xFFFEF5",371, 686,12000) ;waiting for Start game button
@@ -61,15 +74,21 @@ class 4399sfGame
 				CaptureScreen()
 				Continue
 			}
+
+			if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
+				click, 566, 83
+
 			sleep 2000
-			loop 3
+			loop 2
 			{
-				sleep 1000				
 				if !PixelColorExist("0xAFC387",473, 105,10)
 				{
 					this.CloseAnySubWindow()
+					if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
+						click, 566, 83
 					break
 				}
+				sleep 1000			
 			}
 			;WinSet, AlwaysOnTop, off, %windowname%
 			break

@@ -5,9 +5,15 @@ class ShopHomePage{
 
     GetHomePage()
 	{
-		4399sfGame.closeAnySubWindow()
-		click % HB[1]
-		WaitPixelColor("0xFFFFFF",500, 200,2000)		;设置按钮白色
+		loop{
+			if A_Index > 2
+				throw "Not able to GetOrderPage, PixelColorExist 0xFFFFFF 500 200 not exist."
+            4399sfGame.closeAnySubWindow()
+            click % HB[1]
+            sleep 100
+            if PixelColorExist("0xFFFFFF",500, 200,2000)		;设置按钮白色
+                Break
+        }
 	}
 
     Save_Refresh4399()

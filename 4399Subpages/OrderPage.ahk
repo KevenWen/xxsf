@@ -3,10 +3,14 @@ class OrderPage{
 
 	GetOrderPage()
 	{
-		4399sfGame.closeAnySubWindow()
-		click % HB[6]
-		WaitPixelColor("0xFFF8CE",499, 804,2000)			;第8名后的颜色
-		sleep 100
+		loop{
+			if A_Index > 2
+				throw "Not able to GetOrderPage, PixelColorExist 0xFFF8CE 499 804 not exist."
+			4399sfGame.closeAnySubWindow()
+			click % HB[6]
+            sleep 100
+			WaitPixelColor("0xFFF8CE",499, 804,2000)			;第8名后的颜色
+		}
 	}	
 
 	GetBussinessWarOrder()

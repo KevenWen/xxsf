@@ -114,7 +114,7 @@ CheZi()
         and PixelColorExist("0xFFFEF5",216, 585,20) 
         and PixelColorExist("0xFFFEF5",235, 586,20)     ;窗口打开，没有融资，带有0，且只有两个字符
         {
-            click % PopWin["clobtn"]
+            click % PopWin["qhclobtn"]
             sleep, % s["long"]
             Continue 1
         }
@@ -124,7 +124,7 @@ CheZi()
             sleep, % s["long"]
             click % PopWin["okbtn"] 
             sleep, % s["longer"]
-            click % PopWin["clobtn"]
+            click % PopWin["qhclobtn"]
             sleep, % s["longer"]
             Break 1 
         }
@@ -136,7 +136,7 @@ RongZiOK:
     click % PopWin["okbtn"]
     sleep 500
     if PixelColorExist("0xFFFEF5",407, 444,5000) ;close the sub window if the first window closed
-        click % PopWin["clobtn"]
+        click % PopWin["qhclobtn"]
     
     CaptureScreen()
 }

@@ -32,13 +32,34 @@ Rongzi_0:
 ["xhhz","song","sf01","sf03","sf04","sf05","sf06"]
 
 */
-    For index,value in  ["sf06"]
-        new 4399UserTask(value).ClickRongZiOK()
+
+    For index,value in  ["supper","yun","long"]
+       %value% := new 4399UserTask(value)
+ 
+        Loop 300    ;Make sure we are start after 00:00, total 10 mins
+        {
+            FormatTime, MinToMeet,,mm
+            if MinToMeet > 19
+                Break
+            sleep 2000
+        }
+
+    yun.Getland()
+    supper.Getland()
+    long.Getland()
 
     ExitApp
 
+
+    song := new 4399UserTask("song")
+    supper := new 4399UserTask("supper")    
+        For index,value in  ["supper","yun","long","song"]
+        new 4399UserTask(value).ZhuZi(3)
     new QHUser().Getland()
     new 4399UserTask("supper").GetLand()
+
+    For index,value in  ["supper","yun","long"]
+       %value% := new 4399UserTask(value).GetLand()
 
     For index,value in  ["supper","yun","long"]
         new 4399UserTask(value).GetLand()
@@ -53,11 +74,14 @@ Rongzi_0:
     sf04 := new 4399UserTask("sf04")
 
     For index,value in  ["supper","yun","long","song"]
-        new 4399UserTask(value).ZhuZi(2)
+        new 4399UserTask(value).ZhuZi(3)
 
     song := new 4399UserTask("song")
     supper := new 4399UserTask("supper")
     
+    For index,value in  ["sf06"]
+        new 4399UserTask(value).ClickRongZiOK()
+
     Loop 300    ;Make sure we are start after 00:00, total 10 mins
         {
             FormatTime, MinToMeet,,mm

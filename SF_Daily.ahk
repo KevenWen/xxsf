@@ -31,7 +31,7 @@ Task202004:
     If (TimeToMeet = 235000) and IsItemInList(DayToMeet,RongZi00) ; Rong zi task prepare for xhhz
         runwait "4399PrepareRongZi.ahk" "18" "xhhz" "5"
 */
-    If (TimeToMeet = 235959 ) ; Rong zi task, and also shopping / zhuanpan / openshangji
+    If (TimeToMeet = 235800 ) ; Rong zi task, and also shopping / zhuanpan / openshangji
         runwait "RongZiTask.ahk" 
 
     /*

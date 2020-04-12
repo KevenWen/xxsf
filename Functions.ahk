@@ -177,7 +177,7 @@ CaptureScreen()
 		FormatTime, Dayfolder,, yyyyMMdd
         path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=3" . " /convert=" . path
-        LogToFile("Screen...")
+        LogToFile("Screen")
 	}
 	catch e
 	{
@@ -194,7 +194,7 @@ CaptureScreenAll()
         FormatTime, Dayfolder,, yyyyMMdd
 		path := % logPath . "\\" . Dayfolder . "Fullscreens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=0" . " /convert=" . path
-        LogToFile("Full Screen...")
+        LogToFile("Full Screen")
 	}
 	catch e
 	{

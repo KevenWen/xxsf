@@ -12,7 +12,7 @@ class 4399UserTask extends 4399sfGame
 
 	__New(windowname)
 	{
-		this.winName := %windowname%
+		this.winName := windowname
 
 		IniRead, seqid, config.ini, users, %windowname%, 0
 
@@ -67,15 +67,14 @@ class 4399UserTask extends 4399sfGame
 ; <========================  地产入驻  ===========================>
 	
 	GetLand(){
-		;MsgBox, % winName
 		this.PrepareGameWindow(this.winName)
 		try{
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
-		LogtoFile("GetLand() done, winname: " . this.winName)
+		LogToFile("GetLand() done, winname: " . this.winName)
 		}
 		Catch e
 		{
-		LogtoFile("GetLand() get exception: " . e)
+		LogToFile("GetLand() get exception: " . e)
 		CaptureScreen()
 		}
 	}
@@ -83,33 +82,39 @@ class 4399UserTask extends 4399sfGame
 ; <========================  每周商技开启  ===========================>
 
 	OpenBusSkill(){	
-		this.PrepareGameWindow(this.winName)
-		loop
-		{
-			this.GroupPage.GetGroupPage2()	
-			this.GroupPage.GetGroupPage()
-			if this.GroupPage.isBussinessSkillLight()
+		try{
+			this.PrepareGameWindow(this.winName)
+			loop
 			{
-				CaptureScreen()
-				LogtoFile("BussinessSkill is light, checking at index: " . A_Index)
-				Break
-			}	
-			Else
-			{
-				if A_Index > 2
+				this.GroupPage.GetGroupPage2()	
+				this.GroupPage.GetGroupPage()
+				if this.GroupPage.isBussinessSkillLight()
 				{
-					SendAlertEmail()
-					LogtoFile("BussinessSkill still gray after loop 2 times.")
-					break
+					CaptureScreen()
+					LogToFile("BussinessSkill is light, checking at index: " . A_Index)
+					Break
 				}	
-				CaptureScreen()
-				LogtoFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
-				this.GroupPage.OpenSJ()
-				CaptureScreen()
-				LogtoFile("After open BussinessSkill.")		
+				Else
+				{
+					if A_Index > 2
+					{
+						SendAlertEmail()
+						LogToFile("BussinessSkill still gray after loop 2 times.")
+						break
+					}	
+					CaptureScreen()
+					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
+					this.GroupPage.OpenSJ()
+					CaptureScreen()
+					LogToFile("After open BussinessSkill.")		
+				}
+			sleep 1000
 			}
-		sleep 1000
 		}
+		Catch e {
+			LogToFile("Open bussinessSkill failed with execption." . e)		
+		}
+
 	}
 
 ; <========================  偷猎  ===========================>
@@ -151,7 +156,6 @@ class 4399UserTask extends 4399sfGame
 ; <========================  注融资  ===========================>
 
 	ZhuZi(which){
-		;MsgBox, % this.winName
 		this.PrepareGameWindow(this.winName)
 		if which > 3
 		{
@@ -205,7 +209,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  转盘  ===========================>
 
-	ZhuPan(times){
+	ZhunPan(times){
 		this.PrepareGameWindow(this.winName)
 		try{
 		LogToFile("start to ZhuPan, times: " . times)

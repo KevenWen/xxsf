@@ -65,30 +65,35 @@ Return
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
 
-   Loop 300    ;Make sure we are start after 00:00, total 10 mins
+    supper := new 4399UserTask(value)
+    xxsf := new QHUser()
+
+    Loop 300    ;Make sure we are start after 00:00, total 10 mins
     {        
         FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
+        if MinToMeet = 00
             Break
         sleep 2000
     }
-
+        
     new RDPGame().RDP_N()
 
-    runwait "QHLandBusiness.ahk"  
+    if IsItemInList(DayToMeet,shangjiday)
+        supper.OpenBusSkill()
 
-    for index,value in ["supper","yun","xhhz","long","song"]
-    {
+    supper.Getland()
+    supper := ""  
+
+    xxsf.Getland()
+    xxsf := ""
+
+    for index,value in ["xhhz","yun","long","song"]
         new 4399UserTask(value).GetLand()
-    }
 
-    for index,value in ["xhhz","song","sf01","sf03","sf04","sf05","sf06"]
+    for index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
     {
         new 4399UserTask(value).Hunter(1)
     }
-
-    if IsItemInList(DayToMeet,shangjiday)
-        new 4399UserTask("supper").OpenBusSkill()
 
 Return
 ;<========================================= Sub Tasks 2 ================================================>

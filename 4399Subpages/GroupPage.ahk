@@ -95,7 +95,7 @@ class GroupPage{
 	OpenSJ()
 	{
 		sleep 1000
-		Click 146, 562 ;click zhuanqian 技能设置
+		Click 146, 562 ;click 赚钱 技能设置
 
 		For index, value in this.OpenSJList  ;开启赚钱/偷猎/融资/地产技能
 		{
@@ -212,7 +212,6 @@ class GroupPage{
 				4399sfGame.CloseSpeSubWindow(1)
 			if PixelColorExist("0xF4FCFC",348, 581,10)
 			{
-				;MsgBox, 1
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]

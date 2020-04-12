@@ -113,10 +113,10 @@ class ShopHomePage{
         sleep 1000
 
         if PixelColorExist("0xFBFBFB",459,399,100) ; Hongbao window or shangzhan window if exist.
-            {
-                click 459,399
-                sleep 300
-            }	
+        {
+            click 459,399
+            sleep 300
+        }	
 
         ; Click corresponding people
 

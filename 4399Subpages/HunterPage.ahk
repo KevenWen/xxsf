@@ -1,8 +1,7 @@
 
 class HunterPage{    
 
-	GetHunterPage()
-	{
+	GetHunterPage(){
 		loop{
 			if A_Index > 2
 				throw "Not able to GetHunterPage, PixelColorExist 0xFFFEF5 494 703 not exist."
@@ -16,8 +15,7 @@ class HunterPage{
         }
     }
 
-    SelectPeopleAndstolen(islieshou)
-    {
+    SelectPeopleAndstolen(islieshou){
         n :=1
         SuccessCount :=1
         CaptureScreen()
@@ -45,8 +43,7 @@ class HunterPage{
         sleep 500  
     }
 
-    OpenTouLiePage(Num)
-    {
+    OpenTouLiePage(Num){
         if PixelColorExist("0xF39181",126, 187,100) ;Return button if exist.
         {
             click 126, 187
@@ -65,8 +62,7 @@ class HunterPage{
         Return
     }
 
-    TouLieOpration()
-    {
+    TouLieOpration(){
         4399sfGame.CloseAnySubWindow()
         if !PixelColorExist("0x74BDFA",431, 530,2000)
             throw "Not able to open people Stolen page!"
@@ -99,9 +95,9 @@ class HunterPage{
             throw "Already stoled in hours or the target is full!"
     }
 
-    GetResult()
-    {
+    GetResult(){
         this.GetHunterPage()
+        WaitPixelColorAndClick("0xF39181",126, 187,100) ;Return button if exist.     
         WaitPixelColorAndClick("0xFFC7BB",166, 805,1000)
         CaptureScreen()
         sleep 200

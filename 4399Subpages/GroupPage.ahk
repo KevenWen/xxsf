@@ -222,5 +222,21 @@ class GroupPage{
 		}
 	}
 
+	GetRongZiCom()
+	{
+		this.GetGroupPage4()
+		if PixelColorNotExist("0xCDCDCD",156, 514,500) ;查看连接到游乐的融资线是否存在
+			Return 1
+		else if PixelColorNotExist("0xCCCCCC",362, 483,500) ;科技
+			Return 2
+		else if PixelColorNotExist("0xCCCCCC",252, 631,500) ;金融
+			Return 3	
+		else if PixelColorNotExist("0xABA9A5",166, 737,500) ;能源
+			Return 4
+		else if PixelColorNotExist("0x7DAECA",321, 734,500) ;洒店
+			Return 5
+		else
+			Return 3
+	}
 
 }

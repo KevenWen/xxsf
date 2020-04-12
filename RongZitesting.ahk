@@ -13,22 +13,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-FormatTime, DayToMeet,,d
-IniRead, shangjiday, config.ini, April, shangjiday
-IniRead, RongZi00, config.ini, April, RongZi00
-IniRead, RongZi02, config.ini, April, RongZi02
-
-
 ; btn1 肉沫茄子 btn2 - btn4 4399, btn_2 - btn_4 4399 weekly order button,前一个窗口刚好挡住下一个的确认两个字。
 
 sleep 1000
-
-if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
-    Gosub, Rongzi_0
-else if IsItemInList(DayToMeet,RongZi02)     ;RongZi one by one, delay 2 minutes, at 00:02
-    Gosub, Rongzi_0
-else
-    Gosub, Rongzi_0                        ;not a RongZi day
+Gosub, Rongzi_0                        ;not a RongZi day
 
 ExitApp
 
@@ -39,51 +27,33 @@ ExitApp
 
 Rongzi_0:
 
-    ;new 4399UserTask("sf03").Hunter(0)   
-    ;new 4399UserTask("sf01").Hunter(0)   
 /*
-song := new 4399UserTask("song")
-sf04 := new 4399UserTask("sf04")
-
-song.GetLand()
-sf04.Hunter(0)
 ["supper","yun","xhhz","long","song"]
 ["xhhz","song","sf01","sf03","sf04","sf05","sf06"]
-song := 
-sf04 :=
 
-
-    new QHUser().Getland()
-
-    For index,value in  ["song","long"]
-        new 4399UserTask(value).Hunter(1)
-
-    For index,value in  ["supper","yun","long"]
-        new 4399UserTask(value).GetLand()
 */
+    For index,value in  ["sf06"]
+        new 4399UserTask(value).ClickRongZiOK()
 
-       ; arrname := ["sf04","sf05","sf06"]
-   ; for index,value in  ["sf01","sf03","sf04","sf05","sf06"]
-    ;    new 4399UserTask(value).ZhuZi(1)
+    ExitApp
+
     new QHUser().Getland()
     new 4399UserTask("supper").GetLand()
-    ExitApp
 
     For index,value in  ["supper","yun","long"]
         new 4399UserTask(value).GetLand()
 
     For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).Hunter(1)
+   
+    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).ZhuZi(1)
 
+    song := new 4399UserTask("song")
+    sf04 := new 4399UserTask("sf04")
 
-    ;xxsf.RongZi(1)
-    ;xxsf := 
-    
-
-  ;  for index,value in  ["supper","yun","long","song"]
-   ;     new 4399UserTask(value).ZhuZi(2)
-
-
+    For index,value in  ["supper","yun","long","song"]
+        new 4399UserTask(value).ZhuZi(2)
 
     song := new 4399UserTask("song")
     supper := new 4399UserTask("supper")
@@ -97,41 +67,6 @@ sf04 :=
         }
 
     rdp.RDP_0()
-
-    IfWinExist xxsf
-    {
-        WinActivate xxsf
-        ;WinSet, AlwaysOnTop, On, xiaoxiaoshoufu
-        sleep, % s["short"]
-        click % Arrayhome["okbtnxxsf"]
-        sleep, % s["short"]
-    } 
-    hou.ClickRongZiOK()
-    xhhz.ClickRongZiOK()
-    song.ClickRongZiOK()    
-    runwait "QHLandBusiness.ahk"
-
-    song.ZhuPan(4)
-    
-    song.Hunter(1)
-    hou.Hunter(1) 
-    xhhz.Hunter(1) 
-     
-    hou.GetLand()
-    hou := ""
-    song.GetLand()
-    song := ""
-    xhhz.GetLand()
-    xhhz := ""
-    new 4399UserTask(supper_id,"supper").GetLand()
-    new 4399UserTask(yun_id,"yun").GetLand()
-    new 4399UserTask(long_id,"long").GetLand()    
- 
-    new 4399UserTask(sf01_id,"sf01").Hunter(0)   
-    new 4399UserTask(sf03_id,"sf03").Hunter(0)   
-    new 4399UserTask(sf04_id,"sf04").Hunter(0) 
-    new 4399UserTask(sf05_id,"sf05").Hunter(0)  
-    new 4399UserTask(sf06_id,"sf06").Hunter(0)   
 
     ExitApp    
 Return

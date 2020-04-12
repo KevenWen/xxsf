@@ -1,7 +1,7 @@
 ﻿#SingleInstance, Force
 SetBatchLines, -1
 #Include, 4399sfGame.ahk
-; click, % Arrayphy["btn1"]
+SendMode Input 
 
 class 4399UserTask extends 4399sfGame
 {
@@ -66,13 +66,12 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  地产入驻  ===========================>
 	
-	GetLand()
-	{
+	GetLand(){
 		;MsgBox, % winName
 		this.PrepareGameWindow(this.winName)
 		try{
-		this.LandPage.DiCanJinzhu(this.Getzhushu(this.winName))
-		LogtoFile("GetLand() done: " . this.winName . " winname: " . this.winName)
+		this.LandPage.DiCanJinzhu(this.Getzhushu())
+		LogtoFile("GetLand() done, winname: " . this.winName)
 		}
 		Catch e
 		{
@@ -83,8 +82,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  每周商技开启  ===========================>
 
-	OpenBusSkill()
-	{	
+	OpenBusSkill(){	
 		this.PrepareGameWindow(this.winName)
 		loop
 		{
@@ -116,8 +114,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  偷猎  ===========================>
 
-	Hunter(islieshou) ; 1 will from lieshou, 0 or others will from blacklist
-	{	
+	Hunter(islieshou){ ; 1 will from lieshou, 0 or others will from blacklist
 		this.PrepareGameWindow(this.winName)
 		try{
 		this.GetCaiTuanPage.GetCaiTuanMoney()	
@@ -153,8 +150,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  注融资  ===========================>
 
-	ZhuZi(which)
-	{
+	ZhuZi(which){
 		;MsgBox, % this.winName
 		this.PrepareGameWindow(this.winName)
 		if which > 3
@@ -171,8 +167,7 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-	RongZi(which)
-	{
+	RongZi(which){
 		try{
 		LogToFile("Start to RongZi at : " . which)
 		this.PrepareGameWindow(this.winName)
@@ -186,8 +181,7 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-	PrepareRongZi(which)
-	{
+	PrepareRongZi(which){
 		try{
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.PreRongZi(which)
@@ -198,8 +192,7 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-	ClickRongZiOK()
-	{
+	ClickRongZiOK(){
 		try{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("Start to do ClickRongZiOK.")
@@ -212,8 +205,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  转盘  ===========================>
 
-	ZhuPan(times)
-	{
+	ZhuPan(times){
 		this.PrepareGameWindow(this.winName)
 		try{
 		LogToFile("start to ZhuPan, times: " . times)
@@ -229,14 +221,13 @@ class 4399UserTask extends 4399sfGame
 
 		try{			
 			this.ShopHomepage.PlayZhuanPan(times)
+			LogToFile("this.ShopHomepage.PlayZhuanPan done!")			
 		}
 		Catch e{
 		LogToFile("excetion while this.ShopHomepage.PlayZhuanPan: " . e)
 		CaptureScreen()
 		}
 	}
-
-
 
 }
 

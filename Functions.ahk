@@ -177,11 +177,12 @@ CaptureScreen()
 		FormatTime, Dayfolder,, yyyyMMdd
         path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=3" . " /convert=" . path
+        LogToFile("Screen...")
 	}
 	catch e
 	{
 		;Ignore the error here.
-		;LogToFile(e)
+		LogToFile("Screen captured failed: " . e)
 	}
 
 }
@@ -193,11 +194,12 @@ CaptureScreenAll()
         FormatTime, Dayfolder,, yyyyMMdd
 		path := % logPath . "\\" . Dayfolder . "Fullscreens\\" . A_now . ".png"
 		RunWait, % i_viewpath . " /capture=0" . " /convert=" . path
+        LogToFile("Full Screen...")
 	}
 	catch e
 	{
 		;Ignore the error here.
-		;LogToFile(e)
+		LogToFile("Full Screen captured failed: " . e)
 	}
 
 }
@@ -234,8 +236,9 @@ SendSlackEmail()
 LogToFile(TextToLog)
 {
     FormatTime, CurrentDateTime,, HH:mm:ss
+    FormatTime, Dayfolder,, yyyyMMdd
     ;LogFileName := % logPath . "\\logfile.txt"  ; This global variable was previously given a value somewhere outside this function.
-    FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\logfile.txt"
+    FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
 }
 
 IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to read days from config.ini

@@ -49,47 +49,47 @@ class QHsfGame
 			sleep 3000
 			WinGetActiveTitle, xxsf
 			WinWaitActive, xxsf
-			Winmove,xxsf,,933,19,600,959
-
-			sleep 3000 ;Waiting for start button
-			if PixelColorExist("0x41B6AC",368, 783,18000)
+			Winmove,xxsf,,933,19,600,959			
+			loop
 			{
-				this.CloseQHMenu()	
-				sleep 200
-				click 368, 783 ;click the start button
-			}
-			Else If PixelColorExist("0xFE901A",365, 541,100)
-			{
-				click 365, 541 ;click the account button
-				sleep 500
-				click 356, 545 ;click the manully login button
-				sleep 500
-
-				if PixelColorExist("0x41B6AC",368, 783,18000)
+				if A_index > 20
+					Continue 2
+				if PixelColorExist("0x41B6AC",368, 783,100)
 				{
 					this.CloseQHMenu()	
 					sleep 200
 					click 368, 783 ;click the start button
+					break
 				}
-				Else
-					Continue
-			}
-			Else		
-				Continue
 
-			sleep 5000 ;Waiting for pop out window
-
-			this.CloseAnySubWindow()
-			sleep 200
-
-			if !PixelColorExist("0xEFFEFF",56, 920,100) ; double check again on the shop button
-			{
-				CaptureScreen()
-				Continue
+				If PixelColorExist("0xFE901A",365, 541,100)
+				{
+					click 365, 541 ;click the account button
+					sleep 500
+					click 356, 545 ;click the manully login button
+					sleep 500
+				}
+				sleep 1000
 			}
 
-			break
-		}	
+			sleep 2000			
+			loop
+			{				
+				if A_index > 10
+					Continue 2
+				if this.SubWindowExist()
+					this.CloseAnySubWindow()
+				if PixelColorExist("0xEFFEFF",56, 920,10){ 	; double check again on the shop button				
+					sleep 1000								; give one more secs to check if other pop window will come
+					if !this.SubWindowExist()
+						break 2								; looks all good here, break the main loop
+					else{
+						this.CloseAnySubWindow()
+						break 2	
+					}
+				}	
+			}							
+		}
 	}
 
 	GetQHCaiTuanMoney()
@@ -205,8 +205,11 @@ class QHsfGame
 			sleep 200
 		}
 		CaptureScreen()
-		loop 15
+		loop
 		{
+			if A_index > 15
+				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
+
 			this.CloseAnySubWindow()
 			ImageSearch, Px, Py, 113, 429, 504, 817, % A_ScriptDir . "\\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
@@ -222,28 +225,31 @@ class QHsfGame
 			}
 			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
 			{
+                LogToFile("QH Image found when loop times: " . A_Index)
 				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
 				if PixelColorExist("0xFFFEF5",190, 480,1000) 		;经营资源输入框存在
-				   and PixelColorExist("0x5A7965",331, 353,10)     ;且上面图片显示是闲置土地
+				   and PixelColorExist("0x5A7965",331, 353,10)      ;且上面图片显示是闲置土地
 				{
 					click,265, 465, 23 ;金币23
 					sleep 100
 					click,265, 530, 17 ;金币17
-					sleep 500
-                    if !PixelColorExist("0xFEEDC7",119, 391,10) and !PixelColorExist("0xFEEDC7",478, 391,10) ;左右两边都没有显示金钱不够提示
-                        throw "Not enough money warning show!"
+					sleep 100
 					click,433, 530, 3 ;资源卡6
 					sleep 100
-					click,350, 594, 3  ;5份钻石注决策资源
+					click,350, 594, 3  ;3份钻石注决策资源
 					CaptureScreen()
-					sleep 100
+					sleep 300					
+                    if !PixelColorExist("0xFEEDC7",119, 391,10) and !PixelColorExist("0xFEEDC7",478, 391,10) ;左右两边都没有显示金钱不够提示
+                        throw "Not enough money warning show!"
+
 					click 376, 723	;确认注入
 					sleep 100
 					if PixelColorExist("0xFBFBFB",478, 396,300) ;确认注入提示框
                     {
-                        click 305, 611     ;点击确定      
+                        click 305, 611     ;点击确定
+						CaptureScreen()
                         WaitPixelColorAndClick("0xFBFBFB",495, 180,1000)
                     }
 					else

@@ -51,23 +51,39 @@ sf04.Hunter(0)
 ["xhhz","song","sf01","sf03","sf04","sf05","sf06"]
 song := 
 sf04 :=
+
+
+    new QHUser().Getland()
+
+    For index,value in  ["song","long"]
+        new 4399UserTask(value).Hunter(1)
+
+    For index,value in  ["supper","yun","long"]
+        new 4399UserTask(value).GetLand()
 */
 
        ; arrname := ["sf04","sf05","sf06"]
    ; for index,value in  ["sf01","sf03","sf04","sf05","sf06"]
     ;    new 4399UserTask(value).ZhuZi(1)
-    
+    new QHUser().Getland()
+    new 4399UserTask("supper").GetLand()
+    ExitApp
 
-    xxsf := new QHUser().Getland()
-    xxsf.RongZi(1)
-    xxsf.Getland()
-    xxsf := 
+    For index,value in  ["supper","yun","long"]
+        new 4399UserTask(value).GetLand()
+
+    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).Hunter(1)
+
+
+    ;xxsf.RongZi(1)
+    ;xxsf := 
     
 
   ;  for index,value in  ["supper","yun","long","song"]
    ;     new 4399UserTask(value).ZhuZi(2)
 
-    ExitApp
+
 
     song := new 4399UserTask("song")
     supper := new 4399UserTask("supper")

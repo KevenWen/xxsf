@@ -84,8 +84,11 @@ class LandPage{
         click 510, 825
         sleep 200
         CaptureScreen()
-        loop 15
+        loop
         {
+			if A_index > 15
+				throw "DicanJinzhu loop more than 15 times still not get a free land."
+
             4399sfGame.CloseAnySubWindow()
             ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
             if (ErrorLevel = 2)  ;Execption when conduct the search
@@ -114,21 +117,22 @@ class LandPage{
                     click, % round(num/2)+2 ;金币注经营资源
                     sleep 100
                     Mousemove,255, 520
-                    click, % round(num/2)-3 ;金币注管理资源
-                    sleep 500
-                    if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",466, 389,10) ;左右两边都没有显示金钱不够提示
-                        throw "Not enough money warning show!"
-
+                    click, % round(num/2)-3 ;金币注管理资源                    
+                    sleep 100
                     click,414, 520, 2				;2资源卡注管理资源
                     sleep 100
                     click,330,580, 3				;3份钻石注决策资源
                     CaptureScreen()	
-                    sleep 100
+                    sleep 300
+                    if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",466, 389,10) ;左右两边都没有显示金钱不够提示
+                        throw "Not enough money warning show!"
+
                     click 361, 704			;确认注入
                     sleep 100
                     if PixelColorExist("0xFBFBFB",462, 396,3000)     ;确定提示框存在              
                     {
-                        click 302, 593      ;点击确定      
+                        click 302, 593      ;点击确定
+                        CaptureScreen()      
                         WaitPixelColorAndClick("0xFBFBFB",479, 192,1000)
                     }	
                     else

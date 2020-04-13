@@ -33,6 +33,18 @@ Rongzi_0:
 
 */
 
+    sf01 := new 4399UserTask("sf01")
+    sf03 := new 4399UserTask("sf03")
+    sf03.ZhuZi(3)
+    sf01.ZhuZi(3)
+    sf01 :=     
+    sf03 := 
+
+            ExitApp
+
+
+
+
     For index,value in  ["supper","yun","long"]
        %value% := new 4399UserTask(value)
  
@@ -49,7 +61,11 @@ Rongzi_0:
     long.Getland()
 
     ExitApp
+    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).ZhuZi(3)
 
+    For index,value in  ["song","long","sf04","sf05","sf06"]
+        new 4399UserTask(value).Hunter(0)
 
     song := new 4399UserTask("song")
     supper := new 4399UserTask("supper")    

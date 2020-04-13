@@ -21,10 +21,14 @@ class 4399sfGame
 ; <==================================  Command functionalities  ====================================>
 	PrepareGameWindow(name)
 	{	
+		WinGetActiveTitle, CurTitle
+		if (CurTitle = name)
+			Return
+		
 		IfWinExist,%name%
 		{
 			WinActivate, %name%
-			LogToFile("`n")
+			LogToFile("")
 			LogToFile("Log switch for: " . name)
 			sleep 100
 		}
@@ -49,10 +53,11 @@ class 4399sfGame
 			try 
 			{
 				run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
-				sleep 3000
+				sleep 5000
 				WinGetActiveTitle, Title
-				WinWaitActive, %Title%
-				WinSetTitle, %windowname%
+				if !InStr(Title, "xiaoxiao")
+					throw "The active windows is not named xiaoxiaoshoufu" 
+				WinSetTitle,%Title%,, %windowname%
 				;WinSet, AlwaysOnTop, On, %windowname%
 				Winmove,%windowname%,,829,23,600,959
 				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array			

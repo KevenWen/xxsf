@@ -16,11 +16,12 @@ class 4399UserTask extends 4399sfGame
 
 		IniRead, seqid, config.ini, users, %windowname%, 0
 
-		LogToFile("`nLog started for :" . windowname . ", seq: " . seqid)
+		LogToFile("")
+		LogToFile("Log started for :" . windowname . ", seq: " . seqid)
 		
-		if seqid = 0
+		if (seqid = 0) or (StrLen(seqid) > 20)
 		{
-			LogToFile("seq is empty, terminated. ")
+			LogToFile("seq is empty or too long, terminated. ")
 			Return
 		}
 
@@ -57,8 +58,9 @@ class 4399UserTask extends 4399sfGame
     __Delete()
     {
 		WinClose, %windowname%
+		sleep 100
 		WinMinimize, 360游戏大厅
-		LogToFile("Log Ended. `n")
+		LogToFile("Log Ended for: " . this.winName . ".`n")
     }
 	
 ; <==================================  Command Tasks  ====================================>
@@ -112,7 +114,8 @@ class 4399UserTask extends 4399sfGame
 			}
 		}
 		Catch e {
-			LogToFile("Open bussinessSkill failed with execption." . e)		
+			LogToFile("Open bussinessSkill failed with execption." . e)
+			SendAlertEmail()		
 		}
 
 	}
@@ -157,7 +160,7 @@ class 4399UserTask extends 4399sfGame
 
 	ZhuZi(which){
 		this.PrepareGameWindow(this.winName)
-		if which > 3
+		if (which > 3) or (which = "")
 		{
 			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
 			Return

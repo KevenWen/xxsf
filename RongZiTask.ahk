@@ -65,7 +65,7 @@ Return
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
 
-    supper := new 4399UserTask(value)
+    supper := new 4399UserTask("supper")
     xxsf := new QHUser()
 
     Loop 300    ;Make sure we are start after 00:00, total 10 mins

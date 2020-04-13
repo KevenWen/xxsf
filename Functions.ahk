@@ -237,8 +237,10 @@ LogToFile(TextToLog)
 {
     FormatTime, CurrentDateTime,, HH:mm:ss
     FormatTime, Dayfolder,, yyyyMMdd
-    ;LogFileName := % logPath . "\\logfile.txt"  ; This global variable was previously given a value somewhere outside this function.
-    FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
+    if TextToLog = ""
+        FileAppend, % "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
+    Else
+        FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
 }
 
 IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to read days from config.ini

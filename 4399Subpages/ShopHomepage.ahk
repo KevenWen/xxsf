@@ -110,7 +110,7 @@ class ShopHomePage{
         WaitPixelColorAndClickThrowErr("0xD26D24",500, 250,2000) ;HaoYou button
         sleep 500
         WaitPixelColorAndClickThrowErr("0xFFFFFF",449, 776,2000) ;BlackList button
-        sleep 1000
+        PixelColorExist("0xFFFFF3",372, 244,2000)                ; Wait until the green icon gone
 
         if PixelColorExist("0xFBFBFB",459,399,100) ; Hongbao window or shangzhan window if exist.
         {

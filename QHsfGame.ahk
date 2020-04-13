@@ -313,7 +313,7 @@ class QHsfGame
 			else
 				sleep, % s["mid"]
 		}
-		if PixelColorExist("0xFFF8CE",211, 302,100) ; 还没有注过资.
+		if PixelColorExist("0xFFF8CE",231, 305,100) ; 还没有注过资.
 		{
 			loop 42
 			{
@@ -335,6 +335,7 @@ class QHsfGame
 
 	CheZi()
 	{
+		this.GetGroupPage4()
 		Loop 5
 		{
 			click % BC[A_index]
@@ -367,10 +368,8 @@ class QHsfGame
 		click, % BC[RZCom]
 		sleep, % s["long"]		
 
-		mousemove, 200, 574
-		sleep, % s["short"]
 		SetDefaultMouseSpeed 10
-		click, 40
+		click,200, 574, 40
 		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]
 

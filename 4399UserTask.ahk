@@ -57,7 +57,7 @@ class 4399UserTask extends 4399sfGame
 
     __Delete()
     {
-		WinClose, this.winName
+		WinClose, % this.winName
 		sleep 100
 		WinMinimize, 360游戏大厅
 		LogToFile("Log Ended for: " . this.winName . ".`n")

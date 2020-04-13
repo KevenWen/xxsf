@@ -108,6 +108,7 @@ class QHUser extends QHsfGame
 	{
 		try{
 		this.PrepareGameWindow()
+		this.CheZi()
 		this.PreRongZi(which)
 		}
 		Catch e{

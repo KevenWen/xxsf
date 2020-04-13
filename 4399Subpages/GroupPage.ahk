@@ -151,7 +151,7 @@ class GroupPage{
 			click % BC[A_index]
 			sleep, % s["long"]
 			if PixelColorExist("0xFBFBFB",480, 269,1000)   
-			and PixelColorExist("0xFDFBF0",212, 573,10) ;FDFBF0
+			and (PixelColorExist("0xFDFBF0",212, 573,10) or PixelColorExist("0xFFFEF5",212, 573,10)) ;FDFBF0 in home, FFFEF5 in phy
 			and PixelColorExist("0xFFFEF5",230, 574,10)     ;窗口打开，没有融资，带有0，且只有两个字符
 			{
 				click % PopWin["clobtn"]
@@ -181,7 +181,7 @@ class GroupPage{
 		mousemove, 200, 574
 		sleep, % s["short"]
 		SetDefaultMouseSpeed 10
-		click, % 4399sfGame.Getzhushu()
+		click, % 4399sfGame.Getzhushu()-1
 		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]
 

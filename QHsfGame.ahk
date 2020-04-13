@@ -332,24 +332,6 @@ class QHsfGame
 		sleep, % s["short"]
 		CaptureScreen()
 	}
-/*
-	;Functions:
-	PreRongZi(RZCom)
-	{
-		click, % BC[RZCom]
-		sleep, % s["long"]
-		; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-	; TTCo := StrSplit(PopWin["rzarea"],",")
-		mousemove, 239, 570
-		sleep, % s["short"]
-		click,40
-		sleep, % s["mid"]
-		
-		if !PixelColorExist("0xFFFFFF",121, 358,10) ;存在没有更多金币提示，problem here!
-			Throw, "Not enough money warnning exist!"
-
-		click % RZWin["yesbtn"]    
-	}
 
 	CheZi()
 	{
@@ -377,7 +359,7 @@ class QHsfGame
 			}
 		}
 	}
-*/
+
 	PreRongZi(RZCom)
 	{		
 		this.GetGroupPage4()

@@ -57,7 +57,7 @@ class 4399UserTask extends 4399sfGame
 
     __Delete()
     {
-		WinClose, %windowname%
+		WinClose, this.winName
 		sleep 100
 		WinMinimize, 360游戏大厅
 		LogToFile("Log Ended for: " . this.winName . ".`n")
@@ -165,11 +165,11 @@ class 4399UserTask extends 4399sfGame
 			Return
 		}
 
-		try
+		try{
 			this.PrepareGameWindow(this.winName)
 			this.GroupPage.GroupZhuZi(which)
-		Catch e
-		{
+		}
+		Catch e{
 			LogToFile("this.GroupPage.GroupZhuZi get exception: " . e)
 			CaptureScreen()
 		}
@@ -192,7 +192,9 @@ class 4399UserTask extends 4399sfGame
 	PrepareRongZi(which){
 		try{
 		this.PrepareGameWindow(this.winName)
+		this.GroupPage.GroupCheZi()
 		this.GroupPage.PreRongZi(which)
+		LogToFile("this.GroupPage.PreRongZi() done. ")
 		}
 		Catch e{
 		LogToFile("this.GroupPage.PreRongZi() get exception: " . e)

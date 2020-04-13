@@ -69,8 +69,8 @@ class 4399UserTask extends 4399sfGame
 ; <========================  地产入驻  ===========================>
 	
 	GetLand(){
-		this.PrepareGameWindow(this.winName)
 		try{
+		this.PrepareGameWindow(this.winName)
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
 		}
@@ -123,8 +123,8 @@ class 4399UserTask extends 4399sfGame
 ; <========================  偷猎  ===========================>
 
 	Hunter(islieshou){ ; 1 will from lieshou, 0 or others will from blacklist
-		this.PrepareGameWindow(this.winName)
 		try{
+		this.PrepareGameWindow(this.winName)
 		this.GetCaiTuanPage.GetCaiTuanMoney()	
 		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
 		}
@@ -151,7 +151,7 @@ class 4399UserTask extends 4399sfGame
 		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")	
 		}
 		Catch e{
-		LogToFile("excetion while Sunkai or save_refresh: " . e)
+		LogToFile("excetion while SelectPeopleAndstolen or GetResult: " . e)
 		CaptureScreen()
 		}
 	}
@@ -159,13 +159,14 @@ class 4399UserTask extends 4399sfGame
 ; <========================  注融资  ===========================>
 
 	ZhuZi(which){
-		this.PrepareGameWindow(this.winName)
 		if (which > 3) or (which = "")
 		{
 			LogToFile("The passed argument in ZhuZi is: " . which . " > 3, exit!")
 			Return
 		}
+
 		try
+			this.PrepareGameWindow(this.winName)
 			this.GroupPage.GroupZhuZi(which)
 		Catch e
 		{
@@ -213,8 +214,8 @@ class 4399UserTask extends 4399sfGame
 ; <========================  转盘  ===========================>
 
 	ZhunPan(times){
-		this.PrepareGameWindow(this.winName)
 		try{
+		this.PrepareGameWindow(this.winName)
 		LogToFile("start to ZhuPan, times: " . times)
 		this.LandPage.SuanKai()	
 		LogToFile("this.LandPage.SuanKai() done. ")

@@ -33,17 +33,29 @@ Rongzi_0:
 
 */
 
-    For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
-        new 4399UserTask(value).Hunter(0)
+    ;For index,value in  ["supper","yun","long"]
+   ;  For index,value in  ["sf01","sf03","sf04"]   
+     ;  %value% := new 4399UserTask(value,0)
 
+
+    ;supper.Getland()
+    ;long.Getland()
+       For index,value in  ["supper","yun"]
+        new 4399UserTask(value,0)
+
+;RongZiOKEmu()
             ExitApp
 
+new QHUser(0).ZhuZi(2)
+    For index,value in  ["supper","yun"]
+        new 4399UserTask(value).ZhuZi(2)
 
+    For index,value in  ["supper","yun"]
+        new 4399UserTask(value).ZhuZi(2)
+       
+     For index,value in  ["sf01","sf03","sf04"]
+        new 4399UserTask(value).ZhuZi(3)
 
-
-    For index,value in  ["supper","yun","long"]
-       %value% := new 4399UserTask(value)
- 
         Loop 300    ;Make sure we are start after 00:00, total 10 mins
         {
             FormatTime, MinToMeet,,mm

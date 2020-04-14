@@ -72,14 +72,16 @@ class QHsfGame
 				sleep 1000
 			}
 
-			sleep 2000			
+			sleep 5000			
 			loop
 			{				
 				if A_index > 10
 					Continue 2
 				if this.SubWindowExist()
 					this.CloseAnySubWindow()
-				if PixelColorExist("0xEFFEFF",56, 920,10){ 	; double check again on the shop button				
+				sleep 1000
+				if PixelColorExist("0xEFFEFF",56, 920,10) 	; double check again on the shop button				
+				{	
 					sleep 1000								; give one more secs to check if other pop window will come
 					if !this.SubWindowExist()
 						break 2								; looks all good here, break the main loop

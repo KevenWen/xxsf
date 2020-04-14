@@ -9,10 +9,10 @@ class QHUser extends QHsfGame
 	;Nothing for now.
 ; <================================  Constructure functions  ================================>
 
-	__New()
+	__New(isclose=1)
 	{
 		this.winName := "xxsf"
-
+		this.isclosed := isclose
 		LogToFile("`nLog started for QH xxsf.")
 
 		try
@@ -47,9 +47,12 @@ class QHUser extends QHsfGame
 
     __Delete()
     {
-		WinClose, xxsf
-		sleep 100
-		WinMinimize, 360游戏大厅
+		if this.isclosed
+		{
+			WinClose, xxsf
+			sleep 100
+			WinMinimize, 360游戏大厅
+		}
 		LogToFile("Log Ended. `n")
     }
 	
@@ -83,6 +86,7 @@ class QHUser extends QHsfGame
 		try{
 			this.PrepareGameWindow()
 			this.GroupZhuZi(which)
+			LogToFile("this.GroupZhuZi done.")
 		} Catch e{
 			LogToFile("this.GroupZhuZi get exception: " . e)
 			CaptureScreen()

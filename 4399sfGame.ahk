@@ -60,15 +60,22 @@ class 4399sfGame
 				WinSetTitle,%Title%,, %windowname%
 				;WinSet, AlwaysOnTop, On, %windowname%
 				Winmove,%windowname%,,829,23,600,959
-				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array			
-				MouseMove, 566, 83
-				sleep 500				
-				send {LButton down}
-				sleep 10	
-				send {LButton up}
-				;Click 566, 83
-				sleep 1000	
-				;WaitPixelColorAndClickThrowErr("0x3BB1B2",343, 766,12000) 
+				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array		
+				loop
+				{	
+					if A_Index > 5
+					{
+						LogToFile("the up array clicked 5 times with no response!")
+						CaptureScreen()
+						Continue 2
+					}
+
+					click, 566, 83
+					sleep 1000
+					if !PixelColorExist("0x232D4D",544, 84,10) ;Click the up array if it  exist
+						break
+				}
+
 				WaitPixelColor("0xFFFEF5",371, 686,15000) ;waiting for Start game button
 				sleep 500
 				click 343, 766
@@ -80,16 +87,13 @@ class 4399sfGame
 				LogToFile("Start Game timeout, going to retry...")
 				Continue
 			}
-
-			if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
-				click, 566, 83
-			
+	
 			sleep 2000
 			colcount := 0
 			
 			loop
 			{				
-				if PixelColorExist("0xCEC870",520, 90,10) ;the color in the top right cornal
+				if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
 					colcount++
 				else
 					this.CloseAnySubWindow()
@@ -102,7 +106,6 @@ class 4399sfGame
 					CaptureScreen()
 					Continue 2
 				}
-
 				sleep 1000			
 			}
 			;WinSet, AlwaysOnTop, off, %windowname%

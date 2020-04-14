@@ -174,13 +174,14 @@ class GroupPage{
 	PreRongZi(RZCom)
 	{		
 		this.GetGroupPage4()
-
+		
 		click, % BC[RZCom]
 		sleep, % s["long"]		
 
 		mousemove, 200, 574
 		sleep, % s["short"]
-		SetDefaultMouseSpeed 10
+		SetDefaultMouseSpeed 30
+		SendMode Event
 		click, % 4399sfGame.Getzhushu()-1
 		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]

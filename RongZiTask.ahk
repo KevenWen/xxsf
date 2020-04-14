@@ -41,22 +41,46 @@ ExitApp
 
 Rongzi_0:
 
-    rdp := new RDPGame()
-
-    song := new 4399UserTask(song_id,"song")
-    hou := new 4399UserTask(hou_id,"hou")
-    xhhz := new 4399UserTask(xhhz_id,"xhhz")
-    ExitApp
-   Loop 300    ;Make sure we are start after 00:00, total 10 mins
+    For index,value in  ["song","hou","xhhz"]
     {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 2000
+        %value% := new 4399UserTask(value)
+        %value%.PrepareRongZi(index+2)
     }
 
-    rdp.RDP_0()
+    Loop 300    ;Make sure we are start after 00:00, total 10 mins
+        {
+            FormatTime, MinToMeet,,mm
+            if MinToMeet < 50
+                Break
+            sleep 2000
+        }
 
+    new RDPGame().RDP_0()
+
+    new QHUser().ClickRongZiOK()
+
+    For index,value in  ["song","hou","xhhz"]
+        %value%.ClickRongZiOK()
+
+    song.ZhunPan(7)
+
+    For index,value in  ["song","hou","xhhz"]
+        %value%.Hunter(1)
+
+    song := ""
+    hou := ""
+    xhhz := ""
+    
+    new QHUser().Getland()
+
+    For index,value in  ["supper","xhhz","yun","long","song","hou"]
+       new 4399UserTask(value).Getland()
+
+    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+       new 4399UserTask(value).ZhuZi(3)
+
+    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+       new 4399UserTask(value).Hunter(1)
 
     ExitApp    
 Return
@@ -65,36 +89,18 @@ Return
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
 
-    supper := new 4399UserTask("supper")
-    xxsf := new QHUser()
-
-    Loop 300    ;Make sure we are start after 00:00, total 10 mins
-    {        
-        FormatTime, MinToMeet,,mm
-        if MinToMeet = 00
-            Break
-        sleep 2000
-    }
-        
     new RDPGame().RDP_N()
-
-    if IsItemInList(DayToMeet,shangjiday)
-        supper.OpenBusSkill()
-
-    supper.Getland()
-    supper := ""  
-
-    xxsf.Getland()
-    xxsf := ""
-
-    for index,value in ["xhhz","yun","long","song"]
-        new 4399UserTask(value).GetLand()
+    new QHUser().Getland()
+    For index,value in  ["supper","yun","xhhz","long","song"]
+       new 4399UserTask(value).Getland()
 
     for index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
     {
         new 4399UserTask(value).Hunter(1)
     }
-
+    
+    ;if IsItemInList(DayToMeet,shangjiday)
+    ;    supper.OpenBusSkill()
 Return
 ;<========================================= Sub Tasks 2 ================================================>
 

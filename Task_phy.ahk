@@ -2,7 +2,7 @@
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
-#Include Functions.ahk
+#Include 4399UserTask.ahk
 
 
 SetTimer, Task202004, 1000  ;run every 1 secs
@@ -19,10 +19,6 @@ Task202004:
         sleep 30000
         WinClose, yun
         winclose, supper
-
-        ;runwait "4399Shopping_Pan.ahk" "hou"
-        ;runwait "4399Shopping_Pan.ahk" "long"
-
         WinClose, long
         ;winclose, hou
         runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
@@ -33,12 +29,25 @@ Task202004:
 return
 
 ^NumpadDot::
-        ;runwait "4399PreRongZi_phy.ahk" "9" "hou" "3" "2"    
-        ;runwait "4399PreRongZi_phy.ahk" "6" "song" "1" "3"
-        runwait "4399PreRongZi_phy.ahk" "10" "supper" "4" "1"        
-        runwait "4399PreRongZi_phy.ahk" "7" "long" "2" "2"    
-        runwait "4399PreRongZi_phy.ahk" "8" "yun" "1" "3"
+
+   For index,value in  ["supper","yun","long"]
+   {
+       %value% := new 4399UserTask(value)
+       %value%.PrepareRongZi(index)
+   }
+
 return
+
+^Numpad9::
+
+   For index,value in  ["supper"]
+   {
+       %value% := new 4399UserTask(value)
+       %value%.ZhunPan(2)
+   }
+
+return
+
 /*
 ; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	
 ^NumpadAdd::      ;Yun

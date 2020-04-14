@@ -33,12 +33,8 @@ Rongzi_0:
 
 */
 
-    sf01 := new 4399UserTask("sf01")
-    sf03 := new 4399UserTask("sf03")
-    sf03.ZhuZi(3)
-    sf01.ZhuZi(3)
-    sf01 :=     
-    sf03 := 
+    For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).Hunter(0)
 
             ExitApp
 

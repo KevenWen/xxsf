@@ -84,7 +84,7 @@ class 4399sfGame
 			if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
 				click, 566, 83
 			
-			sleep 1000
+			sleep 2000
 			colcount := 0
 			
 			loop
@@ -96,7 +96,7 @@ class 4399sfGame
 
 				if colcount	> 1
 					break
-				if A_Index > 3
+				if A_Index > 5
 				{
 					LogToFile("homepage not show expected and not sub window found!")
 					CaptureScreen()

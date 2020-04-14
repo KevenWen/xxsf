@@ -253,3 +253,19 @@ IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to
    }
    return false
 }
+
+RongZiOKEmu()
+{
+    For index,value in  ["song","hou","xhhz","supper","long","yun"]
+    {
+        IfWinExist %value%
+        {
+            WinActivate %value%
+            sleep, % s["short"]
+            click % PopWin["okbtn"]
+            sleep, % s["short"]
+            click % PopWin["okbtn"]
+            CaptureScreen()
+        }   
+    }
+}

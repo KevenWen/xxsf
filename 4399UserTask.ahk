@@ -39,6 +39,7 @@ class 4399UserTask extends 4399sfGame
 			{
 				LogToFile("Going to open game.")
 				this.Launch4399Game(seqid,windowname)
+				CaptureScreen()
 				LogToFile("Game opened.")
 			}	
 

@@ -39,7 +39,9 @@ class LandPage{
     {
 	    this.GetLandPage2()
 
-        if !PixelColorExist("0x4BB2D9",318, 786,10) and !PixelColorExist("0x4AB2D9",318, 786,10) ;JBP not available
+        if !PixelColorExist("0x4BB2D9",318, 786,10) ;JBP not available home
+        and !PixelColorExist("0x4AB2D9",318, 786,10) ;JBP not available phy
+        and !PixelColorExist("0x4AB1D8",318, 786,10)  ;JBP not available remote
         {
             if PixelColorExist("0x81FBD6",398, 787,10) ; time tunnel available
             {

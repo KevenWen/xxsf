@@ -64,12 +64,12 @@ class 4399sfGame
 				MouseMove, 566, 83
 				sleep 500				
 				send {LButton down}
-				sleep 100	
+				sleep 10	
 				send {LButton up}
 				;Click 566, 83
 				sleep 1000	
 				;WaitPixelColorAndClickThrowErr("0x3BB1B2",343, 766,12000) 
-				WaitPixelColor("0xFFFEF5",371, 686,12000) ;waiting for Start game button
+				WaitPixelColor("0xFFFEF5",371, 686,15000) ;waiting for Start game button
 				sleep 500
 				click 343, 766
 				WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
@@ -77,22 +77,32 @@ class 4399sfGame
 			Catch e
 			{
 				CaptureScreen()
+				LogToFile("Start Game timeout, going to retry...")
 				Continue
 			}
 
 			if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
 				click, 566, 83
-
-			sleep 2000
-			loop 2
-			{
-				if !PixelColorExist("0xAFC387",473, 105,10)
-				{
+			
+			sleep 1000
+			colcount := 0
+			
+			loop
+			{				
+				if PixelColorExist("0xCEC870",520, 90,10) ;the color in the top right cornal
+					colcount++
+				else
 					this.CloseAnySubWindow()
-					if PixelColorExist("0x232D4D",544, 84,10) ;Click the up array again if it still exist
-						click, 566, 83
+
+				if colcount	> 1
 					break
+				if A_Index > 3
+				{
+					LogToFile("homepage not show expected and not sub window found!")
+					CaptureScreen()
+					Continue 2
 				}
+
 				sleep 1000			
 			}
 			;WinSet, AlwaysOnTop, off, %windowname%

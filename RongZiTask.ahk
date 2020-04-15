@@ -23,8 +23,6 @@ global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3
 Arrayhome := {okbtn: "324, 602", okbtnxxsf: "320, 610", kejicomp: "690,519", clobtn: "480, 266", clobtnxxsf: "500, 264"}
 s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}
 
-sleep 2000
-
 if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
     Gosub, Rongzi_0
 else if IsItemInList(DayToMeet,RongZi02)     ;RongZi one by one, delay 2 minutes, at 00:02
@@ -42,7 +40,9 @@ ExitApp
 Rongzi_0:
 
     For index,value in  ["song","hou","xhhz"]
-        new 4399UserTask(value,0).PrepareRongZi(index+2)
+        new 4399UserTask(value,0).PrepareRongZi(index)
+
+    new QHUser(0).PrepareRongZi(4)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
         {
@@ -57,24 +57,17 @@ Rongzi_0:
     new QHUser().ClickRongZiOK()
 
     For index,value in  ["song","hou","xhhz"]
-        %value%.ClickRongZiOK()
+        new 4399UserTask(value,0).ClickRongZiOK()
 
-    song.ZhunPan(7)
+    new 4399UserTask("song",0).ZhuanPan(3)
 
     For index,value in  ["song","hou","xhhz"]
-        %value%.Hunter(1)
+        new 4399UserTask(value).Hunter(1)
 
-    song := ""
-    hou := ""
-    xhhz := ""
-    
     new QHUser().Getland()
 
     For index,value in  ["supper","xhhz","yun","long","song","hou"]
        new 4399UserTask(value).Getland()
-
-    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
-       new 4399UserTask(value).ZhuZi(3)
 
     For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
        new 4399UserTask(value).Hunter(1)
@@ -111,32 +104,40 @@ Return
 
 Rongzi_2:
 
+    Loop 600    ;Make sure we are start delayed from 2 mins
+    {
+        FormatTime, MinToMeet,,mm
+        if MinToMeet < 50
+            Break
+        sleep 1000
+    }
+
    new QHUser(0).Getland()
 
    For index,value in  ["song","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
 
    For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value,0).PrepareRongZi()
+        new 4399UserTask(value,0).PrepareRongZi(index)
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
-        if MinToMeet = 02
+        if MinToMeet > 01
             Break
         sleep 1000
     }
 
-    new QHUser().RongZi(1)
+    new QHUser().RongZi(4)
     new RDPGame().RDP_2()
 
    For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value).ClickRongZiOK(index)
+        new 4399UserTask(value).ClickRongZiOK()
 
    For index,value in  ["supper","yun","long"]
         new 4399UserTask(value).GetLand()
 
-    for index,value in  ["xhhz","song","hou","long","sf01","sf03","sf04","sf05","sf06"]
+    for index,value in  ["hou","xhhz","song","long","sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅

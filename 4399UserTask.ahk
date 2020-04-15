@@ -220,7 +220,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <========================  转盘  ===========================>
 
-	ZhunPan(times){
+	ZhuanPan(times){
 		try{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("start to ZhuPan, times: " . times)

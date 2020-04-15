@@ -2,6 +2,9 @@
 SetBatchLines, -1
 #Include, Functions.ahk
 
+CoordMode, Pixel, window  
+CoordMode, Mouse, window
+
 class QHsfGame
 {
 

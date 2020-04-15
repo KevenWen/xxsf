@@ -3,6 +3,9 @@ SetBatchLines, -1
 SetTitleMatchMode, 3
 #Include, Functions.ahk
 
+CoordMode, Pixel, window  
+CoordMode, Mouse, window
+
 class 4399sfGame
 {
 

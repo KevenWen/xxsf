@@ -71,8 +71,8 @@ Rongzi_0:
 
     For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
        new 4399UserTask(value).Hunter(1)
-
-    ExitApp    
+    
+    WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
 ; 19-01, 21-03, 22-04,23-05,35-06, 
@@ -96,7 +96,8 @@ Rongzi_N:
     {
         new 4399UserTask(value).Hunter(1)
     }
-    
+
+    WinClose 360游戏大厅
     ;if IsItemInList(DayToMeet,shangjiday)
     ;    supper.OpenBusSkill()
 Return
@@ -128,11 +129,11 @@ Rongzi_2:
         sleep 1000
     }
 
-    new QHUser().RongZi(4)
     new RDPGame().RDP_2()
+    For index,value in  ["song","xhhz","hou"]
+        new 4399UserTask(value).ClickRongZiOK() 
 
-   For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value).ClickRongZiOK()
+    new QHUser().RongZi(4)
 
    For index,value in  ["supper","yun","long"]
         new 4399UserTask(value).GetLand()
@@ -141,7 +142,6 @@ Rongzi_2:
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
-    ExitApp
 Return
 
 F10::Pause   ;pause the script

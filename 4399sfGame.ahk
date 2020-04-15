@@ -33,7 +33,7 @@ class 4399sfGame
 			sleep 100
 		}
 		Else
-			throw "Window name not exist!"
+			throw "Window name not exist: " . name
 	}
 
 	Close4399Game(windowname)
@@ -63,9 +63,9 @@ class 4399sfGame
 				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array		
 				loop
 				{	
-					if A_Index > 5
+					if A_Index > 15
 					{
-						LogToFile("the up array clicked 5 times with no response!")
+						LogToFile("the up array clicked 15 times with no response!")
 						CaptureScreen()
 						Continue 2
 					}
@@ -76,7 +76,7 @@ class 4399sfGame
 						break
 				}
 
-				WaitPixelColor("0xFFFEF5",371, 686,15000) ;waiting for Start game button
+				WaitPixelColor("0xFFFEF5",371, 686,10000) ;waiting for Start game button
 				sleep 500
 				click 343, 766
 				WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.

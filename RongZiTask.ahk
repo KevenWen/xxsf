@@ -42,17 +42,14 @@ ExitApp
 Rongzi_0:
 
     For index,value in  ["song","hou","xhhz"]
-    {
-        %value% := new 4399UserTask(value)
-        %value%.PrepareRongZi(index+2)
-    }
+        new 4399UserTask(value,0).PrepareRongZi(index+2)
 
-    Loop 300    ;Make sure we are start after 00:00, total 10 mins
+    Loop 600    ;Make sure we are start after 00:00, total 10 mins
         {
             FormatTime, MinToMeet,,mm
-            if MinToMeet < 50
+            if MinToMeet = 00
                 Break
-            sleep 2000
+            sleep 1000
         }
 
     new RDPGame().RDP_0()
@@ -89,6 +86,14 @@ Return
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
 
+    Loop 600    ;Make sure we are start after 00:00, total 10 mins
+    {
+        FormatTime, MinToMeet,,mm
+        if MinToMeet = 00
+            Break
+        sleep 1000
+    }
+
     new RDPGame().RDP_N()
     new QHUser().Getland()
     For index,value in  ["supper","yun","xhhz","long","song"]
@@ -106,24 +111,27 @@ Return
 
 Rongzi_2:
 
-   xxsf := new QHUser().Getland()
+   new QHUser(0).Getland()
 
    For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value).GetLand()
+        new 4399UserTask(value,0).GetLand()
 
-    Loop 20    ;Make sure we are start delayed from 2 mins
+   For index,value in  ["song","xhhz","hou"]
+        new 4399UserTask(value,0).PrepareRongZi()
+
+    Loop 600    ;Make sure we are start delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
-        if MinToMeet > 01
+        if MinToMeet = 02
             Break
-        sleep 5000
+        sleep 1000
     }
 
     new QHUser().RongZi(1)
     new RDPGame().RDP_2()
 
    For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value).RongZi(index)
+        new 4399UserTask(value).ClickRongZiOK(index)
 
    For index,value in  ["supper","yun","long"]
         new 4399UserTask(value).GetLand()

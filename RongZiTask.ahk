@@ -79,18 +79,22 @@ Return
 ; 19-01, 21-03, 22-04,23-05,35-06, 
 ; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
 Rongzi_N:
+    new QHUser(0)
+
+    For index,value in  ["supper","yun","long"]
+       new 4399UserTask(value,0)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
     {
         FormatTime, MinToMeet,,mm
-        if MinToMeet = 00
+        if MinToMeet < 50
             Break
         sleep 1000
     }
 
     new RDPGame().RDP_N()
     new QHUser().Getland()
-    For index,value in  ["supper","yun","xhhz","long","song"]
+    For index,value in  ["supper","yun","long","xhhz","song"]
        new 4399UserTask(value).Getland()
 
     for index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]

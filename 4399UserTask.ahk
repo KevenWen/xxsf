@@ -199,6 +199,7 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.GroupCheZi()
 		this.GroupPage.PreRongZi(which)
+		CaptureScreen()
 		LogToFile("this.GroupPage.PreRongZi() done. ")
 		}
 		Catch e{

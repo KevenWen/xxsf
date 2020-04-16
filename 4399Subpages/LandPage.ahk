@@ -19,7 +19,7 @@ class LandPage{
             sleep 200
             click % HB[2]
             sleep 200
-            if PixelColorExist("0x706B59",398, 288,2000)		;升级button 旁边的灰色条	
+            if PixelColorExist("0x9E9E9E",72, 797,4000)		;No5 左边的灰色带
                 Break
         }    
     }

@@ -6,20 +6,26 @@ class RDPGame ;extends sfGame
 {
 	__New()
 	{
+		LogToFile("")
+		LogToFile("Log started for ahk_exe mstsc.exe.")
+
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
 			Winmove,ahk_exe mstsc.exe,,585,111,1120,872
+			LogToFile("Found existing RDP window.")
 			sleep 200
 		}
 		Else
 		{
 			run "C:\Windows\system32\mstsc.exe" "C:\Users\keven\Documents\phy.rdp"
+			LogToFile("Started a new RDP window.")			
 			sleep 10000
 			Winmove,ahk_exe mstsc.exe,,585,111,1120,872
 			sleep 200			
 		}
 
+		CaptureScreen()
 		WinGet IDVar,ID,A ; Get ID from Active window.		
 		this.WID := IDVar
 		WinGetActiveTitle, winVar		
@@ -28,6 +34,7 @@ class RDPGame ;extends sfGame
 
 	__Delete()
 	{
+		LogToFile("Log end for RDPGame.")			
 		;WinClose, % this.winname
 	}
 
@@ -59,10 +66,10 @@ class RDPGame ;extends sfGame
 
 	RDP_0()
 	{
+		LogToFile("Start to run RDP_0().")	
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
-			WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
 			sleep 1000
 			CaptureScreen()	
 			sleep 200
@@ -73,6 +80,7 @@ class RDPGame ;extends sfGame
 			click, % Arrayphy["btn1"]
 			sleep, % s["short"]
 			sendinput {D}
+			LogToFile("Clicked btn1 and send D.")
 
 			;Supper
 			if PixelColorExist("0xFFFFF3",798,633,10)
@@ -84,6 +92,7 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn2"]
 			sleep, % s["short"]
+			LogToFile("Clicked btn2.")
 
 			;Long
 			if PixelColorExist("0xFFFFF3",522,633,10)
@@ -95,6 +104,7 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn3"]
 			sleep, % s["short"]
+			LogToFile("Clicked btn3.")
 
 			;Song
 			if PixelColorExist("0xFFFFF3",253,633,10)
@@ -106,13 +116,17 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn4"]
 			sleep, % s["short"]
+			LogToFile("Clicked btn4.")
 
-			WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
+			CaptureScreen()	
 		}
+		Else
+			LogToFile("Not found a RDP window")	
 	}
 
 	RDP_2()
 	{
+		LogToFile("Start to run RDP_2().")	
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
@@ -127,6 +141,8 @@ class RDPGame ;extends sfGame
 			click, % Arrayphy["btn1"]
 			sleep, % s["short"]
 			sendinput {Y}
+			LogToFile("Clicked btn1 and send Y.")
+
 
 			;Supper
 			if PixelColorExist("0xFFFFF3",798,633,10)
@@ -138,6 +154,8 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn2"]
 			sleep, % s["short"]
+			LogToFile("Clicked btn2.")
+
 
 			;Long
 			if PixelColorExist("0xFFFFF3",522,633,10)
@@ -149,6 +167,8 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn3"]
 			sleep, % s["short"]
+			LogToFile("Clicked btn3.")
+
 
 			;Song
 			if PixelColorExist("0xFFFFF3",253,633,10)
@@ -160,13 +180,17 @@ class RDPGame ;extends sfGame
 			sleep, % s["short"]
 			click % Arrayphy["btn4"]
 			sleep, % s["short"]
-
-			;WinSet, AlwaysOnTop, off, ahk_exe mstsc.exe
+			LogToFile("Clicked btn4.")
+			
+			CaptureScreen()
 		}
+		Else
+			LogToFile("Not found a RDP window")	
 	}
 
 	RDP_N()
 	{
+		LogToFile("Start to run RDP_N().")	
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
@@ -180,7 +204,12 @@ class RDPGame ;extends sfGame
 			click, % Arrayphy["btn1"]
 			sleep, % s["short"]    
 			sendinput {D}
+			sleep, % s["mid"]  			
+			LogToFile("Clicked btn1 and send D.")
+			CaptureScreen()			
 		} 
+		Else
+			LogToFile("Not found a RDP window")	
 	}
 
 	SendCommand(cmd)

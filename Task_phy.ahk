@@ -2,7 +2,7 @@
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
-#Include Functions.ahk
+#Include 4399UserTask.ahk
 
 
 SetTimer, Task202004, 1000  ;run every 1 secs
@@ -19,10 +19,6 @@ Task202004:
         sleep 30000
         WinClose, yun
         winclose, supper
-
-        ;runwait "4399Shopping_Pan.ahk" "hou"
-        ;runwait "4399Shopping_Pan.ahk" "long"
-
         WinClose, long
         ;winclose, hou
         runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
@@ -33,19 +29,54 @@ Task202004:
 return
 
 ^NumpadDot::
-        ;runwait "4399PreRongZi_phy.ahk" "9" "hou" "3" "2"    
-        ;runwait "4399PreRongZi_phy.ahk" "6" "song" "1" "3"
-        runwait "4399PreRongZi_phy.ahk" "10" "supper" "4" "1"        
-        runwait "4399PreRongZi_phy.ahk" "7" "long" "2" "2"    
-        runwait "4399PreRongZi_phy.ahk" "8" "yun" "1" "3"
+
+   For index,value in  ["supper","yun","long"]
+   {
+       %value% := new 4399UserTask(value)
+       %value%.PrepareRongZi(index)
+   }
+
 return
-/*
+
 ; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	
 ^NumpadAdd::      ;Yun
     sleep 1000
     run "C:\ChangZhi\LDPlayer\dnconsole.exe" launchex --index 0 --packagename "com.wydsf2.ewan"    
 return
 
-*/
-;https://www.autohotkey.com/boards/viewtopic.php?f=7&t=41332
+^Numpad1::     ;02/song
+    new 4399UserTask("song",0)
+return
+^Numpad2::     ;Long
+    new 4399UserTask("long",0)
+return
+^Numpad3::      ;Yun
+    new 4399UserTask("yun",0)
+return
+^Numpad4::    ;88888
+    new QHUser(0)
+return
+^Numpad5::    ;SF27_Supper
+    new 4399UserTask("supper",0)
+return
 
+^Numpad6::     ;06
+    new 4399UserTask("sf06",0)
+    ;run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
+return
+return
+^Numpad0::     ;01
+    new 4399UserTask("sf01",0)
+return
+^Numpad7::     ;03
+    new 4399UserTask("sf03",0)
+return
+^Numpad8::     ;04
+    new 4399UserTask("sf04",0)
+return
+^Numpad9::     ;05
+    new 4399UserTask("sf05",0)
+return
+^NumpadMult::     ;SF27_Hou
+    new 4399UserTask("hou",0)
+return

@@ -87,7 +87,6 @@ loop 5
   
         v22 /= 100.0
         LogToFile(v22)
-        ;MsgBox, % v22
         if v22=0  ; 如果当前企业没有融资，跳过到下一个企业
         {
             click 486, 265

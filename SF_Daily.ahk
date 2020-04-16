@@ -4,12 +4,9 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
-#Include Functions.ahk
-;ResizeWindow()
+#Include 4399UserTask.ahk
+#Include QHUserTask.ahk
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-
-CoordMode, Pixel, window  
-CoordMode, Mouse, window
 
 SetTimer, Task202004, 1000  ;run every 1 secs
 Return
@@ -17,85 +14,71 @@ Return
 Task202004:
 
     FormatTime, TimeToMeet,,HHmmss
-    FormatTime, DayToMeet,,d
 
-    IniRead, RongZi00, config.ini, April, RongZi00
+    ;TimeToMeet = 235458
 
-    ;TimeToMeet = 235958
-
-    If (TimeToMeet = 200300) ; Bussniss war started
-    {        
-        runwait "ShangZhanReport.ahk"
-    }
-
-    If (TimeToMeet = 235000) and IsItemInList(DayToMeet,RongZi00) ; Rong zi task prepare for xhhz
-        runwait "4399PrepareRongZi.ahk" "18" "xhhz" "5"
-
-    If (TimeToMeet = 235400) ; Check if the remote desktop is opened, if not send alert.
-    {
-        CaptureScreenAll()
-        sleep 1000
-        if !FixRDPConn()
-            SendAlertEmail()
-    }
-
-    If (TimeToMeet = 235958 ) ; Rong zi task, and also shopping / zhuanpan / openshangji
+    If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
         runwait "RongZiTask.ahk" 
 
-    ;Task for every days    
-    If (TimeToMeet = 002500 ) ; Rong zi task for 01-06
+
+    ;Task for every days
+    If (TimeToMeet = 063000) or (TimeToMeet = 123000)  ; TouLie from black list
     {
-        runwait "4399ZhuRongZi.ahk" "ZR" "L" 
-        runwait "4399TouLie.ahk" "black" "launch" "L"
-        ;runwait "4399ShareTo.ahk" "II"    
-    } 
+        For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
+            new 4399UserTask(value).Hunter(0)
+    }  
 
-    If (TimeToMeet = 063000) ; TouLie from black list
-        runwait "4399TouLie.ahk" "black" "launch" "XL"     
+    If (TimeToMeet = 002500)  ; TouLie from black list
+    {
+        For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+            new 4399UserTask(value).ZhuZi(3)
+    }
+    
+    If (TimeToMeet = 200300) ; Bussniss war started
+    {        
+        ;runwait "ShangZhanReport.ahk"
+    }      
 
-    If (TimeToMeet = 123000) ; TouLie from black list
-        runwait "4399TouLie.ahk" "black" "launch" "XL"     
-   
 Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count
 ^Numpad1::     ;02/song
-    run %4399GamePath% -action:opengame -gid:1 -gaid:20
+    new 4399UserTask("song",0)
 return
 ^Numpad2::     ;Long
-    run %4399GamePath% -action:opengame -gid:1 -gaid:25 
+    new 4399UserTask("long",0)
 return
 ^Numpad3::      ;Yun
-    run %4399GamePath% -action:opengame -gid:1 -gaid:24 
+    new 4399UserTask("yun",0)
 return
 ^Numpad4::    ;88888
-    run %4399GamePath% -action:opengame -gid:4 -gaid:30 
+    new QHUser(0)
 return
 ^Numpad5::    ;SF27_Supper
-    run %4399GamePath% -action:opengame -gid:1 -gaid:27 
+    new 4399UserTask("supper",0)
 return
 
 ^Numpad6::     ;06
-    run %4399GamePath% -action:opengame -gid:1 -gaid:35 
+    new 4399UserTask("sf06",0)
     ;run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
 return
 ^Numpad0::     ;01
-    run %4399GamePath% -action:opengame -gid:1 -gaid:19
+    new 4399UserTask("sf01",0)
 return
 ^Numpad7::     ;03
-    run %4399GamePath% -action:opengame -gid:1 -gaid:21
+    new 4399UserTask("sf03",0)
 return
 ^Numpad8::     ;04
-    run %4399GamePath% -action:opengame -gid:1 -gaid:32 
+    new 4399UserTask("sf04",0)
 return
 ^Numpad9::     ;05
-    run %4399GamePath% -action:opengame -gid:1 -gaid:23 
+    new 4399UserTask("sf05",0)
 return
 ^NumpadMult::     ;SF27_Hou
-    run %4399GamePath% -action:opengame -gid:1 -gaid:26 
+    new 4399UserTask("hou",0)
 return
 ^NumpadDiv::    ;xhhz
-    run %4399GamePath% -action:opengame -gid:1 -gaid:18
+    new 4399UserTask("xhhz",0)
 return
 
 F12::ExitApp ;stop the script

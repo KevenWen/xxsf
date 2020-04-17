@@ -44,10 +44,12 @@ class LandPage{
         and !PixelColorExist("0x4AB1D8",318, 786,10)  ;JBP not available remote
         {
             if PixelColorExist("0x81FBD6",398, 787,10) ; time tunnel available
+            or PixelColorExist("0x81F1CB",398, 787,10) ; time tunnel available remote
             {
                 click 398, 787
                 sleep 200
-                WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
+                WaitPixelColor("0xFFF8CE",440, 357,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+                click 445, 469                            ; Use button           
                 sleep 300
             }	
             Else
@@ -55,19 +57,21 @@ class LandPage{
         }	
 
         if !PixelColorExist("0xE4E4E4",447, 756,10) 
-            and PixelColorExist("0x4BB3D9",466, 786,10) 
+            and (PixelColorExist("0x4BB3D9",466, 786,10) or PixelColorExist("0x4AB1D8",466, 786,10))
             and !PixelColorExist("0xFFFDEF",447, 756,10) 
         {
             ;LogToFile("suankai done for 1,3")
             WaitPixelColorAndClick("0xDEF7EE",471, 737,500)  ; NiuShi button
             sleep 100
-            WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
+            WaitPixelColor("0xFFF8CE",440, 357,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+            click 445, 469                            ; Use button
         }
 
         sleep 200
         WaitPixelColorAndClickThrowErr("0xDEF7EE",317, 737,1500) ; JBP button
         sleep 200
-        WaitPixelColorAndClickThrowErr("0x6CE8D0",445, 469,2000) ; Use button
+        WaitPixelColor("0xFFF8CE",440, 357,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+        click 445, 469                            ; Use button
         sleep 500
         ;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
 

@@ -82,10 +82,10 @@ class LandPage{
     {
         this.GetLandPage()        
         SendMode Event
-        sleep 100
+        sleep 300
         Mousemove,510, 825
         send {LButton down}
-        Mousemove,510, 95,10
+        Mousemove,510, 200,10
         send {LButton up}
         click 510, 825
         sleep 200
@@ -153,7 +153,7 @@ class LandPage{
                     CaptureScreen()
                 }
 
-                if !PixelColorExist("0xF7D04A",Px, Py,200)  ;double check 
+                if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 
                 {
                     CaptureScreen()
                     LogToFile("Land business done, num is " . num)

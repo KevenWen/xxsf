@@ -22,16 +22,16 @@ Task202004:
 
 
     ;Task for every days
-    If (TimeToMeet = 063000) or (TimeToMeet = 123000)  ; TouLie from black list
+    If (TimeToMeet = 064000) or (TimeToMeet = 133000)  ; TouLie from black list
     {
         For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).Hunter(0)
     }  
 
-    If (TimeToMeet = 002500)  ; TouLie from black list
+    If (TimeToMeet = 002500)  ; zhuzi
     {
         For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
-            new 4399UserTask(value).ZhuZi(3)
+            new 4399UserTask(value).ZhuZi(1)
     }
     
     If (TimeToMeet = 200300) ; Bussniss war started

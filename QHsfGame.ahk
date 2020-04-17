@@ -197,18 +197,15 @@ class QHsfGame
 	DiCanJinzhu()
 	{
 		this.GetLandpage()
-		sleep 100
+		sleep 300
 		SendMode Event
-		loop 2
-		{
-			Mousemove,570, 840
-			send {LButton down}
-			Mousemove,570, 300,6
-			sleep 100	
-			send {LButton up}
-			click 570, 840
-			sleep 200
-		}
+		Mousemove,570, 840
+		send {LButton down}
+		Mousemove,570, 100,5
+		sleep 100	
+		send {LButton up}
+		click 570, 840
+		sleep 200
 		CaptureScreen()
 		loop
 		{
@@ -216,7 +213,7 @@ class QHsfGame
 				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
 
 			this.CloseAnySubWindow()
-			ImageSearch, Px, Py, 113, 429, 504, 817, % A_ScriptDir . "\\blockofyellow.bmp"
+			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
@@ -269,7 +266,7 @@ class QHsfGame
                     CaptureScreen()
 				}
 
-                if !PixelColorExist("0xF7D04A",Px, Py,200)  ;double check 
+                if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 
                 {
                     CaptureScreen()
                     LogToFile("QH Land business done.")

@@ -16,12 +16,15 @@ Task202004:
 
     If (TimeToMeet = 235959) ; Bussniss war started
     {        
-        sleep 30000
-        WinClose, yun
-        winclose, supper
-        WinClose, long
-        ;winclose, hou
-        runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
+        sleep 10000
+        For index,value in  ["supper","yun","long"]
+            new 4399UserTask(value,0).ClickRongZiOK()
+
+        new 4399UserTask("yun").ZhuanPan(7)
+
+       ; winclose, supper
+        ;WinClose, long
+        ;runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
         WinClose 360游戏大厅
         ExitApp
     }
@@ -31,11 +34,7 @@ return
 ^NumpadDot::
 
    For index,value in  ["supper","yun","long"]
-   {
-       %value% := new 4399UserTask(value)
-       %value%.PrepareRongZi(index)
-   }
-
+        new 4399UserTask(value,0).PrepareRongZi(index)
 return
 
 ; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	

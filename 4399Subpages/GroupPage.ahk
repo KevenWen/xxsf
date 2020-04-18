@@ -81,6 +81,36 @@ class GroupPage{
 		CaptureScreen()	
 	}
 
+    GetShopping(flag)
+	{
+		this.GetGroupPage3() ;Shop button
+		Switch flag
+		{
+			Case "1-1":
+				Click 120,500
+			Case "1-2":
+				Click 230,500
+			Case "1-3":
+				Click 340,500
+			Case "1-4":
+				Click 450,500
+			Case "2-1":
+				Click 120,620
+			Case "2-2":
+				Click 230,620
+			Case "2-3":
+				Click 340,620
+			Case "2-4":
+				Click 450,620
+			Default:
+				Throw "Not a correct flag, out of scope."	
+		}
+
+		sleep 300
+		click 323, 593
+		sleep 200
+	}
+
 	isBussinessSkillLight()
 	{
 		this.GetGroupPage()

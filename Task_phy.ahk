@@ -3,8 +3,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
 #Include 4399UserTask.ahk
-
-
+/*
+new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
+    .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
+    .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
+*/
 SetTimer, Task202004, 1000  ;run every 1 secs
 Return
 

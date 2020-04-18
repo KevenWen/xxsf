@@ -248,6 +248,20 @@ class 4399UserTask extends 4399sfGame
 		}
 	}	
 
+	Shopping(which){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to GetShopping at:" . which)
+		this.GroupPage.GetShopping(which)
+		LogToFile("GetShopping done.")
+		CaptureScreen()
+		}
+		Catch e{
+		LogToFile("GetShopping() get exception: " . e)
+		CaptureScreen()
+		}
+	}
+
 ; <========================  转盘  ===========================>
 
 	ZhuanPan(times){

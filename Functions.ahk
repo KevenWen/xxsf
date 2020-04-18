@@ -176,7 +176,7 @@ CaptureScreen()
 	{
 		FormatTime, Dayfolder,, yyyyMMdd
         path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
-		RunWait, % i_viewpath . " /capture=3" . " /convert=" . path
+		Run, % i_viewpath . " /capture=3" . " /convert=" . path
         LogToFile("Screen")
 	}
 	catch e
@@ -193,7 +193,7 @@ CaptureScreenAll()
 	{
         FormatTime, Dayfolder,, yyyyMMdd
 		path := % logPath . "\\" . Dayfolder . "Fullscreens\\" . A_now . ".png"
-		RunWait, % i_viewpath . " /capture=0" . " /convert=" . path
+		Run, % i_viewpath . " /capture=0" . " /convert=" . path
         LogToFile("Full Screen")
 	}
 	catch e
@@ -212,7 +212,7 @@ MadeGif(named="unknown")
         path := % logPath . "\\" . Dayfolder . "Screens\\"
 		FileMove,  % logPath . "\\gif_output\\*.gif", % logPath . "\\Arch_gif", 1
 		name := % logPath . "\\gif_output\\" . named . "_" . A_now . ".gif"
-		RunWait, % gifskipath . " " . path . "\\*.png --quality 90 -W 400 -H 640 --fps 1 -o " . name . " --fast"
+		Runwait, % gifskipath . " " . path . "\\*.png --quality 90 -W 400 -H 640 --fps 1 -o " . name . " --fast"
 		;FileMove, % logPath . "\\*.png", % logArchivePath . "\\Arch", 1
 	}
 	catch e
@@ -235,12 +235,17 @@ SendSlackEmail()
 
 LogToFile(TextToLog)
 {
+    try{
     FormatTime, CurrentDateTime,, HH:mm:ss
     FormatTime, Dayfolder,, yyyyMMdd
     if TextToLog = ""
         FileAppend, % "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
     Else
         FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
+    }
+    catch e {
+        ;Nothing need do here
+    }
 }
 
 IsItemInList(item, list, delim="")			;Return if a var in the list, mainly use to read days from config.ini

@@ -7,7 +7,7 @@ class ShopHomePage{
 	{
 		loop{
 			if A_Index > 2
-				throw "Not able to GetOrderPage, PixelColorExist 0xFFFFFF 500 200 not exist."
+				throw "Not able to ShopHomePage, PixelColorExist 0xFFFFFF 500 200 not exist."
             4399sfGame.closeAnySubWindow()
             click % HB[1]
             sleep 100

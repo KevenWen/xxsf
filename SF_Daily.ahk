@@ -31,12 +31,10 @@ Task202004:
         For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).ZhuZi(1)
     }
-/* 
-    If (TimeToMeet = 200500) ; Bussniss war started
-    {        
-        ;runwait "ShangZhanReport.ahk"
-    }
 
+    If (TimeToMeet = 202500) ; Bussniss war started  
+        new 4399UserTask("long",0).ShangZhanReport()
+/* 
     FormatTime, Secs,,ss
     FormatTime, Mins,,mm
     If (Secs = 33) and (mod(Mins,3) = 0) ; TianTi Task

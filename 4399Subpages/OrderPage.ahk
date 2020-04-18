@@ -9,20 +9,19 @@ class OrderPage{
 			4399sfGame.closeAnySubWindow()
 			click % HB[6]
             sleep 100
-			WaitPixelColor("0xFFF8CE",499, 804,2000)			;第8名后的颜色
+			if PixelColorExist("0xFFF8CE",499, 804,2000)			;第8名后的颜色
+				break
 		}
 	}	
 
 	GetBussinessWarOrder()
 	{
 		this.GetOrderPage()
+		sleep 200
 		Click 82, 707 ;ShangHui button
-		sleep 500
-		CaptureScreen()
 		sleep 500
 		CaptureScreen()	;the first 11 entry	
 		sleep 1000
-		CaptureScreen()	;the first 11 entry	again
 		MouseMove, 326, 676
 		sleep 1000
 		MouseClickDrag, Left, 326, 676,326,326,50

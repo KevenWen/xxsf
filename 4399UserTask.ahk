@@ -155,7 +155,7 @@ class 4399UserTask extends 4399sfGame
 		}
 	}
 
-; <========================  注融资  ===========================>
+; <========================  商会相关  ===========================>
 
 	ZhuZi(which){
 		if (which > 3) or (which = "")
@@ -209,8 +209,10 @@ class 4399UserTask extends 4399sfGame
 		this.GroupPage.RongZiOKpublic()
 		LogToFile("ClickRongZiOK() done.")
 		}
-		Catch e
-			CaptureScreen()
+		Catch e{
+		LogToFile("ClickRongZiOK get exception: " . e)
+		CaptureScreen()
+		}
 	}	
 
 	CalcRongZi(){
@@ -220,8 +222,30 @@ class 4399UserTask extends 4399sfGame
 		this.GroupPage.CalculateRZ()
 		LogToFile("CalcRongZi() done.")
 		}
-		Catch e
-			CaptureScreen()
+		Catch e{
+		LogToFile("CalcRongZi() get exception: " . e)
+		CaptureScreen()
+		}
+	}	
+
+	ShangZhanReport(){
+		try{
+		SendMode Event
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to get ShangZhanReport.")
+		this.OrderPage.GetBussinessWarOrder()
+		LogToFile("Start to get GetBussinessWarOrder.")		
+		this.GroupPage.CalculateRZ()
+		LogToFile("Start to get CalculateRZ.")		
+		this.GroupPage.GetZhuZiList()
+		LogToFile("Start to get GetZhuZiList.")		
+		this.GroupPage.GetShangZhanList()
+		LogToFile("ShangZhanReport task done.")		
+		}
+		Catch e{
+		LogToFile("ShangZhanReport() get exception: " . e)
+		CaptureScreen()
+		}
 	}	
 
 ; <========================  转盘  ===========================>

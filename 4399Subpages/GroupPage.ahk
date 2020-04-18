@@ -318,7 +318,54 @@ class GroupPage{
 		sleep, % s["long"]
 		CaptureScreen()
 		sleep, % s["longest"]
-		CaptureScreen()
+		loop 6
+			Tooltip,,,,A_index   ;Remove the tooltips
+	}
+	
+	GetZhuZiList()
+	{
+		this.GetGroupPage2()
+		sleep 200
+		CaptureScreen()	
+		sleep 200
+		MouseClickDrag, Left, 302, 853,304, 483
+		sleep 500
+		CaptureScreen()		
+		sleep 500
+		MouseClickDrag, Left, 302, 853,304, 483
+		sleep 500
+		CaptureScreen()		
+		sleep 1000
+	}
+
+	GetShangZhanList()
+	{
+		this.GetGroupPage()
+		CaptureScreen()		
+		sleep 2000
+		if PixelColorExist("0xFFF8CE",121, 471,10) ;ShangZhang Button not exist
+			throw "Shangzhnag not start yet!"
+
+		click 120, 464 ;shangzhang button
+		sleep 1000
+		CaptureScreen()		
+		MouseClickDrag, Left, 462, 454,473, 821
+		sleep 500
+		CaptureScreen()				
+		/* 
+		sleep 180000
+		Loop
+		{	CaptureScreen()		
+			sleep 2000
+
+			if PixelColorExist("0xFFFFF3",417, 474,10)
+				break  ; Check if End
+			if (A_Index > 35)
+				break ; if timeout	
+
+			sleep 90000
+		}
+		*/
 	}
 
 }

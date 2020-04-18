@@ -1,5 +1,3 @@
-#SingleInstance, Force
-#KeyHistory, 0
 
 class ShopHomePage{   
 

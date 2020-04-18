@@ -1,12 +1,4 @@
-#SingleInstance, Force
-#KeyHistory, 0
-/*
-SetBatchLines, -1
-ListLines, Off
-SetTitleMatchMode, 2 ; A window's title must exactly match WinTitle to be a match.
-SetWorkingDir, %A_ScriptDir%
-SplitPath, A_ScriptName, , , , thisscriptname
-*/
+
 class LandPage{    
 
 	GetLandPage()

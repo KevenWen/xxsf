@@ -37,18 +37,19 @@ Rongzi_0:
    ;  For index,value in  ["sf01","sf03","sf04"]   
      ;  %value% := new 4399UserTask(value,0)
 
-    for index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
-        new 4399UserTask(value).Hunter(0)
 
+        For index,value in  ["sf01","sf03","sf04","sf05"]
+            new 4399UserTask(value).RongZi(5)
 ;RongZiOKEmu()
             ExitApp
-
+    for index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).Hunter(0)
 new QHUser(0).ZhuZi(2)
     For index,value in  ["supper","yun"]
         new 4399UserTask(value).ZhuZi(2)
 
-    For index,value in  ["supper","yun"]
-        new 4399UserTask(value).ZhuZi(2)
+        For index,value in  ["sf01","sf03","sf04","sf05"]
+            new 4399UserTask(value).RongZi(5)
        
      For index,value in  ["sf01","sf03","sf04"]
         new 4399UserTask(value).ZhuZi(3)

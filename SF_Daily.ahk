@@ -14,12 +14,10 @@ Return
 Task202004:
 
     FormatTime, TimeToMeet,,HHmmss
-
     ;TimeToMeet = 235458
 
     If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
         runwait "RongZiTask.ahk" 
-
 
     ;Task for every days
     If (TimeToMeet = 064000) or (TimeToMeet = 133000)  ; TouLie from black list
@@ -33,12 +31,20 @@ Task202004:
         For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).ZhuZi(1)
     }
-    
-    If (TimeToMeet = 200300) ; Bussniss war started
+/* 
+    If (TimeToMeet = 200500) ; Bussniss war started
     {        
         ;runwait "ShangZhanReport.ahk"
-    }      
+    }
 
+    FormatTime, Secs,,ss
+    FormatTime, Mins,,mm
+    If (Secs = 33) and (mod(Mins,3) = 0) ; TianTi Task
+    {
+        For index,value in  ["supper","yun","long"]
+            new 4399UserTask(value,0).GetTianTi()
+    }
+*/
 Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count

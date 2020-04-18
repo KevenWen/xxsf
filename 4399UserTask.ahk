@@ -213,6 +213,17 @@ class 4399UserTask extends 4399sfGame
 			CaptureScreen()
 	}	
 
+	CalcRongZi(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to CalcRongZi.")
+		this.GroupPage.CalculateRZ()
+		LogToFile("CalcRongZi() done.")
+		}
+		Catch e
+			CaptureScreen()
+	}	
+
 ; <========================  转盘  ===========================>
 
 	ZhuanPan(times){
@@ -239,6 +250,18 @@ class 4399UserTask extends 4399sfGame
 		CaptureScreen()
 		}
 	}
+; <========================  天梯  ===========================>
+	GetTianTi(){
+		try{
+		LogToFile("Start to Play Tian Ti.")			
+		this.PrepareGameWindow(this.winName)
+		this.CaiTuanPage.TTOperation()
+		}
+		Catch e{
+		LogToFile("excetion while Play Tian Ti: " . e)
+		CaptureScreen()
+		}
+	}	
 
 }
 

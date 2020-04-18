@@ -4,8 +4,9 @@ SetBatchLines, -1
 
 class RDPGame ;extends sfGame 
 {
-	__New()
+	__New(isclose=1)
 	{
+		this.isclosed := isclose
 		LogToFile("")
 		LogToFile("Log started for ahk_exe mstsc.exe.")
 
@@ -14,7 +15,7 @@ class RDPGame ;extends sfGame
 			WinActivate ahk_exe mstsc.exe
 			Winmove,ahk_exe mstsc.exe,,585,111,1120,872
 			LogToFile("Found existing RDP window.")
-			sleep 200
+			sleep 100
 		}
 		Else
 		{
@@ -26,16 +27,14 @@ class RDPGame ;extends sfGame
 		}
 
 		CaptureScreen()
-		WinGet IDVar,ID,A ; Get ID from Active window.		
-		this.WID := IDVar
-		WinGetActiveTitle, winVar		
-		this.winname := winVar
 	}
 
 	__Delete()
 	{
-		LogToFile("Log end for RDPGame.")			
-		;WinClose, % this.winname
+		if this.isclosed
+			WinClose, ahk_exe mstsc.exe
+
+		LogToFile("Log end for RDPGame.")
 	}
 
 	FixRDPConn()
@@ -70,9 +69,9 @@ class RDPGame ;extends sfGame
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
-			sleep 1000
+			sleep 100
 			CaptureScreen()	
-			sleep 200
+			sleep 100
 
 			;LDplayer
 			click, % Arrayphy["btn1"]

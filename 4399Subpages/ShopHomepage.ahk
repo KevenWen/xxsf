@@ -33,8 +33,7 @@ class ShopHomePage{
 
 	PlayZhuanPan(times = 6)
 	{
-		click 88, 896
-		sleep 200
+        this.GetHomePage()
 		WaitPixelColorAndClickThrowErr("0xD1762",505, 387,2000) ;ZhuanPan
 		sleep 200
 		n=1  ; 10 x n times

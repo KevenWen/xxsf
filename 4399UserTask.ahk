@@ -41,13 +41,7 @@ class 4399UserTask extends 4399sfGame
 				this.Launch4399Game(seqid,windowname)
 				CaptureScreen()
 				LogToFile("Game opened.")
-			}	
-
-			;Assign properties:
-			WinGet IDVar,ID,A ; Get ID from Active window.		
-			this.WID := IDVar
-
-			LogToFile("Wid is： " . this.WID)
+			}
 		}
 		Catch e
 			{
@@ -236,6 +230,7 @@ class 4399UserTask extends 4399sfGame
 		}
 
 		try{			
+			this.GroupPage.BuyTimeSpeedplus()
 			this.ShopHomepage.PlayZhuanPan(times)
 			LogToFile("this.ShopHomepage.PlayZhuanPan done!")			
 		}

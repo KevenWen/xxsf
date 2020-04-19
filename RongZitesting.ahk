@@ -24,7 +24,14 @@ ExitApp
 
 Rongzi_0:
 
-  new 4399UserTask("long",0).CalcRongZi()
+   ;If IsItemInList(DayToMeet,shangjiday)
+       ;new 4399UserTask("supper",0).OpenBusSkill()
+    
+    For index,value in ["supper","yun","long","song"]
+        new 4399UserTask(value).ZhuZi(1)
+
+    For index,value in ["sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).ZhuZi(2)
 
   ExitApp
 

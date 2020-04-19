@@ -31,6 +31,7 @@ else if IsItemInList(DayToMeet,RongZi02)     ;RongZi one by one, delay 2 minutes
 else
     Gosub, Rongzi_N                          ;not a RongZi day
 
+UploadNetDisk()
 ExitApp
 
 ;<===================The sub tasks==========================>
@@ -110,6 +111,10 @@ Return
 
 Rongzi_2:
 
+   new QHUser(0)
+   For index,value in  ["supper","xhhz","hou"]
+        new 4399UserTask(value,0)
+
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
@@ -120,11 +125,11 @@ Rongzi_2:
 
    new QHUser(0).Getland()
 
-   For index,value in  ["song","xhhz","hou"]
+   For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
 
-   For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value,0).PrepareRongZi(index)
+   If IsItemInList(DayToMeet,shangjiday)
+       new 4399UserTask("supper",0).OpenBusSkill()
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -134,14 +139,14 @@ Rongzi_2:
         sleep 1000
     }
 
-    new RDPGame().RDP_2()
-    For index,value in  ["song","xhhz","hou"]
-        new 4399UserTask(value).ClickRongZiOK() 
+    ;new RDPGame().RDP_2()
+    For index,value in  ["supper","xhhz","hou"]
+        new 4399UserTask(value).RongZi(index) 
 
     new QHUser().RongZi(4)
 
-   For index,value in  ["supper","yun","long"]
-        new 4399UserTask(value).GetLand()
+   ;For index,value in  ["song","yun","long"]
+    ;    new 4399UserTask(value).GetLand()
 
     for index,value in  ["hou","xhhz","song","long","sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).Hunter(1)

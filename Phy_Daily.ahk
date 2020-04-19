@@ -17,16 +17,25 @@ Task202004:
 
     ;TimeToMeet = 235959
 
-    If (TimeToMeet = 235959) ; Bussniss war started
+    If (TimeToMeet = 235959)
     {        
-        sleep 10000
-        For index,value in  ["supper","yun","long"]
-            new 4399UserTask(value,0).ClickRongZiOK()
+        sleep 2000
 
-        new 4399UserTask("yun").ZhuanPan(7)
+        For index,value in ["yun","song","long"]
+            new 4399UserTask(value,0).Getland()
+ 
+        Loop 600    ;Make sure we are start delayed from 2 mins
+        {
+            FormatTime, MinToMeet,,mm
+            if MinToMeet > 01
+                Break
+            sleep 1000
+        }
+        
+        For index,value in ["yun","song","long"]
+            new 4399UserTask(value).RongZi(index+1)
+        ;new 4399UserTask("yun").ZhuanPan(7)
 
-       ; winclose, supper
-        ;WinClose, long
         ;runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
         WinClose 360游戏大厅
         ExitApp
@@ -35,11 +44,13 @@ Task202004:
 return
 
 ^NumpadDot::
-
-   For index,value in  ["supper","yun","long"]
-        new 4399UserTask(value,0).PrepareRongZi(index)
+    CaptureScreen()
 return
 
+^NumpadMult::
+   For index,value in  ["song","yun","long"]
+       new 4399UserTask(value,0).PrepareRongZi(index+1)
+return
 ; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	
 ^NumpadAdd::      ;Yun
     sleep 1000
@@ -78,7 +89,4 @@ return
 return
 ^Numpad9::     ;05
     new 4399UserTask("sf05",0)
-return
-^NumpadMult::     ;SF27_Hou
-    new 4399UserTask("hou",0)
 return

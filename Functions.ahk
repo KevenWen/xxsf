@@ -274,3 +274,9 @@ RongZiOKEmu()
         }   
     }
 }
+UploadNetDisk()
+{
+    Run "C:\Users\keven\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"
+    sleep 600000
+    Process, close, baidunetdisk.exe
+}

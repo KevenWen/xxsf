@@ -43,9 +43,8 @@ class CaiTuanPage{
 		if !PixelColorExist("0xFFFEF5",243, 830, 1000) ; if the color is unexpected, close the game and exit. so next time it will fix itself. 
 		{
 			click 470,440  ;in case not enough money allocated.
-			CaptureScreen()
 			sleep 300
-			Return
+			Throw "Color 0xFFFEF5,243, 830 unexpected.."
 		}
 		sleep 100
 		click 234, 836  ;add one for 1

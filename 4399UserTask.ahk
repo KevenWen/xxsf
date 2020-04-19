@@ -298,6 +298,7 @@ class 4399UserTask extends 4399sfGame
 		Catch e{
 		LogToFile("excetion while Play Tian Ti: " . e)
 		CaptureScreen()
+		WinClose, % this.winName
 		}
 	}	
 

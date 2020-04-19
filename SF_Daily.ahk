@@ -17,31 +17,37 @@ Task202004:
     ;TimeToMeet = 235458
 
     If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
-        runwait "RongZiTask.ahk" 
+        runwait "RongZiTask.ahk"
 
     ;Task for every days
     If (TimeToMeet = 064000) or (TimeToMeet = 133000)  ; TouLie from black list
     {
         For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).Hunter(0)
+        UploadNetDisk()
     }  
+    If (TimeToMeet = 202800) ; Bussniss war started  
+        new 4399UserTask("long",0).ShangZhanReport()    
 
+    If (TimeToMeet > 003000) and (TimeToMeet < 202500)  ; TianTi Task
+    {
+        FormatTime, Secs,,ss
+        FormatTime, Mins,,mm
+        If (mod(Mins,3) = 0) and (Secs = 33) 
+        {
+            For index,value in  ["supper","yun","long","song"]
+                new 4399UserTask(value,0).GetTianTi()
+        }
+    }      
+
+/* 
     If (TimeToMeet = 002500)  ; zhuzi
     {
         For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).ZhuZi(1)
     }
 
-    If (TimeToMeet = 202500) ; Bussniss war started  
-        new 4399UserTask("long",0).ShangZhanReport()
-/* 
-    FormatTime, Secs,,ss
-    FormatTime, Mins,,mm
-    If (Secs = 33) and (mod(Mins,3) = 0) ; TianTi Task
-    {
-        For index,value in  ["supper","yun","long"]
-            new 4399UserTask(value,0).GetTianTi()
-    }
+
 */
 Return
 
@@ -83,6 +89,10 @@ return
 return
 ^NumpadDiv::    ;xhhz
     new 4399UserTask("xhhz",0)
+return
+
+^NumpadDot::    ;Screenshot
+    CaptureScreen()
 return
 
 F12::ExitApp ;stop the script

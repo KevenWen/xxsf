@@ -377,10 +377,9 @@ class GroupPage{
 			throw "Shangzhnag not start yet!"
 
 		click 120, 464 ;shangzhang button
-		sleep 1000
+		sleep 200
 		CaptureScreen()		
-		MouseClickDrag, Left, 462, 454,473, 821
-		sleep 500
+		sleep 2000
 		CaptureScreen()				
 		/* 
 		sleep 180000

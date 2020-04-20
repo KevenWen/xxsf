@@ -24,17 +24,17 @@ ExitApp
 
 Rongzi_0:
 
-   ;If IsItemInList(DayToMeet,shangjiday)
-       ;new 4399UserTask("supper",0).OpenBusSkill()
-    
+       new 4399UserTask("yun",0).CalcRongZi()
+
+  ExitApp
+  
     For index,value in ["supper","yun","long","song"]
         new 4399UserTask(value).ZhuZi(1)
 
     For index,value in ["sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).ZhuZi(2)
-
-  ExitApp
-
+    For index,value in ["sf01","sf03","sf04","sf05","sf06"]
+        new 4399UserTask(value).RongZi(2)        
 /*
 Loop 300    ;Make sure we are start after 00:00, total 10 mins
 {

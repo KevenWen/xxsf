@@ -46,10 +46,7 @@ IniRead, sf06_id, config.ini, users, sf06
 
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
 
-
-;global	HB := ["110, 875","175, 875","240, 875","305, 875","370, 875","435, 875","500, 875"] ; home buttons
-global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"] ; home buttons
-
+global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"]            ; home buttons
 global	SB := ["100, 260","230,260","330,260","420,260"]                                            ; shanghui buttons
 global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                              ; 5个企业 coordinates
 global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
@@ -58,7 +55,8 @@ global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}   
 global StockPos := ["155, 415","310, 415","460, 415"]                       		                ; 注资的三个框
 global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
 global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
-
+global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633"        ; RDP click OK buttons
+        , btn_3: "522, 692", btn4: "253, 622", btn_4: "253, 692"}       ; btn1 肉沫茄子 btn2 - btn4 4399,前一个窗口刚好挡住下一个的确认两个字。
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {

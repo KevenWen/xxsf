@@ -72,14 +72,14 @@ Return
 
 Rongzi_N:
 
-    Loop 600
+    Loop 600    ;Make sure we are start delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
-        if MinToMeet = 10
+        if MinToMeet < 50
             Break
         sleep 1000
     }
-    runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
+    new LDGame().GetLand()
 
 Return
 
@@ -108,7 +108,10 @@ Rongzi_2:
             Break
         sleep 1000
     }
-    
+
+    new LDGame(0).RongZiOKpublic()
+    new LDGame().GetLand()
+
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).RongZi(index+1)
 

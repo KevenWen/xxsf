@@ -93,15 +93,12 @@ Rongzi_N:
         sleep 1000
     }
 
-    new RDPGame().RDP_N()
     new QHUser().Getland()
     For index,value in  ["supper","yun","long","xhhz","song"]
        new 4399UserTask(value).Getland()
 
     for index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
-    {
         new 4399UserTask(value).Hunter(1)
-    }
 
     WinClose 360游戏大厅
     ;if IsItemInList(DayToMeet,shangjiday)

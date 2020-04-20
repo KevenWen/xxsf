@@ -29,13 +29,13 @@ Task202004:
     If (TimeToMeet = 202800) ; Bussniss war started  
         new 4399UserTask("long",0).ShangZhanReport()    
 
-    If (TimeToMeet > 003000) and (TimeToMeet < 202500)  ; TianTi Task
+    If (TimeToMeet > 002000) and (TimeToMeet < 235000)  ; TianTi Task
     {
         FormatTime, Secs,,ss
         FormatTime, Mins,,mm
         If (mod(Mins,3) = 0) and (Secs = 33) 
         {
-            For index,value in  ["supper","yun","long","song"]
+            For index,value in  ["supper","long","song"]
                 new 4399UserTask(value,0).GetTianTi()
         }
     }      

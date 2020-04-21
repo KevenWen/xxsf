@@ -5,6 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include 4399UserTask.ahk
 #include RDPGame.ahk
 #include QHuserTask.ahk
+#include LDGame.ahk
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;
 ; phy2 yun-1; xxsf/8888-5; 
@@ -24,7 +25,8 @@ ExitApp
 
 Rongzi_0:
 
-       new 4399UserTask("yun",0).CalcRongZi()
+    For index,value in ["long"]
+        new 4399UserTask(value,0).PrepareRongZi(index+2)
 
   ExitApp
   

@@ -35,7 +35,7 @@ ExitApp
 
 Rongzi_0:
 
-    For index,value in  ["song","hou","xhhz"]
+    For index,value in  ["supper","hou","xhhz"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
     new QHUser(0).PrepareRongZi(4)
@@ -48,25 +48,30 @@ Rongzi_0:
             sleep 1000
         }
 
-    new RDPGame().RDP_0()
+    ;-------------------- ClickRongZiOK --------------------
 
     new QHUser().ClickRongZiOK()
-
-    For index,value in  ["song","hou","xhhz"]
+    For index,value in  ["supper","xhhz"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
-    new 4399UserTask("song",0).ZhuanPan(3)
+    new 4399UserTask("hou").ClickRongZiOK()        
 
-    For index,value in  ["song","hou","xhhz"]
-        new 4399UserTask(value).Hunter(1)
+    ;---------------------- ZhuanPan -----------------------
+
+    new 4399UserTask("hou",0).ZhuanPan(5)
+    new 4399UserTask("xhhz",0).ZhuanPan(5)
+
+    ;----------------------- Hunter ------------------------
+
+    For index,value in  ["hou","xhhz"]
+        new 4399UserTask(value,0).Hunter(1)
+
+    ;---------------------- Getland ------------------------
 
     new QHUser().Getland()
-
-    For index,value in  ["supper","xhhz","yun","long","song","hou"]
+    For index,value in  ["supper","xhhz","hou"]
        new 4399UserTask(value).Getland()
 
-    For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
-       new 4399UserTask(value).Hunter(1)
     
     WinClose 360游戏大厅
 Return

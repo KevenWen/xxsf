@@ -20,7 +20,18 @@ Task202004:
         runwait "RongZiTask.ahk"
 
     ;Task for every days
-    If (TimeToMeet = 064000) or (TimeToMeet = 133000)  ; TouLie from black list
+
+    If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
+    {
+        For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+        {
+            %value% := new 4399UserTask(value,0).ZhuZi(2)
+            %value%.Hunter(1)
+            %value% := ""
+        }
+    }
+
+    If (TimeToMeet = 065000) or (TimeToMeet = 140000)  ; TouLie from black list
     {
         For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).Hunter(0)
@@ -33,22 +44,13 @@ Task202004:
     {
         FormatTime, Secs,,ss
         FormatTime, Mins,,mm
-        If (mod(Mins,3) = 0) and (Secs = 33) 
+        If (mod(Mins,7) = 0) and (Secs = 33) 
         {
-            For index,value in  ["supper","yun","long","song"]
+            For index,value in  ["supper","long","song"]
                 new 4399UserTask(value,0).GetTianTi()
         }
     }      
 
-/* 
-    If (TimeToMeet = 002500)  ; zhuzi
-    {
-        For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
-            new 4399UserTask(value).ZhuZi(1)
-    }
-
-
-*/
 Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count

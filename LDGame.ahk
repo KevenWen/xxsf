@@ -58,15 +58,15 @@ class LDGame
 
 ; <========================  融资确认  ===========================>
 
-    RongZiOKpublic()
+    ClickRongZiOK()
 	{
 		loop 5
 		{
 			if !this.SubWindowExist()
 				break
-			if !PixelColorExist("0xEBFAFA",326, 614,10) ; the white color in the OK button
-				4399sfGame.CloseSpeSubWindow(1)
-			if PixelColorExist("0xEBFAFA",326, 614,10)
+			if !PixelColorExist("0xB2A68C",278, 672,10) ; the color under in the OK window
+				this.CloseSpeSubWindow(1)
+			if PixelColorExist("0xB2A68C",278, 672,100)
 			{
 				click 310, 627
 				sleep, % s["short"]
@@ -141,11 +141,11 @@ class LDGame
             if A_Index > 2
                 throw "Not able to GetLandPage."
             this.closeAnySubWindow()
-            click 50, 975
+            click 50, 965
             sleep 500
-            click 117, 987
+            click 117, 965
             sleep 1000
-            if PixelColorExist("0x9E9E9E",25, 887,4000)		;3号地产 左边的灰条	
+            if PixelColorExist("0x9E9E9E",25, 871,4000)		;3号地产 左边的灰条	
                 Break
         } 
 	}
@@ -155,12 +155,12 @@ class LDGame
 		this.GetLandpage()
 		sleep 300
 		SendMode Event
-		Mousemove,521, 889
+		Mousemove,515, 878
 		send {LButton down}
-		Mousemove,536, 132,5
+		Mousemove,515, 132,5
 		sleep 100	
 		send {LButton up}
-		click 521, 889
+		click 515, 878
 		sleep 200
 		CaptureScreen()
 		loop
@@ -174,11 +174,11 @@ class LDGame
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
 			{
-				Mousemove,521, 889
+				Mousemove,515, 878
 				send {LButton down}
-				Mousemove,536, 280,5
+				Mousemove,515, 280,5
 				send {LButton up}
-				click 521, 889
+				click 515, 878
 				sleep 200
 			}
 			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
@@ -187,28 +187,28 @@ class LDGame
 				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
-				if PixelColorExist("0xFFFEF5",141, 486,1000) 		;经营资源输入框存在
+				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 474, 23 ;金币23
+					click,235, 470, 23 ;金币23
 					sleep 100
-					click,241, 546, 17 ;金币17
+					click,241, 540, 17 ;金币17
 					sleep 100
-					click,415, 609, 3 ;资源卡6
+					click,415, 540, 3 ;资源卡6
 					sleep 100
-					click,326, 614, 3  ;3份钻石注决策资源
+					click,326, 607, 3  ;3份钻石注决策资源
 					CaptureScreen()
 					sleep 300					
-                    if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",470, 394,10) ;左右两边都没有显示金钱不够提示
+                    if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
                         throw "Not enough money warning show!"
 
-					click 355, 758	;确认注入
+					click 355, 746	;确认注入
 					sleep 200
-					if PixelColorExist("0xFBFBFB",479, 391,300) ;确认注入提示框
+					if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
                     {
-                        click 305, 630     ;点击确定
+                        click 305, 625     ;点击确定
 						CaptureScreen()
-                        WaitPixelColorAndClick("0xFBFBFB",489, 161,1000)
+                        WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
                     }
 					else
                     {

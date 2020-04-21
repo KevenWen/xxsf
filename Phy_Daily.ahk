@@ -3,6 +3,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
 #Include 4399UserTask.ahk
+#include LDGame.ahk
+
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
@@ -21,7 +23,7 @@ Task202004:
     FormatTime, TimeToMeet,,HHmmss
     FormatTime, DayToMeet,,d
 
-    ;TimeToMeet = 235959
+    ;TimeToMeet = 235459
 
     If (TimeToMeet = 235459)
     { 
@@ -41,8 +43,8 @@ return
 
 Rongzi_0:
 
-    For index,value in ["yun","song","long"]
-        new 4399UserTask(value,0).PrepareRongZi(index+2)
+    ;For index,value in ["yun","song","long"]
+    ;    new 4399UserTask(value,0).PrepareRongZi(index+2)
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -51,20 +53,30 @@ Rongzi_0:
             Break
         sleep 1000
     }
+    ;-------------------- ClickRongZiOK -----------------
 
-    For index,value in ["yun","song","long"]
+    new LDGame(0).ClickRongZiOK()    
+    For index,value in ["yun","long"]
         new 4399UserTask(value,0).ClickRongZiOK()
+    new 4399UserTask("song").ClickRongZiOK()
 
-    ;new 4399UserTask("yun",0).ZhuanPan(7)
+    ;-------------------- ZhuanPan ----------------------
+
+    new 4399UserTask("song",0).ZhuanPan(6)
+    new 4399UserTask("yun",0).ZhuanPan(7)
+
+    ;-------------------- Hunter ------------------------
 
     For index,value in ["song","long"]
         new 4399UserTask(value,0).Hunter(1)
 
+    ;-------------------- GetLand -----------------------
 
+    new LDGame().GetLand()
     For index,value in ["yun","song","long"]
-        new 4399UserTask(value).Getland()
+        new 4399UserTask(value).GetLand()
 
-    runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
+
     WinClose 360游戏大厅
 Return
 

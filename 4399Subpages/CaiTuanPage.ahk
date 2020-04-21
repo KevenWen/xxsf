@@ -48,6 +48,8 @@ class CaiTuanPage{
 		}
 		sleep 100
 		click 234, 836  ;add one for 1
+		click 310, 836  ;add one for 1
+		click 390, 836  ;add one for 1				
 		PixelColorExist("0xFFF8CE",167, 843,40000)
 
 		if PixelColorExist("0xDC3131",262, 807,100)

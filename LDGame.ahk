@@ -60,18 +60,16 @@ class LDGame
 
     ClickRongZiOK()
 	{
-		loop 5
+		try{
+		this.PrepareGameWindow()
+		CaptureScreen()
+		this.ClickRongZiOKPublic()
+		LogToFile("ClickRongZiOK() done for LDPlayer")
+		}
+		Catch e
 		{
-			if !this.SubWindowExist()
-				break
-			if !PixelColorExist("0xB2A68C",278, 672,10) ; the color under in the OK window
-				this.CloseSpeSubWindow(1)
-			if PixelColorExist("0xB2A68C",278, 672,100)
-			{
-				click 310, 627
-				sleep, % s["short"]
-				CaptureScreen()
-			}	
+		LogToFile("ClickRongZiOK() get exception: " . e)
+		CaptureScreen()
 		}
 	}
 
@@ -150,17 +148,39 @@ class LDGame
         } 
 	}
 
+	ClickRongZiOKPublic()
+	{
+		click 310, 627
+		sleep, % s["short"]
+		click 310, 627
+		sleep, % s["short"]		
+		loop 5
+		{
+			if !this.SubWindowExist()
+				break
+			if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
+				this.CloseSpeSubWindow(1)
+			if PixelColorExist("0xB2A68C",278, 680,100)
+			{
+				click 310, 627
+				sleep, % s["short"]
+				CaptureScreen()
+			}	
+		}
+	}
+
+
 	DiCanJinzhu()
 	{
 		this.GetLandpage()
 		sleep 300
 		SendMode Event
-		Mousemove,515, 878
+		Mousemove,520, 878
 		send {LButton down}
-		Mousemove,515, 132,5
+		Mousemove,520, 132,5
 		sleep 100	
 		send {LButton up}
-		click 515, 878
+		click 520, 878
 		sleep 200
 		CaptureScreen()
 		loop
@@ -174,11 +194,11 @@ class LDGame
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
 			{
-				Mousemove,515, 878
+				Mousemove,520, 878
 				send {LButton down}
-				Mousemove,515, 280,5
+				Mousemove,520, 280,5
 				send {LButton up}
-				click 515, 878
+				click 520, 878
 				sleep 200
 			}
 			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line

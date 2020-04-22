@@ -87,9 +87,10 @@ class HunterPage{
                     break
                 if A_Index > 10  ;Total 20 loop times
                     break
-                sleep 30	
+                sleep 50	
                 click, 293, 805,20
             }
+            sleep 100
         }
         Else
             throw "Already stoled in hours or the target is full!"
@@ -97,8 +98,10 @@ class HunterPage{
 
     GetResult(){
         this.GetHunterPage()
-        WaitPixelColorAndClick("0xF39181",126, 187,100) ;Return button if exist.     
-        WaitPixelColorAndClick("0xFFC7BB",166, 805,1000)
+        if PixelColorExist("0xFFFEF5",176, 197,100)
+            click 126, 187                               ;Return button if exist.     
+        WaitPixelColorAndClick("0xFFC7BB",166, 805,1000) ;偷猎记录
+        sleep 300        
         CaptureScreen()
         sleep 200
         WaitPixelColorAndClick("0xFBFBFB",492, 217,1000)

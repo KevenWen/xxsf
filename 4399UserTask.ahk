@@ -123,6 +123,7 @@ class 4399UserTask extends 4399sfGame
 
 	Hunter(islieshou){ ; 1 will from lieshou, 0 or others will from blacklist
 		try{
+		SendMode Input
 		this.PrepareGameWindow(this.winName)
 		this.GetCaiTuanPage.GetCaiTuanMoney()	
 		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")

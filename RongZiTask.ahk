@@ -76,11 +76,12 @@ Rongzi_0:
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
-; 19-01, 21-03, 22-04,23-05,35-06, 
-; 18-xhhz, 20-02/song,24-yun, 25-long, 27-supper, 26-hou
-Rongzi_N:
-    new QHUser(0)
 
+Rongzi_N:
+
+    ;---------------------- Prepare ------------------------
+
+    new QHUser(0)
     For index,value in  ["supper","yun","long"]
        new 4399UserTask(value,0)
 
@@ -92,11 +93,15 @@ Rongzi_N:
         sleep 1000
     }
 
+    ;---------------------- GetLand ------------------------
+
     new QHUser().Getland()
     For index,value in  ["supper","yun","long","xhhz","song"]
        new 4399UserTask(value).Getland()
 
-    for index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
+    ;---------------------- Hunter ------------------------
+
+    For index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
@@ -107,9 +112,11 @@ Return
 
 Rongzi_2:
 
-   new QHUser(0)
-   For index,value in  ["supper","xhhz","hou"]
-        new 4399UserTask(value,0)
+    ;---------------------- Prepare ------------------------
+
+    new QHUser(0)
+    For index,value in  ["supper","xhhz","hou"]
+            new 4399UserTask(value,0)
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -119,13 +126,13 @@ Rongzi_2:
         sleep 1000
     }
 
-   new QHUser(0).Getland()
+   ;---------------------- Getland ------------------------
 
+   new QHUser(0).Getland()
    For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
 
-   If IsItemInList(DayToMeet,shangjiday)
-       new 4399UserTask("supper",0).OpenBusSkill()
+   ;---------------------- Waiting ------------------------
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -135,6 +142,8 @@ Rongzi_2:
         sleep 1000
     }
 
+   ;---------------------- RongZi ------------------------
+
     ;new RDPGame().RDP_2()
     For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value).RongZi(index) 
@@ -143,6 +152,8 @@ Rongzi_2:
 
    ;For index,value in  ["song","yun","long"]
     ;    new 4399UserTask(value).GetLand()
+
+   ;---------------------- Hunter ------------------------
 
     for index,value in  ["hou","xhhz","song","long","sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).Hunter(1)

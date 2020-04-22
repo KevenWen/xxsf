@@ -208,6 +208,9 @@ class GroupPage{
 		click, % BC[RZCom]
 		sleep, % s["long"]		
 
+		if !PixelColorExist("0xFFFEF5",230, 574,10) ; 不是显示0份
+			Throw, "Already RongZi, not zero!"    
+
 		mousemove, 200, 574
 		sleep, % s["short"]
 		SetDefaultMouseSpeed 30

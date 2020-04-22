@@ -25,7 +25,9 @@ Task202004:
     {
         For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
         {
-            %value% := new 4399UserTask(value,0).ZhuZi(2)
+            %value% := new 4399UserTask(value)
+            %value%.ZhuZi(2)
+            %value%.RongZi(3)
             %value%.Hunter(1)
             %value% := ""
         }

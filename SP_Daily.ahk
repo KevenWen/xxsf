@@ -99,6 +99,7 @@ Return
 
 Rongzi_2:
 
+    ;-------------------- Prepare game -----------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0)
 
@@ -110,6 +111,7 @@ Rongzi_2:
         sleep 1000
     }
 
+    ;-------------------- 4399 GetLand ---------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).Getland()
 
@@ -121,13 +123,14 @@ Rongzi_2:
         sleep 1000
     }
 
+    ;-------------------- LDGames Tasks----------------------
     new LDGame(0).RongZiOKpublic()
     new LDGame().GetLand()
 
+    ;-------------------- 4399 RongZi -----------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).RongZi(index+1)
 
-    runwait "C:\ChangZhi\LDPlayer\dnconsole.exe" "quitall"
     WinClose 360游戏大厅
 Return
 

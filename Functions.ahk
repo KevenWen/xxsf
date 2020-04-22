@@ -278,3 +278,20 @@ UploadNetDisk()
     sleep 600000
     Process, close, baidunetdisk.exe
 }
+
+Launch4399GamePri(windowname,Sequ)
+{
+    IfWinExist %windowname%
+    {
+        WinActivate %windowname%
+        Return
+    }
+
+    run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
+    sleep 4000
+    WinGetActiveTitle, Title
+    if !InStr(Title, "xiaoxiao")
+        MsgBox, "The active windows is not named xiaoxiaoshoufu" 
+    WinSetTitle,%Title%,, %windowname%
+    Winmove,%windowname%,,829,23,600,959			
+}

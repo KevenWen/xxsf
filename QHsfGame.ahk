@@ -25,17 +25,18 @@ class QHsfGame
 
 	PrepareGameWindow()
 	{
+		WinGetActiveTitle, CurTitle
+		if (CurTitle = "xxsf")
+			Return
+
 		IfWinExist, xxsf
         {
+			WinSet, AlwaysOnTop, On, xxsf		
 			WinActivate, xxsf
 			sleep 200
 		}
 		Else
 			throw "Game not existing!"
-	}
-
-	GetShoppage(){
-
 	}
 
 	LaunchqhGame()
@@ -49,9 +50,8 @@ class QHsfGame
 				}
 			WinClose, xxsf
 			run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30
-			sleep 3000
-			WinGetActiveTitle, xxsf
-			WinWaitActive, xxsf
+			sleep 5000
+			WinSet, AlwaysOnTop, On, xxsf	
 			Winmove,xxsf,,933,19,600,959			
 			loop
 			{

@@ -55,42 +55,42 @@ Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count
 ^Numpad1::     ;02/song
-    new 4399UserTask("song",0)
+    Launch4399GamePri("song",20)
 return
 ^Numpad2::     ;Long
-    new 4399UserTask("long",0)
+    Launch4399GamePri("long",25)
 return
 ^Numpad3::      ;Yun
-    new 4399UserTask("yun",0)
+    Launch4399GamePri("yun",24)
 return
 ^Numpad4::    ;88888
     new QHUser(0)
 return
 ^Numpad5::    ;SF27_Supper
-    new 4399UserTask("supper",0)
+    Launch4399GamePri("supper",27)
 return
 
 ^Numpad6::     ;06
-    new 4399UserTask("sf06",0)
+    Launch4399GamePri("sf06",35)
     ;run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
 return
 ^Numpad0::     ;01
-    new 4399UserTask("sf01",0)
+    Launch4399GamePri("sf01",19)
 return
 ^Numpad7::     ;03
-    new 4399UserTask("sf03",0)
+    Launch4399GamePri("sf03",21)
 return
 ^Numpad8::     ;04
-    new 4399UserTask("sf04",0)
+    Launch4399GamePri("sf04",22)
 return
 ^Numpad9::     ;05
-    new 4399UserTask("sf05",0)
+    Launch4399GamePri("sf05",23)
 return
 ^NumpadMult::     ;SF27_Hou
-    new 4399UserTask("hou",0)
+    Launch4399GamePri("hou",26)
 return
 ^NumpadDiv::    ;xhhz
-    new 4399UserTask("xhhz",0)
+    Launch4399GamePri("xhhz",18)
 return
 
 ^NumpadDot::    ;Screenshot

@@ -31,6 +31,7 @@ class 4399sfGame
 		IfWinExist,%name%
 		{
 			WinActivate, %name%
+			WinSet, AlwaysOnTop, On, %name%					
 			LogToFile("")
 			LogToFile("Log switch for: " . name)
 			sleep 100
@@ -61,7 +62,7 @@ class 4399sfGame
 				if !InStr(Title, "xiaoxiao")
 					throw "The active windows is not named xiaoxiaoshoufu" 
 				WinSetTitle,%Title%,, %windowname%
-				;WinSet, AlwaysOnTop, On, %windowname%
+				WinSet, AlwaysOnTop, On, %windowname%
 				Winmove,%windowname%,,829,23,600,959
 				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array		
 				loop
@@ -111,7 +112,7 @@ class 4399sfGame
 				}
 				sleep 1000			
 			}
-			;WinSet, AlwaysOnTop, off, %windowname%
+			WinSet, AlwaysOnTop, off, %windowname%
 			break
 		}	
 	}

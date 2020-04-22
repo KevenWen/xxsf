@@ -19,6 +19,7 @@ class LDGame
 		IfWinExist, LDPlayer
 		{
 			WinActivate LDPlayer
+			WinSet, AlwaysOnTop, On, LDPlayer		
 			Sleep 100
 			LogToFile("Find existing window named LDPlayer. ")
 		}
@@ -32,6 +33,7 @@ class LDGame
 
     __Delete()
     {
+		WinSet, AlwaysOnTop, Off, LDPlayer		
 		if this.isclosed
 		{
 			WinClose, LDPlayer

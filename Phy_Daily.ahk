@@ -148,19 +148,19 @@ return
 return
 
 ^Numpad1::     ;02/song
-    new 4399UserTask("song",0)
+    Launch4399GamePri("song",2)
 return
 ^Numpad2::     ;Long
-    new 4399UserTask("long",0)
+    Launch4399GamePri("long",7)
 return
 ^Numpad3::      ;Yun
-    new 4399UserTask("yun",0)
+    Launch4399GamePri("yun",8)
 return
 ^Numpad4::    ;88888
     new QHUser(0)
 return
 ^Numpad5::    ;SF27_Supper
-    new 4399UserTask("supper",0)
+    Launch4399GamePri("supper",10)
 return
 
 ^Numpad6::     ;06

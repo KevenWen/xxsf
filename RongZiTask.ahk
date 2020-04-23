@@ -125,7 +125,7 @@ Rongzi_2:
             Break
         sleep 1000
     }
-
+    sleep 1000
    ;---------------------- Getland ------------------------
 
    new QHUser(0).Getland()
@@ -153,6 +153,22 @@ Rongzi_2:
    ;For index,value in  ["song","yun","long"]
     ;    new 4399UserTask(value).GetLand()
 
+   ;------------------- Verification ---------------------
+/*
+    if RemoteBak()
+    {
+        For index,value in  ["song","yun","long"]
+        {
+            IniRead, _RZ, %UserIniRemote%, %value%, RZ
+            if not _RZ
+            new 4399UserTask(value).RongZi(index+2)  
+
+            IniRead, _DC, %UserIniRemote%, %value%, DC
+            if not _RZ
+            new 4399UserTask(value).Getland()  
+        }
+    }
+*/
    ;---------------------- Hunter ------------------------
 
     for index,value in  ["hou","xhhz","song","long","sf01","sf03","sf04","sf05","sf06"]

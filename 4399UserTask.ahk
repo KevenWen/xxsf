@@ -7,7 +7,29 @@ class 4399UserTask extends 4399sfGame
 {
 
 ; <==================================  Properties  ====================================>
-	;Nothing for now.
+
+RZ[]{
+	get{
+		IniRead, value, % UserIni, % this.winName,RZ
+		return %value%
+	}
+
+	set{
+		IniWrite, % value, % UserIni, % this.winName,RZ
+	}
+}
+
+DC[]{
+	get{
+		IniRead, value, % UserIni, % this.winName,DC
+		return %value%
+	}
+
+	set{
+		IniWrite, % value, % UserIni, % this.winName,DC
+	}
+}
+
 ; <================================  Constructure functions  ================================>
 
 	__New(windowname,isclose=1)
@@ -74,6 +96,7 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
+		;this.DC := 1
 		}
 		Catch e
 		{
@@ -183,6 +206,7 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.PreRongZi(which)
 		this.GroupPage.RongZiOKinternal()
+		;this.RZ := 1		
 		LogToFile("RongZi done.")
 		}
 		Catch e{
@@ -210,6 +234,7 @@ class 4399UserTask extends 4399sfGame
 		this.PrepareGameWindow(this.winName)
 		LogToFile("Start to do ClickRongZiOK.")
 		this.GroupPage.RongZiOKpublic()
+		;this.RZ := 1		
 		LogToFile("ClickRongZiOK() done.")
 		}
 		Catch e{

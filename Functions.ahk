@@ -30,7 +30,8 @@ IniRead, LDGamePath, config.ini, path, LDGamePath
 IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath
-
+IniRead, UserIni, config.ini, path, UserIni
+IniRead, UserIniRemote, config.ini, path, UserIniRemote
 
 IniRead, supper_id, config.ini, users, supper
 IniRead, yun_id, config.ini, users, yun
@@ -295,3 +296,52 @@ Launch4399GamePri(windowname,Sequ)
     WinSetTitle,%Title%,, %windowname%
     Winmove,%windowname%,,829,23,600,959			
 }
+
+FTPUpload(srv, usr, pwd, lfile, rfile)
+{
+    static a := "AHK-FTP-UL"
+    if !(m := DllCall("LoadLibrary", "str", "wininet.dll", "ptr")) || !(h := DllCall("wininet\InternetOpen", "ptr", &a, "uint", 1, "ptr", 0, "ptr", 0, "uint", 0, "ptr"))
+        return 0
+    if (f := DllCall("wininet\InternetConnect", "ptr", h, "ptr", &srv, "ushort", 21, "ptr", &usr, "ptr", &pwd, "uint", 1, "uint", 0x08000000, "uptr", 0, "ptr")) {
+        if !(DllCall("wininet\FtpPutFile", "ptr", f, "ptr", &lfile, "ptr", &rfile, "uint", 0, "uptr", 0))
+            return 0, DllCall("wininet\InternetCloseHandle", "ptr", h) && DllCall("FreeLibrary", "ptr", m)
+        DllCall("wininet\InternetCloseHandle", "ptr", f)
+    }
+    DllCall("wininet\InternetCloseHandle", "ptr", h) && DllCall("FreeLibrary", "ptr", m)
+    return 1
+}
+
+FTPDownload(srv, usr, pwd, rfile, lfile)
+{
+    static a := "AHK-FTP-DL"
+    if !(m := DllCall("LoadLibrary", "str", "wininet.dll", "ptr")) || !(h := DllCall("wininet\InternetOpen", "ptr", &a, "uint", 1, "ptr", 0, "ptr", 0, "uint", 0, "ptr"))
+        return 0
+    if (f := DllCall("wininet\InternetConnect", "ptr", h, "ptr", &srv, "ushort", 21, "ptr", &usr, "ptr", &pwd, "uint", 1, "uint", 0x08000000, "uptr", 0, "ptr")) {
+        if !(DllCall("wininet\FtpGetFile", "ptr", f, "ptr", &rfile, "ptr", &lfile, "int", 0, "uint", 0, "uint", 0, "uptr", 0))
+            return 0, DllCall("wininet\InternetCloseHandle", "ptr", h) && DllCall("FreeLibrary", "ptr", m)
+        DllCall("wininet\InternetCloseHandle", "ptr", f)
+    }
+    DllCall("wininet\InternetCloseHandle", "ptr", h) && DllCall("FreeLibrary", "ptr", m)
+    return 1
+}
+
+; <========================  FTP  ===========================>
+/*
+	RemoteBak(){
+		try{
+			LogToFile("Start to check remote task.")			
+			FTPUpload("10.154.10.6", "", "", UserIni, "SF.ini")
+			loop 60
+			{
+				FTPDownload("10.154.10.6", "", "", "SP.ini", UserIniRemote)
+				if FileExist(%UserIniRemote%)
+					break
+				sleep 1000
+			}
+            Return 1
+		}
+		Catch e{
+		LogToFile("excetion while check remote task: " . e)
+		}
+	}
+*/ 

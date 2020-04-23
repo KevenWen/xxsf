@@ -48,7 +48,7 @@ Task202004:
         FormatTime, Mins,,mm
         If (mod(Mins,7) = 0) and (Secs = 33) 
         {
-            For index,value in  ["supper","long","song"]
+            For index,value in  ["supper","song"]
                 new 4399UserTask(value,0).GetTianTi()
         }
     }      

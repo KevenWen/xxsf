@@ -203,28 +203,38 @@ class GroupPage{
 
 	PreRongZi(RZCom)
 	{		
-		this.GetGroupPage4()
-		
-		click, % BC[RZCom]
-		sleep, % s["long"]		
+		loop
+		{
+			if A_index > 2
+				throw, "Tried 2 times but still not able to prepare RongZi."
 
-		if !PixelColorExist("0xFFFEF5",230, 574,10) ; 不是显示0份
-			Throw, "Already RongZi, not zero!"    
+			this.GetGroupPage4()
+			
+			click, % BC[RZCom]
+			sleep, % s["long"]		
 
-		mousemove, 200, 574
-		sleep, % s["short"]
-		SetDefaultMouseSpeed 30
-		SendMode Event
-		click, % 4399sfGame.Getzhushu()-1
-		SetDefaultMouseSpeed 2		
-		sleep, % s["mid"]
+			if !PixelColorExist("0xFFFEF5",230, 574,2000) ; 不是显示0份
+			throw, "Already RongZi, not zero!"
 
-		if !PixelColorExist("0xFFFFF3",268, 396,10) ;存在没有更多金币提示.!
-			Throw, "Not enough money warnning exist!"    
+			mousemove, 200, 574
+			sleep, % s["short"]
+			SetDefaultMouseSpeed 30
+			SendMode Event
+			click, % 4399sfGame.Getzhushu()-1
+			SetDefaultMouseSpeed 2		
+			sleep, % s["mid"]
 
-		sleep, % s["mid"]
-		click % RZWin["yesbtn"]
-		sleep, % s["short"]
+			if !PixelColorExist("0xFFFFF3",268, 396,10) ;存在没有更多金币提示.!
+				Throw, "Not enough money warnning exist!"    
+
+			sleep, % s["mid"]
+			click % RZWin["yesbtn"]
+			if !PixelColorExist("0xFFFFFF",139, 400,2000)
+				Continue
+			else
+				Break   
+		}
+
 	}
 
 	RongZiOKinternal()
@@ -240,18 +250,24 @@ class GroupPage{
 	{
 		loop 5
 		{
-			if !4399sfGame.SubWindowExist()
-				break
-			if !PixelColorExist("0xF4FCFC",348, 581,10)
-				4399sfGame.CloseSpeSubWindow(1)
-			if PixelColorExist("0xF4FCFC",348, 581,10)
+			if !PixelColorExist("0xFFFFFF",139, 400,10) and !PixelColorExist("0xB2A68C",300, 650,10) ;左上白点和确定button下的第二个弹出窗口color
+			{
+				CaptureScreen()
+				4399sfGame.CloseSpeSubWindow(1)								
+			}	
+
+			if PixelColorExist("0xFFFFFF",139, 400,10)
 			{
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				CaptureScreen()
+				break
 			}	
+
+			if !4399sfGame.SubWindowExist()
+				throw "Not found RongZi OK button!"
 		}
 	}
 

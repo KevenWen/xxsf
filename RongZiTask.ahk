@@ -35,6 +35,9 @@ ExitApp
 
 Rongzi_0:
 
+    FileDelete % UserIni
+    FileAppend,,% UserIni
+
     For index,value in  ["supper","hou","xhhz"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
@@ -80,6 +83,8 @@ Return
 Rongzi_N:
 
     ;---------------------- Prepare ------------------------
+    For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
+		IniWrite, 0, % UserIni, %value%,DC
 
     new QHUser(0)
     For index,value in  ["supper","yun","long"]
@@ -99,6 +104,18 @@ Rongzi_N:
     For index,value in  ["supper","yun","long","xhhz","song"]
        new 4399UserTask(value).Getland()
 
+   ;------------------- Verification ---------------------
+   For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
+    {
+        IniRead, _DC, % UserIni, % value, DC,0        
+        if _DC < 1
+        {
+           if value = xxsf
+               new QHUser().Getland()
+            else 
+               new 4399UserTask(value).Getland()              
+        }
+    }
     ;---------------------- Hunter ------------------------
 
     For index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
@@ -113,6 +130,8 @@ Return
 Rongzi_2:
 
     ;---------------------- Prepare ------------------------
+    FileDelete % UserIni
+    FileAppend,,% UserIni
 
     new QHUser(0)
     For index,value in  ["supper","xhhz","hou"]

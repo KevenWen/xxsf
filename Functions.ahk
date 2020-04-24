@@ -9,6 +9,8 @@ global emailPSFilePath = ""
 global logPath = ""
 global i_viewpath = ""
 global logArchivePath = ""
+global UserIni = ""
+global UserIniRemote = ""
 
 global supper_id 
 global yun_id 

@@ -197,8 +197,12 @@ class 4399sfGame
 				return 39
 			Case "xhhz":
 				return 39
+			Case "sf05":
+				return 16				
+			Case "sf06":
+				return 16					
 			Default:
-				return 16	
+				return 17	
 		}
 	}
 

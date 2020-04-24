@@ -10,7 +10,7 @@ class 4399UserTask extends 4399sfGame
 
 RZ[]{
 	get{
-		IniRead, value, % UserIni, % this.winName,RZ
+		IniRead, value, % UserIni, % this.winName,RZ,0
 		return %value%
 	}
 
@@ -21,7 +21,7 @@ RZ[]{
 
 DC[]{
 	get{
-		IniRead, value, % UserIni, % this.winName,DC
+		IniRead, value, % UserIni, % this.winName,DC,0
 		return %value%
 	}
 
@@ -96,7 +96,7 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
-		;this.DC := 1
+		this.DC := 1
 		}
 		Catch e
 		{
@@ -206,7 +206,7 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.PreRongZi(which)
 		this.GroupPage.RongZiOKinternal()
-		;this.RZ := 1		
+		this.RZ := 1		
 		LogToFile("RongZi done.")
 		}
 		Catch e{
@@ -234,7 +234,8 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("Start to do ClickRongZiOK.")
 		this.GroupPage.RongZiOKpublic()
-		;this.RZ := 1		
+		CaptureScreen()		
+		this.RZ := 1		
 		LogToFile("ClickRongZiOK() done.")
 		}
 		Catch e{

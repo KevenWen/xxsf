@@ -76,6 +76,12 @@ class LandPage{
         SendMode Event
         sleep 300
         4399sfGame.CloseAnySubWindow()        
+        if PixelColorExist("0xFFFFFF",449, 394,100)     ;the white color on the button
+        {
+            CaptureScreen()
+            LogToFile("Land business already done, no action needed." )
+            return  
+        }                
         Mousemove,510, 825
         send {LButton down}
         Mousemove,510, 200,10
@@ -85,8 +91,8 @@ class LandPage{
         CaptureScreen()
         loop
         {
-			if A_index > 8
-				throw "DicanJinzhu loop more than 15 times still not get a free land."
+			if A_index > 10
+				throw "DicanJinzhu loop more than 10 times still not get a free land."
 
             4399sfGame.CloseAnySubWindow()
             ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"

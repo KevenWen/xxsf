@@ -68,7 +68,7 @@ class QHsfGame
 				If PixelColorExist("0xFE901A",365, 541,100)
 				{
 					click 365, 541 ;click the account button
-					sleep 500
+					sleep 2000
 					click 356, 545 ;click the manully login button
 					sleep 500
 				}
@@ -200,6 +200,12 @@ class QHsfGame
 		sleep 300
 		SendMode Event
 		this.CloseAnySubWindow()
+        if PixelColorExist("0xFFFFFF",515, 395,100)     ;the white color on the button
+        {
+            CaptureScreen()
+            LogToFile("Land business already done, no action needed." )
+            return  
+        } 
 		Mousemove,570, 840
 		send {LButton down}
 		Mousemove,570, 100,5
@@ -210,8 +216,8 @@ class QHsfGame
 		CaptureScreen()
 		loop
 		{
-			if A_index > 8
-				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
+			if A_index > 10
+				throw "QH DicanJinzhu loop more than 10 times still not get a free land."
 
 			this.CloseAnySubWindow()
 			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\\blockofyellow.bmp"
@@ -271,7 +277,7 @@ class QHsfGame
 					Continue
 				}
 
-                if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 
+                if !PixelColorExist("0x706B59",574, 383,200) and !PixelColorExist("0x706B59",574, 416,10) ;the button is exist
                 {
                     CaptureScreen()
                     LogToFile("QH Land business done.")

@@ -6,12 +6,33 @@ class QHUser extends QHsfGame
 {
 
 ; <==================================  Properties  ====================================>
-	;Nothing for now.
+
+RZ[]{
+	get{
+		IniRead, value,% UserIni,xxsf,RZ,0
+		return %value%
+	}
+
+	set{
+		IniWrite, % value, % UserIni,xxsf,RZ
+	}
+}
+
+DC[]{
+	get{
+		IniRead, value, % UserIni,xxsf,DC,0
+		return %value%
+	}
+
+	set{
+		IniWrite, % value, % UserIni,xxsf,DC
+	}
+}
 ; <================================  Constructure functions  ================================>
 
 	__New(isclose=1)
 	{
-		this.winName := "xxsf"
+		this.winName := xxsf
 		this.isclosed := isclose
 		LogToFile("`nLog started for QH xxsf.")
 
@@ -31,13 +52,7 @@ class QHUser extends QHsfGame
 				LogToFile("Going to open game.")
 				this.LaunchQHGame()
 				LogToFile("Game opened.")
-			}	
-
-			;Assign properties:
-			WinGet IDVar,ID,A ; Get ID from Active window.		
-			this.WID := IDVar
-
-			LogToFile("Wid is： " . this.WID)
+			}
 		}
 		Catch e
 			{
@@ -67,6 +82,7 @@ class QHUser extends QHsfGame
 		try{
 		this.PrepareGameWindow()	
 		this.DiCanJinzhu()
+		this.DC := 1		
 		LogtoFile("QH GetLand() done. ")
 		}
 		Catch e
@@ -102,6 +118,7 @@ class QHUser extends QHsfGame
 		this.PrepareGameWindow()
 		this.PreRongZi(which)
 		this.RongZiOKinternal()
+		this.RZ := 1			
 		LogToFile("this.RongZi done.")
 		}
 		Catch e{
@@ -129,6 +146,7 @@ class QHUser extends QHsfGame
 		this.PrepareGameWindow()
 		LogToFile("Start to do ClickRongZiOK.")
 		this.RongZiOKpublic()
+		this.RZ := 1			
 		LogToFile("ClickRongZiOK() done.")
 		}
 		Catch e

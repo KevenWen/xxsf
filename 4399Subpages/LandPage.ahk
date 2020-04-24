@@ -75,6 +75,7 @@ class LandPage{
         this.GetLandPage()        
         SendMode Event
         sleep 300
+        4399sfGame.CloseAnySubWindow()        
         Mousemove,510, 825
         send {LButton down}
         Mousemove,510, 200,10
@@ -84,7 +85,7 @@ class LandPage{
         CaptureScreen()
         loop
         {
-			if A_index > 15
+			if A_index > 8
 				throw "DicanJinzhu loop more than 15 times still not get a free land."
 
             4399sfGame.CloseAnySubWindow()
@@ -93,7 +94,8 @@ class LandPage{
                 throw "ImageSearch not work, please check." 
             else if (ErrorLevel = 1) ;Image not found 
             {
-                sleep 500
+                sleep 200
+                4399sfGame.CloseAnySubWindow()                
                 Mousemove,510, 825
                 send {LButton down}
                 Mousemove,510, 345,15
@@ -122,7 +124,7 @@ class LandPage{
                     click,330,580, 3				;3份钻石注决策资源
                     CaptureScreen()	
                     sleep 300
-                    if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",466, 389,10) ;左右两边都没有显示金钱不够提示
+                    if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",460, 398,10) ;左右两边都没有显示金钱不够提示
                         throw "Not enough money warning show!"
 
                     click 361, 704			;确认注入
@@ -136,16 +138,18 @@ class LandPage{
                     else
                     {
                         CaptureScreen()
-                        LogToFile("Exception while DiCcanJinzhu2: not found the OK button") 
+                        LogToFile("Exception while DiCcanJinzhu2: not found the OK button, will continue")
+                        Continue 
                     }
                 }
                 else
                 {
-                    LogToFile("0xFFFEF5 and 0x5A7965 exception.")
+                    LogToFile("0xFFFEF5 and 0x5A7965 exception, will continue")
                     CaptureScreen()
+                    Continue
                 }
 
-                if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 
+                if !PixelColorExist("0x706B59",504, 373,200) and !PixelColorExist("0x706B59",506, 414,10) ;the button is exist
                 {
                     CaptureScreen()
                     LogToFile("Land business done, num is " . num)

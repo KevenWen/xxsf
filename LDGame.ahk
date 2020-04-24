@@ -176,6 +176,7 @@ class LDGame
 	{
 		this.GetLandpage()
 		sleep 300
+		this.CloseAnySubWindow()
 		SendMode Event
 		Mousemove,520, 878
 		send {LButton down}
@@ -187,7 +188,7 @@ class LDGame
 		CaptureScreen()
 		loop
 		{
-			if A_index > 13
+			if A_index > 8
 				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
 
 			this.CloseAnySubWindow()
@@ -235,13 +236,15 @@ class LDGame
 					else
                     {
     					CaptureScreen()
-                        LogToFile("Exception while LDDiCcanJinzhu: not found the OK button") 
+                        LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
+						Continue						 
 					}
 				}
 				else
 				{
                     LogToFile("0xFFFEF5 and 0x5A7965 exception.")
                     CaptureScreen()
+					Continue
 				}
 
                 if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 

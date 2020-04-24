@@ -124,7 +124,7 @@ Rongzi_2:
     }
 
     ;-------------------- LDGames Tasks----------------------
-    new LDGame(0).RongZiOKpublic()
+    new LDGame(0).ClickRongZiOK()
     new LDGame().GetLand()
 
     ;-------------------- 4399 RongZi -----------------------

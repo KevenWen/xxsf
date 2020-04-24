@@ -199,6 +199,7 @@ class QHsfGame
 		this.GetLandpage()
 		sleep 300
 		SendMode Event
+		this.CloseAnySubWindow()
 		Mousemove,570, 840
 		send {LButton down}
 		Mousemove,570, 100,5
@@ -209,7 +210,7 @@ class QHsfGame
 		CaptureScreen()
 		loop
 		{
-			if A_index > 15
+			if A_index > 8
 				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
 
 			this.CloseAnySubWindow()
@@ -218,6 +219,8 @@ class QHsfGame
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
 			{
+				sleep 200
+				this.CloseAnySubWindow()							
 				Mousemove,570, 824
 				send {LButton down}
 				Mousemove,570, 500,2
@@ -257,13 +260,15 @@ class QHsfGame
 					else
                     {
     					CaptureScreen()
-                        LogToFile("Exception while QHDiCcanJinzhu: not found the OK button") 
+                        LogToFile("Exception while QHDiCcanJinzhu: not found the OK button, will continue") 
+						Continue
 					}
 				}
 				else
 				{
-                    LogToFile("0xFFFEF5 and 0x5A7965 exception.")
+                    LogToFile("0xFFFEF5 and 0x5A7965 exception, will continue")
                     CaptureScreen()
+					Continue
 				}
 
                 if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 

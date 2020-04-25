@@ -52,30 +52,52 @@ Rongzi_0:
         }
 
     ;-------------------- ClickRongZiOK --------------------
-
-    new QHUser().ClickRongZiOK()
-    For index,value in  ["supper","xhhz"]
+    new QHUser(0).ClickRongZiOK()
+    For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
-    new 4399UserTask("hou").ClickRongZiOK()        
+    ;--------------------  Verification --------------------
+    For index,value in  ["supper","hou","xhhz","xxsf"]
+    {
+        IniRead, _RC, % UserIni, % value, RC,0        
+        if _RC < 1
+        {
+           if value = xxsf
+               new QHUser().RongZi(4)
+            else 
+               new 4399UserTask(value,0).RongZi(index)              
+        }
+    }
+    WinClose,xxsf
+    WinClose,supper    
 
     ;---------------------- ZhuanPan -----------------------
-
     new 4399UserTask("hou",0).ZhuanPan(5)
     new 4399UserTask("xhhz",0).ZhuanPan(5)
 
     ;----------------------- Hunter ------------------------
-
     For index,value in  ["hou","xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    new QHUser().Getland()
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["xhhz","hou","supper"]
        new 4399UserTask(value).Getland()
-
+    new QHUser().Getland()
     
+    ;--------------------  Verification --------------------
+    For index,value in  ["supper","hou","xhhz","xxsf"]
+    {
+        IniRead, _DC, % UserIni, % value, DC,0        
+        if _DC < 1
+        {
+           if value = xxsf
+               new QHUser().Getland()
+            else 
+               new 4399UserTask(value).Getland()              
+        }
+    }
+
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
@@ -105,7 +127,7 @@ Rongzi_N:
        new 4399UserTask(value).Getland()
 
    ;------------------- Verification ---------------------
-   For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
+    For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -118,7 +140,7 @@ Rongzi_N:
     }
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","long","song","sf01","sf03","sf04","sf05","sf06"]
+    For index,value in ["xhhz","long","song"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
@@ -163,14 +185,31 @@ Rongzi_2:
 
    ;---------------------- RongZi ------------------------
 
-    ;new RDPGame().RDP_2()
     For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value).RongZi(index) 
 
     new QHUser().RongZi(4)
 
-   ;For index,value in  ["song","yun","long"]
-    ;    new 4399UserTask(value).GetLand()
+    ;--------------------  Verification --------------------
+    For index,value in  ["supper","hou","xhhz","xxsf"]
+    {
+        IniRead, _RC, % UserIni, % value, RC,0
+        IniRead, _DC, % UserIni, % value, DC,0              
+        if _RC < 1
+        {
+           if value = xxsf
+               new QHUser().RongZi(4)
+            else 
+               new 4399UserTask(value).RongZi(index)              
+        }   
+        if _DC < 1
+        {
+           if value = xxsf
+               new QHUser().Getland()
+            else 
+               new 4399UserTask(value).Getland()              
+        }
+    }
 
    ;------------------- Verification ---------------------
 /*
@@ -190,7 +229,7 @@ Rongzi_2:
 */
    ;---------------------- Hunter ------------------------
 
-    for index,value in  ["hou","xhhz","song","long","sf01","sf03","sf04","sf05","sf06"]
+    for index,value in  ["hou","xhhz","song","long"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅

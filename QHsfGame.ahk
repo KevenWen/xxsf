@@ -216,9 +216,6 @@ class QHsfGame
 		CaptureScreen()
 		loop
 		{
-			if A_index > 10
-				throw "QH DicanJinzhu loop more than 10 times still not get a free land."
-
 			this.CloseAnySubWindow()
 			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
@@ -284,7 +281,10 @@ class QHsfGame
                     Break  
                 }
 			}
-			sleep 200		
+			sleep 200
+			if A_index > 10
+				throw "QH DicanJinzhu loop more than 10 times still not get a free land."
+
 		}
 		SendMode Input		
 	}

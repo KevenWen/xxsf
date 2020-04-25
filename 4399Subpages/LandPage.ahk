@@ -91,9 +91,6 @@ class LandPage{
         CaptureScreen()
         loop
         {
-			if A_index > 10
-				throw "DicanJinzhu loop more than 10 times still not get a free land."
-
             4399sfGame.CloseAnySubWindow()
             ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
             if (ErrorLevel = 2)  ;Execption when conduct the search
@@ -159,10 +156,12 @@ class LandPage{
                 {
                     CaptureScreen()
                     LogToFile("Land business done, num is " . num)
+			        sleep 200                     
                     Break  
-                }
-                      
-            }  
+                }                      
+            }      
+			if A_index > 10
+				throw "DicanJinzhu loop more than 10 times still not get a free land."
         }
         SendMode Input			
     }

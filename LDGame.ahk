@@ -177,6 +177,12 @@ class LDGame
 		this.GetLandpage()
 		sleep 300
 		this.CloseAnySubWindow()
+        if PixelColorExist("0xB3DDBF",511, 377,100)     ;the white color on the button
+        {
+            CaptureScreen()
+            LogToFile("Land business already done, no action needed." )
+            return  
+        }  
 		SendMode Event
 		Mousemove,520, 878
 		send {LButton down}
@@ -188,9 +194,6 @@ class LDGame
 		CaptureScreen()
 		loop
 		{
-			if A_index > 8
-				throw "QH DicanJinzhu loop more than 15 times still not get a free land."
-
 			this.CloseAnySubWindow()
 			ImageSearch, Px, Py, 253, 431, 527, 901, % A_ScriptDir . "\\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
@@ -247,14 +250,17 @@ class LDGame
 					Continue
 				}
 
-                if !PixelColorExist("0xF2B21B",Px, Py,200)  ;double check 
+                if !PixelColorExist("0x706B59",520, 423,200) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
                 {
                     CaptureScreen()
                     LogToFile("LD Land business done.")
+			        sleep 200                     
                     Break  
-                }
+                }   
 			}
-			sleep 200		
+			sleep 200
+			if A_index > 8
+				throw "QH DicanJinzhu loop more than 8 times still not get a free land."
 		}
 		SendMode Input		
 	}

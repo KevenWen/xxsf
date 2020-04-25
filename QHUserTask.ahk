@@ -44,7 +44,6 @@ DC[]{
 				WinSet, AlwaysOnTop, On, xxsf		
 				Winmove,xxsf,,933,19,600,959
 				sleep, % s["short"]
-				this.CloseAnySubWindow()
 				LogToFile("Find existing window named xxsf. " )
 			}
 			else

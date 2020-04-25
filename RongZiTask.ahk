@@ -5,6 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include 4399UserTask.ahk
 #include QHuserTask.ahk
 #include RDPGame.ahk
+;#include Socket.ahk
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;
 ; phy2 yun-1; xxsf/8888-5; 
@@ -12,6 +13,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
+/*
+myTcp := new SocketTCP()
+myTcp.connect(["10.154.10.6", 1377])
+myTcp.sendText("long")
+response := StrSplit(myTcp.recvText(2048), ",")
+MsgBox, % response[1]
+MsgBox, % response[2]
+MsgBox, % response[3]
+myTcp.disconnect()
+*/
 
 FormatTime, DayToMeet,,d
 IniRead, shangjiday, config.ini, April, shangjiday
@@ -72,8 +83,8 @@ Rongzi_0:
     WinClose,supper    
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(5)
-    new 4399UserTask("xhhz",0).ZhuanPan(5)
+    new 4399UserTask("hou",0).ZhuanPan(2)
+    new 4399UserTask("xhhz",0).ZhuanPan(8,0)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","xhhz"]
@@ -236,7 +247,10 @@ Rongzi_2:
 Return
 
 F10::Pause   ;pause the script
-F11::ExitApp ;stop the script
-
+F11::
+    myTcp.disconnect()
+    myTcp := ""
+    ExitApp ;stop the script
+Return
 
 

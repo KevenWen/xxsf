@@ -293,7 +293,7 @@ DC[]{
 
 ; <========================  转盘  ===========================>
 
-	ZhuanPan(times){
+	ZhuanPan(times,buytime=1){
 		try{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("start to ZhuPan, times: " . times)
@@ -308,7 +308,9 @@ DC[]{
 		}
 
 		try{			
-			this.GroupPage.BuyTimeSpeedplus()
+			if buytime = 1
+				this.GroupPage.BuyTimeSpeedplus()
+			
 			this.ShopHomepage.PlayZhuanPan(times)
 			LogToFile("this.ShopHomepage.PlayZhuanPan done!")			
 		}

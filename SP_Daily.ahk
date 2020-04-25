@@ -68,8 +68,8 @@ Rongzi_0:
     }
     ;-------------------- ZhuanPan ----------------------
 
-    new 4399UserTask("song",0).ZhuanPan(6)
-    new 4399UserTask("long",0).ZhuanPan(7)
+    new 4399UserTask("song",0).ZhuanPan(3)
+    new 4399UserTask("long",0).ZhuanPan(5,0)
 
     ;-------------------- Hunter ------------------------
 

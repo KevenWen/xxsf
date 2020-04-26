@@ -145,6 +145,7 @@ DC[]{
 		this.PrepareGameWindow()
 		LogToFile("Start to do ClickRongZiOK.")
 		this.RongZiOKpublic()
+		CaptureScreen()			
 		this.RZ := 1			
 		LogToFile("ClickRongZiOK() done.")
 		}

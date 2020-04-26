@@ -45,7 +45,8 @@ Rongzi_0:
 
     ;For index,value in ["yun","song","long"]
     ;    new 4399UserTask(value,0).PrepareRongZi(index+2)
-
+    FileDelete % UserIni
+    FileAppend,,% UserIni
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
@@ -62,8 +63,8 @@ Rongzi_0:
     ;--------------------  Verification --------------------
     For index,value in  ["song","yun","long"]
     {
-        IniRead, _RC, % UserIni, % value, RC,0        
-        if _RC < 1  
+        IniRead, _RZ, % UserIni, % value, RZ,0        
+        if _RZ < 1  
             new 4399UserTask(value,0).RongZi(index+2)              
     }
     ;-------------------- ZhuanPan ----------------------
@@ -148,9 +149,9 @@ Rongzi_2:
     For index,value in  ["yun","song","long"]
     {
         IniRead, _DC, % UserIni, % value, DC,0   
-        IniRead, _RC, % UserIni, % value, RC,0
+        IniRead, _RZ, % UserIni, % value, RZ,0
 
-        if _RC < 1  
+        if _RZ < 1  
             new 4399UserTask(value,0).RongZi(index+2)      
         if _DC < 1
             new 4399UserTask(value).Getland()

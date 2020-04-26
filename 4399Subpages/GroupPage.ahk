@@ -253,16 +253,17 @@ class GroupPage{
 			if !PixelColorExist("0xFFFFFF",139, 400,10) and !PixelColorExist("0xB2A68C",300, 650,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
 				CaptureScreen()
-				4399sfGame.CloseSpeSubWindow(1)								
+				4399sfGame.CloseSpeSubWindow(1)
+				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}	
 
 			if PixelColorExist("0xFFFFFF",139, 400,10)
 			{
+				LogToFile("RongZiOKpublic find OK window, going to click")			
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
-				CaptureScreen()
 				break
 			}	
 

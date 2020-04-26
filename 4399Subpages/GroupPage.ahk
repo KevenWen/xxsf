@@ -127,7 +127,7 @@ class GroupPage{
 		sleep 1000
 		Click 146, 562 ;click 赚钱 技能设置
 
-		For index, value in this.OpenSJList  ;开启赚钱/偷猎/融资/地产技能
+		For index, value in OpenSJList  ;开启赚钱/偷猎/融资/地产技能
 		{
 			WaitPixelColor("0xFFFFF3",350, 503,1000)
 			click, % value

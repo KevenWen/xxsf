@@ -98,15 +98,31 @@ Return
 
 Rongzi_N:
 
-    Loop 600    ;Make sure we are start delayed from 2 mins
+    ;------------------ Prepare game ---------------------
+	IniWrite, 0, % UserIni,LDPlayer,SJ
+    IniWrite, 0, % UserIni,LDPlayer,DC
+    Loop 600                           ;Start from 00 mins
     {
         FormatTime, MinToMeet,,mm
         if MinToMeet < 50
             Break
         sleep 1000
     }
-    new LDGame().GetLand()
 
+    ;--------------------- Tasks ------------------------
+    new LDGame(0).OpenBusinessSkill()
+    new LDGame(0).GetLand()
+
+    ;-------------------  Verification ------------------
+    IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+    if _SJ < 1
+        new LDGame(0).OpenBusinessSkill()
+
+    IniRead, _DC, % UserIni,LDPlayer,DC,0
+    if _DC < 1
+        new LDGame().GetLand()
+    else
+        new LDGame()
 Return
 
 ;<========================================= Sub Tasks 2 ================================================>
@@ -114,6 +130,8 @@ Return
 Rongzi_2:
 
     ;-------------------- Prepare game -----------------------
+    FileDelete % UserIni
+    FileAppend,,% UserIni
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0)
 

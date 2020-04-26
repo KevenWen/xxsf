@@ -55,10 +55,11 @@ global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]           
 global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
 global	PopWin := {okbtn: "324, 602", clobtn: "480, 266",qhclobtn: "500, 266",zhuziok: "507, 320"}  ; button positions
 global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}                      ; 融资的按钮
-global StockPos := ["155, 415","310, 415","460, 415"]                       		                ; 注资的三个框
+global  StockPos := ["155, 415","310, 415","460, 415"]                       		                ; 注资的三个框
 global	OpenSJList := ["403, 330","403, 444","403, 675","403, 753"]
-global LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
-global Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633"        ; RDP click OK buttons
+global	OpenSJListLD := ["420, 325","420, 450","420, 720","420, 810"]
+global  LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
+global  Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633"        ; RDP click OK buttons
         , btn_3: "522, 692", btn4: "253, 622", btn_4: "253, 692"}       ; btn1 肉沫茄子 btn2 - btn4 4399,前一个窗口刚好挡住下一个的确认两个字。
 
 PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 

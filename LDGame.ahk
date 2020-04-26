@@ -43,12 +43,47 @@ class LDGame
 		LogToFile("Log Ended for LDPlayer.`n")
     }
 
+; <==================================  Properties  ====================================>
+
+	RZ[]{
+		get{
+			IniRead, value,% UserIni,LDPlayer,RZ,0
+			return %value%
+		}
+
+		set{
+			IniWrite, % value, % UserIni,LDPlayer,RZ
+		}
+	}
+
+	DC[]{
+		get{
+			IniRead, value, % UserIni,LDPlayer,DC,0
+			return %value%
+		}
+
+		set{
+			IniWrite, % value, % UserIni,LDPlayer,DC
+		}
+	}
+
+	SJ[]{
+		get{
+			IniRead, value, % UserIni,LDPlayer,SJ,0
+			return %value%
+		}
+
+		set{
+			IniWrite, % value, % UserIni,LDPlayer,SJ
+		}
+	}
 ; <========================  地产入驻  ===========================>
 	
 	GetLand(){
 		try{
 		this.PrepareGameWindow()
 		this.DiCanJinzhu()
+		this.DC := 1
 		LogToFile("GetLand() done for LDPlayer")
 		}
 		Catch e
@@ -66,6 +101,7 @@ class LDGame
 		this.PrepareGameWindow()
 		CaptureScreen()
 		this.ClickRongZiOKPublic()
+		this.RZ := 1
 		LogToFile("ClickRongZiOK() done for LDPlayer")
 		}
 		Catch e
@@ -149,28 +185,6 @@ class LDGame
                 Break
         } 
 	}
-
-	ClickRongZiOKPublic()
-	{
-		click 310, 627
-		sleep, % s["short"]
-		click 310, 627
-		sleep, % s["short"]		
-		loop 5
-		{
-			if !this.SubWindowExist()
-				break
-			if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
-				this.CloseSpeSubWindow(1)
-			if PixelColorExist("0xB2A68C",278, 680,100)
-			{
-				click 310, 627
-				sleep, % s["short"]
-				CaptureScreen()
-			}	
-		}
-	}
-
 
 	DiCanJinzhu()
 	{
@@ -264,6 +278,78 @@ class LDGame
 		}
 		SendMode Input		
 	}
+
+;=========================================  Group functions  ===============================================
+	
+	OpenBusinessSkill(){
+		try{
+			this.PrepareGameWindow()
+			loop 2 {
+				this.CloseAnySubWindow()
+				click 356, 984				;商会 button
+				sleep 200
+				click 239, 241				;注资 tab
+				sleep 200
+				click 88, 247				;商会 tab
+				sleep 100
+				CaptureScreen()
+				if PixelColorExist("0xFFFEF5",395, 444,2000) ;商战配置中的白色块
+					break
+			}
+
+			if PixelColorExist("0xA1FF3D",108, 590,100){
+				LogToFile("Already opened, no need more action. ")
+				this.SJ := 1  
+				return
+			}
+			click 108, 590					  				;赚钱上的绿点
+			sleep 100
+			For index, value in OpenSJListLD  				;开启赚钱/偷猎/融资/地产技能
+			{
+				PixelColorExist("0xF1E4B8",315, 542,1500)    ;知已知彼框上颜色
+				click, % value
+				PixelColorExist("0xFFFFF3",315, 542,1000)	;开启 button
+				click 355, 610
+				LogToFile("OpenBusinessSkill() for: " . index)			
+				;WaitPixelColorAndClick("0xFBFBFB", 500, 410,1000)	;关闭 button, for testing only
+			}
+
+			sleep 1000
+			CaptureScreen()
+			click 506, 228  ; 关闭subwindow
+			sleep 100
+			this.SJ := 1
+			CaptureScreen()
+			LogToFile("OpenBusinessSkill() done for LDPlayer")
+		}
+		Catch e
+		{
+		LogToFile("OpenBusinessSkill() get exception: " . e)
+		CaptureScreen()
+		}
+	}
+
+	ClickRongZiOKPublic()
+	{
+		click 310, 627
+		sleep, % s["short"]
+		click 310, 627
+		sleep, % s["short"]		
+		loop 5
+		{
+			if !this.SubWindowExist()
+				break
+			if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
+				this.CloseSpeSubWindow(1)
+			if PixelColorExist("0xB2A68C",278, 680,100)
+			{
+				click 310, 627
+				sleep, % s["short"]
+				CaptureScreen()
+			}	
+		}
+	}
+
 
 }
 

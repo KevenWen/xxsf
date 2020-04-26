@@ -49,6 +49,7 @@ class ShopHomePage{
 			CaptureScreen()	
 			n++  
 		}
+        sleep 1000
 	}
 
 	GetGiftScreen()

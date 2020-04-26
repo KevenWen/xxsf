@@ -230,6 +230,7 @@ class QHsfGame
 				Mousemove,570, 500,2
 				send {LButton up}
 				click 570, 840
+				CaptureScreen()				
 				sleep 200
 			}
 			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line

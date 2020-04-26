@@ -284,14 +284,14 @@ class LDGame
 	OpenBusSkill(){
 		try{
 			this.PrepareGameWindow()
-			loop 2 {
+			loop 3 {
 				this.CloseAnySubWindow()
 				click 356, 984				;商会 button
-				sleep 200
+				sleep 300
 				click 239, 241				;注资 tab
-				sleep 200
+				sleep 1000
 				click 88, 247				;商会 tab
-				sleep 100
+				sleep 200
 				CaptureScreen()
 				if PixelColorExist("0xFFFEF5",395, 444,2000) ;商战配置中的白色块
 					break
@@ -307,8 +307,10 @@ class LDGame
 			For index, value in OpenSJListLD  				;开启赚钱/偷猎/融资/地产技能
 			{
 				PixelColorExist("0xF1E4B8",315, 542,1500)    ;知已知彼框上颜色
+				sleep 200
 				click, % value
 				PixelColorExist("0xFFFFF3",315, 542,1000)	;开启 button
+				sleep 200
 				click 355, 610
 				LogToFile("OpenBusinessSkill() for: " . index)			
 				;WaitPixelColorAndClick("0xFBFBFB", 500, 410,1000)	;关闭 button, for testing only

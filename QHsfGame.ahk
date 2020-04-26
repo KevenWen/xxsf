@@ -224,11 +224,12 @@ class QHsfGame
 			{
 				sleep 200
 				this.CloseAnySubWindow()							
-				Mousemove,570, 824
+				Mousemove,570, 840
 				send {LButton down}
+				sleep 100				
 				Mousemove,570, 500,2
 				send {LButton up}
-				click 570, 824
+				click 570, 840
 				sleep 200
 			}
 			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
@@ -428,70 +429,6 @@ class QHsfGame
 				throw "Not found RongZi OK button!"
 		}
 	}
-
-;----------------------------------
-/*
-	GroupCheZi()
-	{
-		this.GetGroupPage4()
-		Loop 5
-		{
-			click % BC[A_index]
-			sleep, % s["long"]
-			if PixelColorExist("0xFBFBFB",480, 269,1000)   
-			and PixelColorExist("0xFDFBF0",212, 573,10) ;FDFBF0
-			and PixelColorExist("0xFFFEF5",230, 574,10)     ;窗口打开，没有融资，带有0，且只有两个字符
-			{
-				click % PopWin["clobtn"]
-				sleep, % s["long"]
-				Continue
-			}
-			Else
-			{
-				click % RZWin["chezibtn"]
-				sleep, % s["long"]
-				click % PopWin["okbtn"] 
-				sleep, % s["longer"]
-				click % PopWin["clobtn"]
-				sleep, % s["longer"]
-				Break   
-			}
-		}
-	}
-
-	PreRongZi(RZCom)
-	{		
-		this.GetGroupPage4()
-
-		click, % BC[RZCom]
-		sleep, % s["long"]		
-
-		mousemove, 200, 574
-		sleep, % s["short"]
-		SetDefaultMouseSpeed 10
-		click, % 4399sfGame.Getzhushu()
-		SetDefaultMouseSpeed 2		
-		sleep, % s["mid"]
-
-		if !PixelColorExist("0xFFFFF3",268, 396,10) ;存在没有更多金币提示.!
-			Throw, "Not enough money warnning exist!"    
-
-		sleep, % s["mid"]
-		click % RZWin["yesbtn"]
-		sleep, % s["short"]
-	}
-
-	RongZiOKinternal()
-	{
-		click % PopWin["okbtn"]
-		sleep, % s["mid"]
-		CaptureScreen()
-		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
-			click % PopWin["clobtn"]
-	}
-
-*/
-
 
 }
 

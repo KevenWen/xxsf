@@ -70,8 +70,8 @@ Rongzi_0:
     ;--------------------  Verification --------------------
     For index,value in  ["supper","hou","xhhz","xxsf"]
     {
-        IniRead, _RC, % UserIni, % value, RC,0        
-        if _RC < 1
+        IniRead, _RZ, % UserIni, % value, RZ,0        
+        if _RZ < 1
         {
            if value = xxsf
                new QHUser().RongZi(4)
@@ -204,9 +204,9 @@ Rongzi_2:
     ;--------------------  Verification --------------------
     For index,value in  ["supper","hou","xhhz","xxsf"]
     {
-        IniRead, _RC, % UserIni, % value, RC,0
+        IniRead, _RZ, % UserIni, % value, RZ,0
         IniRead, _DC, % UserIni, % value, DC,0              
-        if _RC < 1
+        if _RZ < 1
         {
            if value = xxsf
                new QHUser().RongZi(4)

@@ -131,11 +131,13 @@ Rongzi_N:
         sleep 1000
     }
 
-    ;---------------------- GetLand ------------------------
-
+    ;---------------------- Tasks ------------------------
     new QHUser().Getland()
     For index,value in  ["supper","yun","long","xhhz","song"]
        new 4399UserTask(value).Getland()
+
+    new 4399UserTask("supper",0).OpenBusSkill()
+    new 4399UserTask("supper").ZhuanPan(3,0)
 
    ;------------------- Verification ---------------------
     For index,value in  ["supper","yun","long","xhhz","song","xxsf"]

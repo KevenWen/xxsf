@@ -133,6 +133,7 @@ class GroupPage{
 			click, % value
 			WaitPixelColorAndClick("0xFAFDFD", 380, 566,1000)	;开启 button
 			;WaitPixelColorAndClick("0xFBFBFB", 482, 409,1000)	;关闭 button, for testing only
+			LogToFile("Open BussinessSkill for index: " . index)				
 		}
 
 		sleep 1000

@@ -125,8 +125,7 @@ DC[]{
 					if A_Index > 2
 					{
 						SendAlertEmail()
-						LogToFile("BussinessSkill still gray after loop 2 times.")
-						break
+						throw "BussinessSkill still gray after loop 2 times."
 					}	
 					CaptureScreen()
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				

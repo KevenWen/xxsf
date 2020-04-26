@@ -281,7 +281,7 @@ class LDGame
 
 ;=========================================  Group functions  ===============================================
 	
-	OpenBusinessSkill(){
+	OpenBusSkill(){
 		try{
 			this.PrepareGameWindow()
 			loop 2 {

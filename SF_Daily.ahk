@@ -39,9 +39,11 @@ Task202004:
             new 4399UserTask(value).Hunter(0)
         UploadNetDisk()
     }  
+
     If (TimeToMeet = 202800) ; Bussniss war started  
         new 4399UserTask("long",0).ShangZhanReport()    
 
+/*
     If (TimeToMeet > 002000) and (TimeToMeet < 202000)  ; TianTi Task
     {
         FormatTime, Secs,,ss
@@ -52,7 +54,7 @@ Task202004:
                 new 4399UserTask(value,0).GetTianTi()
         }
     }      
-
+*/
 Return
 
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper, order by money count

@@ -110,7 +110,7 @@ Rongzi_N:
     }
 
     ;--------------------- Tasks ------------------------
-    new LDGame(0).OpenBusinessSkill()
+    new LDGame(0).OpenBusSkill()
     new LDGame(0).GetLand()
 
     ;-------------------  Verification ------------------

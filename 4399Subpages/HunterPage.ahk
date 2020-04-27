@@ -9,7 +9,12 @@ class HunterPage{
             click % HB[1]
             sleep 200
             click % HB[3]
-            sleep 100            		
+            sleep 300
+            if PixelColorExist("0xFFFEF5",176, 197,100)
+            {
+                click 126, 187                                      ;Click the return button if exist.    
+                sleep 200
+            }             		
             if PixelColorExist("0xFFFEF5",494, 703,2000)			;The white in Hunt failure count area
                 break
         }
@@ -97,9 +102,7 @@ class HunterPage{
     }
 
     GetResult(){
-        this.GetHunterPage()
-        if PixelColorExist("0xFFFEF5",176, 197,100)
-            click 126, 187                               ;Return button if exist.     
+        this.GetHunterPage()                                                           
         WaitPixelColorAndClick("0xFFC7BB",166, 805,1000) ;偷猎记录
         sleep 300        
         CaptureScreen()

@@ -24,6 +24,9 @@ class 4399sfGame
 ; <==================================  Command functionalities  ====================================>
 	PrepareGameWindow(name)
 	{	
+		IfWinExist Cisco AnyConnect				;The VPN windows may exist
+			WinClose Cisco AnyConnect		
+
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = name)
 			Return
@@ -51,7 +54,8 @@ class 4399sfGame
 		Loop
 		{
 			WinClose, %windowname%
-			
+			WinClose Cisco AnyConnect
+
 			if A_Index > 4				
 					throw "Cannot launch Game!"
 			try 

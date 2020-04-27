@@ -65,7 +65,7 @@ Rongzi_0:
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index+2)              
+            new 4399UserTask(value,0).RongZi(index+1)              
     }
     ;-------------------- ZhuanPan ----------------------
 
@@ -79,11 +79,18 @@ Rongzi_0:
 
     ;-------------------- GetLand -----------------------
 
-    new LDGame().GetLand()
+    new LDGame(0).GetLand()
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).GetLand()
 
     ;--------------------  Verification --------------------
+
+    IniRead, _DC, % UserIni,LDPlayer,DC,0
+    if _DC < 1
+        new LDGame().GetLand()
+    else
+        new LDGame()
+
     For index,value in  ["yun","song","long"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
@@ -157,20 +164,26 @@ Rongzi_2:
 
     ;-------------------- LDGames Tasks----------------------
     new LDGame(0).ClickRongZiOK()
-    new LDGame().GetLand()
+    new LDGame(0).GetLand()
 
     ;-------------------- 4399 RongZi -----------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).RongZi(index+1)
 
     ;--------------------  Verification --------------------
+    IniRead, _DC, % UserIni,LDPlayer,DC,0
+    if _DC < 1
+        new LDGame().GetLand()
+    else
+        new LDGame()
+
     For index,value in  ["yun","song","long"]
     {
         IniRead, _DC, % UserIni, % value, DC,0   
         IniRead, _RZ, % UserIni, % value, RZ,0
 
         if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index+2)      
+            new 4399UserTask(value).RongZi(index+1)      
         if _DC < 1
             new 4399UserTask(value).Getland()
     }

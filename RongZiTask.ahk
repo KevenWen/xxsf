@@ -172,7 +172,7 @@ Rongzi_2:
     For index,value in  ["supper","xhhz","hou"]
             new 4399UserTask(value,0)
 
-    Loop 600    ;Make sure we are start delayed from 2 mins
+    Loop 600    ;Make sure we are start at 00 mins
     {
         FormatTime, MinToMeet,,mm
         if MinToMeet < 50
@@ -188,7 +188,7 @@ Rongzi_2:
 
    ;---------------------- Waiting ------------------------
 
-    Loop 600    ;Make sure we are start delayed from 2 mins
+    Loop 600    ;Make sure we are start RongZi delayed from 2 mins
     {
         FormatTime, MinToMeet,,mm
         if MinToMeet > 01
@@ -250,8 +250,8 @@ Return
 
 F10::Pause   ;pause the script
 F11::
-    myTcp.disconnect()
-    myTcp := ""
+    ;myTcp.disconnect()
+    ;myTcp := ""
     ExitApp ;stop the script
 Return
 

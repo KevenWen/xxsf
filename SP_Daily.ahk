@@ -106,7 +106,7 @@ Return
 Rongzi_N:
 
     ;------------------ Prepare game ---------------------
-	IniWrite, 0, % UserIni,LDPlayer,SJ
+	;IniWrite, 0, % UserIni,LDPlayer,SJ
     IniWrite, 0, % UserIni,LDPlayer,DC
     Loop 600                           ;Start from 00 mins
     {
@@ -117,13 +117,13 @@ Rongzi_N:
     }
 
     ;--------------------- Tasks ------------------------
-    new LDGame(0).OpenBusSkill()
+    ;new LDGame(0).OpenBusSkill()
     new LDGame(0).GetLand()
 
     ;-------------------  Verification ------------------
-    IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-    if _SJ < 1
-        new LDGame(0).OpenBusinessSkill()
+    ;IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+    ;if _SJ < 1
+    ;    new LDGame(0).OpenBusinessSkill()
 
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1

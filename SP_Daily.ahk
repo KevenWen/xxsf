@@ -204,7 +204,7 @@ return
 return
 
 ^NumpadAdd::      ;LDPlayer
-    run "C:\ChangZhi\LDPlayer\dnconsole.exe" launchex --index 0 --packagename "com.wydsf2.ewan"    
+   run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
 return
 
 ^Numpad1::     ;02/song
@@ -225,7 +225,6 @@ return
 
 ^Numpad6::     ;06
     new 4399UserTask("sf06",0)
-    ;run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
 return
 
 ^Numpad0::     ;01

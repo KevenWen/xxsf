@@ -25,9 +25,16 @@ class LDGame
 		}
 		else
 		{
-			LogToFile("LDPlayer window not fond.")
+			try{
+			this.LaunchLDGame()
+			LogToFile("LDPlayer Started.")
+			CaptureScreen()
+			}
+			Catch e{
+			LogToFile("LDPlayer window not fond and start game failed: " . e)
 			CaptureScreen()
 			Return
+			}
 		}
 	}
 
@@ -350,6 +357,38 @@ class LDGame
 				CaptureScreen()
 			}	
 		}
+	}
+
+	;=========================================  Launch Game  ===============================================
+
+	LaunchLDGame()
+	{
+		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"  
+		sleep 40000
+		IfWinExist, LDPlayer
+		{
+			WinActivate, LDPlayer
+			sleep 200
+			Loop
+			{
+				runwait %LDExePath% -s 0 input tap 844 544,, Hide
+
+				if PixelColorExist("0xFFFEF5",384, 731,10)
+				{
+					runwait %LDExePath% -s 0 input tap 450 1300,, Hide
+					sleep 10000
+					this.CloseAnySubWindow()
+					Break
+				}
+
+				if A_Index > 60
+					throw "LDPlayer start wait timeout"
+
+				sleep 2000
+			}
+		}
+		Else
+			throw "LDPlayer window not exist"
 	}
 
 

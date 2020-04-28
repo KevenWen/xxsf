@@ -4,6 +4,7 @@ SetBatchLines, -1
 
 global 4399GamePath = ""
 global LDGamePath = ""
+global LDExePath = ""
 global gifskipath = ""
 global emailPSFilePath = ""
 global logPath = ""
@@ -29,6 +30,7 @@ IniRead, logPath, config.ini, path, logPath
 IniRead, logArchivePath, config.ini, path, logArchivePath
 IniRead, emailPSFilePath, config.ini, path, emailPSFilePath
 IniRead, LDGamePath, config.ini, path, LDGamePath
+IniRead, LDExePath, config.ini, path, LDExePath
 IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath

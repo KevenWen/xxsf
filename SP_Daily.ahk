@@ -44,7 +44,7 @@ return
 Rongzi_0:
 
     ;For index,value in ["yun","song","long"]
-    ;    new 4399UserTask(value,0).PrepareRongZi(index+2)
+    ;    new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
     FileAppend,,% UserIni
     Loop 600    ;Make sure we are start delayed from 2 mins

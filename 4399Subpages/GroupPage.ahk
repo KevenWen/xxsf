@@ -212,8 +212,6 @@ class GroupPage{
 			this.GetGroupPage4()
 			
 			click, % BC[RZCom]
-			sleep, % s["long"]		
-
 			if !PixelColorExist("0xFFFEF5",230, 574,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 
@@ -228,7 +226,6 @@ class GroupPage{
 			if !PixelColorExist("0xFFFFF3",268, 396,10) ;存在没有更多金币提示.!
 				Throw, "Not enough money warnning exist!"    
 
-			sleep, % s["mid"]
 			click % RZWin["yesbtn"]
 			if !PixelColorExist("0xFFFFFF",139, 400,2000)
 				Continue
@@ -241,8 +238,8 @@ class GroupPage{
 	RongZiOKinternal()
 	{
 		click % PopWin["okbtn"]
-		sleep, % s["mid"]
-		CaptureScreen()
+		sleep, % s["short"]
+		CaptureScreen()		
 		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
 			click % PopWin["clobtn"]
 	}

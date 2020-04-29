@@ -197,7 +197,6 @@ class LDGame
 	{
 		this.GetLandpage()
 		sleep 300
-		this.CloseAnySubWindow()
         if PixelColorExist("0xB3DDBF",511, 377,100)     ;the white color on the button
         {
             CaptureScreen()
@@ -364,6 +363,7 @@ class LDGame
 	LaunchLDGame()
 	{
 		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"  
+		LogToFile("Start to Launch LDGame. ")			
 		sleep 40000
 		IfWinExist, LDPlayer
 		{
@@ -371,10 +371,12 @@ class LDGame
 			sleep 200
 			Loop
 			{
-				runwait %LDExePath% -s 0 input tap 844 544,, Hide
+				LogToFile("Find Started window, going to Click AD. ")	
+				runwait %LDExePath% -s 0 input tap 805 345,, Hide
 
-				if PixelColorExist("0xFFFEF5",384, 731,10)
+				if PixelColorExist("0xFFFEF5",382, 727,10)
 				{
+					LogToFile("Find Start button, going to Click it. ")	
 					runwait %LDExePath% -s 0 input tap 450 1300,, Hide
 					sleep 10000
 					this.CloseAnySubWindow()

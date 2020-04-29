@@ -21,9 +21,10 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
 
 */
+    For index,value in ["supper","yun","long","song"]
+        new 4399UserTask(value).ZhuZi(3)
 
-
-
+    new QHuser(0).ZhuZi(3)
 
   ExitApp
   

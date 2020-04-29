@@ -80,11 +80,11 @@ Rongzi_0:
         }
     }
     WinClose,xxsf
-    WinClose,supper    
+    WinClose,supper
+    WinClose,hou
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(2)
-    new 4399UserTask("xhhz",0).ZhuanPan(8,0)
+    new 4399UserTask("hou",0).ZhuanPan(4)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","xhhz"]

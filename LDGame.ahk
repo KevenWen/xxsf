@@ -122,6 +122,9 @@ class LDGame
 
 	PrepareGameWindow()
 	{
+		WinClose Cisco AnyConnect	;The VPN windows may exist	
+		WinClose, IrfanView			;The capture screen error windows may exist		
+
 		IfWinExist, LDPlayer
         {
 			WinActivate, LDPlayer
@@ -362,6 +365,8 @@ class LDGame
 
 	LaunchLDGame()
 	{
+		WinClose Cisco AnyConnect	;The VPN windows may exist	
+		WinClose, IrfanView			;The capture screen error windows may exist		
 		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"  
 		LogToFile("Start to Launch LDGame. ")			
 		sleep 40000

@@ -25,6 +25,9 @@ class QHsfGame
 
 	PrepareGameWindow()
 	{
+		WinClose Cisco AnyConnect	;The VPN windows may exist	
+		WinClose, IrfanView			;The capture screen error windows may exist				
+
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = "xxsf")
 			Return
@@ -49,6 +52,8 @@ class QHsfGame
 					throw "Cannot launch qun hei Game!"
 				}
 			WinClose, xxsf
+			WinClose Cisco AnyConnect	;The VPN windows may exist	
+			WinClose, IrfanView			;The capture screen error windows may exist					
 			run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30
 			sleep 5000
 			WinSet, AlwaysOnTop, On, xxsf	
@@ -107,6 +112,8 @@ class QHsfGame
 
 	CloseAnySubWindow()
 	{
+		WinClose Cisco AnyConnect	;The VPN windows may exist	
+		WinClose, IrfanView			;The capture screen error windows may exist		
 		loop 5
 		{
 			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"

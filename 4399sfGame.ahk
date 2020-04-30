@@ -24,8 +24,8 @@ class 4399sfGame
 ; <==================================  Command functionalities  ====================================>
 	PrepareGameWindow(name)
 	{	
-		IfWinExist Cisco AnyConnect				;The VPN windows may exist
-			WinClose Cisco AnyConnect		
+		WinClose Cisco AnyConnect				;The VPN windows may exist					
+		WinClose, IrfanView						;The capture screen error windows may exist	
 
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = name)
@@ -54,7 +54,8 @@ class 4399sfGame
 		Loop
 		{
 			WinClose, %windowname%
-			WinClose Cisco AnyConnect
+			WinClose Cisco AnyConnect	;The VPN windows may exist	
+			WinClose, IrfanView			;The capture screen error windows may exist				
 
 			if A_Index > 4				
 					throw "Cannot launch Game!"

@@ -178,15 +178,27 @@ CaptureScreen()
 {
 	try
 	{
-		FormatTime, Dayfolder,, yyyyMMdd
-        path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
-		Run, % i_viewpath . " /capture=3" . " /convert=" . path
-        LogToFile("Screen")
+        ifWinExist,IrfanView            ;If run too often, may have load exe error
+            WinClose, IrfanView
+        Process, Exist, i_view64.exe ; check to see if iTeleportConnect is running
+        If (ErrorLevel = 0) ; If it is not running
+        {
+            FormatTime, Dayfolder,, yyyyMMdd
+            path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
+            Run, % i_viewpath . " /capture=3" . " /convert=" . path		
+            LogToFile("Screen")
+        }
+        Else ; If it is running, ErrorLevel equals the process id for the target program (Printkey). Then do nothing.
+        {
+            WinClose, IrfanView       
+            throw "i_viewpath still running."
+        }
 	}
 	catch e
 	{
 		;Ignore the error here.
 		LogToFile("Screen captured failed: " . e)
+        WinClose, IrfanView        
 	}
 
 }

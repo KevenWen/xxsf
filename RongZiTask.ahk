@@ -116,7 +116,7 @@ Return
 Rongzi_N:
 
     ;---------------------- Prepare ------------------------
-    For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
+    For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
 		IniWrite, 0, % UserIni, %value%,DC
 
     new QHUser(0)
@@ -133,14 +133,14 @@ Rongzi_N:
 
     ;---------------------- Tasks ------------------------
     new QHUser().Getland()
-    For index,value in  ["supper","yun","long","xhhz","song"]
+    For index,value in  ["supper","yun","long","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
 
     ;new 4399UserTask("supper",0).OpenBusSkill()
     ;new 4399UserTask("supper").ZhuanPan(3,0)
 
    ;------------------- Verification ---------------------
-    For index,value in  ["supper","yun","long","xhhz","song","xxsf"]
+    For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -153,7 +153,7 @@ Rongzi_N:
     }
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","long","song"]
+    For index,value in ["xhhz","long","song","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅

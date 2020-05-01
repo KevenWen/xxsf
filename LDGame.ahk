@@ -376,12 +376,12 @@ class LDGame
 			Loop
 			{
 				LogToFile("Find Started window, going to Click AD. ")	
-				runwait %LDExePath% -s 0 input tap 805 345,, Hide
+				run %LDExePath% -s 0 input tap 828 406,, Hide
 
 				if PixelColorExist("0xFFFEF5",382, 727,10)
 				{
 					LogToFile("Find Start button, going to Click it. ")	
-					runwait %LDExePath% -s 0 input tap 450 1300,, Hide
+					run %LDExePath% -s 0 input tap 450 1300,, Hide
 					sleep 10000
 					this.CloseAnySubWindow()
 					Break

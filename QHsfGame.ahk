@@ -215,7 +215,7 @@ class QHsfGame
         } 
 		Mousemove,570, 840
 		send {LButton down}
-		Mousemove,570, 100,5
+		Mousemove,570, 80,5
 		sleep 100	
 		send {LButton up}
 		click 570, 840
@@ -256,7 +256,6 @@ class QHsfGame
 					click,433, 530, 3 ;资源卡6
 					sleep 100
 					click,350, 594, 3  ;3份钻石注决策资源
-					CaptureScreen()
 					sleep 300					
                     if !PixelColorExist("0xFEEDC7",119, 391,10) and !PixelColorExist("0xFEEDC7",478, 391,10) ;左右两边都没有显示金钱不够提示
                         throw "Not enough money warning show!"

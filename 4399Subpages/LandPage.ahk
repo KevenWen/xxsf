@@ -125,7 +125,6 @@ class LandPage{
                     click,414, 520, 2				;2资源卡注管理资源
                     sleep 100
                     click,330,580, 3				;3份钻石注决策资源
-                    CaptureScreen()	
                     sleep 300
                     if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",460, 398,10) ;左右两边都没有显示金钱不够提示
                         throw "Not enough money warning show!"

@@ -246,7 +246,6 @@ class LDGame
 					click,415, 540, 3 ;资源卡6
 					sleep 100
 					click,326, 607, 3  ;3份钻石注决策资源
-					CaptureScreen()
 					sleep 300					
                     if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
                         throw "Not enough money warning show!"

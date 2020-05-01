@@ -23,7 +23,7 @@ Task202004:
 
     If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
     {
-        For index,value in  ["sf01","sf03","sf04","sf05","sf06"]
+        For index,value in  ["sf01","sf03","sf04","sf05"]
         {
             %value% := new 4399UserTask(value)
             %value%.ZhuZi(2)

@@ -43,6 +43,7 @@ ExitApp
 Rongzi_0:
 
     FileDelete % UserIni
+    FileDelete % UserIniRemote       
     FileAppend,,% UserIni
 
     For index,value in  ["supper","hou","xhhz"]
@@ -131,6 +132,7 @@ Return
 Rongzi_N:
 
     ;---------------------- Prepare ------------------------
+    FileDelete % UserIniRemote   
     For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
 		IniWrite, 0, % UserIni, %value%,DC
 
@@ -184,6 +186,7 @@ Return
 Rongzi_2:
 
     ;---------------------- Prepare ------------------------
+    FileDelete % UserIniRemote   
     FileDelete % UserIni
     FileAppend,,% UserIni
 

@@ -45,6 +45,7 @@ Rongzi_0:
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
+    FileDelete % UserIniRemote   
     FileAppend,,% UserIni
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -128,6 +129,7 @@ Rongzi_N:
     ;------------------ Prepare game ---------------------
 	;IniWrite, 0, % UserIni,LDPlayer,SJ
     IniWrite, 0, % UserIni,LDPlayer,DC
+    FileDelete % UserIniRemote       
     Loop 600                           ;Start from 00 mins
     {
         FormatTime, MinToMeet,,mm

@@ -12,6 +12,7 @@ global i_viewpath = ""
 global logArchivePath = ""
 global UserIni = ""
 global UserIniRemote = ""
+global BaiduNetDiskPath = ""
 
 global supper_id 
 global yun_id 
@@ -34,6 +35,7 @@ IniRead, LDExePath, config.ini, path, LDExePath
 IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath
+IniRead, BaiduNetDiskPath, config.ini, path, BaiduNetDiskPath
 IniRead, UserIni, config.ini, path, UserIni
 IniRead, UserIniRemote, config.ini, path, UserIniRemote
 
@@ -292,7 +294,7 @@ RongZiOKEmu()
 }
 UploadNetDisk()
 {
-    Run "C:\Users\keven\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"
+    Run, % BaiduNetDiskPath
     sleep 600000
     Process, close, baidunetdisk.exe
 }

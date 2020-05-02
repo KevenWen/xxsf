@@ -31,7 +31,8 @@ Task2020:
             Gosub, Rongzi_N
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
-
+        
+        UploadNetDisk()
         ExitApp
     }
 

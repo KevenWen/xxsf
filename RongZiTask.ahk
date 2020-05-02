@@ -24,17 +24,13 @@ MsgBox, % response[3]
 myTcp.disconnect()
 */
 
-FormatTime, DayToMeet,,d
-IniRead, shangjiday, config.ini, April, shangjiday
-IniRead, RongZi00, config.ini, April, RongZi00
-IniRead, RongZi02, config.ini, April, RongZi02
-
-if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
+shangjiday := % mod(A_YDay-117,7)=0 ? 1:0 
+if mod(A_YDay,4)=0            ;RongZi at 00:00
     Gosub, Rongzi_0
-else if IsItemInList(DayToMeet,RongZi02)     ;RongZi one by one, delay 2 minutes, at 00:02
-    Gosub, Rongzi_2
+else if mod(A_YDay,2) > 0     ;not a RongZi day
+    Gosub, Rongzi_N
 else
-    Gosub, Rongzi_N                          ;not a RongZi day
+    Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
 
 UploadNetDisk()
 ExitApp
@@ -157,7 +153,7 @@ Rongzi_N:
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
-    ;if IsItemInList(DayToMeet,shangjiday)
+    ;if shangjiday
     ;    supper.OpenBusSkill()
 Return
 ;<========================================= Sub Tasks 2 ================================================>

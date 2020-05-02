@@ -37,7 +37,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
         new 4399UserTask(value).ZhuZi(2)
     For index,value in ["sf01","sf03","sf04","sf05","sf06"]
         new 4399UserTask(value).RongZi(2)        
-
+    
+    new QHUser(0).ZhuZi(3)
 
 F10::Pause   ;pause the script
 F11::ExitApp ;stop the script

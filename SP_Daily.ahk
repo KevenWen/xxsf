@@ -10,29 +10,25 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
     .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
 */
+shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
 
-IniRead, shangjiday, config.ini, April, shangjiday
-IniRead, RongZi00, config.ini, April, RongZi00
-IniRead, RongZi02, config.ini, April, RongZi02
-
-SetTimer, Task202004, 1000  ;run every 1 secs
+SetTimer, Task2020, 1000  ;run every 1 secs
 Return
 
-Task202004:
+Task2020:
 
     FormatTime, TimeToMeet,,HHmmss
-    FormatTime, DayToMeet,,d
 
     ;TimeToMeet = 235459
 
     If (TimeToMeet = 235459)
     { 
-        if IsItemInList(DayToMeet,RongZi00)          ;RongZi at 00:00
+        if mod(A_YDay,4)=0            ;RongZi at 00:00
             Gosub, Rongzi_0
-        else if IsItemInList(DayToMeet,RongZi02)     ;RongZi one by one, delay 2 minutes, at 00:02
-            Gosub, Rongzi_2
+        else if mod(A_YDay,2) > 0     ;not a RongZi day
+            Gosub, Rongzi_N
         else
-            Gosub, Rongzi_N                          ;not a RongZi day
+            Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
 
         ExitApp
     }
@@ -43,8 +39,8 @@ return
 
 Rongzi_0:
 
-    ;For index,value in ["yun","song","long"]
-    ;    new 4399UserTask(value,0).PrepareRongZi(index+1)
+    For index,value in ["yun","song","long"]
+        new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
     FileAppend,,% UserIni
     Loop 600    ;Make sure we are start delayed from 2 mins

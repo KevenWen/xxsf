@@ -8,10 +8,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include QHUserTask.ahk
 ; 18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
 
-SetTimer, Task202004, 1000  ;run every 1 secs
+SetTimer, Task2020, 1000  ;run every 1 secs
 Return
 
-Task202004:
+Task2020:
 
     FormatTime, TimeToMeet,,HHmmss
     ;TimeToMeet = 235458

@@ -64,6 +64,7 @@ Rongzi_0:
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;--------------------  Verification --------------------
+    LogtoFile("Start to do verification 1...")
     For index,value in  ["supper","hou","xhhz","xxsf"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
@@ -75,6 +76,7 @@ Rongzi_0:
                new 4399UserTask(value,0).RongZi(index)              
         }
     }
+    LogtoFile("Verification 1 done.")    
     WinClose,xxsf
     WinClose,supper
     WinClose,hou
@@ -93,6 +95,7 @@ Rongzi_0:
     new QHUser().Getland()
     
     ;--------------------  Verification --------------------
+    LogtoFile("Start to do verification 2...")
     For index,value in  ["supper","hou","xhhz","xxsf"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
@@ -104,7 +107,7 @@ Rongzi_0:
                new 4399UserTask(value).Getland()              
         }
     }
-
+    LogtoFile("Verification 2 done.")
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
@@ -136,6 +139,7 @@ Rongzi_N:
     ;new 4399UserTask("supper").ZhuanPan(3,0)
 
    ;------------------- Verification ---------------------
+    LogtoFile("Start to do verification...")
     For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
@@ -147,6 +151,7 @@ Rongzi_N:
                new 4399UserTask(value).Getland()              
         }
     }
+    LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
     For index,value in ["xhhz","long","song","sf06"]
@@ -200,6 +205,7 @@ Rongzi_2:
     new QHUser().RongZi(4)
 
     ;--------------------  Verification --------------------
+    LogtoFile("Start to do verification...")
     For index,value in  ["supper","hou","xhhz","xxsf"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0
@@ -219,7 +225,7 @@ Rongzi_2:
                new 4399UserTask(value).Getland()              
         }
     }
-
+    LogtoFile("Verification done.")
    ;------------------- Verification ---------------------
 /*
     if RemoteBak()

@@ -118,6 +118,20 @@ class LDGame
 		}
 	}
 
+	RongZi()
+	{
+		try{
+		this.GetGroupPage4()
+		this.RongZiPri()
+		LogToFile("RongZi() done for LDPlayer")		
+		this.RZ := 1	
+		}
+		catch e {
+		LogToFile("RongZi() get exception: " . e)
+		CaptureScreen()		
+		}
+	}
+
 ;=========================================  Common functions  ===============================================
 
 	PrepareGameWindow()
@@ -288,7 +302,24 @@ class LDGame
 	}
 
 ;=========================================  Group functions  ===============================================
-	
+
+	GetGroupPage4()
+	{
+		this.PrepareGameWindow()
+		loop
+		{
+			if A_index > 2
+				throw, "Tried 2 times, still not able to GetGroupPage4."
+			this.CloseAnySubWindow()
+			click 356, 984				;商会 button
+			sleep 300
+			click 459, 248				;融资 tab
+			if PixelColorExist("0xABA9A5",468, 572,2000) ;金融企业右边的灰块
+				break
+		}
+
+	}
+
 	OpenBusSkill(){
 		try{
 			this.PrepareGameWindow()
@@ -357,6 +388,42 @@ class LDGame
 				sleep, % s["short"]
 				CaptureScreen()
 			}	
+		}
+	}
+
+	RongZiPri()
+	{		
+		loop
+		{
+			if A_index > 2
+				throw, "Tried 2 times but still not able to complete RongZi."
+
+			this.CloseAnySubWindow()			
+			click, 403, 724	   							  ; 固定注洒店
+			if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
+			throw, "Already RongZi, not zero!"
+
+			mousemove, 200, 600
+			sleep, % s["short"]
+			SetDefaultMouseSpeed 30
+			SendMode Event
+			click, 40
+			SetDefaultMouseSpeed 2	
+			SendMode Input				
+			sleep, % s["mid"]
+
+			if !PixelColorExist("0xFFFFF3",246, 396,10) ;存在没有更多金币提示.!
+				Throw, "Not enough money warnning exist!"    
+
+			click 328, 594
+			if !PixelColorExist("0xFFFFFF",98,403,2000)
+				Continue
+			else
+			{
+				click  277, 628
+				CaptureScreen()				
+				sleep 200
+			}
 		}
 	}
 

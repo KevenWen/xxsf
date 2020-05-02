@@ -10,6 +10,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
     .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
 */
+
+;Gosub, Rongzi_0  ;for testing only
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
 
 SetTimer, Task2020, 1000  ;run every 1 secs
@@ -39,6 +41,7 @@ return
 
 Rongzi_0:
 
+    new LDGame(0)
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
@@ -57,12 +60,18 @@ Rongzi_0:
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;--------------------  Verification --------------------
+    LogtoFile("Start to do verification 1...")
     For index,value in  ["song","yun","long"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1  
             new 4399UserTask(value,0).RongZi(index+1)              
     }
+    
+    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
+    if _RZ < 1
+        new LDGame(0).RongZi()
+    LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
     new 4399UserTask("song",0).ZhuanPan(6,0)
@@ -79,7 +88,7 @@ Rongzi_0:
         new 4399UserTask(value).GetLand()
 
     ;--------------------  Verification --------------------
-
+    LogtoFile("Start to do verification 2...")
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
@@ -92,7 +101,7 @@ Rongzi_0:
         if _DC < 1
             new 4399UserTask(value).Getland()
     }
-
+    LogtoFile("Verification 2 done.")  
     WinClose 360游戏大厅
 Return
 
@@ -119,12 +128,13 @@ Rongzi_N:
     ;IniRead, _SJ, % UserIni,LDPlayer,SJ,0
     ;if _SJ < 1
     ;    new LDGame(0).OpenBusinessSkill()
-
+    LogtoFile("Start to do verification...")
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
     else
         new LDGame()
+    LogtoFile("Verification done.")
 Return
 
 ;<========================================= Sub Tasks 2 ================================================>
@@ -134,6 +144,8 @@ Rongzi_2:
     ;-------------------- Prepare game -----------------------
     FileDelete % UserIni
     FileAppend,,% UserIni
+    
+    new LDGame(0)
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0)
 
@@ -145,9 +157,11 @@ Rongzi_2:
         sleep 1000
     }
 
-    ;-------------------- 4399 GetLand ---------------------
+    ;-------------------- GetLand ---------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).Getland()
+
+    new LDGame(0).GetLand()
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -157,15 +171,18 @@ Rongzi_2:
         sleep 1000
     }
 
-    ;-------------------- LDGames Tasks----------------------
-    new LDGame(0).ClickRongZiOK()
-    new LDGame(0).GetLand()
-
-    ;-------------------- 4399 RongZi -----------------------
+    ;--------------------  RongZi -----------------------
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).RongZi(index+1)
-
+    
+    new LDGame(0).RongZi()
     ;--------------------  Verification --------------------
+    LogtoFile("Start to do verification...")
+
+    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
+    if _RZ < 1
+        new LDGame(0).RongZi()
+    
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
@@ -183,6 +200,7 @@ Rongzi_2:
             new 4399UserTask(value).Getland()
     }
 
+    LogtoFile("Verification done.")
     WinClose 360游戏大厅
 Return
 

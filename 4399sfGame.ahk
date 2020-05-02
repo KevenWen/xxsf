@@ -93,7 +93,7 @@ class 4399sfGame
 			Catch e
 			{
 				CaptureScreen()
-				LogToFile("Start Game timeout, going to retry...")
+				LogToFile("Start Game timeout, going to retry..." . e)
 				Continue
 			}
 	

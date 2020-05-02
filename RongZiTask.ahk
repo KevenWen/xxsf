@@ -76,7 +76,8 @@ Rongzi_0:
                new 4399UserTask(value,0).RongZi(index)              
         }
     }
-    LogtoFile("Verification 1 done.")    
+    LogtoFile("Verification 1 done.")
+    iniFileSync()        
     WinClose,xxsf
     WinClose,supper
     WinClose,hou
@@ -108,6 +109,21 @@ Rongzi_0:
         }
     }
     LogtoFile("Verification 2 done.")
+    
+    iniFileSync()
+    LogtoFile("Start to do remote verification...")
+    For index,value in  ["long","song","yun"]
+    {
+        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
+        if _RZ < 1  
+            new 4399UserTask(value).RongZi(index+2)
+
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()    
+    } 
+    LogtoFile("Remote verification done.")
+
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
@@ -151,6 +167,8 @@ Rongzi_N:
                new 4399UserTask(value).Getland()              
         }
     }
+
+    iniFileSync()
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
@@ -226,22 +244,21 @@ Rongzi_2:
         }
     }
     LogtoFile("Verification done.")
-   ;------------------- Verification ---------------------
-/*
-    if RemoteBak()
+    
+    iniFileSync()
+    LogtoFile("Start to do remote verification...")
+    For index,value in  ["long","song","yun"]
     {
-        For index,value in  ["song","yun","long"]
-        {
-            IniRead, _RZ, %UserIniRemote%, %value%, RZ
-            if not _RZ
-            new 4399UserTask(value).RongZi(index+2)  
+        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
+        if _RZ < 1  
+            new 4399UserTask(value).RongZi(index+2)
 
-            IniRead, _DC, %UserIniRemote%, %value%, DC
-            if not _RZ
-            new 4399UserTask(value).Getland()  
-        }
-    }
-*/
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()    
+    } 
+    LogtoFile("Remote verification done.")
+
    ;---------------------- Hunter ------------------------
 
     for index,value in  ["hou","xhhz","song","long"]

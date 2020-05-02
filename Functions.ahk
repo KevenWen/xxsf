@@ -343,8 +343,8 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
 }
 
 ; <========================  FTP  ===========================>
-/*
-	RemoteBak(){
+
+	iniFileSync(){
 		try{
 			LogToFile("Start to check remote task.")			
 			FTPUpload("10.154.10.6", "", "", UserIni, "SF.ini")
@@ -361,4 +361,3 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
 		LogToFile("excetion while check remote task: " . e)
 		}
 	}
-*/ 

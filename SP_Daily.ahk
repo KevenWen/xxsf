@@ -101,7 +101,23 @@ Rongzi_0:
         if _DC < 1
             new 4399UserTask(value).Getland()
     }
-    LogtoFile("Verification 2 done.")  
+    LogtoFile("Verification 2 done.")
+
+    Sleep 120000
+    LogtoFile("Start to do remote verification...")
+    For index,value in  ["supper","xhhz","hou"]
+    {
+        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
+        if _RZ < 1  
+            new 4399UserTask(value).RongZi(index)
+
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()    
+    } 
+    LogtoFile("Remote verification done.")
+
+
     WinClose 360游戏大厅
 Return
 
@@ -134,7 +150,18 @@ Rongzi_N:
         new LDGame().GetLand()
     else
         new LDGame()
+
+    Sleep 300000
+    LogtoFile("Start to do remote verification...")
+    For index,value in  ["supper","yun","long","song","xhhz","sf06"]
+    {
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()
+    } 
+
     LogtoFile("Verification done.")
+
 Return
 
 ;<========================================= Sub Tasks 2 ================================================>
@@ -142,6 +169,7 @@ Return
 Rongzi_2:
 
     ;-------------------- Prepare game -----------------------
+    FileDelete % UserIniRemote
     FileDelete % UserIni
     FileAppend,,% UserIni
     
@@ -199,6 +227,19 @@ Rongzi_2:
         if _DC < 1
             new 4399UserTask(value).Getland()
     }
+
+    Sleep 300000
+    LogtoFile("Start to do remote verification...")
+    For index,value in  ["supper","xhhz","hou"]
+    {
+        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
+        if _RZ < 1  
+            new 4399UserTask(value).RongZi(index)
+
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()    
+    } 
 
     LogtoFile("Verification done.")
     WinClose 360游戏大厅

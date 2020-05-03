@@ -205,7 +205,9 @@ class 4399sfGame
 			Case "sf05":
 				return 16				
 			Case "sf06":
-				return 36					
+				return 38					
+			Case "sf01":
+				return 18
 			Default:
 				return 17	
 		}

@@ -42,7 +42,7 @@ Task2020:
     }  
 
     If (TimeToMeet = 202800) ; Bussniss war started  
-        new 4399UserTask("long",0).ShangZhanReport()    
+        new 4399UserTask("supper",0).ShangZhanReport()    
 
 /*
     If (TimeToMeet > 002000) and (TimeToMeet < 202000)  ; TianTi Task

@@ -244,7 +244,7 @@ class LDGame
 				click 520, 878
 				sleep 200
 			}
-			else if (ErrorLevel = 0) and !PixelColorExist("0x706B59",455, 284,10) ;Image found and not on the first line
+			else if (ErrorLevel = 0) ;Image found
 			{
                 LogToFile("LD Image found when loop times: " . A_Index)
 				CaptureScreen()	

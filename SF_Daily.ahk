@@ -27,7 +27,8 @@ Task2020:
         {
             %value% := new 4399UserTask(value)
             %value%.ZhuZi(2)
-            %value%.RongZi(3)
+            if mod(A_YDay,2) > 0                         
+                %value%.RongZi(3)
             %value%.Hunter(1)
             %value% := ""
         }

@@ -78,14 +78,15 @@ Rongzi_0:
         }
     }
     LogtoFile("Verification 1 done.")
-    new 4399UserTask("supper").OpenBusSkill()    
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusSkill()    
     iniFileSync()        
     WinClose,xxsf
     WinClose,supper
     WinClose,hou
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(3)
+    ;new 4399UserTask("hou",0).ZhuanPan(3)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","xhhz"]
@@ -133,9 +134,9 @@ Return
 Rongzi_N:
 
     ;---------------------- Prepare ------------------------
-    FileDelete % UserIniRemote   
-    For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
-		IniWrite, 0, % UserIni, %value%,DC
+    FileDelete % UserIniRemote
+    FileDelete % UserIni
+    FileAppend,,% UserIni
 
     new QHUser(0)
     For index,value in  ["supper","yun","long"]
@@ -151,11 +152,12 @@ Rongzi_N:
 
     ;---------------------- Tasks ------------------------
     new QHUser().Getland()
+
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusSkill()    
+
     For index,value in  ["supper","yun","long","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
-
-    ;new 4399UserTask("supper",0).OpenBusSkill()
-    ;new 4399UserTask("supper").ZhuanPan(3,0)
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
@@ -205,10 +207,13 @@ Rongzi_2:
     sleep 1000
    ;---------------------- Getland ------------------------
 
-   new QHUser(0).Getland()
-   For index,value in  ["supper","xhhz","hou"]
+    new QHUser(0).Getland()
+
+    For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
 
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusSkill()   
    ;---------------------- Waiting ------------------------
 
     Loop 600    ;Make sure we are start RongZi delayed from 2 mins

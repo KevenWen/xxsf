@@ -56,13 +56,14 @@ Rongzi_0:
         sleep 1000
     }
     ;-------------------- ClickRongZiOK -----------------
-
-    new LDGame(0).ClickRongZiOK()    
+    new LDGame(0).ClickRongZiOK()   
+    if mod(A_YDay-118,7) = 0
+        new LDGame(0).OpenBusinessSkill()
+ 
     For index,value in ["song","yun","long"]
         new 4399UserTask(value,0).ClickRongZiOK()
-    new LDGame(0).OpenBusinessSkill()
 
-    ;--------------------  Verification --------------------
+    ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
     For index,value in  ["song","yun","long"]
     {
@@ -93,8 +94,14 @@ Rongzi_0:
     For index,value in ["yun","song","long"]
         new 4399UserTask(value).GetLand()
 
-    ;--------------------  Verification --------------------
+    ;-------------------  Verification 2 ------------------
     LogtoFile("Start to do verification 2...")
+    if mod(A_YDay-118,7) = 0
+    {
+        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+        if _SJ < 1
+            new LDGame(0).OpenBusinessSkill()
+    }
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
@@ -133,8 +140,9 @@ Rongzi_N:
 
     ;------------------ Prepare game ---------------------
 	;IniWrite, 0, % UserIni,LDPlayer,SJ
-    IniWrite, 0, % UserIni,LDPlayer,DC
-    FileDelete % UserIniRemote       
+    FileDelete % UserIniRemote
+    FileDelete % UserIni
+    FileAppend,,% UserIni  
     Loop 600                           ;Start from 00 mins
     {
         FormatTime, MinToMeet,,mm
@@ -144,13 +152,19 @@ Rongzi_N:
     }
 
     ;--------------------- Tasks ------------------------
-    ;new LDGame(0).OpenBusSkill()
+    if mod(A_YDay-118,7) = 0
+        new LDGame(0).OpenBusinessSkill()
+
     new LDGame(0).GetLand()
 
     ;-------------------  Verification ------------------
-    ;IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-    ;if _SJ < 1
-    ;    new LDGame(0).OpenBusinessSkill()
+    if mod(A_YDay-118,7) = 0
+    {
+        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+        if _SJ < 1
+            new LDGame(0).OpenBusinessSkill()
+    }
+
     LogtoFile("Start to do verification...")
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
@@ -192,7 +206,10 @@ Rongzi_2:
         sleep 1000
     }
 
-    ;-------------------- GetLand ---------------------
+    ;-------------------- Tasks ---------------------
+    if mod(A_YDay-118,7) = 0
+        new LDGame(0).OpenBusinessSkill()
+
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).Getland()
 
@@ -206,14 +223,20 @@ Rongzi_2:
         sleep 1000
     }
 
-    ;--------------------  RongZi -----------------------
-    For index,value in ["yun","song","long"]
+     For index,value in ["yun","song","long"]
         new 4399UserTask(value).RongZi(index+1)
     
     new LDGame(0).RongZi()
+
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
 
+    if mod(A_YDay-118,7) = 0
+    {
+        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+        if _SJ < 1
+            new LDGame(0).OpenBusinessSkill()
+    }
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
     if _RZ < 1
         new LDGame(0).RongZi()

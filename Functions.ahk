@@ -350,11 +350,15 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
 		try{
 			LogToFile("Start to check remote task.")			
 			FTPUpload("10.154.10.6", "", "", UserIni, "SF.ini")
+            LogToFile("FTPUpload done.")
 			loop 60
 			{
-				FTPDownload("10.154.10.6", "", "", "SP.ini", UserIniRemote)
-				if FileExist(%UserIniRemote%)
-					break
+				FTPDownload("10.154.10.6", "", "", "SP.ini", UserIniRemote) 
+				if FileExist(UserIniRemote)
+				{
+                    LogToFile("UserIniRemote found, FTPDownload done, loop times: " . A_index)
+                    break
+                }
 				sleep 1000
 			}
             Return 1

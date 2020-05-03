@@ -57,6 +57,7 @@ DC[]{
 			{
 				CaptureScreen()
 				LogToFile("Game open failed: " . e)
+				return
 			}
 	}
 

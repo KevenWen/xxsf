@@ -88,7 +88,6 @@ class LandPage{
         send {LButton up}
         click 510, 825
         sleep 200
-        CaptureScreen()
         loop
         {
             4399sfGame.CloseAnySubWindow()

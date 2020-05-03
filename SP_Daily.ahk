@@ -42,7 +42,7 @@ return
 
 Rongzi_0:
 
-    new LDGame(0)
+    new LDGame(0)    
     For index,value in ["yun","song","long"]
         new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
@@ -60,6 +60,7 @@ Rongzi_0:
     new LDGame(0).ClickRongZiOK()    
     For index,value in ["song","yun","long"]
         new 4399UserTask(value,0).ClickRongZiOK()
+    new LDGame(0).OpenBusinessSkill()
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
@@ -69,14 +70,17 @@ Rongzi_0:
         if _RZ < 1  
             new 4399UserTask(value,0).RongZi(index+1)              
     }
-    
+
+    IniRead, _SJ, % UserIni,LDPlayer,SJ,0
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
+    if _SJ < 1
+        new LDGame(0).OpenBusinessSkill() 
     if _RZ < 1
         new LDGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 4399UserTask("song",0).ZhuanPan(6,0)
+    new 4399UserTask("song",0).ZhuanPan(3,0)
 
     ;-------------------- Hunter ------------------------
 

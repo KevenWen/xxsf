@@ -78,13 +78,14 @@ Rongzi_0:
         }
     }
     LogtoFile("Verification 1 done.")
+    new 4399UserTask("supper").OpenBusSkill()    
     iniFileSync()        
     WinClose,xxsf
     WinClose,supper
     WinClose,hou
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(4)
+    new 4399UserTask("hou",0).ZhuanPan(3)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","xhhz"]

@@ -23,11 +23,11 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 */
 
 
-    new QHuser(0).Getland()
+    new QHUser(0).ZhuZi(3)
 
   ExitApp
   
-    For index,value in ["supper","yun","long","song"]
+    For index,value in ["supper","yun","long","song","sf06"]
         new 4399UserTask(value).ZhuZi(2)
 
     For index,value in ["supper","yun","long","song"]

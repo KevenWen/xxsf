@@ -79,8 +79,7 @@ Rongzi_0:
     }
     LogtoFile("Verification 1 done.")
     if mod(A_YDay-118,7) = 0
-        new 4399UserTask("supper").OpenBusSkill()    
-    iniFileSync()        
+        new 4399UserTask("supper").OpenBusinessSkill()   
     WinClose,xxsf
     WinClose,supper
     WinClose,hou
@@ -112,7 +111,8 @@ Rongzi_0:
         }
     }
     LogtoFile("Verification 2 done.")
-    
+
+    sleep 60000    
     iniFileSync()
     LogtoFile("Start to do remote verification...")
     For index,value in  ["long","song","yun"]
@@ -154,7 +154,7 @@ Rongzi_N:
     new QHUser().Getland()
 
     if mod(A_YDay-118,7) = 0
-        new 4399UserTask("supper").OpenBusSkill()    
+        new 4399UserTask("supper").OpenBusinessSkill()    
 
     For index,value in  ["supper","yun","long","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
@@ -181,8 +181,6 @@ Rongzi_N:
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
-    ;if shangjiday
-    ;    supper.OpenBusSkill()
 Return
 ;<========================================= Sub Tasks 2 ================================================>
 
@@ -213,7 +211,7 @@ Rongzi_2:
         new 4399UserTask(value,0).GetLand()
 
     if mod(A_YDay-118,7) = 0
-        new 4399UserTask("supper").OpenBusSkill()   
+        new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
 
     Loop 600    ;Make sure we are start RongZi delayed from 2 mins
@@ -253,7 +251,8 @@ Rongzi_2:
         }
     }
     LogtoFile("Verification done.")
-    
+
+    sleep 60000    
     iniFileSync()
     LogtoFile("Start to do remote verification...")
     For index,value in  ["long","song","yun"]

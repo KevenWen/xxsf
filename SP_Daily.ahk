@@ -8,7 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
-    .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
+    .ClickRongZiOK().PrepareRongZi(3).OpenBusinessSkill()
 */
 
 ;Gosub, Rongzi_0  ;for testing only
@@ -116,7 +116,7 @@ Rongzi_0:
     }
     LogtoFile("Verification 2 done.")
 
-    Sleep 120000
+    Sleep 180000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","hou"]
     {

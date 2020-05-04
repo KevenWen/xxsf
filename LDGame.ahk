@@ -320,7 +320,7 @@ class LDGame
 
 	}
 
-	OpenBusSkill(){
+	OpenBusinessSkill(){
 		try{
 			this.PrepareGameWindow()
 			loop 3 {

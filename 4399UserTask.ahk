@@ -108,7 +108,7 @@ DC[]{
 
 ; <========================  每周商技开启  ===========================>
 
-	OpenBusSkill(){	
+	OpenBusinessSkill(){	
 		try{
 			this.PrepareGameWindow(this.winName)
 			loop
@@ -123,11 +123,11 @@ DC[]{
 				}	
 				Else
 				{
-					if A_Index > 2
+					if A_Index > 3
 					{
 						SendAlertEmail()
 						throw "BussinessSkill still gray after loop 2 times."
-					}	
+					}
 					CaptureScreen()
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
 					this.GroupPage.OpenSJ()
@@ -139,6 +139,7 @@ DC[]{
 		}
 		Catch e {
 			LogToFile("Open bussinessSkill failed with execption." . e)
+			CaptureScreen()			
 			SendAlertEmail()		
 		}
 

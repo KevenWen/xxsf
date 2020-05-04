@@ -129,17 +129,20 @@ class GroupPage{
 
 		For index, value in OpenSJList  ;开启赚钱/偷猎/融资/地产技能
 		{
-			WaitPixelColor("0xFFFFF3",350, 503,1000)
+			sleep 100	
+			PixelColorExist("0xFFFFF3",350, 503,2000)
 			click, % value
-			WaitPixelColorAndClick("0xFAFDFD", 380, 566,1000)	;开启 button
+			PixelColorExist("0xFAFDFD",380, 566,2000)	;开启 button
+			click, 380, 566
 			;WaitPixelColorAndClick("0xFBFBFB", 482, 409,1000)	;关闭 button, for testing only
-			LogToFile("Open BussinessSkill for index: " . index)				
+			LogToFile("Open BussinessSkill for index: " . index)
 		}
 
 		sleep 1000
 		
 		click 492, 249  ; 关闭subwindow
 		sleep 100
+		return 1
 	}
 
 	GroupZhuZi(which)

@@ -18,27 +18,29 @@ CoordMode, Mouse, window
 
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
-    .ClickRongZiOK().PrepareRongZi(3).OpenBusSkill()
+    .ClickRongZiOK().PrepareRongZi(3).OpenBusinessSkill()
 
 */
 
+  
 
-    new QHUser(0).ZhuZi(3)
 
   ExitApp
   
     For index,value in ["supper","yun","long","song","sf06"]
         new 4399UserTask(value).ZhuZi(2)
 
-    For index,value in ["supper","yun","long","song"]
+    For index,value in ["supper","yun","long","song","sf06"]
         new 4399UserTask(value).ZhuZi(1)
 
-    For index,value in ["sf01","sf03","sf04","sf05","sf06"]
+    For index,value in ["sf01","sf03","sf04","sf05"]
         new 4399UserTask(value).ZhuZi(2)
-    For index,value in ["sf01","sf03","sf04","sf05","sf06"]
+    For index,value in ["sf01","sf03","sf04","sf05"]
         new 4399UserTask(value).RongZi(2)        
     
     new QHUser(0).ZhuZi(3)
+
+    new LDGame(0)
 
 F10::Pause   ;pause the script
 F11::ExitApp ;stop the script

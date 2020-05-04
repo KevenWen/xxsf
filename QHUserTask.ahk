@@ -163,7 +163,7 @@ DC[]{
 
 ; <========================  每周商技开启  ===========================>
 
-	OpenBusSkill()
+	OpenBusinessSkill()
 	{
 		LogtoFile("QH open BussinessSkill not implement yet.")
 	}

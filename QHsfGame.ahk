@@ -352,6 +352,7 @@ class QHsfGame
 
 		sleep, % s["short"]
 		CaptureScreen()
+		sleep, % s["mid"]		
 	}
 
 	CheZi()

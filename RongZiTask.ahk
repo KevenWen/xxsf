@@ -139,7 +139,7 @@ Rongzi_N:
     FileAppend,,% UserIni
 
     new QHUser(0)
-    For index,value in  ["supper","yun","long"]
+    For index,value in  ["supper","xhhz","long"]
        new 4399UserTask(value,0)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
@@ -156,7 +156,7 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
 
-    For index,value in  ["supper","yun","long","xhhz","song","sf06"]
+    For index,value in  ["supper","xhhz","long","song","sf06","yun"]
        new 4399UserTask(value).Getland()
 
    ;------------------- Verification ---------------------

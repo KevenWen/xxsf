@@ -166,6 +166,8 @@ class GroupPage{
 			}
 			sleep % s["mid"]
 			if !PixelColorExist("0xFFF8CE",62, 393,100) ; 没有金币不足提示.
+				throw, "Not enough money warning exit!"
+
 			click % PopWin["zhuziok"]
 			sleep, % s["short"] 
 			click % PopWin["okbtn"]

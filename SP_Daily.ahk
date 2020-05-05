@@ -195,7 +195,7 @@ Rongzi_2:
     FileAppend,,% UserIni
     
     new LDGame(0)
-    For index,value in ["yun","song","long"]
+    For index,value in ["sf06","song","long"]
         new 4399UserTask(value,0)
 
     Loop 600    ;Make sure we are start delayed from 2 mins
@@ -210,7 +210,7 @@ Rongzi_2:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
 
-    For index,value in ["yun","song","long"]
+    For index,value in ["sf06","song","long"]
         new 4399UserTask(value,0).Getland()
 
     new LDGame(0).GetLand()
@@ -223,7 +223,7 @@ Rongzi_2:
         sleep 1000
     }
 
-     For index,value in ["yun","song","long"]
+     For index,value in ["sf06","song","long"]
         new 4399UserTask(value).RongZi(index+1)
     
     new LDGame(0).RongZi()
@@ -247,7 +247,7 @@ Rongzi_2:
     else
         new LDGame()
 
-    For index,value in  ["yun","song","long"]
+    For index,value in  ["sf06","song","long"]
     {
         IniRead, _DC, % UserIni, % value, DC,0   
         IniRead, _RZ, % UserIni, % value, RZ,0

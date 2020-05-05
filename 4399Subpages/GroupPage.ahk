@@ -164,7 +164,8 @@ class GroupPage{
 				click % StockPos[which]
 				sleep 50
 			}
-			sleep % s["short"]
+			sleep % s["mid"]
+			if !PixelColorExist("0xFFF8CE",62, 393,100) ; 没有金币不足提示.
 			click % PopWin["zhuziok"]
 			sleep, % s["short"] 
 			click % PopWin["okbtn"]

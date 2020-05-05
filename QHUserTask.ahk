@@ -15,6 +15,7 @@ RZ[]{
 
 	set{
 		IniWrite, % value, % UserIni,xxsf,RZ
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni,xxsf,Rztime		
 	}
 }
 
@@ -26,6 +27,7 @@ DC[]{
 
 	set{
 		IniWrite, % value, % UserIni,xxsf,DC
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni,xxsf,Dctime
 	}
 }
 ; <================================  Constructure functions  ================================>

@@ -16,6 +16,7 @@ RZ[]{
 
 	set{
 		IniWrite, % value, % UserIni, % this.winName,RZ
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni, % this.winName,Rztime
 	}
 }
 
@@ -27,6 +28,7 @@ DC[]{
 
 	set{
 		IniWrite, % value, % UserIni, % this.winName,DC
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni, % this.winName,Dctime		
 	}
 }
 

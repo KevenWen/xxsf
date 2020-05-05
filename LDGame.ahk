@@ -60,6 +60,7 @@ class LDGame
 
 		set{
 			IniWrite, % value, % UserIni,LDPlayer,RZ
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,LDPlayer,Rztime			
 		}
 	}
 
@@ -71,6 +72,7 @@ class LDGame
 
 		set{
 			IniWrite, % value, % UserIni,LDPlayer,DC
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,LDPlayer,Dctime					
 		}
 	}
 
@@ -82,6 +84,7 @@ class LDGame
 
 		set{
 			IniWrite, % value, % UserIni,LDPlayer,SJ
+			IniWrite, % A_Sec . ":" . A_Sec, % UserIni,LDPlayer,Sjtime					
 		}
 	}
 ; <========================  地产入驻  ===========================>

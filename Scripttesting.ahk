@@ -22,18 +22,24 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 
 */
 
-  
-
 
   ExitApp
   
-    For index,value in ["supper","long","song","sf06"]
+  
+    For index,value in ["sf01","sf03","sf04","sf05","yun","long"]
+    {
+        %value% := new 4399UserTask(value)
+        %value%.ZhuZi(2)
+    }
+    sleep 100000
+
+    For index,value in ["supper","sf06"]
         new 4399UserTask(value).ZhuZi(3)
 
     For index,value in ["supper","yun","long","song","sf06"]
         new 4399UserTask(value).ZhuZi(1)
 
-    For index,value in ["sf01","sf03","sf04","sf05","yun"]
+    For index,value in ["sf01","sf03","sf04","sf05","yun","long"]
         new 4399UserTask(value).ZhuZi(2)
     For index,value in ["sf01","sf03","sf04","sf05"]
         new 4399UserTask(value).RongZi(2)        

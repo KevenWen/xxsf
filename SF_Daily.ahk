@@ -23,10 +23,10 @@ Task2020:
 
     If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
     {
-        For index,value in  ["sf01","sf03","sf04","sf05"]
+        For index,value in  ["sf01","sf03","sf04","song","long"]
         {
             %value% := new 4399UserTask(value)
-            %value%.ZhuZi(2)
+            ;%value%.ZhuZi(2)
             sleep 5000
             if mod(A_YDay,2) > 0                         
                 %value%.RongZi(3)

@@ -255,7 +255,7 @@ Rongzi_2:
     sleep 60000    
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["long","song","sf06"]
+    For index,value in  ["song","sf06"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
@@ -269,7 +269,7 @@ Rongzi_2:
 
    ;---------------------- Hunter ------------------------
 
-    for index,value in  ["hou","xhhz","song","long"]
+    for index,value in  ["hou","xhhz","song"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅

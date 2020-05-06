@@ -22,7 +22,7 @@ Task2020:
     FormatTime, TimeToMeet,,HHmmss
 
     ;TimeToMeet = 235459
-
+/*
     If (TimeToMeet = 235459)
     { 
         if mod(A_YDay,4)=0            ;RongZi at 00:00
@@ -35,7 +35,13 @@ Task2020:
         UploadNetDisk()
         ExitApp
     }
-
+*/
+    If (TimeToMeet = 031000)
+    {
+        Gosub, Rongzi_N
+        UploadNetDisk()
+        ExitApp
+    }
 return
 
 ;<========================================= Sub Tasks 0 ================================================>
@@ -172,9 +178,9 @@ Rongzi_N:
     else
         new LDGame()
 
-    Sleep 300000
+    Sleep 1200000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","yun","long","song","xhhz","sf06"]
+    For index,value in  ["supper","song","xhhz","sf06"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1

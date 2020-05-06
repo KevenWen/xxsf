@@ -25,13 +25,15 @@ myTcp.disconnect()
 */
 
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0 
+/*
 if mod(A_YDay,4)=0            ;RongZi at 00:00
     Gosub, Rongzi_0
 else if mod(A_YDay,2) > 0     ;not a RongZi day
     Gosub, Rongzi_N
 else
     Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
-
+*/
+Gosub, Rongzi_N
 UploadNetDisk()
 ExitApp
 
@@ -139,7 +141,7 @@ Rongzi_N:
     FileAppend,,% UserIni
 
     new QHUser(0)
-    For index,value in  ["supper","xhhz","long"]
+    For index,value in  ["supper","xhhz"]
        new 4399UserTask(value,0)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
@@ -156,12 +158,12 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
 
-    For index,value in  ["supper","xhhz","long","song","sf06","yun"]
+    For index,value in  ["supper","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","yun","long","xhhz","song","xxsf","sf06"]
+    For index,value in  ["supper","xhhz","song","xxsf","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -177,7 +179,7 @@ Rongzi_N:
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","long","song","sf06"]
+    For index,value in ["xhhz","song","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅

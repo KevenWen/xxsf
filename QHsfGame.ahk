@@ -46,7 +46,7 @@ class QHsfGame
 	{
 		Loop
 		{
-			if A_Index > 4
+			if A_Index > 3
 				{
 					break
 					throw "Cannot launch qun hei Game!"

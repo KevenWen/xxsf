@@ -57,7 +57,7 @@ class 4399sfGame
 			WinClose Cisco AnyConnect	;The VPN windows may exist	
 			WinClose, IrfanView			;The capture screen error windows may exist				
 
-			if A_Index > 4				
+			if A_Index > 2				
 					throw "Cannot launch Game!"
 			try 
 			{

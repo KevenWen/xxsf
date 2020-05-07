@@ -22,7 +22,7 @@ Task2020:
     FormatTime, TimeToMeet,,HHmmss
 
     ;TimeToMeet = 235459
-/*
+
     If (TimeToMeet = 235459)
     { 
         if mod(A_YDay,4)=0            ;RongZi at 00:00
@@ -35,13 +35,7 @@ Task2020:
         UploadNetDisk()
         ExitApp
     }
-*/
-    If (TimeToMeet = 031000)
-    {
-        Gosub, Rongzi_N
-        UploadNetDisk()
-        ExitApp
-    }
+
 return
 
 ;<========================================= Sub Tasks 0 ================================================>
@@ -49,12 +43,12 @@ return
 Rongzi_0:
 
     new LDGame(0)    
-    For index,value in ["yun","song","long"]
-        new 4399UserTask(value,0).PrepareRongZi(index+1)
+    For index,value in ["hou"]
+        new 4399UserTask(value,0).PrepareRongZi(4)
     FileDelete % UserIni
     FileDelete % UserIniRemote   
     FileAppend,,% UserIni
-    Loop 600    ;Make sure we are start delayed from 2 mins
+    Loop 600    ;Make sure we are start after 00:00
     {
         FormatTime, MinToMeet,,mm
         if MinToMeet < 50
@@ -66,38 +60,42 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
-    For index,value in ["song","yun","long"]
+    For index,value in ["hou"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["song","yun","long"]
+    For index,value in ["hou"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index+1)              
+            new 4399UserTask(value,0).RongZi(4)              
     }
 
-    IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+    if mod(A_YDay-118,7) = 0
+    {
+        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
+        if _SJ < 1 and mod(A_YDay-118,7) = 0
+            new LDGame(0).OpenBusinessSkill() 
+    }
+
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
-    if _SJ < 1
-        new LDGame(0).OpenBusinessSkill() 
     if _RZ < 1
         new LDGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 4399UserTask("song",0).ZhuanPan(3,0)
+    new 4399UserTask("hou",0).ZhuanPan(3,0)
 
     ;-------------------- Hunter ------------------------
 
-    For index,value in ["song","long"]
+    For index,value in ["hou"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;-------------------- GetLand -----------------------
 
     new LDGame(0).GetLand()
-    For index,value in ["yun","song","long"]
+    For index,value in ["hou"]
         new 4399UserTask(value).GetLand()
 
     ;-------------------  Verification 2 ------------------
@@ -114,7 +112,7 @@ Rongzi_0:
     else
         new LDGame()
 
-    For index,value in  ["yun","song","long"]
+    For index,value in  ["hou"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -124,7 +122,7 @@ Rongzi_0:
 
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["supper","xhhz"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  

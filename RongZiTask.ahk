@@ -25,15 +25,14 @@ myTcp.disconnect()
 */
 
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0 
-/*
+
 if mod(A_YDay,4)=0            ;RongZi at 00:00
     Gosub, Rongzi_0
 else if mod(A_YDay,2) > 0     ;not a RongZi day
     Gosub, Rongzi_N
 else
     Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
-*/
-Gosub, Rongzi_N
+
 UploadNetDisk()
 ExitApp
 
@@ -48,10 +47,10 @@ Rongzi_0:
     FileDelete % UserIniRemote       
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","hou","xhhz"]
+    For index,value in  ["supper","xhhz"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
-    new QHUser(0).PrepareRongZi(4)
+    new QHUser(0).PrepareRongZi(3)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
         {
@@ -63,18 +62,18 @@ Rongzi_0:
 
     ;-------------------- ClickRongZiOK --------------------
     new QHUser(0).ClickRongZiOK()
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["supper","xhhz"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["supper","hou","xhhz","xxsf"]
+    For index,value in  ["supper","xhhz","xxsf"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1
         {
            if value = xxsf
-               new QHUser().RongZi(4)
+               new QHUser().RongZi(3)
             else 
                new 4399UserTask(value,0).RongZi(index)              
         }
@@ -90,18 +89,18 @@ Rongzi_0:
     ;new 4399UserTask("hou",0).ZhuanPan(3)
 
     ;----------------------- Hunter ------------------------
-    For index,value in  ["hou","xhhz"]
+    For index,value in  ["xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["xhhz","hou","supper"]
+    For index,value in  ["xhhz","supper"]
        new 4399UserTask(value).Getland()
     new QHUser().Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")
-    For index,value in  ["supper","hou","xhhz","xxsf"]
+    For index,value in  ["supper","xhhz","xxsf"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -117,11 +116,11 @@ Rongzi_0:
     sleep 60000    
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["long","song","yun"]
+    For index,value in  ["hou"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
-            new 4399UserTask(value).RongZi(index+2)
+            new 4399UserTask(value).RongZi(4)
 
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1

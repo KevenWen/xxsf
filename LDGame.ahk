@@ -217,7 +217,7 @@ class LDGame
 	{
 		this.GetLandpage()
 		sleep 300
-        if PixelColorExist("0xB3DDBF",511, 377,100)     ;the white color on the button
+        if PixelColorExist("0xB3DDBF",511, 377,100) or PixelColorExist("0xB6DEC1",511, 366,10) ;the white color on the button,remote or phy
         {
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )

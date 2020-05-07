@@ -80,13 +80,10 @@ Rongzi_0:
     }
     LogtoFile("Verification 1 done.")
     if mod(A_YDay-118,7) = 0
-        new 4399UserTask("supper").OpenBusinessSkill()   
-    WinClose,xxsf
-    WinClose,supper
-    WinClose,hou
+        new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    ;new 4399UserTask("hou",0).ZhuanPan(3)
+    new 4399UserTask("xhhz",0).ZhuanPan(4)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["xhhz"]
@@ -113,14 +110,14 @@ Rongzi_0:
     }
     LogtoFile("Verification 2 done.")
 
-    sleep 60000    
+    sleep 120000   
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["hou"]
+    For index,value in  ["hou","song"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
-            new 4399UserTask(value).RongZi(4)
+            new 4399UserTask(value).RongZi(index+2)
 
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1

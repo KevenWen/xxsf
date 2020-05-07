@@ -33,8 +33,10 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     }
     sleep 100000
 
-    For index,value in ["supper","sf06"]
-        new 4399UserTask(value).ZhuZi(3)
+    For index,value in ["supper","song","sf06"]
+        new 4399UserTask(value,0).ZhuZi(3)
+    
+    new QHUser(0).ZhuZi(3)      
 
     For index,value in ["supper","yun","long","song","sf06"]
         new 4399UserTask(value).ZhuZi(1)

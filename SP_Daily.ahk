@@ -43,8 +43,8 @@ return
 Rongzi_0:
 
     new LDGame(0)    
-    For index,value in ["hou"]
-        new 4399UserTask(value,0).PrepareRongZi(4)
+    For index,value in ["hou","song"]
+        new 4399UserTask(value,0).PrepareRongZi(index+2)
     FileDelete % UserIni
     FileDelete % UserIniRemote   
     FileAppend,,% UserIni
@@ -60,16 +60,16 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
-    For index,value in ["hou"]
+    For index,value in ["hou","song"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in ["hou"]
+    For index,value in ["hou","song"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(4)              
+            new 4399UserTask(value,0).RongZi(index+2)              
     }
 
     if mod(A_YDay-118,7) = 0
@@ -85,17 +85,17 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 4399UserTask("hou",0).ZhuanPan(3,0)
-
+    new 4399UserTask("hou",0).ZhuanPan(4)
+    new 4399UserTask("song",0).ZhuanPan(3,0)
     ;-------------------- Hunter ------------------------
 
-    For index,value in ["hou"]
+    For index,value in ["hou","song"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;-------------------- GetLand -----------------------
 
     new LDGame(0).GetLand()
-    For index,value in ["hou"]
+    For index,value in ["hou","song"]
         new 4399UserTask(value).GetLand()
 
     ;-------------------  Verification 2 ------------------
@@ -112,7 +112,7 @@ Rongzi_0:
     else
         new LDGame()
 
-    For index,value in  ["hou"]
+    For index,value in  ["hou","song"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1

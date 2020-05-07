@@ -16,29 +16,26 @@ Task2020:
     FormatTime, TimeToMeet,,HHmmss
     ;TimeToMeet = 235458
 
-    ;If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
-        ;runwait "RongZiTask.ahk"
-    If (TimeToMeet = 031000) ; Rong zi task, and also shopping / zhuanpan / openshangji
+    If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
         runwait "RongZiTask.ahk"
+
     ;Task for every days
-/*
+
     If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
     {
-        For index,value in  ["sf01","sf03","sf04","song","long"]
+        For index,value in  ["sf01","sf03","sf04","sf04","long","yun"]
         {
-            %value% := new 4399UserTask(value)
-            ;%value%.ZhuZi(2)
+            new 4399UserTask(value,0)
             sleep 5000
             if mod(A_YDay,2) > 0                         
-                %value%.RongZi(3)
-            %value%.Hunter(1)
-            %value% := ""
+                new 4399UserTask(value,0).RongZi(mod(index,5)+1)
+            new 4399UserTask(value).Hunter(1)
         }
     }
-*/
+
     If (TimeToMeet = 065000) or (TimeToMeet = 140000)  ; TouLie from black list
     {
-        For index,value in  ["song","sf01","sf03","sf04","sf06"]
+        For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
             new 4399UserTask(value).Hunter(0)
         UploadNetDisk()
     }  

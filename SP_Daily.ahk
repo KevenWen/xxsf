@@ -178,7 +178,7 @@ Rongzi_N:
 
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","song","xhhz","sf06"]
+    For index,value in  ["supper","song","xhhz","sf06","yun","long"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1

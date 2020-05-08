@@ -103,7 +103,7 @@ class HunterPage{
 
     GetResult(){
         this.GetHunterPage()                                                           
-        WaitPixelColorAndClick("0xFFC7BB",166, 805,1000) ;偷猎记录
+        click 166, 805          ;偷猎记录
         sleep 300        
         CaptureScreen()
         sleep 200

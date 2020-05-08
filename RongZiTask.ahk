@@ -83,7 +83,7 @@ Rongzi_0:
         new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("xhhz",0).ZhuanPan(4)
+    ;new 4399UserTask("xhhz",0).ZhuanPan(4,0)
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["xhhz"]
@@ -154,12 +154,12 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
 
-    For index,value in  ["supper","xhhz","song","sf06"]
+    For index,value in  ["supper","xhhz","song","sf06","yun","long"]
        new 4399UserTask(value).Getland()
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","xhhz","song","xxsf","sf06"]
+    For index,value in  ["supper","xhhz","song","xxsf","sf06","yun","long"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1

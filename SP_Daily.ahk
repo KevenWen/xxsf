@@ -198,7 +198,7 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
     
-    new LDGame(0)
+    Ldgame := new LDGame(0)
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0)
 
@@ -212,12 +212,15 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
-        new LDGame(0).OpenBusinessSkill()
+        Ldgame.OpenBusinessSkill()
 
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0).Getland()
 
-    new LDGame(0).GetLand()
+    Ldgame.GetLand()
+    Ldgame.SwitchYQX()
+    Ldgame.GetLand(0)
+    Ldgame.SwitchQZRM()        
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -230,8 +233,10 @@ Rongzi_2:
      For index,value in ["sf06","song"]
         new 4399UserTask(value).RongZi(index+1)
     
-    new LDGame(0).RongZi()
-
+    Ldgame.RongZi()
+    Ldgame.SwitchYQX()
+    Ldgame.RongZi(0)
+    Ldgame.SwitchQZRM()  
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
 

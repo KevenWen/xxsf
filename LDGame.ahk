@@ -89,11 +89,17 @@ class LDGame
 	}
 ; <========================  地产入驻  ===========================>
 	
-	GetLand(){
+	GetLand(qzrm=1){
 		try{
 		this.PrepareGameWindow()
-		this.DiCanJinzhu()
-		this.DC := 1
+		if qzrm = 1
+		{
+			this.DiCanJinzhu(1)
+			this.DC := 1
+		}
+		else
+			this.DiCanJinzhu(0)
+
 		LogToFile("GetLand() done for LDPlayer")
 		}
 		Catch e
@@ -105,13 +111,18 @@ class LDGame
 
 ; <========================  融资确认  ===========================>
 
-    ClickRongZiOK()
+    ClickRongZiOK(qzrm=1)
 	{
 		try{
 		this.PrepareGameWindow()
 		CaptureScreen()
-		this.ClickRongZiOKPublic()
-		this.RZ := 1
+		if qzrm = 1
+		{
+			this.ClickRongZiOKPublic(1)
+			this.RZ := 1
+		}
+		else
+			this.ClickRongZiOKPublic(0)
 		LogToFile("ClickRongZiOK() done for LDPlayer")
 		}
 		Catch e
@@ -121,13 +132,21 @@ class LDGame
 		}
 	}
 
-	RongZi()
+	RongZi(qzrm=1)
 	{
 		try{
-		this.GetGroupPage4()
-		this.RongZiPri()
+		if qzrm = 1
+		{
+			this.GetGroupPage4(1)
+			this.RongZiPri(1)
+			this.RZ := 1	
+		}
+		else
+		{
+			this.GetGroupPage4(0)
+			this.RongZiPri(0)
+		}			
 		LogToFile("RongZi() done for LDPlayer")		
-		this.RZ := 1	
 		}
 		catch e {
 		LogToFile("RongZi() get exception: " . e)
@@ -213,100 +232,194 @@ class LDGame
         } 
 	}
 
-	DiCanJinzhu()
+	DiCanJinzhu(qzrm=1)
 	{
 		this.GetLandpage()
 		sleep 300
-        if PixelColorExist("0xB3DDBF",511, 377,100) or PixelColorExist("0xB6DEC1",511, 366,10) ;the white color on the button,remote or phy
-        {
-            CaptureScreen()
-            LogToFile("Land business already done, no action needed." )
-            return  
-        }  
-		SendMode Event
-		Mousemove,520, 878
-		send {LButton down}
-		Mousemove,520, 132,5
-		sleep 100	
-		send {LButton up}
-		click 520, 878
-		sleep 200
-		CaptureScreen()
-		loop
+		if qzrm = 1
 		{
-			this.CloseAnySubWindow()
-			ImageSearch, Px, Py, 253, 431, 527, 901, % A_ScriptDir . "\\blockofyellow.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 		
-			else if (ErrorLevel = 1) ;Image not found 
+			if PixelColorExist("0xB3DDBF",511, 377,100) or PixelColorExist("0xB6DEC1",511, 366,10) ;the white color on the button,remote or phy
 			{
-				Mousemove,520, 878
-				send {LButton down}
-				Mousemove,520, 280,5
-				send {LButton up}
-				click 520, 878
-				sleep 200
+				CaptureScreen()
+				LogToFile("Land business already done, no action needed." )
+				return  
 			}
-			else if (ErrorLevel = 0) ;Image found
-			{
-                LogToFile("LD Image found when loop times: " . A_Index)
-				CaptureScreen()	
-				click %Px%, %Py%
-				sleep 200
-				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
-				   and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
-				{
-					click,235, 470, 23 ;金币23
-					sleep 100
-					click,241, 540, 17 ;金币17
-					sleep 100
-					click,415, 540, 3 ;资源卡6
-					sleep 100
-					click,326, 607, 3  ;3份钻石注决策资源
-					sleep 300					
-                    if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
-                        throw "Not enough money warning show!"
 
-					click 355, 746	;确认注入
-					sleep 200
-					if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
-                    {
-                        click 305, 625     ;点击确定
-						CaptureScreen()
-                        WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
-                    }
-					else
-                    {
-    					CaptureScreen()
-                        LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
-						Continue						 
-					}
-				}
-				else
-				{
-                    LogToFile("0xFFFEF5 and 0x5A7965 exception.")
-                    CaptureScreen()
-					Continue
-				}
-
-                if !PixelColorExist("0x706B59",520, 423,200) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
-                {
-                    CaptureScreen()
-                    LogToFile("LD Land business done.")
-			        sleep 200                     
-                    Break  
-                }   
-			}
+			SendMode Event
+			Mousemove,520, 878
+			send {LButton down}
+			Mousemove,520, 132,5
+			sleep 100	
+			send {LButton up}
+			click 520, 878
 			sleep 200
-			if A_index > 8
-				throw "QH DicanJinzhu loop more than 8 times still not get a free land."
+			CaptureScreen()
+			loop
+			{
+				this.CloseAnySubWindow()
+				ImageSearch, Px, Py, 253, 431, 527, 901, % A_ScriptDir . "\\blockofyellow.bmp"
+				if (ErrorLevel = 2)  ;Execption when conduct the search
+					throw "ImageSearch not work, please check." 		
+				else if (ErrorLevel = 1) ;Image not found 
+				{
+					Mousemove,520, 878
+					send {LButton down}
+					Mousemove,520, 280,5
+					send {LButton up}
+					click 520, 878
+					sleep 200
+				}
+				else if (ErrorLevel = 0) ;Image found
+				{
+					LogToFile("LD Image found when loop times: " . A_Index)
+					CaptureScreen()	
+					click %Px%, %Py%
+					sleep 200
+					if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
+					and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
+					{
+						click,235, 470, 23 ;金币23
+						sleep 100
+						click,241, 540, 17 ;金币17
+						sleep 100
+						click,415, 540, 3 ;资源卡6
+						sleep 100
+						click,326, 607, 3  ;3份钻石注决策资源
+						sleep 300					
+						if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
+							throw "Not enough money warning show!"
+
+						click 355, 746	;确认注入
+						sleep 200
+						if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
+						{
+							click 305, 625     ;点击确定
+							CaptureScreen()
+							WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
+						}
+						else
+						{
+							CaptureScreen()
+							LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
+							Continue						 
+						}
+					}
+					else
+					{
+						LogToFile("0xFFFEF5 and 0x5A7965 exception.")
+						CaptureScreen()
+						Continue
+					}
+
+					if !PixelColorExist("0x706B59",520, 423,200) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
+					{
+						CaptureScreen()
+						LogToFile("LD Land business done.")
+						sleep 200                     
+						Break  
+					}   
+				}
+				sleep 200
+				if A_index > 8
+					throw "QH DicanJinzhu loop more than 8 times still not get a free land."
+			}
+			SendMode Input			  
 		}
-		SendMode Input		
+		else
+		{
+			if !PixelColorExist("0x706B59",184, 455,100)			;the gray color next refresh time
+			{
+				CaptureScreen()
+				LogToFile("YQX Land business already done, no action needed." )
+				return  
+			}
+			SendMode Event
+			Mousemove,525, 905
+			send {LButton down}
+			Mousemove,525, 132,5
+			sleep 100	
+			send {LButton up}
+			click 525, 905
+			sleep 200
+			CaptureScreen()
+			loop
+			{
+				this.CloseAnySubWindow()
+				ImageSearch, Px, Py, 253, 490, 500, 910, % A_ScriptDir . "\\blockofyellow.bmp"
+				if (ErrorLevel = 2)  ;Execption when conduct the search
+					throw "ImageSearch not work, please check." 		
+				else if (ErrorLevel = 1) ;Image not found 
+				{
+					Mousemove,525, 905
+					send {LButton down}
+					Mousemove,525, 350,5
+					send {LButton up}
+					click 525, 905
+					sleep 200
+				}
+				else if (ErrorLevel = 0) ;Image found
+				{
+					LogToFile("LD Image found when loop times: " . A_Index)
+					CaptureScreen()	
+					click %Px%, %Py%
+					sleep 200
+					if PixelColorExist("0xFFFEF5",154, 533,1000) 		;经营资源输入框存在
+					and PixelColorExist("0x5A7965",300, 404,10)      ;且上面图片显示是闲置土地
+					{
+						click,235, 520, 21 ;金币23
+						sleep 100
+						click,241, 585, 18 ;金币17
+						sleep 100
+						click,415, 585, 2 ;资源卡3
+						sleep 100
+						click,326, 650, 2  ;3份钻石注决策资源
+						sleep 300					
+						if !PixelColorExist("0xFEEDC7",92, 449,10) ;没有显示金钱不够提示
+							throw "Not enough money warning show!"
+
+						click 355, 780	;确认注入
+						sleep 200
+						if PixelColorExist("0xFBFBFB",461, 454,300) ;确认注入提示框
+						{
+							click 301, 661     ;点击确定
+							CaptureScreen()
+							WaitPixelColorAndClick("0xFBFBFB",472, 236,1000)
+						}
+						else
+						{
+							CaptureScreen()
+							LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
+							Continue						 
+						}
+					}
+					else
+					{
+						LogToFile("0xFFFEF5 and 0x5A7965 exception.")
+						CaptureScreen()
+						Continue
+					}
+
+					if !PixelColorExist("0x706B59",528, 446,200) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
+					{
+						CaptureScreen()
+						LogToFile("YQX LD Land business done.")
+						sleep 200                     
+						Break  
+					}   
+				}
+				sleep 200
+				if A_index > 8
+					throw "QH DicanJinzhu loop more than 8 times still not get a free land."
+			}
+			SendMode Input				
+		}
+
+	
 	}
 
 ;=========================================  Group functions  ===============================================
 
-	GetGroupPage4()
+	GetGroupPage4(qzrm=1)
 	{
 		this.PrepareGameWindow()
 		loop
@@ -316,7 +429,10 @@ class LDGame
 			this.CloseAnySubWindow()
 			click 356, 984				;商会 button
 			sleep 300
-			click 459, 248				;融资 tab
+			if qzrm = 1			
+				click 459, 248				;融资 tab
+			else
+				click 445, 312				;融资 tab					
 			if PixelColorExist("0xABA9A5",468, 572,2000) ;金融企业右边的灰块
 				break
 		}
@@ -373,59 +489,106 @@ class LDGame
 		}
 	}
 
-	ClickRongZiOKPublic()
+	ClickRongZiOKPublic(qzrm=1)
 	{
-		click 310, 627
-		sleep, % s["short"]
-		click 310, 627
-		sleep, % s["short"]		
-		loop 5
+		if qzrm
 		{
-			if !this.SubWindowExist()
-				break
-			if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
-				this.CloseSpeSubWindow(1)
-			if PixelColorExist("0xB2A68C",278, 680,100)
+			click 310, 627
+			sleep, % s["short"]
+			click 310, 627
+			sleep, % s["short"]		
+			loop 5
 			{
-				click 310, 627
-				sleep, % s["short"]
-				CaptureScreen()
-			}	
+				if !this.SubWindowExist()
+					break
+				if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
+					this.CloseSpeSubWindow(1)
+				if PixelColorExist("0xB2A68C",278, 680,100)
+				{
+					click 310, 627
+					sleep, % s["short"]
+					CaptureScreen()
+				}	
+			}
+		}
+		else
+		{
+			click 285, 733
+			sleep, % s["short"]
+			click 310, 666
+			sleep, % s["short"]		
+			click 310, 666
+			sleep, % s["short"]
+			if PixelColorExist("0xFBFBFB",477, 318,1000) ; the color under in the OK window
+				this.CloseAnySubWindow()
 		}
 	}
 
-	RongZiPri()
+	RongZiPri(qzrm=1)
 	{		
 		loop
 		{
 			if A_index > 2
 				throw, "Tried 2 times but still not able to complete RongZi."
 
-			this.CloseAnySubWindow()			
-			click, 403, 724	   							  ; 固定注洒店
-			if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
-			throw, "Already RongZi, not zero!"
+			this.CloseAnySubWindow()
+			if qzrm = 1
+			{
+				click, 403, 724	   							  ; 固定注洒店
+				if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
+				throw, "Already RongZi, not zero!"
 
-			mousemove, 200, 600
-			sleep, % s["short"]
-			SetDefaultMouseSpeed 30
-			SendMode Event
-			click, 40
-			SetDefaultMouseSpeed 2	
-			SendMode Input				
-			sleep, % s["mid"]
+				mousemove, 200, 600
+				sleep, % s["short"]
+				SetDefaultMouseSpeed 30
+				SendMode Event
+				click, 40
+				SetDefaultMouseSpeed 2	
+				SendMode Input				
+				sleep, % s["mid"]
 
-			if !PixelColorExist("0xFFFFF3",246, 396,10) ;存在没有更多金币提示.!
-				Throw, "Not enough money warnning exist!"    
+				if !PixelColorExist("0xFFFFF3",246, 396,10) ;存在没有更多金币提示.!
+					Throw, "Not enough money warnning exist!"    
 
-			click 328, 594
-			if !PixelColorExist("0xFFFFFF",98,403,2000)
-				Continue
+				click 328, 594
+				if !PixelColorExist("0xFFFFFF",98,403,2000)
+					Continue
+				else
+				{
+					click  277, 628
+					CaptureScreen()				
+					sleep 200
+					break
+				}
+			}
 			else
 			{
-				click  277, 628
-				CaptureScreen()				
-				sleep 200
+				click 138,475	   							  ; 固定注游乐
+				if !PixelColorExist("0xFFFEF5",211, 640,2000) ; 不是显示0份
+				throw, "Already RongZi, not zero!"
+
+				mousemove, 200, 640
+				sleep, % s["short"]
+				SetDefaultMouseSpeed 30
+				SendMode Event
+				click, 39
+				SetDefaultMouseSpeed 2	
+				SendMode Input				
+				sleep, % s["mid"]
+
+				if !PixelColorExist("0xFFFFF3",250,450,10) ;存在没有更多金币提示.!
+					Throw, "Not enough money warnning exist!"    
+
+				click 312, 631
+				if !PixelColorExist("0xFFFFFF",115, 459,2000)
+					Continue
+				else
+				{
+					click  287, 661
+					CaptureScreen()				
+					sleep 200
+					break					
+				}
 			}
 		}
 	}
@@ -467,7 +630,35 @@ class LDGame
 			throw "LDPlayer window not exist"
 	}
 
+	SwitchYQX()
+	{
+		LogToFile(" ")	
+		LogToFile("Going to SwitchYQX..... ")	
+		if PixelColorExist("0xFFFFFF",352, 104,10)
+			return
 
+		send {F2}
+		sleep 300
+		click 272, 268
+		sleep 500		
+		if !PixelColorExist("0xFFFFFF",352, 104,1000)
+			LogToFile("Switch to YQX failed, not found the white title.")		
+	}
+
+	SwitchQZRM()
+	{
+		LogToFile(" ")
+		LogToFile("Going to SwitchQZRM..... ")	
+		if !PixelColorExist("0xFFFFFF",352, 104,10)
+			return
+
+		send {F2}
+		sleep 300
+		click 272, 268
+		sleep 500		
+		if PixelColorExist("0xFFFFFF",352, 104,1000)
+			LogToFile("SwitchQZRM failed, Still the white title.")		
+	}	
 }
 
 

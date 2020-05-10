@@ -6,6 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include RDPGame.ahk
 #include QHuserTask.ahk
 #include LDGame.ahk
+#include YQXGame.ahk
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window

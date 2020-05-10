@@ -4,7 +4,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 #Include 4399UserTask.ahk
 #include LDGame.ahk
-
+#include YQXGame.ahk
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
@@ -43,6 +43,7 @@ return
 Rongzi_0:
 
     new LDGame(0)    
+    new YQXGame(0)       
     For index,value in ["hou","song"]
         new 4399UserTask(value,0).PrepareRongZi(index+2)
     FileDelete % UserIni
@@ -57,6 +58,7 @@ Rongzi_0:
     }
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).ClickRongZiOK()   
+    new YQXGame(0).ClickRongZiOK()   
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
@@ -82,6 +84,10 @@ Rongzi_0:
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
     if _RZ < 1
         new LDGame(0).RongZi()
+
+    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
+    if _RZ < 1
+        new YQXGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
@@ -95,6 +101,8 @@ Rongzi_0:
     ;-------------------- GetLand -----------------------
 
     new LDGame(0).GetLand()
+    new YQXGame(0).GetLand()
+    
     For index,value in ["hou","song"]
         new 4399UserTask(value).GetLand()
 
@@ -111,6 +119,12 @@ Rongzi_0:
         new LDGame().GetLand()
     else
         new LDGame()
+
+    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    if _DC < 1
+        new YQXGame().GetLand()
+    else
+        new YQXGame()
 
     For index,value in  ["hou","song"]
     {
@@ -134,7 +148,6 @@ Rongzi_0:
     } 
     LogtoFile("Remote verification done.")
 
-
     WinClose 360游戏大厅
 Return
 
@@ -147,6 +160,10 @@ Rongzi_N:
     FileDelete % UserIniRemote
     FileDelete % UserIni
     FileAppend,,% UserIni  
+
+    new LDGame(0)
+    new YQXGame(0)   
+
     Loop 600                           ;Start from 00 mins
     {
         FormatTime, MinToMeet,,mm
@@ -160,6 +177,7 @@ Rongzi_N:
         new LDGame(0).OpenBusinessSkill()
 
     new LDGame(0).GetLand()
+    new YQXGame().GetLand()    
 
     ;-------------------  Verification ------------------
     if mod(A_YDay-118,7) = 0
@@ -170,11 +188,17 @@ Rongzi_N:
     }
 
     LogtoFile("Start to do verification...")
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
+    IniRead, _DC, % UserIni,LDlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
     else
         new LDGame()
+
+    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    if _DC < 1
+        new YQXGame().GetLand()
+    else
+        new YQXGame()
 
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
@@ -198,7 +222,8 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
     
-    Ldgame := new LDGame(0)
+    new LDGame(0)
+    new YQXGame(0)       
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0)
 
@@ -217,10 +242,8 @@ Rongzi_2:
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0).Getland()
 
-    Ldgame.GetLand()
-    Ldgame.SwitchYQX()
-    Ldgame.GetLand(0)
-    Ldgame.SwitchQZRM()        
+    new LDGame(0).GetLand()
+    new YQXGame(0).GetLand()
 
     Loop 600    ;Make sure we are start delayed from 2 mins
     {
@@ -233,10 +256,8 @@ Rongzi_2:
      For index,value in ["sf06","song"]
         new 4399UserTask(value).RongZi(index+1)
     
-    Ldgame.RongZi()
-    Ldgame.SwitchYQX()
-    Ldgame.RongZi(0)
-    Ldgame.SwitchQZRM()  
+    new LDGame(0).RongZi()
+    new YQXGame().RongZi()
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
 
@@ -255,6 +276,16 @@ Rongzi_2:
         new LDGame().GetLand()
     else
         new LDGame()
+
+    IniRead, _RZ, % UserIni,YQXlayer,RZ,0
+    if _RZ < 1
+        new YQXGame(0).RongZi()
+    
+    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    if _DC < 1
+        new YQXGame().GetLand()
+    else
+        new YQXGame()
 
     For index,value in  ["sf06","song"]
     {

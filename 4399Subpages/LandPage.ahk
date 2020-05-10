@@ -81,10 +81,11 @@ class LandPage{
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )
             return  
-        }                
+        }
+        sleep 100                
         Mousemove,510, 825
         send {LButton down}
-        Mousemove,510, 200,10
+        Mousemove,510, 180,5
         send {LButton up}
         click 510, 825
         sleep 200

@@ -223,11 +223,11 @@ class LDGame
             LogToFile("Land business already done, no action needed." )
             return  
         }  
+		sleep 200
 		SendMode Event
 		Mousemove,520, 878
 		send {LButton down}
-		Mousemove,520, 132,5
-		sleep 100	
+		Mousemove,520, 130,4
 		send {LButton up}
 		click 520, 878
 		sleep 200

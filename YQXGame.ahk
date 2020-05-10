@@ -250,11 +250,11 @@ class YQXGame
 			LogToFile("YQX Land business already done, no action needed." )
 			return  
 		}
+		sleep 200
 		SendMode Event
 		Mousemove,525, 905
 		send {LButton down}
-		Mousemove,525, 132,5
-		sleep 100	
+		Mousemove,525, 100,4
 		send {LButton up}
 		click 525, 905
 		sleep 200
@@ -269,7 +269,7 @@ class YQXGame
 			{
 				Mousemove,525, 905
 				send {LButton down}
-				Mousemove,525, 350,5
+				Mousemove,525, 350,10
 				send {LButton up}
 				click 525, 905
 				sleep 200

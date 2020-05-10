@@ -215,9 +215,9 @@ class QHsfGame
         } 
 		Mousemove,570, 840
 		send {LButton down}
-		Mousemove,570, 80,5
+		Mousemove,570, 80,3
+		send {LButton up}		
 		sleep 100	
-		send {LButton up}
 		click 570, 840
 		sleep 200
 		CaptureScreen()

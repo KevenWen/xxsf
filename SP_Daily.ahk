@@ -66,19 +66,21 @@ Rongzi_0:
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;-------------------  Verification 1 -------------------
+    sleep 1000
     LogtoFile("Start to do verification 1...")
-    For index,value in ["hou","song"]
-    {
-        IniRead, _RZ, % UserIni, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index+2)              
-    }
 
     if mod(A_YDay-118,7) = 0
     {
         IniRead, _SJ, % UserIni,LDPlayer,SJ,0
         if _SJ < 1 and mod(A_YDay-118,7) = 0
             new LDGame(0).OpenBusinessSkill() 
+    }
+
+    For index,value in ["hou","song"]
+    {
+        IniRead, _RZ, % UserIni, % value, RZ,0        
+        if _RZ < 1  
+            new 4399UserTask(value,0).RongZi(index+2)              
     }
 
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
@@ -91,7 +93,8 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 4399UserTask("hou",0).ZhuanPan(4)
+    ;new 4399UserTask("hou",0).ZhuanPan(4)
+    new YQXGame(0).ZhuanPan(7)
     new 4399UserTask("song",0).ZhuanPan(3,0)
     ;-------------------- Hunter ------------------------
 
@@ -100,31 +103,23 @@ Rongzi_0:
 
     ;-------------------- GetLand -----------------------
 
-    new LDGame(0).GetLand()
-    new YQXGame(0).GetLand()
+    new LDGame().GetLand()
+    new YQXGame().GetLand()
     
     For index,value in ["hou","song"]
         new 4399UserTask(value).GetLand()
 
     ;-------------------  Verification 2 ------------------
+    sleep 1000
     LogtoFile("Start to do verification 2...")
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            new LDGame(0).OpenBusinessSkill()
-    }
+
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
-    else
-        new LDGame()
 
     IniRead, _DC, % UserIni,YQXlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
-    else
-        new YQXGame()
 
     For index,value in  ["hou","song"]
     {
@@ -136,7 +131,7 @@ Rongzi_0:
 
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz"]
+    For index,value in  ["supper","xhhz","sf06"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
@@ -176,29 +171,26 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
 
-    new LDGame(0).GetLand()
+    new LDGame().GetLand()
     new YQXGame().GetLand()    
 
     ;-------------------  Verification ------------------
+    sleep 1000
+    LogtoFile("Start to do verification...")
     if mod(A_YDay-118,7) = 0
     {
         IniRead, _SJ, % UserIni,LDPlayer,SJ,0
         if _SJ < 1
-            new LDGame(0).OpenBusinessSkill()
+            new LDGame().OpenBusinessSkill()
     }
 
-    LogtoFile("Start to do verification...")
     IniRead, _DC, % UserIni,LDlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
-    else
-        new LDGame()
 
     IniRead, _DC, % UserIni,YQXlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
-    else
-        new YQXGame()
 
     Sleep 1200000
     LogtoFile("Start to do remote verification...")

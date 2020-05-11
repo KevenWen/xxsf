@@ -220,7 +220,6 @@ class QHsfGame
 		sleep 100	
 		click 570, 840
 		sleep 200
-		CaptureScreen()
 		loop
 		{
 			this.CloseAnySubWindow()

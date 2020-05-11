@@ -101,7 +101,7 @@ class LandPage{
                 4399sfGame.CloseAnySubWindow()                
                 Mousemove,510, 825
                 send {LButton down}
-                Mousemove,510, 345,15
+                Mousemove,510, 400,15
                 send {LButton up}
                 click 510, 825			
                 sleep 200

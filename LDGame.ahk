@@ -229,9 +229,8 @@ class LDGame
 		send {LButton down}
 		Mousemove,520, 130,4
 		send {LButton up}
-		click 520, 878
+		click 520, 878	
 		sleep 200
-		CaptureScreen()
 		loop
 		{
 			this.CloseAnySubWindow()

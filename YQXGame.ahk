@@ -256,9 +256,8 @@ class YQXGame
 		send {LButton down}
 		Mousemove,525, 100,4
 		send {LButton up}
-		click 525, 905
+		click 525, 905	
 		sleep 200
-		CaptureScreen()
 		loop
 		{
 			this.CloseAnySubWindow()
@@ -474,13 +473,13 @@ class YQXGame
 			sleep 200
 			Loop
 			{
-				LogToFile("Find Started window, going to Click AD. ")	
-				if PixelColorExist("0xFFFDFF",281, 272,100)
+				if PixelColorExist("0xFFFDFF",281, 272,100) or PixelColorExist("0xFFFDFF",272, 265,100) ;remote or local
+				{
+					LogToFile("Find last time play window, going to Click play. ")	
 					click 281, 374
+				}
 
-				;run %LDExePath% -s 1 input tap 828 406,, Hide
-
-				if PixelColorExist("0xFFFEF5",359, 759,10)
+				if PixelColorExist("0xFFFEF5",359, 754,10)
 				{
 					LogToFile("Find Start button, going to Click it. ")	
 					click 279, 849

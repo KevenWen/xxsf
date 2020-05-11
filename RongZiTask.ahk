@@ -47,33 +47,33 @@ Rongzi_0:
     FileDelete % UserIniRemote       
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz"]
+    For index,value in  ["supper","xhhz","sf06"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
-    new QHUser(0).PrepareRongZi(3)
+    new QHUser(0).PrepareRongZi(5)
 
     Loop 600    ;Make sure we are start after 00:00, total 10 mins
         {
             FormatTime, MinToMeet,,mm
             if MinToMeet = 00
                 Break
-            sleep 1000
+            sleep 100
         }
 
     ;-------------------- ClickRongZiOK --------------------
     new QHUser(0).ClickRongZiOK()
-    For index,value in  ["supper","xhhz"]
+    For index,value in  ["supper","xhhz","sf06"]
         new 4399UserTask(value,0).ClickRongZiOK()
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["supper","xhhz","xxsf"]
+    For index,value in  ["supper","xhhz","xxsf","sf06"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1
         {
            if value = xxsf
-               new QHUser().RongZi(3)
+               new QHUser().RongZi(5)
             else 
                new 4399UserTask(value,0).RongZi(index)              
         }
@@ -83,15 +83,16 @@ Rongzi_0:
         new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    ;new 4399UserTask("xhhz",0).ZhuanPan(4,0)
+    new 4399UserTask("sf06",0).ZhuanPan(7,1)
+    new 4399UserTask("xhhz",0).ZhuanPan(4,0)
 
     ;----------------------- Hunter ------------------------
-    For index,value in  ["xhhz"]
+    For index,value in  ["sf06","xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["xhhz","supper"]
+    For index,value in  ["xhhz","sf06","supper"]
        new 4399UserTask(value).Getland()
     new QHUser().Getland()
     

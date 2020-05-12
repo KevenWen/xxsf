@@ -367,3 +367,17 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
 		LogToFile("excetion while check remote task: " . e)
 		}
 	}
+
+; <========================  Time  ===========================>
+
+    WaitForTime(eTime) { 
+    eTime := A_YYYY A_MM A_DD SubStr(eTime, 1 ,2) SubStr(eTime, 3 ,2) (SubStr(eTime, 5, 2) ? SubStr(eTime, 5, 2) : "00")
+    if (A_Now > eTime) ; if eTime is past, set for tomorrow at eTime
+        eTime += 1, day
+    TimeToSleep := eTime
+    TimeToSleep -= A_Now, seconds
+    Sleep, % TimeToSleep * 1000    
+    FormatTime, current, A_Now, HHmmss ; optional - comment out if you don't need the current time returned
+    Return, current
+    }
+

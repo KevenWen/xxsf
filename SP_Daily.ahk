@@ -13,6 +13,36 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 
 ;Gosub, Rongzi_0  ;for testing only
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
+#persistent
+
+/*
+TargetTime = 1400  ; run at 2pm, which is 1400.
+
+StringLeft, TargetDateTime, A_Now, 8  ; Put just YYYYMMDD into the variable.
+TargetDateTime = %TargetDateTime%%TargetTime%
+TimeUntilTarget = %TargetDateTime%
+TimeUntilTarget -= %A_Now%, seconds
+if TimeUntilTarget < 0
+{
+     [color=red]MsgBox The target time is already past![/color]
+     ExitApp
+}
+TimeUntilTarget *= 1000 ; Convert to milliseconds.
+SetTimer, Timer1, %TimeUntilTarget%
+return
+
+Timer1:
+SetTimer, Timer1, off  ; i.e. perform this subroutine only once.
+; In case you want to be warned before it happens, in case it changes the
+; active window or otherwise disrupts what the user is working on:
+SplashTexton,,, It's about to happen.
+Sleep, 3000
+SplashTextOff
+; And here perform whatever action you wanted scheduled:
+; ...
+return
+*/
+
 
 SetTimer, Task2020, 1000  ;run every 1 secs
 Return
@@ -48,14 +78,10 @@ Rongzi_0:
         new 4399UserTask(value,0).PrepareRongZi(index+2)
     FileDelete % UserIni
     FileDelete % UserIniRemote   
-    FileAppend,,% UserIni
-    Loop 600    ;Make sure we are start after 00:00
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 1000
-    }
+    FileAppend,,% UserIni               
+
+    WaitForTime(0000)   ;Make sure we are start after 00:00
+
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).ClickRongZiOK()   
     new YQXGame(0).ClickRongZiOK()   
@@ -92,10 +118,10 @@ Rongzi_0:
         new YQXGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
-
     ;new 4399UserTask("hou",0).ZhuanPan(4)
-    new YQXGame(0).ZhuanPan(7)
-    new 4399UserTask("song",0).ZhuanPan(3,0)
+    new YQXGame(0).ZhuanPan(8)
+    new 4399UserTask("hou").ZhuanPan(3,0)
+    new 4399UserTask("hou",0).ZhuanPan(1,1)
     ;-------------------- Hunter ------------------------
 
     For index,value in ["hou","song"]
@@ -159,13 +185,7 @@ Rongzi_N:
     new LDGame(0)
     new YQXGame(0)   
 
-    Loop 600                           ;Start from 00 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 1000
-    }
+    WaitForTime(0000)   ;Make sure we are start after 00:00
 
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
@@ -219,13 +239,8 @@ Rongzi_2:
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0)
 
-    Loop 600    ;Make sure we are start delayed from 2 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 1000
-    }
+
+    WaitForTime(000001)   ;Make sure we are start after 00:00:01
 
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
@@ -237,13 +252,7 @@ Rongzi_2:
     new LDGame(0).GetLand()
     new YQXGame(0).GetLand()
 
-    Loop 600    ;Make sure we are start delayed from 2 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet > 01
-            Break
-        sleep 1000
-    }
+    WaitForTime(0002)   ;Make sure we are start after 00:02
 
      For index,value in ["sf06","song"]
         new 4399UserTask(value).RongZi(index+1)

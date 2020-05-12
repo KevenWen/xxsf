@@ -52,13 +52,8 @@ Rongzi_0:
 
     new QHUser(0).PrepareRongZi(5)
 
-    Loop 600    ;Make sure we are start after 00:00, total 10 mins
-        {
-            FormatTime, MinToMeet,,mm
-            if MinToMeet = 00
-                Break
-            sleep 100
-        }
+    while A_Min > 50
+        sleep 1000
 
     ;-------------------- ClickRongZiOK --------------------
     new QHUser(0).ClickRongZiOK()
@@ -141,13 +136,8 @@ Rongzi_N:
     For index,value in  ["supper","xhhz"]
        new 4399UserTask(value,0)
 
-    Loop 600    ;Make sure we are start after 00:00, total 10 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 1000
-    }
+    while A_Min > 50     ;Make sure we are start after 00:00
+        sleep 1000 
 
     ;---------------------- Tasks ------------------------
     new QHUser().Getland()
@@ -194,13 +184,9 @@ Rongzi_2:
     For index,value in  ["supper","xhhz","hou"]
             new 4399UserTask(value,0)
 
-    Loop 600    ;Make sure we are start at 00 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet < 50
-            Break
-        sleep 1000
-    }
+    while A_Min > 50     ;Make sure we are start after 00:00
+        sleep 1000 
+
     sleep 1000
    ;---------------------- Getland ------------------------
 
@@ -213,13 +199,8 @@ Rongzi_2:
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
 
-    Loop 600    ;Make sure we are start RongZi delayed from 2 mins
-    {
-        FormatTime, MinToMeet,,mm
-        if MinToMeet > 01
-            Break
-        sleep 1000
-    }
+    while A_Min < 02      ;Make sure we are start RongZi delayed from 2 mins
+        sleep 1000 
 
    ;---------------------- RongZi ------------------------
 

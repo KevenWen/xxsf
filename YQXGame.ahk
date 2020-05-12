@@ -373,12 +373,13 @@ class YQXGame
 			WaitPixelColorAndClickThrowErr("0xF4452A",409, 827,2000) ;Ten Times Button
 			sleep 200
 			LogToFile("one time..")	
-			PixelColorExist("0xFBFBFB",412, 240,5000) ;Finished once
+			PixelColorExist("0xFBFBFB",390, 300,5000) ;Finished once
 			sleep 200
-			click 412, 240
+			click 390, 300
 			sleep 300
 			click 445, 447  ;Close double money window if any.
 			sleep 200
+			click 433, 432
 			CaptureScreen()	
 			n++  
 		}

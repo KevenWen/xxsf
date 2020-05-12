@@ -73,7 +73,7 @@ class QHsfGame
 				If PixelColorExist("0xFE901A",365, 541,100)
 				{
 					click 365, 541 ;click the account button
-					sleep 1000
+					sleep 1500
 					click 356, 545 ;click the manully login button
 					sleep 500
 				}

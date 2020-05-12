@@ -78,7 +78,7 @@ Rongzi_0:
         new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("sf06",0).ZhuanPan(7,1)
+    new 4399UserTask("sf06",0).ZhuanPan(7,0)
     new 4399UserTask("xhhz",0).ZhuanPan(4,0)
 
     ;----------------------- Hunter ------------------------

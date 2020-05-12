@@ -52,8 +52,7 @@ Rongzi_0:
 
     new QHUser(0).PrepareRongZi(5)
 
-    while A_Min > 50
-        sleep 1000
+    WaitForTime(000001)   ;Make sure we are start after 00:00
 
     ;-------------------- ClickRongZiOK --------------------
     new QHUser(0).ClickRongZiOK()
@@ -133,11 +132,10 @@ Rongzi_N:
     FileAppend,,% UserIni
 
     new QHUser(0)
-    For index,value in  ["supper","xhhz"]
+    For index,value in  ["supper","xhhz","song"]
        new 4399UserTask(value,0)
 
-    while A_Min > 50     ;Make sure we are start after 00:00
-        sleep 1000 
+    WaitForTime(000001)   ;Make sure we are start after 00:00
 
     ;---------------------- Tasks ------------------------
     new QHUser().Getland()
@@ -184,8 +182,7 @@ Rongzi_2:
     For index,value in  ["supper","xhhz","hou"]
             new 4399UserTask(value,0)
 
-    while A_Min > 50     ;Make sure we are start after 00:00
-        sleep 1000 
+    WaitForTime(0000)   ;Make sure we are start after 00:00
 
     sleep 1000
    ;---------------------- Getland ------------------------
@@ -199,8 +196,7 @@ Rongzi_2:
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
 
-    while A_Min < 02      ;Make sure we are start RongZi delayed from 2 mins
-        sleep 1000 
+    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
 
    ;---------------------- RongZi ------------------------
 

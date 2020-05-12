@@ -117,12 +117,12 @@ class LandPage{
                 and PixelColorExist("0x5A7965",331, 353,10)     ;且上面图片显示是闲置土地
                 {
                     Mousemove,255, 460
-                    click, % round(num/2)+2 ;金币注经营资源
+                    click, % num-6                  ;金币注经营资源
                     sleep 100
                     Mousemove,255, 520
-                    click, % round(num/2)-3 ;金币注管理资源                    
+                    click, 5                        ;金币注管理资源                    
                     sleep 100
-                    click,414, 520, 2				;2资源卡注管理资源
+                    click,425,580, 2				;2资源卡注决策资源
                     sleep 100
                     click,330,580, 3				;3份钻石注决策资源
                     sleep 300

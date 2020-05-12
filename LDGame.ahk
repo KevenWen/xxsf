@@ -255,9 +255,9 @@ class LDGame
 				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 470, 23 ;金币23
+					click,235, 470, 35 ;金币23
 					sleep 100
-					click,241, 540, 17 ;金币17
+					click,241, 540, 5 ;金币17
 					sleep 100
 					click,415, 540, 3 ;资源卡6
 					sleep 100

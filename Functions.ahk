@@ -370,14 +370,14 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
 
 ; <========================  Time  ===========================>
 
-    WaitForTime(eTime) { 
+    WaitForTime(eTime, plusday=1) { 
     eTime := A_YYYY A_MM A_DD SubStr(eTime, 1 ,2) SubStr(eTime, 3 ,2) (SubStr(eTime, 5, 2) ? SubStr(eTime, 5, 2) : "00")
-    if (A_Now > eTime) ; if eTime is past, set for tomorrow at eTime
+    if (A_Now > eTime and plusday)  ; if eTime is past, set for tomorrow at eTime
         eTime += 1, day
     TimeToSleep := eTime
     TimeToSleep -= A_Now, seconds
+    MsgBox, % TimeToSleep
     Sleep, % TimeToSleep * 1000    
     FormatTime, current, A_Now, HHmmss ; optional - comment out if you don't need the current time returned
     Return, current
     }
-

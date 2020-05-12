@@ -80,7 +80,7 @@ Rongzi_0:
     FileDelete % UserIniRemote   
     FileAppend,,% UserIni               
 
-    WaitForTime(0000)   ;Make sure we are start after 00:00
+    WaitForTime(000001)   ;Make sure we are start after 00:00
 
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).ClickRongZiOK()   
@@ -252,7 +252,7 @@ Rongzi_2:
     new LDGame(0).GetLand()
     new YQXGame(0).GetLand()
 
-    WaitForTime(0002)   ;Make sure we are start after 00:02
+    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
 
      For index,value in ["sf06","song"]
         new 4399UserTask(value).RongZi(index+1)

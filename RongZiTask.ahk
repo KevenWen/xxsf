@@ -143,12 +143,12 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
 
-    For index,value in  ["supper","xhhz","song","sf06","yun","long"]
+    For index,value in  ["supper","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","xhhz","song","xxsf","sf06","yun","long"]
+    For index,value in  ["supper","xhhz","song","xxsf","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1

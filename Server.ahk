@@ -1,6 +1,6 @@
 #NoEnv
 SetBatchLines, -1
-
+#include Functions.ahk
 #Include Socket.ahk
 #Include Jxon.ahk
 #Include RemoteObj.ahk

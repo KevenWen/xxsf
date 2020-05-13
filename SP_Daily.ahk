@@ -143,7 +143,7 @@ Rongzi_0:
     if _DC < 1
         new LDGame().GetLand()
 
-    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
 
@@ -208,13 +208,13 @@ Rongzi_N:
     if _DC < 1
         new LDGame().GetLand()
 
-    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
 
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","song","xhhz","sf06","yun","long"]
+    For index,value in  ["supper","song","xhhz","sf06"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1
@@ -258,7 +258,7 @@ Rongzi_2:
         new 4399UserTask(value).RongZi(index+1)
     
     new LDGame(0).RongZi()
-    new YQXGame().RongZi()
+    new YQXGame(0).RongZi()
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
 
@@ -276,17 +276,17 @@ Rongzi_2:
     if _DC < 1
         new LDGame().GetLand()
     else
-        new LDGame()
+        winclose LDPlayer
 
-    IniRead, _RZ, % UserIni,YQXlayer,RZ,0
+    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
     if _RZ < 1
         new YQXGame(0).RongZi()
     
-    IniRead, _DC, % UserIni,YQXlayer,DC,0
+    IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
     else
-        new YQXGame()
+        winclose YQXPlayer
 
     For index,value in  ["sf06","song"]
     {

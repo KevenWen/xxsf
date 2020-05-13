@@ -376,7 +376,6 @@ FTPDownload(srv, usr, pwd, rfile, lfile)
         eTime += 1, day
     TimeToSleep := eTime
     TimeToSleep -= A_Now, seconds
-    MsgBox, % TimeToSleep
     Sleep, % TimeToSleep * 1000    
     FormatTime, current, A_Now, HHmmss ; optional - comment out if you don't need the current time returned
     Return, current

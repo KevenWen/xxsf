@@ -100,6 +100,7 @@ DC[]{
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
 		this.DC := 1
+		return 1
 		}
 		Catch e
 		{
@@ -134,7 +135,8 @@ DC[]{
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
 					this.GroupPage.OpenSJ()
 					CaptureScreen()
-					LogToFile("After open BussinessSkill.")		
+					LogToFile("After open BussinessSkill.")
+					Return 1		
 				}
 			sleep 1000
 			}
@@ -142,7 +144,8 @@ DC[]{
 		Catch e {
 			LogToFile("Open bussinessSkill failed with execption." . e)
 			CaptureScreen()			
-			SendAlertEmail()		
+			SendAlertEmail()
+			Return 0		
 		}
 
 	}
@@ -176,7 +179,8 @@ DC[]{
 		try{
 		this.HunterPage.SelectPeopleAndstolen(islieshou)
 		this.HunterPage.GetResult()
-		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")	
+		LogToFile("this.HunterPage.SelectPeopleAndstolen done. ")
+		Return 1	
 		}
 		Catch e{
 		LogToFile("excetion while SelectPeopleAndstolen or GetResult: " . e)
@@ -196,10 +200,12 @@ DC[]{
 		try{
 			this.PrepareGameWindow(this.winName)
 			this.GroupPage.GroupZhuZi(which)
+			Return 1
 		}
 		Catch e{
 			LogToFile("this.GroupPage.GroupZhuZi get exception: " . e)
 			CaptureScreen()
+			Return 0
 		}
 	}
 
@@ -211,10 +217,12 @@ DC[]{
 		this.GroupPage.RongZiOKinternal()
 		this.RZ := 1		
 		LogToFile("RongZi done.")
+		Return 1
 		}
 		Catch e{
 		LogToFile("this.GroupPage.RongZi() get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}
 
@@ -225,10 +233,12 @@ DC[]{
 		this.GroupPage.PreRongZi(which)
 		CaptureScreen()
 		LogToFile("this.GroupPage.PreRongZi() done. ")
+		Return 1
 		}
 		Catch e{
 		LogToFile("this.GroupPage.PreRongZi() get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}
 
@@ -240,10 +250,12 @@ DC[]{
 		CaptureScreen()		
 		this.RZ := 1		
 		LogToFile("ClickRongZiOK() done.")
+		Return 1
 		}
 		Catch e{
 		LogToFile("ClickRongZiOK get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}	
 
@@ -253,10 +265,12 @@ DC[]{
 		LogToFile("Start to CalcRongZi.")
 		this.GroupPage.CalculateRZ()
 		LogToFile("CalcRongZi() done.")
+		Return 1
 		}
 		Catch e{
 		LogToFile("CalcRongZi() get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}	
 
@@ -272,11 +286,13 @@ DC[]{
 		this.GroupPage.GetZhuZiList()
 		LogToFile("Start to get GetZhuZiList.")		
 		this.GroupPage.GetShangZhanList()
-		LogToFile("ShangZhanReport task done.")		
+		LogToFile("ShangZhanReport task done.")
+		Return 1		
 		}
 		Catch e{
 		LogToFile("ShangZhanReport() get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}	
 
@@ -287,10 +303,12 @@ DC[]{
 		this.GroupPage.GetShopping(which)
 		LogToFile("GetShopping done.")
 		CaptureScreen()
+		Return 1
 		}
 		Catch e{
 		LogToFile("GetShopping() get exception: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}
 
@@ -315,11 +333,13 @@ DC[]{
 				this.GroupPage.BuyTimeSpeedplus()
 			
 			this.ShopHomepage.PlayZhuanPan(times)
-			LogToFile("this.ShopHomepage.PlayZhuanPan done!")			
+			LogToFile("this.ShopHomepage.PlayZhuanPan done!")
+			Return 1
 		}
 		Catch e{
 		LogToFile("excetion while this.ShopHomepage.PlayZhuanPan: " . e)
 		CaptureScreen()
+		Return 0
 		}
 	}
 ; <========================  天梯  ===========================>

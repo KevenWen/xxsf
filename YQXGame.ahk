@@ -120,25 +120,17 @@ class YQXGame
 
 ; <========================  融资确认  ===========================>
 
-    ClickRongZiOK()
-	{
-		try{
-		this.PrepareGameWindow()
-		CaptureScreen()
-		this.ClickRongZiOKPublic()
-		this.RZ := 1
-		LogToFile("ClickRongZiOK() done for YQXPlayer.")
-		}
-		Catch e
-		{
-		LogToFile("ClickRongZiOK() get exception: " . e)
-		CaptureScreen()
-		}
-	}
-
 	RongZi()
 	{
 		try{
+		if this.isRongZiprepared() {
+		LogToFile("Find RongZi prepared, Going to click OK.")		
+		this.ClickRongZiOKPublic()
+		this.RZ := 1
+		LogToFile("RongZi() done for YQXPlayer")			
+		return
+		}
+
 		this.GetGroupPage4()
 		this.RongZiPri()
 		this.RZ := 1
@@ -240,8 +232,49 @@ class YQXGame
         } 
 	}
 
+	isPrepared()
+	{
+		CaptureScreen()
+		if PixelColorExist("0x7C7C7C",472, 236,10) or PixelColorExist("0xB0B0B0",472, 236,10)
+		{		
+			LogToFile("Find land business prepared, just click OK." )
+			click 281, 661     ;点击确定
+			sleep 200
+			click 281, 661     ;点击确定
+			sleep 200
+			click 355, 780	   ;再次确认注入
+			sleep 200
+			if PixelColorExist("0xFFFFF3",226, 623,1000) ;确认注入提示框
+			{
+				click 301, 661     ;点击确定
+				sleep 300
+				click 451, 454
+				sleep 200
+			}
+			this.closeAnySubWindow()
+			if !PixelColorExist("0x706B59",528, 446,100) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
+			{
+				CaptureScreen()
+				LogToFile("Land business click OK done.")
+				sleep 200                     
+				return 1 
+			}
+			else
+			{
+				LogToFile("Land business double check failed, will Getland again." )	
+				CaptureScreen()			
+				return 0
+			}
+									
+		}
+		else
+			return 0
+	}
+
 	DiCanJinzhu()
 	{
+		if this.isPrepared()
+			return
 		this.GetLandpage()
 		sleep 300
 		if !PixelColorExist("0x706B59",184, 455,100)			;the gray color next refresh time
@@ -403,6 +436,11 @@ class YQXGame
 				break
 		}
 
+	}
+
+	isRongZiprepared()
+	{
+		return (PixelColorExist("0xB0B0B0",475, 320,100) or PixelColorExist("0x7C7C7C",475, 320,10))
 	}
 
 	ClickRongZiOKPublic()

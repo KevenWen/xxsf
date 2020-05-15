@@ -105,25 +105,17 @@ class LDGame
 
 ; <========================  融资确认  ===========================>
 
-    ClickRongZiOK()
-	{
-		try{
-		this.PrepareGameWindow()
-		CaptureScreen()
-		this.ClickRongZiOKPublic()
-		this.RZ := 1
-		LogToFile("ClickRongZiOK() done for LDPlayer")
-		}
-		Catch e
-		{
-		LogToFile("ClickRongZiOK() get exception: " . e)
-		CaptureScreen()
-		}
-	}
-
 	RongZi()
 	{
 		try{
+		if this.isRongZiprepared() {
+		LogToFile("Find RongZi prepared, Going to click OK.")		
+		this.ClickRongZiOKPublic()
+		this.RZ := 1
+		LogToFile("RongZi() done for LDPlayer")			
+		return
+		}			
+
 		this.GetGroupPage4()
 		this.RongZiPri()
 		LogToFile("RongZi() done for LDPlayer")		
@@ -219,20 +211,33 @@ class LDGame
 		if PixelColorExist("0x7C7C7C",485, 161,10) or PixelColorExist("0xB0B0B0",485, 161,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
-			Click 305, 625     ;点击确定
+			Click 281, 625     ;点击确定
 			sleep 200
-			Click 305, 625     ;点击确定
+			Click 281, 625     ;点击确定
 			sleep 200
 			click 355, 746	   ;再次确认注入
 			sleep 200
-			if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
+			if PixelColorExist("0xFFFFF3",217, 581,300) ;确认注入提示框
 			{
-				click 305, 625     						;点击确定
-				CaptureScreen()
+				click 281, 625     						;点击确定
+				sleep 300
+				click 468, 406
+				sleep 200
 			}
-			WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
-			LogToFile("Land business click OK done." )		
-			return 1				
+			this.closeAnySubWindow()
+			if !PixelColorExist("0x706B59",520, 423,100) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
+			{
+				CaptureScreen()
+				LogToFile("LD Land business done.")
+				sleep 200                     
+				return 1  
+			}   
+			else
+			{
+				LogToFile("Land business double check failed, will Getland again." )	
+				CaptureScreen()			
+				return 0
+			}									
 		}
 		else
 			return 0
@@ -347,6 +352,11 @@ class LDGame
 				break
 		}
 
+	}
+
+	isRongZiprepared()
+	{
+		return (PixelColorExist("0xB0B0B0",492, 250,100) or PixelColorExist("0x7C7C7C",492, 250,10))
 	}
 
 	OpenBusinessSkill(){

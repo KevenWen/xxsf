@@ -83,8 +83,8 @@ Rongzi_0:
     WaitForTime(000001)   ;Make sure we are start after 00:00
 
     ;-------------------- ClickRongZiOK -----------------
-    new LDGame(0).ClickRongZiOK()   
-    new YQXGame(0).ClickRongZiOK()   
+    new LDGame(0).RongZi()  
+    new YQXGame(0).RongZi() 
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  

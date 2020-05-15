@@ -282,10 +282,10 @@ class YQXGame
 				if PixelColorExist("0xFFFEF5",154, 533,1000) 		;经营资源输入框存在
 				and PixelColorExist("0x5A7965",300, 404,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 520, 32 ;金币
+					click,235, 520, 38 ;金币
 					sleep 100
-					click,241, 585, 6 ;金币
-					sleep 100
+					;click,241, 585, 6 ;金币
+					;sleep 100
 					click,415, 585, 2 ;资源卡
 					sleep 100
 					click,326, 650, 2  ;钻石注决策资源

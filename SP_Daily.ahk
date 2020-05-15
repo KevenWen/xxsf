@@ -204,7 +204,7 @@ Rongzi_N:
             new LDGame().OpenBusinessSkill()
     }
 
-    IniRead, _DC, % UserIni,LDlayer,DC,0
+    IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
 

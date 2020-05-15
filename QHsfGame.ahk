@@ -204,7 +204,7 @@ class QHsfGame
 	DiCanJinzhu()
 	{
 		this.GetLandpage()
-		sleep 300
+		sleep 500
 		SendMode Event
 		this.CloseAnySubWindow()
         if PixelColorExist("0xFFFFFF",515, 395,100)     ;the white color on the button
@@ -235,6 +235,7 @@ class QHsfGame
 				sleep 100				
 				Mousemove,570, 500,2
 				send {LButton up}
+				sleep 50
 				click 570, 840
 				CaptureScreen()				
 				sleep 200
@@ -248,10 +249,10 @@ class QHsfGame
 				if PixelColorExist("0xFFFEF5",190, 480,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",331, 353,10)      ;且上面图片显示是闲置土地
 				{
-					click,265, 465, 35 ;金币23
+					click,265, 465, 41 ;金币23
 					sleep 100
-					click,265, 530, 5 ;金币17
-					sleep 100
+					;click,265, 530, 5 ;金币17
+					;sleep 100
 					click,433, 530, 3 ;资源卡6
 					sleep 100
 					click,350, 594, 3  ;3份钻石注决策资源

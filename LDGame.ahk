@@ -213,8 +213,35 @@ class LDGame
         } 
 	}
 
+	isPrepared()
+	{
+		CaptureScreen()
+		if PixelColorExist("0x7C7C7C",485, 161,10) or PixelColorExist("0xB0B0B0",485, 161,10)
+		{		
+			LogToFile("Find land business prepared, just click OK." )
+			Click 305, 625     ;点击确定
+			sleep 200
+			Click 305, 625     ;点击确定
+			sleep 200
+			click 355, 746	   ;再次确认注入
+			sleep 200
+			if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
+			{
+				click 305, 625     						;点击确定
+				CaptureScreen()
+			}
+			WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
+			LogToFile("Land business click OK done." )		
+			return 1				
+		}
+		else
+			return 0
+	}
+
 	DiCanJinzhu()
 	{
+		if this.isPrepared()
+			return
 		this.GetLandpage()
 		sleep 300
         if PixelColorExist("0xB3DDBF",511, 377,100) or PixelColorExist("0xB6DEC1",511, 366,10) ;the white color on the button,remote or phy
@@ -255,13 +282,13 @@ class LDGame
 				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 470, 35 ;金币23
+					click,226, 470, 41 ;金币23 326,470  426,470
 					sleep 100
-					click,241, 540, 5 ;金币17
+					click,326, 470, 4   ;钻石4经营
 					sleep 100
-					click,415, 540, 3 ;资源卡6
+					click,326, 540, 1  ;钻石管理  326,540 426, 540
 					sleep 100
-					click,326, 607, 3  ;3份钻石注决策资源
+					click,326, 607, 1  ;钻石决策
 					sleep 300					
                     if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
                         throw "Not enough money warning show!"

@@ -5,6 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include 4399UserTask.ahk
 #include LDGame.ahk
 #include YQXGame.ahk
+#include 6322Game.ahk
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
@@ -13,7 +14,6 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 
 ;Gosub, Rongzi_0  ;for testing only
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
-#persistent
 
 /*
 TargetTime = 1400  ; run at 2pm, which is 1400.
@@ -184,6 +184,7 @@ Rongzi_N:
 
     new LDGame(0)
     new YQXGame(0)
+    new 6322Game(0)    
     song := new 4399UserTask("song")
 
     WaitForTime(0000)   ;Make sure we are start after 00:00
@@ -194,6 +195,7 @@ Rongzi_N:
 
     new LDGame().GetLand()
     new YQXGame().GetLand()
+    new 6322Game().GetLand()      
     song.GetLand()
     song.Hunter(1)
     song := ""       
@@ -215,6 +217,10 @@ Rongzi_N:
     IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
+
+    IniRead, _DC, % UserIni,6322Player,DC,0
+    if _DC < 1
+        new 6322Game().GetLand()
 
     For index,value in  ["song"]
     {

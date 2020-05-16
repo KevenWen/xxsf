@@ -5,7 +5,7 @@ SetBatchLines, -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-class YQXGame
+class 6322Game
 {
 
 ;=========================================  Common functions  ===============================================
@@ -14,24 +14,24 @@ class YQXGame
 		this.isclosed := isclose
 
 		LogToFile("")
-		LogToFile("Log started for YQXPlayer." )		
+		LogToFile("Log started for 6322Player." )		
 
-		IfWinExist, YQXPlayer
+		IfWinExist, 6322Player
 		{
-			WinActivate YQXPlayer
-			WinSet, AlwaysOnTop, On, YQXPlayer		
+			WinActivate 6322Player
+			WinSet, AlwaysOnTop, On, 6322Player		
 			Sleep 100
-			LogToFile("Find existing window named YQXPlayer. ")
+			LogToFile("Find existing window named 6322Player. ")
 		}
 		else
 		{
 			try{
-			this.LaunchYQXGame()
-			LogToFile("YQXPlayer Started.")
+			this.Launch6322Game()
+			LogToFile("6322Player Started.")
 			CaptureScreen()
 			}
 			Catch e{
-			LogToFile("YQXPlayer window not fond and start game failed: " . e)
+			LogToFile("6322Player window not fond and start game failed: " . e)
 			CaptureScreen()
 			Return
 			}
@@ -40,39 +40,39 @@ class YQXGame
 
     __Delete()
     {
-		WinSet, AlwaysOnTop, Off, YQXPlayer		
+		WinSet, AlwaysOnTop, Off, 6322Player		
 		if this.isclosed
 		{
-			WinClose, YQXPlayer
+			WinClose, 6322Player
 			sleep 100
 		}
 
-		LogToFile("Log Ended for YQXPlayer.`n")
+		LogToFile("Log Ended for 6322Player.`n")
     }
 
 ; <==================================  Properties  ====================================>
 
 	RZ[]{
 		get{
-			IniRead, value,% UserIni,YQXPlayer,RZ,0
+			IniRead, value,% UserIni,6322Player,RZ,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,YQXPlayer,RZ
-			IniWrite, % A_Min . ":" . A_Sec, % UserIni,YQXPlayer,Rztime			
+			IniWrite, % value, % UserIni,6322Player,RZ
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Rztime			
 		}
 	}
 
 	DC[]{
 		get{
-			IniRead, value, % UserIni,YQXPlayer,DC,0
+			IniRead, value, % UserIni,6322Player,DC,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,YQXPlayer,DC
-			IniWrite, % A_Min . ":" . A_Sec, % UserIni,YQXPlayer,Dctime					
+			IniWrite, % value, % UserIni,6322Player,DC
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Dctime					
 		}
 	}
 ; <========================  地产入驻  ===========================>
@@ -82,7 +82,7 @@ class YQXGame
 		this.PrepareGameWindow()
 		this.DiCanJinzhu()
 		this.DC := 1
-		LogToFile("GetLand() done for YQXPlayer.")
+		LogToFile("GetLand() done for 6322Player.")
 		}
 		Catch e
 		{
@@ -98,7 +98,7 @@ class YQXGame
 		this.PrepareGameWindow()
 		this.Suankai()
 		CaptureScreen()		
-		LogToFile("Suankai() done for YQXPlayer.")
+		LogToFile("Suankai() done for 6322Player.")
 		}
 		Catch e
 		{
@@ -128,14 +128,14 @@ class YQXGame
 				LogToFile("Find RongZi prepared, Going to click OK.")		
 				this.ClickRongZiOKPublic()
 				this.RZ := 1
-				LogToFile("RongZi() done for YQXPlayer")			
+				LogToFile("RongZi() done for 6322Player")			
 			}
 			else {
 				this.GetGroupPage4()
 				this.RongZiPri()
 			}
 			this.RZ := 1
-			LogToFile("RongZi() done for YQXPlayer.")
+			LogToFile("RongZi() done for 6322Player.")
 		} catch e {
 			LogToFile("RongZi() get exception: " . e)
 			CaptureScreen()		
@@ -150,12 +150,12 @@ class YQXGame
 		WinClose, IrfanView			;The capture screen error windows may exist		
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "YQXPlayer")
+		if (CurTitle = "6322Player")
 			Return
 
-		IfWinExist, YQXPlayer
+		IfWinExist, 6322Player
         {
-			WinActivate, YQXPlayer
+			WinActivate, 6322Player
 			sleep 200
 		}
 		Else
@@ -166,7 +166,7 @@ class YQXGame
 	{
 		loop 5
 		{
-			ImageSearch, Px, Py, 341, 139, 537,512 , % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 370, 130, 537,512 , % A_ScriptDir . "\\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -184,7 +184,7 @@ class YQXGame
 	{
 		loop %n%
 		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 370, 130, 537, 512, % A_ScriptDir . "\\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -200,7 +200,7 @@ class YQXGame
 
 	SubWindowExist()
 	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+		ImageSearch, Px, Py, 370, 130, 537, 512, % A_ScriptDir . "\\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			return 0
 		else if (ErrorLevel = 1) ;Image not found 
@@ -229,9 +229,9 @@ class YQXGame
             if A_Index > 2
                 throw "Not able to GetLandPage2."
             this.GetLandpage()
-            click 227, 301
+            click 227, 234
             sleep 200
-            if PixelColorExist("0xFFFEF5",459, 450,2000)		;总点击数白框	
+            if PixelColorExist("0xFFFEF5",458, 396,2000)		;总点击数白框	
                 Break
         } 
 	}
@@ -239,24 +239,24 @@ class YQXGame
 	isPrepared()
 	{
 		CaptureScreen()
-		if PixelColorExist("0x7C7C7C",472, 236,10) or PixelColorExist("0xB0B0B0",472, 236,10)
+		if PixelColorExist("0x7C7C7C",491, 159,10) or PixelColorExist("0xB0B0B0",491, 159,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
-			click 281, 661     ;点击确定
+			click 281, 627     ;点击确定
 			sleep 200
-			click 281, 661     ;点击确定
+			click 281, 627     ;点击确定
 			sleep 200
-			click 355, 780	   ;再次确认注入
+			click 361, 758	   ;再次确认注入
 			sleep 200
-			if PixelColorExist("0xFFFFF3",226, 623,1000) ;确认注入提示框
+			if PixelColorExist("0xFFFFF3",274, 583,1000) ;确认注入提示框
 			{
-				click 301, 661     ;点击确定
+				click 279, 628     ;点击确定
 				sleep 300
-				click 451, 454
+				click 468, 404
 				sleep 200
 			}
 			this.closeAnySubWindow()
-			if !PixelColorExist("0x706B59",528, 446,100) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
+			if !PixelColorExist("0x706B59",526, 385,100) and !PixelColorExist("0x706B59",526, 415,10) ;the button is exist
 			{
 				CaptureScreen()
 				LogToFile("Land business click OK done.")
@@ -281,33 +281,33 @@ class YQXGame
 			return
 		this.GetLandpage()
 		sleep 300
-		if !PixelColorExist("0x706B59",184, 455,100)			;the gray color next refresh time
+		if !PixelColorExist("0x706B59",194, 400,100)			;the gray color next refresh time
 		{
 			CaptureScreen()
-			LogToFile("YQX Land business already done, no action needed." )
+			LogToFile("Land business already done, no action needed." )
 			return  
 		}
 		sleep 200
 		SendMode Event
-		Mousemove,525, 905
+		Mousemove,525, 900
 		send {LButton down}
-		Mousemove,525, 100,4
+		Mousemove,525, 100,5
 		send {LButton up}
-		click 525, 905	
+		click 525, 900
 		sleep 200
 		loop
 		{
 			this.CloseAnySubWindow()
-			ImageSearch, Px, Py, 253, 490, 500, 910, % A_ScriptDir . "\\blockofyellow.bmp"
+			ImageSearch, Px, Py, 253, 432, 500, 900, % A_ScriptDir . "\\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
 			{
-				Mousemove,525, 905
+				Mousemove,525, 900
 				send {LButton down}
-				Mousemove,525, 350,10
+				Mousemove,525, 380,20
 				send {LButton up}
-				click 525, 905
+				click 525, 900
 				sleep 200
 			}
 			else if (ErrorLevel = 0) ;Image found
@@ -316,27 +316,27 @@ class YQXGame
 				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
-				if PixelColorExist("0xFFFEF5",154, 533,1000) 		;经营资源输入框存在
-				and PixelColorExist("0x5A7965",300, 404,10)      ;且上面图片显示是闲置土地
+				if PixelColorExist("0xFFFEF5",141, 485,1000) 		;经营资源输入框存在
+				and PixelColorExist("0x5A7965",300, 360,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 520, 38 ;金币
+					click,235, 470, 37 ;金币
 					sleep 100
 					;click,241, 585, 6 ;金币
 					;sleep 100
-					click,415, 585, 2 ;资源卡
+					click,415, 538, 2 ;资源卡
 					sleep 100
-					click,326, 650, 2  ;钻石注决策资源
+					click,326, 615, 2  ;钻石注决策资源
 					sleep 300					
-					if !PixelColorExist("0xFEEDC7",92, 449,10) ;没有显示金钱不够提示
+					if !PixelColorExist("0xFEEDC7",76, 391,10) ;没有显示金钱不够提示
 						throw "Not enough money warning show!"
 
-					click 355, 780	;确认注入
+					click 361, 758	;确认注入
 					sleep 200
-					if PixelColorExist("0xFBFBFB",461, 454,300) ;确认注入提示框
+					if PixelColorExist("0xFFFFF3",301, 582,300) ;确认注入提示框
 					{
-						click 301, 661     ;点击确定
+						click 301, 632     ;点击确定
 						CaptureScreen()
-						WaitPixelColorAndClick("0xFBFBFB",472, 236,1000)
+						WaitPixelColorAndClick("0xFBFBFB",492, 158,1000)
 					}
 					else
 					{
@@ -352,17 +352,17 @@ class YQXGame
 					Continue
 				}
 
-				if !PixelColorExist("0x706B59",528, 446,200) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
+				if !PixelColorExist("0x706B59",526, 385,100) and !PixelColorExist("0x706B59",526, 415,10) ;the button is exist
 				{
 					CaptureScreen()
-					LogToFile("YQX LD Land business done.")
+					LogToFile("6322 LD Land business done.")
 					sleep 200                     
 					Break  
 				}   
 			}
 			sleep 200
-			if A_index > 8
-				throw "QH DicanJinzhu loop more than 8 times still not get a free land."
+			if A_index > 38
+				throw "DicanJinzhu loop more than 8 times still not get a free land."
 		}
 		SendMode Input
 	}
@@ -503,42 +503,42 @@ class YQXGame
 
 	;=========================================  Launch Game  ===============================================
 
-	LaunchYQXGame()
+	Launch6322Game()
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
-		run %LDGamePath% launchex --index 1 --packagename "com.dh.flash.game.minigame"  
+		run %LDGamePath% launchex --index 2 --packagename "com.tantanyou.sf"  
 		LogToFile("Start to Launch LDGame. ")			
 		sleep 10000
-		IfWinExist, YQXPlayer
+		IfWinExist, 6322Player
 		{
-			WinActivate, YQXPlayer
+			WinActivate, 6322Player
 			sleep 200
 			Loop
 			{
-				if PixelColorExist("0xFFFDFF",281, 272,100) or PixelColorExist("0xFFFDFF",272, 265,100) ;remote or local
+				if PixelColorExist("0xFFFFFF",255, 388,100) ; or PixelColorExist("0xFFFFFF",272, 265,100) ;remote or local
 				{
-					LogToFile("Find last time play window, going to Click play. ")	
-					click 281, 374
+					LogToFile("Find accout window, going to Click Enter. ")	
+					click 347, 559
 				}
 
-				if PixelColorExist("0xFFFEF5",359, 754,10)
+				if PixelColorExist("0xFFFEF5",370, 735,10)
 				{
 					LogToFile("Find Start button, going to Click it. ")	
-					click 279, 849
+					click 277, 835
 					sleep 10000
 					this.CloseAnySubWindow()
 					Break
 				}
 
 				if A_Index > 60
-					throw "YQXPlayer start wait timeout"
+					throw "6322Player start wait timeout"
 
 				sleep 2000
 			}
 		}
 		Else
-			throw "YQXPlayer window not exist"
+			throw "6322Player window not exist"
 	}
 }
 

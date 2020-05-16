@@ -55,10 +55,10 @@ Rongzi_0:
     WaitForTime(000001)   ;Make sure we are start after 00:00
 
     ;-------------------- ClickRongZiOK --------------------
-    new QHUser(0).ClickRongZiOK()
+
     For index,value in  ["supper","xhhz","sf06"]
         new 4399UserTask(value,0).ClickRongZiOK()
-
+    new QHUser(0).ClickRongZiOK()
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
     For index,value in  ["supper","xhhz","xxsf","sf06"]
@@ -72,6 +72,7 @@ Rongzi_0:
                new 4399UserTask(value,0).RongZi(index)              
         }
     }
+    WinClose xxsf
     LogtoFile("Verification 1 done.")
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()

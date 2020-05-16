@@ -10,6 +10,21 @@ class HunterPage{
             sleep 200
             click % HB[3]
             sleep 300
+            if PixelColorExist("0xFEC120",141, 742,10) ;进度条还在，上一次偷猎未完成
+            {
+                Loop
+                {
+                    if PixelColorExist("0xFEC120",450, 742,10) ;进度条到了		
+                        break
+                    if PixelColorExist("0xE2413E",334, 611,10) ;OK button
+                        break
+                    if A_Index > 10  ;Total 10 loop times
+                        break
+                    sleep 50	
+                    click, 293, 805,20
+                }
+                sleep 100
+            }             
             if PixelColorExist("0xFFFEF5",176, 197,100)
             {
                 click 126, 187                                      ;Click the return button if exist.    
@@ -49,13 +64,7 @@ class HunterPage{
     }
 
     OpenTouLiePage(Num){
-        if PixelColorExist("0xF39181",126, 187,100) ;Return button if exist.
-        {
-            click 126, 187
-            sleep 500
-        }
-        Else
-            this.GetHunterPage()
+        this.GetHunterPage()
     
         ; Click corresponding people 
         click % (Num=1)?(LieshoucoList[1])

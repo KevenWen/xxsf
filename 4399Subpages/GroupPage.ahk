@@ -178,7 +178,7 @@ class GroupPage{
 
 		sleep, % s["short"]
 		CaptureScreen()
-		sleep, % s["mid"]		
+		sleep, % s["longer"]		
 	}
 
 	GroupCheZi()

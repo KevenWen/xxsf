@@ -201,8 +201,50 @@ class QHsfGame
         } 
 	}
 
-	DiCanJinzhu()
+	isPrepared()
 	{
+		CaptureScreen()
+
+		if PixelColorExist("0x7C7C7C",494, 183,10) or PixelColorExist("0xB0B0B0",494, 183,10)
+		{
+			LogToFile("Find land business prepared, just click OK." )
+			click 303, 609     ;点击确定
+			sleep 200
+			click 303, 609     ;点击确定
+			sleep 200
+			click 376, 726	   ;再次确认注入
+			sleep 200
+			if PixelColorExist("0xFFFFF3",308, 562,1000) ;确认注入提示框
+			{
+				click 303, 609     ;点击确定
+				sleep 300
+				click 477, 398
+				sleep 200
+			}
+			this.CloseAnySubWindow()
+            if !PixelColorExist("0x706B59",574, 383,200) and !PixelColorExist("0x706B59",574, 416,10) ;the button is exist
+			{
+				CaptureScreen()
+				LogToFile("Land business click OK done.")
+				sleep 200                     
+				return 1 
+			}
+			else
+			{
+				LogToFile("Land business double check failed, will Getland again." )	
+				CaptureScreen()			
+				return 0
+			}
+									
+		}
+		else
+			return 0
+	}
+
+    DiCanJinzhu()
+    {
+		if this.isPrepared()
+			return
 		this.GetLandpage()
 		sleep 500
 		SendMode Event

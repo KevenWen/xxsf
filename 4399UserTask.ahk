@@ -209,20 +209,27 @@ DC[]{
 		}
 	}
 
-	RongZi(which){
+	RongZi(which=3){
 		try{
-		LogToFile("Start to RongZi at : " . which)
-		this.PrepareGameWindow(this.winName)
-		this.GroupPage.PreRongZi(which)
-		this.GroupPage.RongZiOKinternal()
-		this.RZ := 1		
-		LogToFile("RongZi done.")
-		Return 1
+			this.PrepareGameWindow(this.winName)
+
+			if this.GroupPage.isRongZiprepared(){
+			LogToFile("Find RongZi prepared, going to click OK. ")			
+			this.GroupPage.RongZiOKpublic()
+			}
+			else {
+			LogToFile("Start to RongZi at : " . which)
+			this.GroupPage.PreRongZi(which)
+			this.GroupPage.RongZiOKinternal()
+			}
+			this.RZ := 1		
+			LogToFile("RongZi done.")
+			Return 1
 		}
 		Catch e{
-		LogToFile("this.GroupPage.RongZi() get exception: " . e)
-		CaptureScreen()
-		Return 0
+			LogToFile("this.GroupPage.RongZi() get exception: " . e)
+			CaptureScreen()
+			Return 0
 		}
 	}
 
@@ -241,23 +248,6 @@ DC[]{
 		Return 0
 		}
 	}
-
-	ClickRongZiOK(){
-		try{
-		this.PrepareGameWindow(this.winName)
-		LogToFile("Start to do ClickRongZiOK.")
-		this.GroupPage.RongZiOKpublic()
-		CaptureScreen()		
-		this.RZ := 1		
-		LogToFile("ClickRongZiOK() done.")
-		Return 1
-		}
-		Catch e{
-		LogToFile("ClickRongZiOK get exception: " . e)
-		CaptureScreen()
-		Return 0
-		}
-	}	
 
 	CalcRongZi(){
 		try{

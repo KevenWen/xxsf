@@ -123,22 +123,22 @@ class YQXGame
 	RongZi()
 	{
 		try{
-		if this.isRongZiprepared() {
-		LogToFile("Find RongZi prepared, Going to click OK.")		
-		this.ClickRongZiOKPublic()
-		this.RZ := 1
-		LogToFile("RongZi() done for YQXPlayer")			
-		return
-		}
-
-		this.GetGroupPage4()
-		this.RongZiPri()
-		this.RZ := 1
-		LogToFile("RongZi() done for YQXPlayer.")		
-		}
-		catch e {
-		LogToFile("RongZi() get exception: " . e)
-		CaptureScreen()		
+			this.PrepareGameWindow()
+			if this.isRongZiprepared() {
+				LogToFile("Find RongZi prepared, Going to click OK.")		
+				this.ClickRongZiOKPublic()
+				this.RZ := 1
+				LogToFile("RongZi() done for YQXPlayer")			
+			}
+			else {
+				this.GetGroupPage4()
+				this.RongZiPri()
+			}
+			this.RZ := 1
+			LogToFile("RongZi() done for YQXPlayer.")
+		} catch e {
+			LogToFile("RongZi() get exception: " . e)
+			CaptureScreen()		
 		}
 	}
 
@@ -148,6 +148,10 @@ class YQXGame
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
+
+		WinGetActiveTitle, CurTitle
+		if (CurTitle = "YQXPlayer")
+			Return
 
 		IfWinExist, YQXPlayer
         {

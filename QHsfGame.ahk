@@ -204,7 +204,6 @@ class QHsfGame
 	isPrepared()
 	{
 		CaptureScreen()
-
 		if PixelColorExist("0x7C7C7C",494, 183,10) or PixelColorExist("0xB0B0B0",494, 183,10)
 		{
 			LogToFile("Find land business prepared, just click OK." )
@@ -445,6 +444,11 @@ class QHsfGame
 		sleep, % s["short"]
 	}
 
+	isRongZiprepared()
+	{
+		return (PixelColorExist("0xB0B0B0",498, 263,100) or PixelColorExist("0x7C7C7C",498, 263,10))
+	}
+
 	RongZiOKinternal()
 	{
 		click % PopWin["okbtn"]
@@ -456,7 +460,6 @@ class QHsfGame
 
     RongZiOKpublic()
 	{
-		sleep 50
 		loop 3
 		{
 			if !PixelColorExist("0xFFFFFF",140, 402,10) and !PixelColorExist("0xB2A68C",308, 666,10) ;左上白点和确定button下的第二个弹出窗口color
@@ -471,6 +474,7 @@ class QHsfGame
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]
+				CaptureScreen()					
 				sleep, % s["short"]
 				break
 			}

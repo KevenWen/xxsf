@@ -113,19 +113,25 @@ DC[]{
 		}
 	}
 
-	RongZi(which)
+	RongZi(which=5)
 	{
 		try{
-		LogToFile("Start to RongZi at : " . which)
-		this.PrepareGameWindow()
-		this.PreRongZi(which)
-		this.RongZiOKinternal()
-		this.RZ := 1			
-		LogToFile("this.RongZi done.")
+			this.PrepareGameWindow()
+
+			if this.isRongZiprepared(){			
+			LogToFile("Find RongZi prepared, going to click OK. ")			
+			this.RongZiOKpublic()
+			} else {
+			LogToFile("Start to RongZi at : " . which)
+			this.PreRongZi(which)
+			this.RongZiOKinternal()
+			}
+			this.RZ := 1			
+			LogToFile("this.RongZi done.")
 		}
 		Catch e{
-		LogToFile("this.RongZi() get exception: " . e)
-		CaptureScreen()
+			LogToFile("this.RongZi() get exception: " . e)
+			CaptureScreen()
 		}
 	}
 
@@ -141,20 +147,6 @@ DC[]{
 		CaptureScreen()
 		}
 	}
-
-	ClickRongZiOK()
-	{
-		try{
-		this.PrepareGameWindow()
-		LogToFile("Start to do ClickRongZiOK.")
-		this.RongZiOKpublic()
-		CaptureScreen()			
-		this.RZ := 1			
-		LogToFile("ClickRongZiOK() done.")
-		}
-		Catch e
-			CaptureScreen()
-	}	
 
 ; <========================  转盘  ===========================>
 

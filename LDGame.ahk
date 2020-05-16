@@ -108,22 +108,23 @@ class LDGame
 	RongZi()
 	{
 		try{
-		if this.isRongZiprepared() {
-		LogToFile("Find RongZi prepared, Going to click OK.")		
-		this.ClickRongZiOKPublic()
-		this.RZ := 1
-		LogToFile("RongZi() done for LDPlayer")			
-		return
-		}			
-
-		this.GetGroupPage4()
-		this.RongZiPri()
-		LogToFile("RongZi() done for LDPlayer")		
-		this.RZ := 1	
-		}
-		catch e {
-		LogToFile("RongZi() get exception: " . e)
-		CaptureScreen()		
+			this.PrepareGameWindow()		
+			if this.isRongZiprepared()
+			{
+				LogToFile("Find RongZi prepared, Going to click OK.")		
+				this.ClickRongZiOKPublic()
+			}			
+			else
+			{
+				LogToFile("Start to do RongZi task.")		
+				this.GetGroupPage4()
+				this.RongZiPri()
+			}
+			LogToFile("RongZi() done for LDPlayer")		
+			this.RZ := 1	
+		} catch e {
+			LogToFile("RongZi() get exception: " . e)
+			CaptureScreen()		
 		}
 	}
 
@@ -133,6 +134,10 @@ class LDGame
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
+
+		WinGetActiveTitle, CurTitle
+		if (CurTitle = "LDPlayer")
+			Return
 
 		IfWinExist, LDPlayer
         {

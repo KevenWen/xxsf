@@ -57,8 +57,8 @@ Rongzi_0:
     ;-------------------- ClickRongZiOK --------------------
 
     For index,value in  ["supper","xhhz","sf06"]
-        new 4399UserTask(value,0).ClickRongZiOK()
-    new QHUser(0).ClickRongZiOK()
+        new 4399UserTask(value,0).RongZi(index)
+    new QHUser(0).RongZi(5)
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
     For index,value in  ["supper","xhhz","xxsf","sf06"]

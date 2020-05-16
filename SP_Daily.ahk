@@ -8,7 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
-    .ClickRongZiOK().PrepareRongZi(3).OpenBusinessSkill()
+    .PrepareRongZi(3).OpenBusinessSkill()
 */
 
 ;Gosub, Rongzi_0  ;for testing only
@@ -89,7 +89,7 @@ Rongzi_0:
         new LDGame(0).OpenBusinessSkill()
  
     For index,value in ["hou","song"]
-        new 4399UserTask(value,0).ClickRongZiOK()
+        new 4399UserTask(value,0).RongZi(index+2)
 
     ;-------------------  Verification 1 -------------------
     sleep 1000

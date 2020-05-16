@@ -122,6 +122,11 @@ class GroupPage{
 			Return 0
 	}
 
+	isRongZiprepared()
+	{
+		return (PixelColorExist("0xB0B0B0",480, 268,100) or PixelColorExist("0x7C7C7C",480, 268,10))
+	}
+
 	OpenSJ()
 	{
 		sleep 1000
@@ -268,6 +273,7 @@ class GroupPage{
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]
+				CaptureScreen()				
 				sleep, % s["short"]
 				break
 			}	

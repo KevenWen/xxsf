@@ -183,7 +183,8 @@ Rongzi_N:
     FileAppend,,% UserIni  
 
     new LDGame(0)
-    new YQXGame(0)   
+    new YQXGame(0)
+    song := new 4399UserTask("song")
 
     WaitForTime(0000)   ;Make sure we are start after 00:00
 
@@ -192,7 +193,10 @@ Rongzi_N:
         new LDGame(0).OpenBusinessSkill()
 
     new LDGame().GetLand()
-    new YQXGame().GetLand()    
+    new YQXGame().GetLand()
+    song.GetLand()
+    song.Hunter(1)
+    song := ""       
 
     ;-------------------  Verification ------------------
     sleep 1000
@@ -212,9 +216,16 @@ Rongzi_N:
     if _DC < 1
         new YQXGame().GetLand()
 
+    For index,value in  ["song"]
+    {
+        IniRead, _DC, % UserIniRemote, % value, DC,0        
+        if _DC < 1
+            new 4399UserTask(value).Getland()
+    } 
+
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","song","xhhz","sf06"]
+    For index,value in  ["supper","xhhz","sf06"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1

@@ -220,7 +220,7 @@ class LDGame
 			sleep 200
 			Click 281, 625     ;点击确定
 			sleep 300
-			loop 5
+			loop 4
 			{
 				click 355, 746	   ;再次确认注入
 				sleep 200
@@ -233,22 +233,15 @@ class LDGame
 					sleep 200
 				}
 				if PixelColorExist("0xFD8F45",456, 238,10)
-					break
+				{				
+					LogToFile("Land business click OK done.")
+					CaptureScreen()
+					return 1 	
+				}
 			}
-			this.closeAnySubWindow()
-			if !PixelColorExist("0x706B59",520, 423,100) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
-			{
-				CaptureScreen()
-				LogToFile("LD Land business done.")
-				sleep 200                     
-				return 1  
-			}   
-			else
-			{
-				LogToFile("Land business double check failed, will Getland again." )	
-				CaptureScreen()			
-				return 0
-			}									
+			LogToFile("Land business double check failed, will Getland again." )	
+			CaptureScreen()			
+			return 0	
 		}
 		else
 			return 0
@@ -260,7 +253,7 @@ class LDGame
 			return
 		this.GetLandpage()
 		sleep 300
-        if PixelColorExist("0xB3DDBF",511, 377,100) or PixelColorExist("0xB6DEC1",511, 366,10) ;the white color on the button,remote or phy
+        if !PixelColorExist("0x706B59",251,418,100) or PixelColorExist("0x706B59",361,418,10) ;the gray color on the button left
         {
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )

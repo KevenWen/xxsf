@@ -23,8 +23,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .PrepareRongZi(3).OpenBusinessSkill()
 
 */
-
-
+new 4399UserTask("song",0).Getland()
+new QHUser(0).Getland()
   ExitApp
   
   

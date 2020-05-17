@@ -211,30 +211,28 @@ class QHsfGame
 			sleep 200
 			click 303, 609     ;点击确定
 			sleep 200
-			click 376, 726	   ;再次确认注入
-			sleep 200
-			if PixelColorExist("0xFFFFF3",308, 562,1000) ;确认注入提示框
+    		loop 4
 			{
-				click 303, 609     ;点击确定
-				sleep 300
-				click 477, 398
+				click 376, 726	   ;再次确认注入
 				sleep 200
+				if PixelColorExist("0xFFFFF3",308, 562,1000) ;确认注入提示框
+				{
+					click 303, 609     ;点击确定
+					sleep 300
+					CaptureScreen() 
+					click 477, 398
+					sleep 200
+				}
+				if PixelColorExist("0xFD8F45",463, 250,10)
+                {        
+					LogToFile("Land business click OK done.")
+					CaptureScreen()	     
+                    Return 1
+                }					
 			}
-			this.CloseAnySubWindow()
-            if !PixelColorExist("0x706B59",574, 383,200) and !PixelColorExist("0x706B59",574, 416,10) ;the button is exist
-			{
-				CaptureScreen()
-				LogToFile("Land business click OK done.")
-				sleep 200                     
-				return 1 
-			}
-			else
-			{
-				LogToFile("Land business double check failed, will Getland again." )	
-				CaptureScreen()			
-				return 0
-			}
-									
+			LogToFile("Land business double check failed, will Getland again." )	
+			CaptureScreen()			
+			return 0									
 		}
 		else
 			return 0
@@ -248,7 +246,7 @@ class QHsfGame
 		sleep 500
 		SendMode Event
 		this.CloseAnySubWindow()
-        if PixelColorExist("0xFFFFFF",515, 395,100)     ;the white color on the button
+        if !PixelColorExist("0x706B59",227, 417,10) and PixelColorExist("0x706B59",361, 417,10)     ;the gray color on the top
         {
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )

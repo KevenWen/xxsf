@@ -75,35 +75,33 @@ class LandPage{
 		CaptureScreen()
 		if PixelColorExist("0x7C7C7C",478, 191,10) or PixelColorExist("0xB0B0B0",478, 191,10)
 		{
-			LogToFile("Find land business prepared, just click OK." )
+			LogToFile("Find land business prepared, just click OK.")
 			click 293, 592     ;点击确定
 			sleep 200
 			click 293, 592     ;点击确定
 			sleep 200
-			click 361, 704	   ;再次确认注入
-			sleep 200
-			if PixelColorExist("0xFFFFF3",312, 549,1000) ;确认注入提示框
+    		loop 4
 			{
-				click 302, 593     ;点击确定
-				sleep 300
-				click 465, 406
-				sleep 200
+                click 361, 704	   ;再次确认注入
+                sleep 200
+                if PixelColorExist("0xFFFFF3",312, 549,1000) ;确认注入提示框
+                {
+                    click 302, 593     ;点击确定
+                    sleep 300
+                    CaptureScreen()	                    
+                    click 465, 406
+                    sleep 200
+                }
+				if PixelColorExist("0xFD8F45",446, 257,10)
+                {
+                    LogToFile("Land business click OK done.")
+                    CaptureScreen()	                              
+                    Return 1
+                }					
 			}
-			4399sfGame.CloseAnySubWindow()
-            if !PixelColorExist("0x706B59",504, 373,200) and !PixelColorExist("0x706B59",506, 414,10) ;the button is exist
-			{
-				CaptureScreen()
-				LogToFile("Land business click OK done.")
-				sleep 200                     
-				return 1 
-			}
-			else
-			{
-				LogToFile("Land business double check failed, will Getland again." )	
-				CaptureScreen()			
-				return 0
-			}
-									
+            LogToFile("Land business double check failed, will Getland again." )	
+            CaptureScreen()			
+            return 0									
 		}
 		else
 			return 0
@@ -116,8 +114,8 @@ class LandPage{
         this.GetLandPage()        
         SendMode Event
         sleep 300
-        4399sfGame.CloseAnySubWindow()        
-        if PixelColorExist("0xFFFFFF",449, 394,100)     ;the white color on the button
+        4399sfGame.CloseAnySubWindow()
+        if !PixelColorExist("0x706B59",268, 415,10) and PixelColorExist("0x706B59",375, 417,10) ;the gray color on the top
         {
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )

@@ -246,7 +246,7 @@ class YQXGame
 			sleep 200
 			click 281, 661     ;点击确定
 			sleep 200
-			loop 5
+			loop 4
 			{
 				click 355, 780	   ;再次确认注入
 				sleep 200
@@ -259,24 +259,15 @@ class YQXGame
 					sleep 200
 				}
 				if PixelColorExist("0xFD8F45",439, 309,10)  ;角色入驻 color
-					break
+				{				
+					LogToFile("Land business click OK done.")
+					CaptureScreen()
+					return 1 	
+				}
 			}
-
-			this.closeAnySubWindow()
-			if !PixelColorExist("0x706B59",528, 446,100) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
-			{
-				CaptureScreen()
-				LogToFile("Land business click OK done.")
-				sleep 200                     
-				return 1 
-			}
-			else
-			{
-				LogToFile("Land business double check failed, will Getland again." )	
-				CaptureScreen()			
-				return 0
-			}
-									
+			LogToFile("Land business double check failed, will Getland again." )	
+			CaptureScreen()			
+			return 0									
 		}
 		else
 			return 0
@@ -288,7 +279,7 @@ class YQXGame
 			return
 		this.GetLandpage()
 		sleep 300
-		if !PixelColorExist("0x706B59",184, 455,100)			;the gray color next refresh time
+		if !PixelColorExist("0x706B59",228, 472,100) and PixelColorExist("0x706B59",348,472,10)			;the gray color next refresh time
 		{
 			CaptureScreen()
 			LogToFile("YQX Land business already done, no action needed." )

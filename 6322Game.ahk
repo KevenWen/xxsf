@@ -359,7 +359,7 @@ class 6322Game
 				}   
 			}
 			sleep 200
-			if A_index > 38
+			if A_index > 8
 				throw "DicanJinzhu loop more than 8 times still not get a free land."
 		}
 		SendMode Input
@@ -505,7 +505,7 @@ class 6322Game
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
-		run %LDGamePath% launchex --index 2 --packagename "com.tantanyou.sf"  
+		run %LDGamePath% launchex --index 3 --packagename "com.tantanyou.sf"  
 		LogToFile("Start to Launch LDGame. ")			
 		sleep 10000
 		IfWinExist, 6322Player

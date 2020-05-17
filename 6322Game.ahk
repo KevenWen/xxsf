@@ -433,7 +433,7 @@ class 6322Game
 			this.CloseAnySubWindow()
 			click 356, 984				;商会 button
 			sleep 300
-			click 445, 312				;融资 tab					
+			click 468, 247				;融资 tab					
 			if PixelColorExist("0xABA9A5",468, 572,2000) ;金融企业右边的灰块
 				break
 		}
@@ -442,18 +442,18 @@ class 6322Game
 
 	isRongZiprepared()
 	{
-		return (PixelColorExist("0xB0B0B0",475, 320,100) or PixelColorExist("0x7C7C7C",475, 320,10))
+		return (PixelColorExist("0xB0B0B0",497, 251,100) or PixelColorExist("0x7C7C7C",497, 251,10))
 	}
 
 	ClickRongZiOKPublic()
 	{
-		click 285, 733
+		click 277, 691
 		sleep, % s["short"]
-		click 310, 666
+		click 277, 638
 		sleep, % s["short"]		
-		click 310, 666
+		click 277, 638
 		sleep, % s["short"]
-		if PixelColorExist("0xFBFBFB",477, 318,1000) ; the color under in the OK window
+		if PixelColorExist("0xFBFBFB",495, 250,1000) ; the color under in the OK window
 			this.CloseAnySubWindow()
 	}
 
@@ -465,33 +465,33 @@ class 6322Game
 				throw, "Tried 2 times but still not able to complete RongZi."
 
 			this.CloseAnySubWindow()
-			click 138,475	   							  ; 固定注游乐
-			if !PixelColorExist("0xFFFEF5",211, 640,2000) ; 不是显示0份
+			click 170, 733	   							  ; 固定注能源
+			if !PixelColorExist("0xFFFEF5",204, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 
-			mousemove, 200, 640
+			mousemove, 204, 604
 			CaptureScreen()			
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
-			click, 39
+			click, 38
 			SetDefaultMouseSpeed 2	
 			SendMode Input
 			CaptureScreen()											
 			sleep, % s["mid"]
 
-			if !PixelColorExist("0xFFFFF3",250,450,10) ;存在没有更多金币提示.!
+			if !PixelColorExist("0xFFFFF3",248, 395,10) ;存在没有更多金币提示.!
 				Throw, "Not enough money warnning exist!"    
 
-			click 312, 631
-			if !PixelColorExist("0xFFFFFF",115, 459,2000)
+			click 326, 595
+			if !PixelColorExist("0xFFFFFF",98, 401,2000)
 				Continue
 			else
 			{
-				click  287, 661					
+				click  277, 630					
 				sleep 200
-				if PixelColorExist("0xFBFBFB",477, 318,1000)
-					click 477, 318
+				if PixelColorExist("0xFBFBFB",494, 252,1000)
+					click 494, 252
 				CaptureScreen()	
 				sleep 200		
 				break					

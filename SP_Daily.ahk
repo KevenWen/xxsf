@@ -251,8 +251,9 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
     
-    new LDGame(0)
-    new YQXGame(0)       
+    L := new LDGame(0)
+    Y := new YQXGame(0)  
+    N := new 6322Game(0)           
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0)
 
@@ -261,21 +262,22 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
-        Ldgame.OpenBusinessSkill()
+        L.OpenBusinessSkill()
 
     For index,value in ["sf06","song"]
         new 4399UserTask(value,0).Getland()
 
-    new LDGame(0).GetLand()
-    new YQXGame(0).GetLand()
+    For index,value in ["L","Y","N"]
+        %value%.GetLand()
 
     WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
 
      For index,value in ["sf06","song"]
         new 4399UserTask(value).RongZi(index+1)
     
-    new LDGame(0).RongZi()
-    new YQXGame(0).RongZi()
+    For index,value in ["L","Y","N"]
+        %value%.RongZi()
+
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
 
@@ -283,27 +285,37 @@ Rongzi_2:
     {
         IniRead, _SJ, % UserIni,LDPlayer,SJ,0
         if _SJ < 1
-            new LDGame(0).OpenBusinessSkill()
+            L.OpenBusinessSkill()
     }
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
     if _RZ < 1
-        new LDGame(0).RongZi()
+        L.RongZi()
     
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
-        new LDGame().GetLand()
+        L.GetLand()
     else
-        winclose LDPlayer
+       WinClose LDPlayer
 
     IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
     if _RZ < 1
-        new YQXGame(0).RongZi()
+        Y.RongZi()
     
     IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
-        new YQXGame().GetLand()
+        Y.GetLand()
     else
-        winclose YQXPlayer
+       WinClose YQXPlayer
+
+    IniRead, _RZ, % UserIni,6322Player,RZ,0
+    if _RZ < 1
+        N.RongZi()
+    
+    IniRead, _DC, % UserIni,6322Player,DC,0
+    if _DC < 1
+        N.GetLand()
+    else
+       WinClose 6322Player
 
     For index,value in  ["sf06","song"]
     {

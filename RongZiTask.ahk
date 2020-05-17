@@ -188,11 +188,9 @@ Rongzi_2:
     sleep 1000
    ;---------------------- Getland ------------------------
 
-    new QHUser(0).Getland()
-
     For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
-
+    new QHUser(0).Getland()
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------

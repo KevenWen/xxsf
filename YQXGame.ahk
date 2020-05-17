@@ -246,15 +246,22 @@ class YQXGame
 			sleep 200
 			click 281, 661     ;点击确定
 			sleep 200
-			click 355, 780	   ;再次确认注入
-			sleep 200
-			if PixelColorExist("0xFFFFF3",226, 623,1000) ;确认注入提示框
+			loop 5
 			{
-				click 301, 661     ;点击确定
-				sleep 300
-				click 451, 454
+				click 355, 780	   ;再次确认注入
 				sleep 200
+				if PixelColorExist("0xFFFFF3",226, 623,1000) ;确认注入提示框
+				{
+					click 281, 661     ;点击确定
+					sleep 300
+					CaptureScreen()					
+					click 451, 454
+					sleep 200
+				}
+				if PixelColorExist("0xFD8F45",439, 309,10)  ;角色入驻 color
+					break
 			}
+
 			this.closeAnySubWindow()
 			if !PixelColorExist("0x706B59",528, 446,100) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
 			{

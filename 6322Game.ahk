@@ -246,14 +246,20 @@ class 6322Game
 			sleep 200
 			click 281, 627     ;点击确定
 			sleep 200
-			click 361, 758	   ;再次确认注入
-			sleep 200
-			if PixelColorExist("0xFFFFF3",274, 583,1000) ;确认注入提示框
+			loop 5
 			{
-				click 279, 628     ;点击确定
-				sleep 300
-				click 468, 404
+				click 361, 758	   ;再次确认注入
 				sleep 200
+				if PixelColorExist("0xFFFFF3",274, 583,1000) ;确认注入提示框
+				{
+					click 281, 627     ;点击确定
+					sleep 300
+					CaptureScreen()				
+					click 468, 404
+					sleep 200
+				}
+				if PixelColorExist("0xFD8F45",457, 236,10)  ;角色入驻 color
+					break
 			}
 			this.closeAnySubWindow()
 			if !PixelColorExist("0x706B59",526, 385,100) and !PixelColorExist("0x706B59",526, 415,10) ;the button is exist

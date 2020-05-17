@@ -219,15 +219,21 @@ class LDGame
 			Click 281, 625     ;点击确定
 			sleep 200
 			Click 281, 625     ;点击确定
-			sleep 200
-			click 355, 746	   ;再次确认注入
-			sleep 200
-			if PixelColorExist("0xFFFFF3",217, 581,300) ;确认注入提示框
+			sleep 300
+			loop 5
 			{
-				click 281, 625     						;点击确定
-				sleep 300
-				click 468, 406
+				click 355, 746	   ;再次确认注入
 				sleep 200
+				if PixelColorExist("0xFFFFF3",217, 581,800) ;确认注入提示框
+				{
+					click 281, 625     						;点击确定
+					sleep 300
+					CaptureScreen()
+					click 468, 406
+					sleep 200
+				}
+				if PixelColorExist("0xFD8F45",456, 238,10)
+					break
 			}
 			this.closeAnySubWindow()
 			if !PixelColorExist("0x706B59",520, 423,100) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist

@@ -44,6 +44,8 @@ class 6322Game
 			WinClose, 6322Player
 			sleep 100
 		}
+		else
+			WinMinimize, 6322Player
 
 		LogToFile("Log Ended for 6322Player.`n")
     }

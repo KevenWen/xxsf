@@ -44,6 +44,8 @@ class YQXGame
 			WinClose, YQXPlayer
 			sleep 100
 		}
+		else
+			WinMinimize, YQXPlayer
 
 		LogToFile("Log Ended for YQXPlayer.`n")
     }

@@ -34,6 +34,7 @@ class QHsfGame
 
 		IfWinExist, xxsf
         {
+			WinSet, AlwaysOnTop, On, xxsf		
 			WinActivate, xxsf
 			sleep 200
 		}
@@ -55,6 +56,7 @@ class QHsfGame
 			WinClose, IrfanView			;The capture screen error windows may exist					
 			run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30
 			sleep 5000
+			WinSet, AlwaysOnTop, On, xxsf	
 			Winmove,xxsf,,933,19,600,959			
 			loop
 			{

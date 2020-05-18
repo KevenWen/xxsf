@@ -193,9 +193,11 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
 
-    new LDGame().GetLand()
-    new YQXGame().GetLand()
-    new 6322Game().GetLand()      
+    new LDGame(0).GetLand()
+    new YQXGame(0).GetLand()
+    new 6322Game(0).GetLand()
+        
+
     song.GetLand()
     song.Hunter(1)
     song := ""       
@@ -213,14 +215,20 @@ Rongzi_N:
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         new LDGame().GetLand()
+    else
+       WinClose LDPlayer
 
     IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
+    else
+       WinClose YQXPlayer
 
     IniRead, _DC, % UserIni,6322Player,DC,0
     if _DC < 1
         new 6322Game().GetLand()
+    else
+       WinClose 6322Player
 
     For index,value in  ["song"]
     {

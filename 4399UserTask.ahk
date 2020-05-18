@@ -83,6 +83,8 @@ DC[]{
 			sleep 100
 			WinMinimize, 360游戏大厅
 		}
+		else
+			WinMinimize, % this.winName
 
 		LogToFile("Log Ended for: " . this.winName . ".`n")
     }

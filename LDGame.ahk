@@ -44,6 +44,8 @@ class LDGame
 			WinClose, LDPlayer
 			sleep 100
 		}
+		else
+			WinMinimize, LDPlayer
 
 		LogToFile("Log Ended for LDPlayer.`n")
     }

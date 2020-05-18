@@ -18,10 +18,9 @@ class YQXGame
 
 		IfWinExist, YQXPlayer
 		{
-			WinActivate YQXPlayer
-			WinSet, AlwaysOnTop, On, YQXPlayer		
+			WinActivate YQXPlayer	
 			Sleep 100
-			LogToFile("Find existing window named YQXPlayer. ")
+			LogToFile("Find existing window named YQXPlayer. ")		
 		}
 		else
 		{

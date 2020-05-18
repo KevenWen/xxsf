@@ -19,7 +19,6 @@ class 6322Game
 		IfWinExist, 6322Player
 		{
 			WinActivate 6322Player
-			WinSet, AlwaysOnTop, On, 6322Player		
 			Sleep 100
 			LogToFile("Find existing window named 6322Player. ")
 		}
@@ -279,7 +278,7 @@ class 6322Game
 			return
 		this.GetLandpage()
 		sleep 300
-		if !PixelColorExist("0x706B59",194, 400,10) and PixelColorExist("0x706B59",365, 400,10)		;the gray color next refresh time
+		if !PixelColorExist("0x706B59",252, 420,10) and PixelColorExist("0x706B59",358, 420,10)		;the gray color next refresh time
 		{
 			CaptureScreen()
 			LogToFile("Land business already done, no action needed." )

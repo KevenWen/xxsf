@@ -18,10 +18,9 @@ class LDGame
 
 		IfWinExist, LDPlayer
 		{
-			WinActivate LDPlayer
-			WinSet, AlwaysOnTop, On, LDPlayer		
+			WinActivate LDPlayer		
 			Sleep 100
-			LogToFile("Find existing window named LDPlayer. ")
+			LogToFile("Find existing window named LDPlayer. ")		
 		}
 		else
 		{
@@ -253,7 +252,7 @@ class LDGame
 			return
 		this.GetLandpage()
 		sleep 300
-        if !PixelColorExist("0x706B59",251,418,100) or PixelColorExist("0x706B59",361,418,10) ;the gray color on the button left
+        if !PixelColorExist("0x706B59",251,418,100) and PixelColorExist("0x706B59",361,418,10) ;the gray color on the button left
         {
             CaptureScreen()
             LogToFile("Land business already done, no action needed." )

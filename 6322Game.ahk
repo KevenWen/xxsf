@@ -38,8 +38,7 @@ class 6322Game
 	}
 
     __Delete()
-    {
-		WinSet, AlwaysOnTop, Off, 6322Player		
+	{
 		if this.isclosed
 		{
 			WinClose, 6322Player

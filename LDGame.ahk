@@ -39,7 +39,6 @@ class LDGame
 
     __Delete()
     {
-		WinSet, AlwaysOnTop, Off, LDPlayer		
 		if this.isclosed
 		{
 			WinClose, LDPlayer

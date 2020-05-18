@@ -39,7 +39,6 @@ class YQXGame
 
     __Delete()
     {
-		WinSet, AlwaysOnTop, Off, YQXPlayer		
 		if this.isclosed
 		{
 			WinClose, YQXPlayer

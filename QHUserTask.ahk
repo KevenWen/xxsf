@@ -43,7 +43,6 @@ DC[]{
 			IfWinExist, xxsf
         	{
 				WinActivate, xxsf
-				WinSet, AlwaysOnTop, On, xxsf		
 				Winmove,xxsf,,933,19,600,959
 				sleep, % s["short"]
 				LogToFile("Find existing window named xxsf. " )
@@ -65,7 +64,6 @@ DC[]{
 
     __Delete()
     {
-		WinSet, AlwaysOnTop, Off, xxsf	
 		if this.isclosed
 		{
 			WinClose, xxsf

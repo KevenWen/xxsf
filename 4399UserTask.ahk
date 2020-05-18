@@ -53,8 +53,7 @@ DC[]{
 		{
 			IfWinExist, %windowname%
 			{
-				WinActivate %windowname%
-				WinSet, AlwaysOnTop, On, %windowname%				
+				WinActivate %windowname%			
 				Winmove,%windowname%,,829,23,600,959
 				click % HB[1]
 				LogToFile("Find existing window named: " . windowname)
@@ -78,7 +77,6 @@ DC[]{
 
     __Delete()
     {
-		WinSet, AlwaysOnTop, Off, %windowname%	
 		if this.isclosed
 		{
 			WinClose, % this.winName

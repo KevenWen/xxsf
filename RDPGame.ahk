@@ -40,7 +40,6 @@ class RDPGame ;extends sfGame
 	FixRDPConn()
 	{
 		WinActivate ahk_exe mstsc.exe
-		;WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
 		;The active window "CompanyPhy - 10.154.10.6 - Remote Desktop Connection" is 1120 wide, 872 tall, and positioned at 585,111.
 		Winmove,ahk_exe mstsc.exe,,585,111,1120,872
 		sleep 200
@@ -129,7 +128,6 @@ class RDPGame ;extends sfGame
 		IfWinExist ahk_exe mstsc.exe
 		{
 			WinActivate ahk_exe mstsc.exe
-			;WinSet, AlwaysOnTop, On, ahk_exe mstsc.exe
 			sleep 1000
 			CaptureScreen()	
 			sleep 200

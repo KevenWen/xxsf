@@ -238,12 +238,12 @@ class YQXGame
 
 	isPrepared()
 	{
-		CaptureScreen()
 		if PixelColorExist("0x7C7C7C",472, 236,10) or PixelColorExist("0xB0B0B0",472, 236,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
 			click 281, 661     ;点击确定
 			sleep 200
+			CaptureScreen()			
 			click 281, 661     ;点击确定
 			sleep 200
 			loop 4
@@ -260,7 +260,7 @@ class YQXGame
 				}
 				if PixelColorExist("0xFD8F45",439, 309,10)  ;角色入驻 color
 				{				
-					LogToFile("Land business click OK done.")
+					LogToFile("Land business click OK done, loop times: " . A_index)
 					CaptureScreen()
 					return 1 	
 				}

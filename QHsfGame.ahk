@@ -203,12 +203,12 @@ class QHsfGame
 
 	isPrepared()
 	{
-		CaptureScreen()
 		if PixelColorExist("0x7C7C7C",494, 183,10) or PixelColorExist("0xB0B0B0",494, 183,10)
 		{
 			LogToFile("Find land business prepared, just click OK." )
 			click 303, 609     ;点击确定
 			sleep 200
+			CaptureScreen()
 			click 303, 609     ;点击确定
 			sleep 200
     		loop 4
@@ -225,7 +225,7 @@ class QHsfGame
 				}
 				if PixelColorExist("0xFD8F45",463, 250,10)
                 {        
-					LogToFile("Land business click OK done.")
+					LogToFile("Land business click OK done, loop times: " . A_index)
 					CaptureScreen()	     
                     Return 1
                 }					

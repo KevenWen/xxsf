@@ -47,7 +47,7 @@ Rongzi_0:
     FileDelete % UserIniRemote       
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","song","sf06"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
     new QHUser(0).PrepareRongZi(5)
@@ -56,12 +56,12 @@ Rongzi_0:
 
     ;-------------------- ClickRongZiOK --------------------
 
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","song","sf06"]
         new 4399UserTask(value,0).RongZi(index)
     new QHUser(0).RongZi(5)
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["supper","xhhz","xxsf","sf06"]
+    For index,value in  ["supper","song","xxsf","sf06"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1
@@ -73,27 +73,28 @@ Rongzi_0:
         }
     }
     WinClose xxsf
+    WinClose song    
     LogtoFile("Verification 1 done.")
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
     new 4399UserTask("sf06",0).ZhuanPan(7,0)
-    new 4399UserTask("xhhz",0).ZhuanPan(4,0)
+    new 4399UserTask("song",0).ZhuanPan(4,1)
 
     ;----------------------- Hunter ------------------------
-    For index,value in  ["sf06","xhhz"]
+    For index,value in  ["sf06","song"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["xhhz","sf06","supper"]
+    For index,value in  ["song","sf06","supper"]
        new 4399UserTask(value).Getland()
     new QHUser().Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")
-    For index,value in  ["supper","xhhz","xxsf"]
+    For index,value in  ["supper","song","xxsf","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -109,7 +110,7 @@ Rongzi_0:
     sleep 120000   
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["hou","song"]
+    For index,value in  ["hou","xhhz"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  

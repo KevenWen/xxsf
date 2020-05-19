@@ -237,13 +237,13 @@ class 6322Game
 	}
 
 	isPrepared()
-	{
-		CaptureScreen()
+	{		
 		if PixelColorExist("0x7C7C7C",491, 159,10) or PixelColorExist("0xB0B0B0",491, 159,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
 			click 281, 627     ;点击确定
 			sleep 200
+			CaptureScreen()			
 			click 281, 627     ;点击确定
 			sleep 200
 			loop 4
@@ -260,7 +260,7 @@ class 6322Game
 				}
 				if PixelColorExist("0xFD8F45",457, 236,10)  ;角色入驻 color
 				{				
-					LogToFile("Land business click OK done.")
+					LogToFile("Land business click OK done, loop times: " . A_index)
 					CaptureScreen()
 					return 1 	
 				}

@@ -72,12 +72,12 @@ class LandPage{
 
 	isPrepared()
 	{
-		CaptureScreen()
 		if PixelColorExist("0x7C7C7C",478, 191,10) or PixelColorExist("0xB0B0B0",478, 191,10)
 		{
 			LogToFile("Find land business prepared, just click OK.")
 			click 293, 592     ;点击确定
 			sleep 200
+		    CaptureScreen()            
 			click 293, 592     ;点击确定
 			sleep 200
     		loop 4
@@ -94,7 +94,7 @@ class LandPage{
                 }
 				if PixelColorExist("0xFD8F45",446, 257,10)
                 {
-                    LogToFile("Land business click OK done.")
+					LogToFile("Land business click OK done, loop times: " . A_index)
                     CaptureScreen()	                              
                     Return 1
                 }					

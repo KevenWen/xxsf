@@ -212,12 +212,12 @@ class LDGame
 
 	isPrepared()
 	{
-		CaptureScreen()
 		if PixelColorExist("0x7C7C7C",485, 161,10) or PixelColorExist("0xB0B0B0",485, 161,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
 			Click 281, 625     ;点击确定
 			sleep 200
+			CaptureScreen()
 			Click 281, 625     ;点击确定
 			sleep 300
 			loop 4
@@ -234,7 +234,7 @@ class LDGame
 				}
 				if PixelColorExist("0xFD8F45",456, 238,10)
 				{				
-					LogToFile("Land business click OK done.")
+					LogToFile("Land business click OK done, loop times: " . A_index)
 					CaptureScreen()
 					return 1 	
 				}

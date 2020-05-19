@@ -85,10 +85,12 @@ Rongzi_0:
 
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).RongZi()  
-    new YQXGame(0).RongZi() 
+    
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
+    new YQXGame(0).RongZi()
+    new 6322Game(0).RongZi() 
     For index,value in ["hou","xhhz"]
         new 4399UserTask(value,0).RongZi(index+1)
 

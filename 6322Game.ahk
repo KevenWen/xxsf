@@ -369,28 +369,28 @@ class 6322Game
     {
 	    this.GetLandPage2()
 
-		click 421, 834  ; NiuShi button
+		click 462, 819  ; NiuShi button
 		sleep 200
-		WaitPixelColor("0xFFF8CE",426, 415,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
-		click 412, 528                            ; Use button
+		WaitPixelColor("0xFFF8CE",244, 376,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+		click 424, 479                            ; Use button
 
         sleep 200
-        click 261, 834 ; JBP button
+        click 281, 824 ; JBP button
         sleep 200
-		WaitPixelColor("0xFFF8CE",426, 415,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
-		click 412, 528   
+		WaitPixelColor("0xFFF8CE",244, 376,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+		click 424, 479    
         sleep 200
         ;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
 
         click 49, 976
         ;Setting Button
-        WaitPixelColorAndClickThrowErr("0xFFFFFF",516, 246,3000)
+        WaitPixelColorAndClickThrowErr("0xFFFFFF",515, 169,3000)
         ;Setting page
-        if !PixelColorExist("0xFFFFF3",419, 376,3000) ;off上面的空白
+        if !PixelColorExist("0xFFFFF3",386, 761,3000) ;公告下面的空白
             throw "Setting page cannot found!"
 
         sleep 100
-        click 394, 625 ;Save button
+        click 407, 584 ;Save button
         sleep 1000
         this.CloseAnySubWindow()
     }
@@ -400,21 +400,21 @@ class 6322Game
         this.closeAnySubWindow()
 		click 39, 970
 		sleep 200		
-		WaitPixelColorAndClickThrowErr("0xD17622",526, 446,2000) ;ZhuanPan
+		WaitPixelColorAndClickThrowErr("0xD17622",523, 389,2000) ;ZhuanPan
 		sleep 200
 		n=1  ; 10 x n times
 		while (n < times)
 		{
-			WaitPixelColorAndClickThrowErr("0xF4452A",409, 827,2000) ;Ten Times Button
+			WaitPixelColorAndClickThrowErr("0xF4452A",407, 810,2000) ;Ten Times Button
 			sleep 200
 			LogToFile("one time..")	
-			PixelColorExist("0xFBFBFB",390, 300,5000) ;Finished once
+			PixelColorExist("0xFBFBFB",408, 239,5000) ;Finished once
 			sleep 200
-			click 390, 300
+			click 408, 239
 			sleep 300
-			click 445, 447  ;Close double money window if any.
+			click 465, 388  ;Close double money window if any.
 			sleep 200
-			click 433, 432
+			click 408, 239
 			CaptureScreen()	
 			n++  
 		}

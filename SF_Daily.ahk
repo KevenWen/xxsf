@@ -25,11 +25,12 @@ Task2020:
     {
         For index,value in  ["sf01","sf03","sf04","sf05","long","yun"]
         {
-            new 4399UserTask(value,0)
+            %value% := new 4399UserTask(value)
             sleep 5000
             if mod(A_YDay,2) > 0                         
-                new 4399UserTask(value,0).RongZi(mod(index,5)+1)
-            new 4399UserTask(value).Hunter(1)
+                %value%.RongZi(mod(index,5)+1)
+            %value%.Hunter(1)
+            %value% := ""
         }
     }
 

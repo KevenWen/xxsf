@@ -206,9 +206,9 @@ class QHsfGame
 			LogToFile("Find land business prepared, just click OK." )
 			click 303, 609     ;点击确定
 			sleep 200
-			CaptureScreen()
 			click 303, 609     ;点击确定
 			sleep 200
+			CaptureScreen()
     		loop 4
 			{
 				click 376, 726	   ;再次确认注入

@@ -108,7 +108,6 @@ class 6322Game
 
 		try{	
 		this.PlayZhuanPan(times)
-		CaptureScreen()		
 		LogToFile("PlayZhuanPan done!")		
 		}
 		Catch e
@@ -127,8 +126,6 @@ class 6322Game
 			if this.isRongZiprepared() {
 				LogToFile("Find RongZi prepared, Going to click OK.")		
 				this.ClickRongZiOKPublic()
-				this.RZ := 1
-				LogToFile("RongZi() done for 6322Player")			
 			}
 			else {
 				this.GetGroupPage4()
@@ -243,9 +240,9 @@ class 6322Game
 			LogToFile("Find land business prepared, just click OK." )
 			click 281, 627     ;点击确定
 			sleep 200
-			CaptureScreen()			
 			click 281, 627     ;点击确定
 			sleep 200
+			CaptureScreen()
 			loop 4
 			{
 				click 361, 758	   ;再次确认注入
@@ -371,14 +368,20 @@ class 6322Game
 
 		click 462, 819  ; NiuShi button
 		sleep 200
-		WaitPixelColor("0xFFF8CE",244, 376,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
-		click 424, 479                            ; Use button
+		if PixelColorExist("0xFFF8CE",404, 354,1000)  ;窗口上方空白颜色，如果是3000钻石窗口，颜色会不一样
+			click 424, 479                            ; Use button
+		else
+			click 497, 205							  ; close button
 
         sleep 200
         click 281, 824 ; JBP button
         sleep 200
-		WaitPixelColor("0xFFF8CE",244, 376,2000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
-		click 424, 479    
+
+		if PixelColorExist("0xFFF8CE",404, 354,1000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+			click 424, 479                            ; Use button
+		else
+			click 497, 205							  ; close button
+		
         sleep 200
         ;if !(WaitPixelColorAndClick("0xDEF7EE",471, 737,500)) or !(WaitPixelColorAndClick("0xDEF7EE",317, 737,500))		
 

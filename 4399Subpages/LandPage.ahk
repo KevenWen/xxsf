@@ -77,9 +77,9 @@ class LandPage{
 			LogToFile("Find land business prepared, just click OK.")
 			click 293, 592     ;点击确定
 			sleep 200
-		    CaptureScreen()            
 			click 293, 592     ;点击确定
 			sleep 200
+			CaptureScreen()
     		loop 4
 			{
                 click 361, 704	   ;再次确认注入

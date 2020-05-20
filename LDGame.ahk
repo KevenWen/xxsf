@@ -217,8 +217,8 @@ class LDGame
 			LogToFile("Find land business prepared, just click OK." )
 			Click 281, 625     ;点击确定
 			sleep 200
-			CaptureScreen()
 			Click 281, 625     ;点击确定
+			CaptureScreen()
 			sleep 300
 			loop 4
 			{

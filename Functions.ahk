@@ -106,14 +106,14 @@ WaitPixelColor(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
     Loop {
         PixelGetColor, l_OutputColor, %p_PosX%, %p_PosY%, RGB
         If ( ErrorLevel )
-            throw "WaitPixelColor has error!"
+            throw, % "WaitPixelColor conduct has error, desired color: " . p_DesiredColor
         If ( l_OutputColor = p_DesiredColor )
         {
             sleep 100
             Return 1            
         } 
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)
-            throw "WaitPixelColor has error!"
+            throw, % "WaitPixelColor has error, desired color: " . p_DesiredColor
     }
 }
 
@@ -123,13 +123,13 @@ WaitPixelColorNotExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10)
     Loop {
         PixelGetColor, l_OutputColor, %p_PosX%, %p_PosY%, RGB
         If ( ErrorLevel ) ;Not found 
-			throw "WaitPixelColorNotExist has error!"
+			throw, % "WaitPixelColorNotExist conduct has error, desired color:" . p_DesiredColor
         If ( l_OutputColor = p_DesiredColor ) ;Still found
             sleep 50 ;same
 		Else
 			break	;not same
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut) ;Timeout
-  			throw "WaitPixelColorNotExist has error!"
+  			throw, "WaitPixelColorNotExist has error, desired color:" . p_DesiredColor
     }
 }
 
@@ -159,7 +159,7 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
     Loop {
         PixelGetColor, l_OutputColor, %p_PosX%, %p_PosY%, RGB	
         If ( ErrorLevel )
-				Throw "WaitPixelColorAndClickErrorLevel!"
+				Throw, % "WaitPixelColorAndClickErrorLevel conduct, desired color:" . p_DesiredColor
 
         If ( %l_OutputColor% = %p_DesiredColor% )
             {
@@ -172,7 +172,7 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
 			sleep 20
 
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)
-				Throw "WaitPixelColorAndClickTimeOut!"
+				Throw, % "WaitPixelColorAndClickTimeOut, desired color:" . p_DesiredColor
     }
 }
 

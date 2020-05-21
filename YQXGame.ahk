@@ -235,6 +235,11 @@ class YQXGame
 
 	isPrepared()
 	{
+        if A_Sec > 30
+        {
+            LogToFile("Land business just click time expired, current secs: " . A_Sec)
+            return 0
+        }
 		if PixelColorExist("0x7C7C7C",472, 236,10) or PixelColorExist("0xB0B0B0",472, 236,10)
 		{		
 			LogToFile("Find land business prepared, just click OK." )
@@ -250,8 +255,7 @@ class YQXGame
 				if PixelColorExist("0xFFFFF3",226, 623,1000) ;确认注入提示框
 				{
 					click 281, 661     ;点击确定
-					sleep 300
-					CaptureScreen()					
+					sleep 300				
 					click 451, 454
 					sleep 200
 				}

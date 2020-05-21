@@ -201,6 +201,11 @@ class QHsfGame
 
 	isPrepared()
 	{
+        if A_Sec > 30
+        {
+            LogToFile("Land business just click time expired, current secs: " . A_Sec)
+            return 0
+        }
 		if PixelColorExist("0x7C7C7C",494, 183,10) or PixelColorExist("0xB0B0B0",494, 183,10)
 		{
 			LogToFile("Find land business prepared, just click OK." )

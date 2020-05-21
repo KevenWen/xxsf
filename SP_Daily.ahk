@@ -164,7 +164,7 @@ Rongzi_0:
 
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","song","sf06"]
+    For index,value in  ["supper","sf06"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
@@ -191,8 +191,7 @@ Rongzi_N:
 
     new LDGame(0)
     new YQXGame(0)
-    new 6322Game(0)    
-    song := new 4399UserTask("song")
+    new 6322Game(0)
 
     WaitForTime(0000)   ;Make sure we are start after 00:00
 
@@ -202,12 +201,7 @@ Rongzi_N:
 
     new LDGame(0).GetLand()
     new YQXGame(0).GetLand()
-    new 6322Game(0).GetLand()
-        
-
-    song.GetLand()
-    song.Hunter(1)
-    song := ""       
+    new 6322Game(0).GetLand()   
 
     ;-------------------  Verification ------------------
     sleep 1000
@@ -237,13 +231,6 @@ Rongzi_N:
     else
        WinClose 6322Player
 
-    For index,value in  ["song"]
-    {
-        IniRead, _DC, % UserIni, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    } 
-
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","sf06"]
@@ -269,7 +256,7 @@ Rongzi_2:
     L := new LDGame(0)
     Y := new YQXGame(0)  
     N := new 6322Game(0)           
-    For index,value in ["sf06","song"]
+    For index,value in ["sf06"]
         new 4399UserTask(value,0)
 
 
@@ -279,7 +266,7 @@ Rongzi_2:
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    For index,value in ["sf06","song"]
+    For index,value in ["sf06"]
         new 4399UserTask(value,0).Getland()
 
     For index,value in ["L","Y","N"]
@@ -287,7 +274,7 @@ Rongzi_2:
 
     WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-     For index,value in ["sf06","song"]
+     For index,value in ["sf06"]
         new 4399UserTask(value).RongZi(index+1)
     
     For index,value in ["L","Y","N"]
@@ -309,8 +296,8 @@ Rongzi_2:
     IniRead, _DC, % UserIni,LDPlayer,DC,0
     if _DC < 1
         L.GetLand()
-    else
-       WinClose LDPlayer
+
+    WinClose LDPlayer
 
     IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
     if _RZ < 1
@@ -319,8 +306,8 @@ Rongzi_2:
     IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         Y.GetLand()
-    else
-       WinClose YQXPlayer
+
+    WinClose YQXPlayer
 
     IniRead, _RZ, % UserIni,6322Player,RZ,0
     if _RZ < 1
@@ -329,10 +316,10 @@ Rongzi_2:
     IniRead, _DC, % UserIni,6322Player,DC,0
     if _DC < 1
         N.GetLand()
-    else
-       WinClose 6322Player
 
-    For index,value in  ["sf06","song"]
+    WinClose 6322Player
+
+    For index,value in  ["sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0   
         IniRead, _RZ, % UserIni, % value, RZ,0

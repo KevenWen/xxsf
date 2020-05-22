@@ -235,7 +235,7 @@ class 6322Game
 
 	isPrepared()
 	{		
-        if A_Sec > 30
+        if A_Sec > 20
         {
             LogToFile("Land business just click time expired, current secs: " . A_Sec)
             return 0

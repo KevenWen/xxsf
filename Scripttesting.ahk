@@ -3,11 +3,6 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 #include 4399UserTask.ahk
-#include RDPGame.ahk
-#include QHuserTask.ahk
-#include LDGame.ahk
-#include YQXGame.ahk
-#include 6322Game.ahk
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window

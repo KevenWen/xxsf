@@ -38,12 +38,12 @@ DC[]{
 	{
 		this.winName := windowname
 		this.isclosed := isclose
-		IniRead, seqid, config.ini, users, %windowname%, 0
+		seqid := idtable[windowname]
 
 		LogToFile("")
 		LogToFile("Log started for :" . windowname . ", seq: " . seqid)
 		
-		if (seqid = 0) or (StrLen(seqid) > 20)
+		if (seqid = "") or (StrLen(seqid) > 20)
 		{
 			LogToFile("seq is empty or too long, terminated. ")
 			Return
@@ -184,6 +184,19 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while SelectPeopleAndstolen or GetResult: " . e)
+		CaptureScreen()
+		}
+	}
+
+	GetCaiTuan()
+	{
+		try{
+		this.PrepareGameWindow(this.winName)
+		this.CaiTuanPage.GetCaiTuanMoney()	
+		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
+		}
+		Catch e{
+		LogToFile("excetion while GetCaiTuanMoney(): " . e)
 		CaptureScreen()
 		}
 	}

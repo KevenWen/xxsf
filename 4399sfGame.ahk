@@ -185,29 +185,10 @@ class 4399sfGame
    Getzhushu()
 	{
 		WinGetActiveTitle, titlename
-		Switch titlename
-		{
-			Case "song":
-				return 38
-			Case "long":
-				return 39
-			Case "hou":
-				return 38				
-			Case "yun":
-				return 40
-			Case "supper":
-				return 42							
-			Case "xxhz":
-				return 39
-			Case "xhhz":
-				return 39
-			Case "sf06":
-				return 38					
-			Case "sf01":
-				return 18
-			Default:
-				return 17	
-		}
+		if numTable[titlename] = ""
+			return 16
+		else
+			return numTable[titlename]
 	}
 
    CheckName()

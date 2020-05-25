@@ -135,9 +135,9 @@ class 4399sfGame
 				if PixelColorExist("0x1657B0",324, 418,10) ;Daily awards
 				{
 					click 403, 573
-					sleep 100
+					sleep 200
 					click 402, 493
-					sleep 100
+					sleep 200
 					click 401, 415
 				}
 				if PixelColorExist("0xFBFBFB",471, 214,100) ;限时活动

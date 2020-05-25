@@ -135,6 +135,7 @@ DC[]{
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
 					this.GroupPage.OpenSJ()
 					CaptureScreen()
+					sleep 500
 					LogToFile("After open BussinessSkill.")
 					Return 1		
 				}

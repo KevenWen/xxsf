@@ -384,7 +384,7 @@ class LDGame
 					break
 			}
 
-			if PixelColorExist("0xA1FF3D",108, 590,100){
+			if PixelColorExist("0xA1FF3D",205, 590,100){
 				LogToFile("Already opened, no need more action. ")
 				this.SJ := 1  
 				return
@@ -398,7 +398,7 @@ class LDGame
 				click, % value
 				PixelColorExist("0xFFFFF3",315, 542,1000)	;开启 button
 				sleep 200
-				click 355, 610
+				click 350, 610
 				LogToFile("OpenBusinessSkill() for: " . index)			
 				;WaitPixelColorAndClick("0xFBFBFB", 500, 410,1000)	;关闭 button, for testing only
 			}
@@ -406,9 +406,8 @@ class LDGame
 			sleep 1000
 			CaptureScreen()
 			click 506, 228  ; 关闭subwindow
-			sleep 100
+			sleep 300
 			this.SJ := 1
-			CaptureScreen()
 			LogToFile("OpenBusinessSkill() done for LDPlayer")
 		}
 		Catch e

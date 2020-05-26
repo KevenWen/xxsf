@@ -56,8 +56,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     new YQXGame(0)
     new 6322Game(0)
 
-F10::Pause   ;pause the script
-F11::ExitApp ;stop the script
+F7::Pause   ;pause the script
+F8::ExitApp ;stop the script
 
 
 

@@ -55,6 +55,7 @@ Task2020:
 
     If (TimeToMeet = 235459)
     { 
+        GameRecordingOn()
         if mod(A_YDay,4)=0            ;RongZi at 00:00
             Gosub, Rongzi_0
         else if mod(A_YDay,2) > 0     ;not a RongZi day
@@ -62,6 +63,7 @@ Task2020:
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
         
+        GameRecordingOff()
         UploadNetDisk()
         ExitApp
     }

@@ -16,7 +16,7 @@ KeepAwake:
 return
 
 global toggle := 0
-F9::
+F4::
     global countN = 0
     toggle := !toggle
     if (toggle){        

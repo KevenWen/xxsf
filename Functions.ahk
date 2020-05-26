@@ -9,6 +9,7 @@ global gifskipath = ""
 global emailPSFilePath = ""
 global logPath = ""
 global i_viewpath = ""
+global recorderpath = ""
 global logArchivePath = ""
 global UserIni = ""
 global UserIniRemote = ""
@@ -35,6 +36,7 @@ IniRead, LDExePath, config.ini, path, LDExePath
 IniRead, 4399GamePath, config.ini, path, 4399GamePath
 IniRead, gifskipath, config.ini, path, gifskipath
 IniRead, i_viewpath, config.ini, path, i_viewpath
+IniRead, recorderpath, config.ini, path, recorderpath
 IniRead, BaiduNetDiskPath, config.ini, path, BaiduNetDiskPath
 IniRead, UserIni, config.ini, path, UserIni
 IniRead, UserIniRemote, config.ini, path, UserIniRemote
@@ -178,6 +180,7 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
 
 CaptureScreen()
 {
+/*
 	try
 	{
         ifWinExist,IrfanView            ;If run too often, may have load exe error
@@ -202,7 +205,7 @@ CaptureScreen()
 		LogToFile("Screen captured failed: " . e)
         WinClose, IrfanView        
 	}
-
+*/
 }
 
 CaptureScreenAll()
@@ -236,7 +239,56 @@ MadeGif(named="unknown")
 	catch e
 	{
 		;Ignore the error here.
-		;LogToFile("MadeGif exception: " . e)
+		LogToFile("MadeGif exception: " . e)
+	}
+}
+
+GameRecordingOn()
+{
+	try
+	{
+        Run, % recorderpath
+        loop
+        {
+            IfWinActive, ahk_class TfrmMain
+                break
+            if A_index > 10
+                throw, "Run game recorder time out!"
+            sleep 1000
+        }
+        sleep 200
+        send {F9}
+        sleep 200
+        WinMinimize, ahk_class TfrmMain ;minimize the TfrmMain window
+        LogToFile("Game Recording On.")
+	}
+	catch e
+	{
+		;Ignore the error here.
+		LogToFile("Game recording turn on failed: " . e)
+	}
+}
+
+GameRecordingOff()
+{
+    try
+	{
+        ifWinExist,ahk_class TfrmMain
+        {
+            WinActivate, ahk_class TfrmMain ;Activate the TfrmMain window
+            sleep 200
+            send {F11}
+            sleep 1000      
+            WinMinimize, ahk_class TfrmMain ;minimize the TfrmMain window               
+            sleep 5000
+            Process, Close, gamerecorder.exe
+            LogToFile("Game Recording Off.")
+        }
+	}
+	catch e
+	{
+        Process, Close, gamerecorder.exe
+		LogToFile("Game recording turn off failed: " . e)
 	}
 }
 

@@ -271,25 +271,10 @@ GameRecordingOn()
 
 GameRecordingOff()
 {
-    try
-	{
-        ifWinExist,ahk_class TfrmMain
-        {
-            WinActivate, ahk_class TfrmMain ;Activate the TfrmMain window
-            sleep 200
-            send {F11}
-            sleep 1000      
-            WinMinimize, ahk_class TfrmMain ;minimize the TfrmMain window               
-            sleep 5000
-            Process, Close, gamerecorder.exe
-            LogToFile("Game Recording Off.")
-        }
-	}
-	catch e
-	{
-        Process, Close, gamerecorder.exe
-		LogToFile("Game recording turn off failed: " . e)
-	}
+    send {F11}
+    sleep 2000      
+    Process, Close, gamerecorder.exe
+    LogToFile("Game Recording Off.")
 }
 
 SendAlertEmail()

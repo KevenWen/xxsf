@@ -35,7 +35,7 @@ OnTCPAccept()
     return
 }
 
-F11::
+F12::
     myTcp.disconnect()
     ExitApp
 return

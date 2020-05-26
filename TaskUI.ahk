@@ -11,9 +11,10 @@ for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
 Gui Add, Text, x122 y22 w124 h23 +0x200, 任务选项
+
 Gui Add, Text, vExecTime x123 y53 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
 Gui Add, Edit, vTimeStart x330 y55 w132 h21 +Number
-Gui Add, Text, cRed vTips x124 y272 w124 h23 +0x200,
+Gui Add, Text, cRed vTips x124 y272 w164 h23 +0x200,
 
 Gui Add, CheckBox, vShare x399 y120 w85 h23, 好友分享
 Gui Add, CheckBox, visCaiTuan x121 y88 w81 h23, 财团收钱
@@ -61,11 +62,10 @@ CreateTask:
     if !(TimeStart = "")
     {
         TimeNow := A_Hour A_Min A_Sec
-        while TimeStart > TimeNow
+        while !(TimeStart = TimeNow)
         {
+            GuiControl,, Tips, % "执行倒计时：" . Floor(WaitTime(TimeStart)/60) . " 分 " . Round(mod(WaitTime(TimeStart),60),0) . " 秒"
             sleep 1000
-            TimeNow := A_Hour A_Min A_Sec
-            GuiControl,, Tips, % "执行倒计时：" . TimeStart - TimeNow . " 秒"
         }
     }
     
@@ -102,7 +102,8 @@ CreateTask:
         }
     }
 
-    GuiControl,Enable, vBtnCreateTask
+    GuiControl,Enable, TimeStart
+    GuiControl,Enable, BtnCreateTask
     GuiControl,Disable, BtnStopTask
     GuiControl,Disable, BtnPauseTask
 Return

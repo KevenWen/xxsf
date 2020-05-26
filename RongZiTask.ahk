@@ -26,6 +26,7 @@ myTcp.disconnect()
 
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0 
 
+GameRecordingOn()
 if mod(A_YDay,4)=0            ;RongZi at 00:00
     Gosub, Rongzi_0
 else if mod(A_YDay,2) > 0     ;not a RongZi day
@@ -33,6 +34,7 @@ else if mod(A_YDay,2) > 0     ;not a RongZi day
 else
     Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
 
+GameRecordingOff()
 UploadNetDisk()
 ExitApp
 
@@ -249,8 +251,8 @@ Rongzi_2:
     WinClose 360游戏大厅
 Return
 
-F10::Pause   ;pause the script
-F11::
+F7::Pause   ;pause the script
+F8::
     ;myTcp.disconnect()
     ;myTcp := ""
     ExitApp ;stop the script

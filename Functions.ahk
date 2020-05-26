@@ -29,7 +29,7 @@ IniRead, BaiduNetDiskPath, config.ini, path, BaiduNetDiskPath
 IniRead, UserIni, config.ini, path, UserIni
 IniRead, UserIniRemote, config.ini, path, UserIniRemote
 
-IniRead, content, config.ini, users
+IniRead, content, config.ini, users/num
 Loop, Parse, Content, `n, `r
 {
 

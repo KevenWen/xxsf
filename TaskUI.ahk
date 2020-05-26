@@ -11,9 +11,9 @@ for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
 Gui Add, Text, x122 y22 w124 h23 +0x200, 任务选项
-Gui Add, Text, vExecTime x123 y53 w150 h23 +0x200, 执行时间（如000001, 留空立即执行)：
+Gui Add, Text, vExecTime x123 y53 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
 Gui Add, Edit, vTimeStart x330 y55 w132 h21 +Number
-Gui Add, Text, vTips x780 y53 w124 h23 +0x200,
+Gui Add, Text, cRed vTips x124 y272 w124 h23 +0x200,
 
 Gui Add, CheckBox, vShare x399 y120 w85 h23, 好友分享
 Gui Add, CheckBox, visCaiTuan x121 y88 w81 h23, 财团收钱
@@ -27,7 +27,7 @@ Gui Add, CheckBox, vGInjection x214 y90 w52 h23, 注资
 Gui Add, CheckBox, vGFiance x308 y94 w53 h23, 融资
 
 Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
-Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 停止任务(F11)
+Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F11)
 Gui Add, Button, vBtnPauseTask x261 y348 w117 h40 gGuiPause, 暂停任务(F10恢复)
 Gui Add, Button, vBtnClose x390 y348 w117 h40 gGuiClose, 关闭
 Gui Add, Button, vBtnOpenLog x124 y304 w142 h23 gOpenLog, 查看当日log文件..
@@ -52,19 +52,24 @@ return
 
 CreateTask:
 
-    GuiControl,Disable, BtnCreateTask
+    GuiControl, Disable, BtnCreateTask
     GuiControl, Enable, BtnStopTask
     GuiControl, Enable, BtnPauseTask
+    GuiControl, Disable, TimeStart
 
     GuiControlGet, TimeStart 
     if !(TimeStart = "")
     {
-        ControlSetText, Tips, waiting to start..., Tasks
-        WaitForTime(TimeStart)
+        TimeNow := A_Hour A_Min A_Sec
+        while TimeStart > TimeNow
+        {
+            sleep 1000
+            TimeNow := A_Hour A_Min A_Sec
+            GuiControl,, Tips, % "执行倒计时：" . TimeStart - TimeNow . " 秒"
+        }
     }
     
     GuiControlGet, isShare,, Share
-
     ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
     if (SelectedUsersC < 1)
     {

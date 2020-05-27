@@ -331,6 +331,7 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("Start to GetCard, times: " . times)			
 		this.ShopHomepage.GetCards(times)
+		LogToFile("GetCard done.")
 		}
 		Catch e{
 		LogToFile("excetion while GetCard: " . e)

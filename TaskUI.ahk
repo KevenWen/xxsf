@@ -5,30 +5,36 @@
 SetWorkingDir %A_ScriptDir%
 SetBatchLines -1
 
-Gui Add, ListView, vUlist x9 y25 w105 h303 gMyListView, UserTit|ID|Num
+Gui Add, Text, x25 y20 w124 h25 +0x200, 任务选项
 
+Gui Add, Text, vExecTime x25 y55 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
+Gui Add, Edit, vTimeStart x230 y55 w100 h21 +Number
+
+Gui Add, CheckBox, visGFiance x25 y88 w50 h23, 融资
+Gui Add, ComboBox, vFianceSeq xp+50 w30, 1|2|3|4|5
+
+Gui Add, CheckBox, visPlayTurnTable xp+60 y88 w60 h23, 转盘x10
+Gui Add, ComboBox, vTurnTableTimes xp+60 w30, 1|2|3|4|5|6|7
+Gui Add, CheckBox, visHunter xp+50 w81 h23, 黑名单偷猎
+Gui Add, CheckBox, visLand xp+90 w81 h23, 地产入驻
+
+Gui Add, CheckBox, visGInjection x25 y+m w45 h23, 注资
+Gui Add, ComboBox, vInjectionSeq xp+50 w30, 1|2|3
+Gui Add, CheckBox, visBuy xp+60 yp+5 , 购买转盘
+
+
+Gui Add, CheckBox, visCaiTuan x25 y+m w81 h23, 财团收钱
+Gui Add, CheckBox, visShare xp+110 w88 h23, 分享20钻石
+Gui Add, CheckBox, visCard xp+110 w82 h23, 刷拼图
+
+Gui Add, ListView, vUlist x430 y25 w125 h303 gMyListView, UserTit|ID|Num
 for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
-Gui Add, Text, x122 y22 w124 h23 +0x200, 任务选项
 
-Gui Add, Text, vExecTime x123 y53 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
-Gui Add, Edit, vTimeStart x330 y55 w132 h21 +Number
-
-Gui Add, CheckBox, visCaiTuan x121 y88 w81 h23, 财团收钱
-Gui Add, CheckBox, visShare x399 y120 w85 h23, 好友分享
-Gui Add, CheckBox, visGInjection x214 y90 w52 h23, 注资
-Gui Add, CheckBox, visGFiance x308 y94 w53 h23, 融资
-Gui Add, CheckBox, visHunter x121 y119 w81 h23, 黑名单偷猎
-
-Gui Add, CheckBox, visBuy x308 y120 w81 h19, 购买转盘
-Gui Add, CheckBox, visLand x398 y95 w81 h23, 地产入驻
-Gui Add, CheckBox, visCard x214 y119 w82 h23, 刷拼图
-
-
-Gui Add, Text, cRed vTips x124 y262 w164 h23 +0x200,
-Gui Add, CheckBox, visRecordingOn x124 y280 w81 h23, 开启录屏
-Gui Add, Button, vBtnOpenLog x124 y304 w142 h23 gOpenLog, 查看当日log文件..
+Gui Add, Text, cRed vTips x25 y262 w164 h23 +0x200,
+Gui Add, CheckBox, visRecordingOn x25 y280 w81 h23, 开启录屏
+Gui Add, Button, vBtnOpenLog x25 y304 w142 h23 gOpenLog, 查看当日log文件..
 Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F12)
 Gui Add, Button, vBtnPauseTask x261 y348 w117 h40 gGuiPause, 暂停任务(F7恢复)
@@ -55,6 +61,22 @@ return
 
 CreateTask:
 
+    ;======================= Verification ========================================
+    ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
+    if (SelectedUsersC < 1)
+    {
+        MsgBox, Please select at least one user!
+        Return
+    }
+
+    GuiControlGet, isZhuZiSelected,, isGInjection
+    GuiControlGet, zhuziWhich,, InjectionSeq
+    if (isZhuZiSelected and zhuziWhich = "")
+    {
+        MsgBox, Please select a zhuzi sequence!
+        Return
+    }
+
     GuiControl, Disable, BtnCreateTask
     GuiControl, Enable, BtnStopTask
     GuiControl, Enable, BtnPauseTask
@@ -72,13 +94,6 @@ CreateTask:
         }
     }
     
-    ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
-    if (SelectedUsersC < 1)
-    {
-        MsgBox, "Please select at lease one user! "
-        Return
-    }
-
     GuiControlGet, isRecordingOnSelected,, isRecordingOn        
     if isRecordingOnSelected
         GameRecordingOn()
@@ -99,6 +114,11 @@ CreateTask:
             GuiControlGet, isBuySelected,, isBuy
             GuiControlGet, isCardSelected,, isCard
 
+
+
+
+
+
             U := StrSplit(A_LoopField, A_Tab)
             user := new 4399UserTask(U[1],0)
 
@@ -106,7 +126,7 @@ CreateTask:
                 user.GetCaiTuan()
 
             if isShareSelected
-                user.GetCard(1)
+                user.GetCard(3)
 
             if visLandSelected
                 user.GetLand()
@@ -115,7 +135,7 @@ CreateTask:
                 user.Hunter(0)
 
             if isZhuZiSelected
-                user.Zhuzi(2)
+                user.Zhuzi(zhuziWhich)
 
             if isRongZiSelected
                 user.Rongzi(3)
@@ -124,7 +144,7 @@ CreateTask:
                 user.GetCaiTuan()
 
             if isCardSelected
-                user.GetCard(150)
+                user.GetCard()
 
             user := ""
             ;Loop, Parse, A_LoopField, %A_Tab%  ; Fields (columns) in each row are delimited by tabs (A_Tab).
@@ -136,6 +156,7 @@ CreateTask:
         GameRecordingOff()
 
     GuiControl,, Tips,
+    GuiControl,, TimeStart,
     GuiControl,Enable, TimeStart
     GuiControl,Enable, BtnCreateTask
     GuiControl,Disable, BtnStopTask

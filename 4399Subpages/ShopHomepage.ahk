@@ -64,6 +64,7 @@ class ShopHomePage{
 
 	GetCards(times=150)
 	{
+        this.GetHomePage()
 		click 246, 196	;click 礼包 button
 		sleep 500
 		Loop %times%		;循环150次，可按需要调整
@@ -79,7 +80,8 @@ class ShopHomePage{
 				this.closeSpeSubWindow(1)
 			sleep 200
 		}
-		this.CloseSpeSubWindow(30)	;关闭所有子窗口
+        sleep 2000
+		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口
 	}
 
 

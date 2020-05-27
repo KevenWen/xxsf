@@ -19,21 +19,11 @@ class OrderPage{
 		this.GetOrderPage()
 		sleep 200
 		Click 82, 707 ;ShangHui button
-		sleep 500
-		CaptureScreen()	;the first 11 entry	
-		sleep 1000
-		MouseMove, 326, 676
-		sleep 1000
+		sleep 2000
 		MouseClickDrag, Left, 326, 676,326,326,50
 		sleep 2000
-		mousemove 557, 398
-		CaptureScreen()		;the seconrd entries
-		sleep 1000			
 		MouseClickDrag, Left, 326, 676,326,326
 		sleep 2000			
-		mousemove 557, 398
-		CaptureScreen()		;the third entries
-		sleep 2000
 	}
 
 }

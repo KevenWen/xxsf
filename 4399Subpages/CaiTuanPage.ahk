@@ -59,7 +59,6 @@ class CaiTuanPage{
 		else 
 			LogtoFile("Tian Ti result unknown..")
 
-		CaptureScreen()
 		sleep 500		
 		click 294, 813   	;close result page, return 
 		sleep 1000

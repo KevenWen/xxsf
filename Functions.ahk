@@ -176,7 +176,8 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
 
 CaptureScreen()
 {
-/*
+    if !FileExist(i_viewpath)
+        return
 	try
 	{
         ifWinExist,IrfanView            ;If run too often, may have load exe error
@@ -201,11 +202,12 @@ CaptureScreen()
 		LogToFile("Screen captured failed: " . e)
         WinClose, IrfanView        
 	}
-*/
 }
 
 CaptureScreenAll()
 {
+    if !FileExist(i_viewpath)
+        return
 	try
 	{
         FormatTime, Dayfolder,, yyyyMMdd
@@ -223,6 +225,8 @@ CaptureScreenAll()
 
 MadeGif(named="unknown")
 {
+    if !FileExist(gifskipath)
+        return
 	try
 	{
 		FormatTime, Dayfolder,, yyyyMMdd
@@ -241,6 +245,8 @@ MadeGif(named="unknown")
 
 GameRecordingOn()
 {
+    if !FileExist(recorderpath)
+        return
 	try
 	{
         Run, % recorderpath
@@ -275,6 +281,8 @@ GameRecordingOff()
 
 SendAlertEmail()
 {
+    if !FileExist(emailPSFilePath)
+        return
 	Run "powershell.exe" -ExecutionPolicy Bypass -File %emailPSFilePath%
 }
 
@@ -321,12 +329,13 @@ RongZiOKEmu()
             click % PopWin["okbtn"]
             sleep, % s["short"]
             click % PopWin["okbtn"]
-            CaptureScreen()
         }   
     }
 }
 UploadNetDisk()
 {
+    if !FileExist(BaiduNetDiskPath)
+        return
     Run, % BaiduNetDiskPath
     sleep 600000
     Process, close, baidunetdisk.exe

@@ -16,22 +16,23 @@ Gui Add, Text, vExecTime x123 y53 w210 h23 +0x200, 执行时间（如000001, 留
 Gui Add, Edit, vTimeStart x330 y55 w132 h21 +Number
 Gui Add, Text, cRed vTips x124 y272 w164 h23 +0x200,
 
-Gui Add, CheckBox, vShare x399 y120 w85 h23, 好友分享
 Gui Add, CheckBox, visCaiTuan x121 y88 w81 h23, 财团收钱
-Gui Add, CheckBox, vHunter x121 y119 w81 h23, 黑名单偷猎
-Gui Add, CheckBox, vBuy x308 y120 w81 h19, 购买转盘
+Gui Add, CheckBox, visShare x399 y120 w85 h23, 好友分享
+Gui Add, CheckBox, visGInjection x214 y90 w52 h23, 注资
+Gui Add, CheckBox, visGFiance x308 y94 w53 h23, 融资
+Gui Add, CheckBox, visHunter x121 y119 w81 h23, 黑名单偷猎
 
+Gui Add, CheckBox, visBuy x308 y120 w81 h19, 购买转盘
+Gui Add, CheckBox, visLand x398 y95 w81 h23, 地产入驻
+Gui Add, CheckBox, visCard x214 y119 w82 h23, 刷拼图
 
-Gui Add, CheckBox, vLand x398 y95 w81 h23, 地产入驻
-Gui Add, CheckBox, vCard x214 y119 w82 h23, 刷拼图
-Gui Add, CheckBox, vGInjection x214 y90 w52 h23, 注资
-Gui Add, CheckBox, vGFiance x308 y94 w53 h23, 融资
-
-Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
-Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F11)
-Gui Add, Button, vBtnPauseTask x261 y348 w117 h40 gGuiPause, 暂停任务(F10恢复)
-Gui Add, Button, vBtnClose x390 y348 w117 h40 gGuiClose, 关闭
+Gui Add, CheckBox, visRecordingOn x124 y280 w81 h23, 开启录屏
 Gui Add, Button, vBtnOpenLog x124 y304 w142 h23 gOpenLog, 查看当日log文件..
+Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
+Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F12)
+Gui Add, Button, vBtnPauseTask x261 y348 w117 h40 gGuiPause, 暂停任务(F7恢复)
+Gui Add, Button, vBtnClose x390 y348 w117 h40 gGuiClose, 关闭(F8)
+
 
 GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
@@ -77,30 +78,62 @@ CreateTask:
         Return
     }
 
+    GuiControlGet, isRecordingOnSelected,, isRecordingOn        
+    if isRecordingOnSelected
+        GameRecordingOn()
+
     ControlGet, SelectedUsers, List,Selected, SysListView321, Tasks
     {
         Loop, Parse, SelectedUsers, `n  ; Rows are delimited by linefeeds (`n).
         {
             RowNumber := A_Index
+
+
+            GuiControlGet, isCaiTuanSelected,, isCaiTuan
+            GuiControlGet, isShareSelected,, isShare
+            GuiControlGet, isHunterSelected,, isHunter            
+            GuiControlGet, isZhuZiSelected,, isGInjection
+            GuiControlGet, isRongZiSelected,, isGFiance
+            GuiControlGet, visLandSelected,, isLand
+            GuiControlGet, isBuySelected,, isBuy
+            GuiControlGet, isCardSelected,, isCard
+
+
             U := StrSplit(A_LoopField, A_Tab)
             user := new 4399UserTask(U[1],0)
 
-            GuiControlGet, isCaiTuanSelected,, isCaiTuan
             if isCaiTuanSelected
                 user.GetCaiTuan()
 
-            GuiControlGet, isZhuZi,, GInjection
-            if isZhuZi
+            if isShareSelected
+                user.GetCard(1)
+
+            if visLandSelected
+                user.GetLand()
+
+            if isHunterSelected
+                user.Hunter(0)
+
+            if isZhuZiSelected
                 user.Zhuzi(2)
-            GuiControlGet, isRongZi,, GFiance
-            if isRongZi
+
+            if isRongZiSelected
                 user.Rongzi(3)
+
+            if isBuySelected
+                user.GetCaiTuan()
+
+            if isCardSelected
+                user.GetCard(150)
 
             user := ""
             ;Loop, Parse, A_LoopField, %A_Tab%  ; Fields (columns) in each row are delimited by tabs (A_Tab).
             ;    MsgBox Row #%RowNumber% Col #%A_Index% is %A_LoopField%.
         }
     }
+
+    if isRecordingOnSelected
+        GameRecordingOff()
 
     GuiControl,Enable, TimeStart
     GuiControl,Enable, BtnCreateTask
@@ -117,371 +150,14 @@ GuiPause:
     Pause   
 return
 
-F10::Pause   ;pause the script
-F11::ExitApp ;stop the script
-
-Reloading:
-    Reload
-return
-    
-
 GuiEscape:
 GuiClose:
     ExitApp
 
-
-/*
-
-SetTimer, Task2020, 1000  ;run every 1 secs
-Return
-
-Task2020:
-
-    FormatTime, TimeToMeet,,HHmmss
-
-    ;TimeToMeet = 235459
-
-    If (TimeToMeet = 235459)
-    { 
-        if mod(A_YDay,4)=0            ;RongZi at 00:00
-            Gosub, Rongzi_0
-        else if mod(A_YDay,2) > 0     ;not a RongZi day
-            Gosub, Rongzi_N
-        else
-            Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
-        
-        UploadNetDisk()
-        ExitApp
-    }
-
+Reloading:
+    Reload
 return
 
-;<========================================= Sub Tasks 0 ================================================>
-
-Rongzi_0:
-
-    new LDGame(0)    
-    new YQXGame(0)
-    new 6322Game(0)           
-    For index,value in ["hou","xhhz"]
-        new 4399UserTask(value,0).PrepareRongZi(index+1)
-    FileDelete % UserIni
-    FileDelete % UserIniRemote   
-    FileAppend,,% UserIni               
-
-    WaitForTime(000001)   ;Make sure we are start after 00:00
-
-    ;-------------------- ClickRongZiOK -----------------
-    new LDGame(0).RongZi()  
-    
-    if mod(A_YDay-118,7) = 0
-        new LDGame(0).OpenBusinessSkill()
- 
-    new YQXGame(0).RongZi()
-    new 6322Game(0).RongZi() 
-    For index,value in ["hou","xhhz"]
-        new 4399UserTask(value,0).RongZi(index+1)
-
-    ;-------------------  Verification 1 -------------------
-    LogtoFile("Start to do verification 1...")
-
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1 and mod(A_YDay-118,7) = 0
-            new LDGame(0).OpenBusinessSkill() 
-    }
-
-    For index,value in ["hou","xhhz"]
-    {
-        IniRead, _RZ, % UserIni, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index+1)              
-    }
-
-    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
-    if _RZ < 1
-        new LDGame(0).RongZi()
-
-    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
-    if _RZ < 1
-        new YQXGame(0).RongZi()
-
-    IniRead, _RZ, % UserIni,6322Player,RZ,0
-    if _RZ < 1
-        new 6322Game(0).RongZi()
-    LogtoFile("Verification 1 done.")    
-    ;-------------------- ZhuanPan ----------------------
-    WinClose hou
-    new 6322Game(0).ZhuanPan(5)
-    new 4399UserTask("hou",0).ZhuanPan(4,1)
-    new 4399UserTask("xhhz",0).ZhuanPan(5,0)            
-
-    ;-------------------- Hunter ------------------------
-
-    For index,value in ["hou","xhhz"]
-        new 4399UserTask(value,0).Hunter(1)
-
-    ;-------------------- GetLand -----------------------
-
-    new LDGame().GetLand()
-    new YQXGame().GetLand()
-    new 6322Game().GetLand()
-    For index,value in ["hou","xhhz"]
-        new 4399UserTask(value).GetLand()
-
-    ;-------------------  Verification 2 ------------------
-    sleep 1000
-    LogtoFile("Start to do verification 2...")
-
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
-    if _DC < 1
-        new LDGame().GetLand()
-
-    IniRead, _DC, % UserIni,YQXPlayer,DC,0
-    if _DC < 1
-        new YQXGame().GetLand()
-
-    For index,value in  ["hou","xhhz"]
-    {
-        IniRead, _DC, % UserIni, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    }
-    LogtoFile("Verification 2 done.")
-
-    Sleep 180000
-    LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","sf06"]
-    {
-        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index)
-
-        IniRead, _DC, % UserIniRemote, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()    
-    } 
-    LogtoFile("Remote verification done.")
-
-    WinClose 360游戏大厅
-Return
-
-;<========================================= Sub Tasks N ================================================>
-
-Rongzi_N:
-
-    ;------------------ Prepare game ---------------------
-	;IniWrite, 0, % UserIni,LDPlayer,SJ
-    FileDelete % UserIniRemote
-    FileDelete % UserIni
-    FileAppend,,% UserIni  
-
-    new LDGame(0)
-    new YQXGame(0)
-    new 6322Game(0)
-
-    WaitForTime(0000)   ;Make sure we are start after 00:00
-
-    ;--------------------- Tasks ------------------------
-    if mod(A_YDay-118,7) = 0
-        new LDGame(0).OpenBusinessSkill()
-
-    new LDGame(0).GetLand()
-    new YQXGame(0).GetLand()
-    new 6322Game(0).GetLand()   
-
-    ;-------------------  Verification ------------------
-    sleep 1000
-    LogtoFile("Start to do verification...")
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            new LDGame().OpenBusinessSkill()
-    }
-
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
-    if _DC < 1
-        new LDGame().GetLand()
-    else
-       WinClose LDPlayer
-
-    IniRead, _DC, % UserIni,YQXPlayer,DC,0
-    if _DC < 1
-        new YQXGame().GetLand()
-    else
-       WinClose YQXPlayer
-
-    IniRead, _DC, % UserIni,6322Player,DC,0
-    if _DC < 1
-        new 6322Game().GetLand()
-    else
-       WinClose 6322Player
-
-    Sleep 1200000
-    LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","sf06"]
-    {
-        IniRead, _DC, % UserIniRemote, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    } 
-
-    LogtoFile("Verification done.")
-
-Return
-
-;<========================================= Sub Tasks 2 ================================================>
-
-Rongzi_2:
-
-    ;-------------------- Prepare game -----------------------
-    FileDelete % UserIniRemote
-    FileDelete % UserIni
-    FileAppend,,% UserIni
-    
-    L := new LDGame(0)
-    Y := new YQXGame(0)  
-    N := new 6322Game(0)           
-    For index,value in ["sf06"]
-        new 4399UserTask(value,0)
-
-
-    WaitForTime(000001)   ;Make sure we are start after 00:00:01
-
-    ;-------------------- Tasks ---------------------
-    if mod(A_YDay-118,7) = 0
-        L.OpenBusinessSkill()
-
-    For index,value in ["sf06"]
-        new 4399UserTask(value,0).Getland()
-
-    For index,value in ["L","Y","N"]
-        %value%.GetLand()
-
-    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
-
-     For index,value in ["sf06"]
-        new 4399UserTask(value).RongZi(index+1)
-    
-    For index,value in ["L","Y","N"]
-        %value%.RongZi()
-
-    ;--------------------  Verification --------------------
-    LogtoFile("Start to do verification...")
-
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            L.OpenBusinessSkill()
-    }
-    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
-    if _RZ < 1
-        L.RongZi()
-    
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
-    if _DC < 1
-        L.GetLand()
-
-    WinClose LDPlayer
-
-    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
-    if _RZ < 1
-        Y.RongZi()
-    
-    IniRead, _DC, % UserIni,YQXPlayer,DC,0
-    if _DC < 1
-        Y.GetLand()
-
-    WinClose YQXPlayer
-
-    IniRead, _RZ, % UserIni,6322Player,RZ,0
-    if _RZ < 1
-        N.RongZi()
-    
-    IniRead, _DC, % UserIni,6322Player,DC,0
-    if _DC < 1
-        N.GetLand()
-
-    WinClose 6322Player
-
-    For index,value in  ["sf06"]
-    {
-        IniRead, _DC, % UserIni, % value, DC,0   
-        IniRead, _RZ, % UserIni, % value, RZ,0
-
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index+1)      
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    }
-
-    Sleep 300000
-    LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","hou"]
-    {
-        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index)
-
-        IniRead, _DC, % UserIniRemote, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()    
-    } 
-
-    LogtoFile("Verification done.")
-    WinClose 360游戏大厅
-Return
-
-;<========================================= HotKeys ================================================>
-; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	
-
-^NumpadDot::
-    CaptureScreen()
-return
-
-^NumpadMult::
-   For index,value in  ["song","yun","long"]
-       new 4399UserTask(value,0)
-return
-
-^NumpadAdd::      ;LDPlayer
-   run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
-return
-
-^Numpad1::     ;02/song
-    Launch4399GamePri("song",2)
-return
-^Numpad2::     ;Long
-    Launch4399GamePri("long",7)
-return
-^Numpad3::      ;Yun
-    Launch4399GamePri("yun",8)
-return
-^Numpad4::    ;88888
-    new QHUser(0)
-return
-^Numpad5::    ;SF27_Supper
-    Launch4399GamePri("supper",10)
-return
-
-^Numpad6::     ;06
-    new 4399UserTask("sf06",0)
-return
-
-^Numpad0::     ;01
-    new 4399UserTask("sf01",0)
-return
-^Numpad7::     ;03
-    new 4399UserTask("sf03",0)
-return
-^Numpad8::     ;04
-    new 4399UserTask("sf04",0)
-return
-^Numpad9::     ;05
-    new 4399UserTask("sf05",0)
-return
-*/
-F12::ExitApp ;stop the script
+F7::Pause   ;pause the script
+F8::ExitApp ;stop the script
+F12::Reload ;Reload the script

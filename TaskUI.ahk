@@ -14,7 +14,6 @@ Gui Add, Text, x122 y22 w124 h23 +0x200, 任务选项
 
 Gui Add, Text, vExecTime x123 y53 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
 Gui Add, Edit, vTimeStart x330 y55 w132 h21 +Number
-Gui Add, Text, cRed vTips x124 y272 w164 h23 +0x200,
 
 Gui Add, CheckBox, visCaiTuan x121 y88 w81 h23, 财团收钱
 Gui Add, CheckBox, visShare x399 y120 w85 h23, 好友分享
@@ -26,6 +25,8 @@ Gui Add, CheckBox, visBuy x308 y120 w81 h19, 购买转盘
 Gui Add, CheckBox, visLand x398 y95 w81 h23, 地产入驻
 Gui Add, CheckBox, visCard x214 y119 w82 h23, 刷拼图
 
+
+Gui Add, Text, cRed vTips x124 y262 w164 h23 +0x200,
 Gui Add, CheckBox, visRecordingOn x124 y280 w81 h23, 开启录屏
 Gui Add, Button, vBtnOpenLog x124 y304 w142 h23 gOpenLog, 查看当日log文件..
 Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
@@ -65,12 +66,12 @@ CreateTask:
         TimeNow := A_Hour A_Min A_Sec
         while !(TimeStart = TimeNow)
         {
+            TimeNow := A_Hour A_Min A_Sec
             GuiControl,, Tips, % "执行倒计时：" . Floor(WaitTime(TimeStart)/60) . " 分 " . Round(mod(WaitTime(TimeStart),60),0) . " 秒"
             sleep 1000
         }
     }
     
-    GuiControlGet, isShare,, Share
     ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
     if (SelectedUsersC < 1)
     {
@@ -97,7 +98,6 @@ CreateTask:
             GuiControlGet, visLandSelected,, isLand
             GuiControlGet, isBuySelected,, isBuy
             GuiControlGet, isCardSelected,, isCard
-
 
             U := StrSplit(A_LoopField, A_Tab)
             user := new 4399UserTask(U[1],0)
@@ -135,6 +135,7 @@ CreateTask:
     if isRecordingOnSelected
         GameRecordingOff()
 
+    GuiControl,, Tips,
     GuiControl,Enable, TimeStart
     GuiControl,Enable, BtnCreateTask
     GuiControl,Disable, BtnStopTask

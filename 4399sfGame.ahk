@@ -33,10 +33,12 @@ class 4399sfGame
 		
 		IfWinExist,%name%
 		{
+			WinSet, AlwaysOnTop, On, %name%
 			WinActivate, %name%			
 			LogToFile("")
 			LogToFile("Log switch for: " . name)
 			sleep 100
+			WinSet, AlwaysOnTop, Off, %name%			
 		}
 		Else
 			throw "Window name not exist: " . name

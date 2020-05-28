@@ -326,6 +326,33 @@ DC[]{
 		}
 	}
 
+	ReloadGame(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to ReloadGame.")			
+		this.ShopHomepage.Reload()
+		LogToFile("ReloadGame done.")
+		return 1
+		}
+		Catch e{
+		LogToFile("excetion while ReloadGame: " . e)
+		WinClose, % this.winName
+		return 0
+		}
+	}	
+
+    GuanGuJYS(name)
+	{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to GuanGuJYS.")			
+		this.ShopHomepage.GuanGu(name)
+		LogToFile("GuanGuJYS done.")
+		}
+		Catch e{
+		LogToFile("excetion while GuanGuJYS: " . e)
+		4399sfGame.CloseAnySubWindow()
+	}
+
 	GetCard(times){
 		try{
 		this.PrepareGameWindow(this.winName)

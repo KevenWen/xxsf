@@ -123,6 +123,12 @@ class 4399sfGame
 
 	CloseAnySubWindow()
 	{
+		if PixelColorExist("0x5BD157",286, 536,10) ;Share to window
+		{
+			click 414, 439
+			sleep 300
+		}
+
 		loop 5
 		{
 			ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"

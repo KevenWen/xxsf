@@ -14,18 +14,21 @@ Gui Add, CheckBox, visGFiance x25 y88 w50 h23, 融资
 Gui Add, ComboBox, vFianceSeq xp+50 w30, 1|2|3|4|5
 
 Gui Add, CheckBox, visPlayTurnTable xp+60 y88 w60 h23, 转盘x10
-Gui Add, ComboBox, vTurnTableTimes xp+60 w30, 1|2|3|4|5|6|7
-Gui Add, CheckBox, visHunter xp+50 w81 h23, 黑名单偷猎
-Gui Add, CheckBox, visLand xp+90 w81 h23, 地产入驻
+Gui Add, ComboBox, vTurnTableTime xp+60 w30, 1|2|3|4|5|6|7
+Gui Add, CheckBox, vTimespeed xp+35 h23, 转前买加速
+Gui Add, CheckBox, vLoginagain xp+83 h23, 之前重登
 
-Gui Add, CheckBox, visGInjection x25 y+m w45 h23, 注资
-Gui Add, ComboBox, vInjectionSeq xp+50 w30, 1|2|3
-Gui Add, CheckBox, visBuy xp+60 yp+5 , 购买转盘
 
+
+Gui Add, CheckBox, visGInjection x25 y+m w45, 注资
+Gui Add, ComboBox, vInjectionSeq x+m w30, 1|2|3
+Gui Add, CheckBox, visBuy xp+55 yp+5 , 购买转盘
+Gui Add, CheckBox, visHunter xp+95 w81, 黑名单偷猎
+Gui Add, CheckBox, visLand x+m w81, 地产入驻
 
 Gui Add, CheckBox, visCaiTuan x25 y+m w81 h23, 财团收钱
 Gui Add, CheckBox, visShare xp+110 w88 h23, 分享20钻石
-Gui Add, CheckBox, visCard xp+110 w82 h23, 刷拼图
+Gui Add, CheckBox, visCard xp+95 w82 h23, 刷拼图
 
 Gui Add, ListView, vUlist x430 y25 w125 h303 gMyListView, UserTit|ID|Num
 for key,num in numTable
@@ -34,6 +37,7 @@ for key,num in numTable
 
 Gui Add, Text, cRed vTips x25 y262 w164 h23 +0x200,
 Gui Add, CheckBox, visRecordingOn x25 y280 w81 h23, 开启录屏
+Gui Add, CheckBox, visClose x+m y280 w120 h23, 任务完成保留窗口
 Gui Add, Button, vBtnOpenLog x25 y304 w142 h23 gOpenLog, 查看当日log文件..
 Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F12)
@@ -63,19 +67,51 @@ CreateTask:
 
     ;======================= Verification ========================================
     ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
+
+    GuiControlGet, isZhuZiSelected,, isGInjection
+    GuiControlGet, zhuziWhich,, InjectionSeq
+
+    GuiControlGet, isRongZiSelected,, isGFiance
+    GuiControlGet, RongziWhich,, FianceSeq
+
+    GuiControlGet, isPlayTurnTableSelected,, isPlayTurnTable
+    GuiControlGet, TurnTableTimes,, TurnTableTime
+    GuiControlGet, isbuyTimespeed,, Timespeed
+    GuiControlGet, isLoginagain,, Loginagain
+
+    GuiControlGet, isCaiTuanSelected,, isCaiTuan
+    GuiControlGet, isShareSelected,, isShare
+    GuiControlGet, isHunterSelected,, isHunter            
+
+    GuiControlGet, isBuySelected,, isBuy
+    GuiControlGet, isCardSelected,, isCard
+    GuiControlGet, isClose,, isClose
+
+
+    if (isZhuZiSelected and zhuziWhich = "")
+    {
+        MsgBox, Please select a zhuzi sequence!
+        Return
+    }
+
+    if (isRongZiSelected and RongziWhich = "")
+    {
+        MsgBox, Please select a RongZi sequence!
+        Return
+    }
+
+    if (isPlayTurnTableSelected and TurnTableTimes = "")
+    {
+        MsgBox, Please select Turn Table Times!
+        Return
+    }
+
     if (SelectedUsersC < 1)
     {
         MsgBox, Please select at least one user!
         Return
     }
 
-    GuiControlGet, isZhuZiSelected,, isGInjection
-    GuiControlGet, zhuziWhich,, InjectionSeq
-    if (isZhuZiSelected and zhuziWhich = "")
-    {
-        MsgBox, Please select a zhuzi sequence!
-        Return
-    }
 
     GuiControl, Disable, BtnCreateTask
     GuiControl, Enable, BtnStopTask
@@ -104,29 +140,11 @@ CreateTask:
         {
             RowNumber := A_Index
 
-
-            GuiControlGet, isCaiTuanSelected,, isCaiTuan
-            GuiControlGet, isShareSelected,, isShare
-            GuiControlGet, isHunterSelected,, isHunter            
-            GuiControlGet, isZhuZiSelected,, isGInjection
-            GuiControlGet, isRongZiSelected,, isGFiance
-            GuiControlGet, visLandSelected,, isLand
-            GuiControlGet, isBuySelected,, isBuy
-            GuiControlGet, isCardSelected,, isCard
-
-
-
-
-
-
             U := StrSplit(A_LoopField, A_Tab)
-            user := new 4399UserTask(U[1],0)
+            user := new 4399UserTask(U[1],!isClose)
 
             if isCaiTuanSelected
                 user.GetCaiTuan()
-
-            if isShareSelected
-                user.GetCard(3)
 
             if visLandSelected
                 user.GetLand()
@@ -138,10 +156,23 @@ CreateTask:
                 user.Zhuzi(zhuziWhich)
 
             if isRongZiSelected
-                user.Rongzi(3)
+                user.Rongzi(RongziWhich)
+            
+            if isPlayTurnTableSelected
+            {
+                if isLoginagain
+                {                    
+                    if (user.ReloadGame() = 0)
+                        Continue
+                }                    
+                user.ZhuanPan(TurnTableTimes,isbuyTimespeed)                
+            }
 
             if isBuySelected
                 user.GetCaiTuan()
+
+            if isShareSelected
+                user.GetCard(1)
 
             if isCardSelected
                 user.GetCard()

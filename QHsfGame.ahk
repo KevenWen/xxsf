@@ -34,8 +34,10 @@ class QHsfGame
 
 		IfWinExist, xxsf
         {
+			WinSet, AlwaysOnTop, On, xxsf
 			WinActivate, xxsf
 			sleep 200
+			WinSet, AlwaysOnTop, Off, xxsf			
 		}
 		Else
 			throw "Game not existing!"

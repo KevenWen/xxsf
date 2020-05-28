@@ -77,7 +77,7 @@ Rongzi_0:
     new LDGame(0)    
     new YQXGame(0)
     new 6322Game(0)           
-    For index,value in ["hou","xhhz"]
+    For index,value in ["hou"]
         new 4399UserTask(value,0).PrepareRongZi(index+1)
     FileDelete % UserIni
     FileDelete % UserIniRemote   
@@ -93,7 +93,7 @@ Rongzi_0:
  
     new YQXGame(0).RongZi()
     new 6322Game(0).RongZi() 
-    For index,value in ["hou","xhhz"]
+    For index,value in ["hou"]
         new 4399UserTask(value,0).RongZi(index+1)
 
     ;-------------------  Verification 1 -------------------
@@ -106,7 +106,7 @@ Rongzi_0:
             new LDGame(0).OpenBusinessSkill() 
     }
 
-    For index,value in ["hou","xhhz"]
+    For index,value in ["hou"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1  
@@ -126,14 +126,14 @@ Rongzi_0:
         new 6322Game(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
-    WinClose hou
-    new 6322Game(0).ZhuanPan(5)
-    new 4399UserTask("hou",0).ZhuanPan(4,1)
-    new 4399UserTask("xhhz",0).ZhuanPan(5,0)            
+    
+    new 6322Game(0).ZhuanPan(2)
+    new 4399UserTask("hou",0).ZhuanPan(6,1)        
+    new YQXGame(0).ZhuanPan(3)
 
     ;-------------------- Hunter ------------------------
 
-    For index,value in ["hou","xhhz"]
+    For index,value in ["hou"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;-------------------- GetLand -----------------------
@@ -141,7 +141,7 @@ Rongzi_0:
     new LDGame().GetLand()
     new YQXGame().GetLand()
     new 6322Game().GetLand()
-    For index,value in ["hou","xhhz"]
+    For index,value in ["hou"]
         new 4399UserTask(value).GetLand()
 
     ;-------------------  Verification 2 ------------------
@@ -156,7 +156,7 @@ Rongzi_0:
     if _DC < 1
         new YQXGame().GetLand()
 
-    For index,value in  ["hou","xhhz"]
+    For index,value in  ["hou"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -166,7 +166,7 @@ Rongzi_0:
 
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","sf06"]
+    For index,value in  ["supper","sf06","xhhz"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  

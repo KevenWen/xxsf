@@ -101,7 +101,7 @@ class 4399sfGame
 				if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
 					colcount++
 				else
-					this.CloseAnySubWindow()
+					CloseAnySubWindow()
 
 				if colcount	> 1
 					break
@@ -115,78 +115,6 @@ class 4399sfGame
 		    WinSet, AlwaysOnTop, Off, %windowname%
 			break
 		}	
-	}
-
-	CloseAnySubWindow()
-	{
-		if PixelColorExist("0x5BD157",286, 536,10) ;Share to... window
-		{
-			click 414, 439
-			sleep 1000
-		}
-
-		loop 5
-		{
-			ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				if PixelColorExist("0x1657B0",324, 418,10) ;Daily awards
-				{
-					click 403, 573
-					sleep 200
-					click 402, 493
-					sleep 200
-					click 401, 415
-				}
-				if PixelColorExist("0xFBFBFB",471, 214,100) ;限时活动
-				{
-					click 449, 471
-					sleep 100
-				}
-				
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	CloseSpeSubWindow(n)
-	{
-		if PixelColorExist("0x5BD157",286, 536,10) ;Share to window
-		{
-			click 414, 439
-			sleep 1000
-		}
-		loop %n%
-		{
-			ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	SubWindowExist()
-	{
-		ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
-		if (ErrorLevel = 2)  ;Execption when conduct the search
-			return 0
-		else if (ErrorLevel = 1) ;Image not found 
-			return 0
-		else if (ErrorLevel = 0) ;Image found
-			return 1
 	}
 
    Getzhushu()

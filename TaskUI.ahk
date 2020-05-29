@@ -235,7 +235,7 @@ OpenLog:                                    ;打开日志文件
 return
 
 OpenPic:                                    ;打开商店列表
-    run % A_ScriptDir . "\ShoppingList.png"
+    run % A_ScriptDir . "\img\ShoppingList.png"
 return
 
 GuiPause:

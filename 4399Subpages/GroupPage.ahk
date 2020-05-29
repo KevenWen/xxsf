@@ -6,7 +6,7 @@ class GroupPage{
 		loop{
 			if A_Index > 2
 				throw "Not able to GetGroupPage, PixelColorExist 0xFFFEF5 492 354 not exist."
-			4399sfGame.closeAnySubWindow()
+			closeAnySubWindow()
 			click % HB[5]
             sleep 100			
 			if PixelColorExist("0xFFFEF5",492, 354,2000)			;白色人数框
@@ -258,7 +258,7 @@ class GroupPage{
 		{
 			if !PixelColorExist("0xFFFFFF",139, 400,10) and !PixelColorExist("0xB2A68C",300, 650,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
-				4399sfGame.CloseSpeSubWindow(1)
+				CloseSpeSubWindow(1)
 				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}	
 
@@ -272,7 +272,7 @@ class GroupPage{
 				break
 			}	
 
-			if !4399sfGame.SubWindowExist()
+			if !SubWindowExist()
 				throw "Not found RongZi OK button!"
 		}
 	}

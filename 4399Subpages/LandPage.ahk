@@ -6,7 +6,7 @@ class LandPage{
 		loop{
             if A_Index > 2
                 throw "Not able to GetLandPage."
-            4399sfGame.closeAnySubWindow()
+            closeAnySubWindow()
             click % HB[1]
             sleep 200
             click % HB[2]
@@ -116,7 +116,7 @@ class LandPage{
         this.GetLandPage()        
         SendMode Event
         sleep 300
-        4399sfGame.CloseAnySubWindow()
+        CloseAnySubWindow()
         if !PixelColorExist("0x706B59",268, 415,10) and PixelColorExist("0x706B59",375, 417,10) ;the gray color on the top
         {
             LogToFile("Land business already done, no action needed." )
@@ -131,14 +131,14 @@ class LandPage{
         sleep 200
         loop
         {
-            4399sfGame.CloseAnySubWindow()
-            ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
+            CloseAnySubWindow()
+            ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\img\blockofyellow.bmp"
             if (ErrorLevel = 2)  ;Execption when conduct the search
                 throw "ImageSearch not work, please check." 
             else if (ErrorLevel = 1) ;Image not found 
             {
                 sleep 200
-                4399sfGame.CloseAnySubWindow()                
+                CloseAnySubWindow()                
                 Mousemove,510, 825
                 send {LButton down}
                 Mousemove,510, 400,15

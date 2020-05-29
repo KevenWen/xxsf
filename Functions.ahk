@@ -245,6 +245,8 @@ MadeGif(named="unknown")
 
 GameRecordingOn()
 {
+    if !FileExist(recorderpath)     ;if not installed game recorder, do nothing.
+        return
 	try
 	{
         Run, % recorderpath
@@ -271,10 +273,16 @@ GameRecordingOn()
 
 GameRecordingOff()
 {
-    send {F11}
-    sleep 2000      
-    Process, Close, gamerecorder.exe
-    LogToFile("Game Recording Off.")
+    Process, Exist, gamerecorder.exe ; check to see if gamerecorder.exe is running
+    If (ErrorLevel = 0) ; If it is not running
+        LogToFile("Turn Recording Off but not find related window.")
+    Else ; If it is running, ErrorLevel equals the process id for the target program (Printkey). Then do nothing.
+    {
+        send {F11}
+        sleep 2000
+        Process, Close, gamerecorder.exe
+        LogToFile("Game Recording Off.")
+    }
 }
 
 SendAlertEmail()

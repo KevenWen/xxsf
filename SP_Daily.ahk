@@ -82,9 +82,10 @@ Rongzi_0:
     FileDelete % UserIni
     FileDelete % UserIniRemote   
     FileAppend,,% UserIni               
+    GameRecordingOff()
 
-    WaitForTime(000001)   ;Make sure we are start after 00:00
-
+    WaitForTime(000000)   ;Make sure we are start after 00:00
+    GameRecordingOn()
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).RongZi()  
     
@@ -194,9 +195,10 @@ Rongzi_N:
     new LDGame(0)
     new YQXGame(0)
     new 6322Game(0)
+    GameRecordingOff()
 
     WaitForTime(0000)   ;Make sure we are start after 00:00
-
+    GameRecordingOn()
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
@@ -261,9 +263,10 @@ Rongzi_2:
     For index,value in ["sf06"]
         new 4399UserTask(value,0)
 
+    GameRecordingOff()
 
-    WaitForTime(000001)   ;Make sure we are start after 00:00:01
-
+    WaitForTime(000000)   ;Make sure we are start after 00:00:01
+    GameRecordingOn()
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()

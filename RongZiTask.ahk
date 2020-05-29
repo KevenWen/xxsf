@@ -53,9 +53,12 @@ Rongzi_0:
         new 4399UserTask(value,0).PrepareRongZi(index+2)
 
     new QHUser(0).PrepareRongZi(2)
+    GameRecordingOff()
 
-    WaitForTime(000001)   ;Make sure we are start after 00:00
+    
 
+    WaitForTime(000000)   ;Make sure we are start after 00:00
+    GameRecordingOn()
     ;-------------------- ClickRongZiOK --------------------
 
     For index,value in  ["supper","sf06","xhhz"]
@@ -136,9 +139,10 @@ Rongzi_N:
     new QHUser(0)
     For index,value in  ["supper","xhhz","sf06"]
        new 4399UserTask(value,0)
+    GameRecordingOff()
 
-    WaitForTime(000001)   ;Make sure we are start after 00:00
-
+    WaitForTime(000000)   ;Make sure we are start after 00:00
+    GameRecordingOn()
     ;---------------------- Tasks ------------------------
     new QHUser().Getland()
 
@@ -183,10 +187,11 @@ Rongzi_2:
     new QHUser(0)
     For index,value in  ["supper","xhhz","hou"]
             new 4399UserTask(value,0)
+    GameRecordingOff()
 
     WaitForTime(0000)   ;Make sure we are start after 00:00
 
-    sleep 1000
+    GameRecordingOn()
    ;---------------------- Getland ------------------------
 
     For index,value in  ["supper","xhhz","hou"]

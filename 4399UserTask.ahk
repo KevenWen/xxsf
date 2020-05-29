@@ -8,29 +8,7 @@ class 4399UserTask extends 4399sfGame
 
 ; <==================================  Properties  ====================================>
 
-RZ[]{
-	get{
-		IniRead, value, % UserIni, % this.winName,RZ,0
-		return %value%
-	}
-
-	set{
-		IniWrite, % value, % UserIni, % this.winName,RZ
-		IniWrite, % A_Min . ":" . A_Sec, % UserIni, % this.winName,Rztime
-	}
-}
-
-DC[]{
-	get{
-		IniRead, value, % UserIni, % this.winName,DC,0
-		return %value%
-	}
-
-	set{
-		IniWrite, % value, % UserIni, % this.winName,DC
-		IniWrite, % A_Min . ":" . A_Sec, % UserIni, % this.winName,Dctime		
-	}
-}
+; nothing for now.
 
 ; <================================  Constructure functions  ================================>
 
@@ -89,6 +67,20 @@ DC[]{
 	
 ; <==================================  Command Tasks  ====================================>
 
+	ReloadGame(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to ReloadGame.")			
+		this.ShopHomepage.Reload()
+		LogToFile("ReloadGame done.")
+		return 1
+		}
+		Catch e{
+		LogToFile("excetion while ReloadGame: " . e)
+		WinClose, % this.winName
+		return 0
+		}
+	}
 
 ; <========================  地产入驻  ===========================>
 	
@@ -97,7 +89,6 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
-		this.DC := 1
 		return 1
 		}
 		Catch e
@@ -124,7 +115,7 @@ DC[]{
 				{
 					if A_Index > 3
 					{
-						SendAlertEmail()
+						;SendAlertEmail()
 						throw "BussinessSkill still gray after loop 2 times."
 					}
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
@@ -138,7 +129,7 @@ DC[]{
 		}
 		Catch e {
 			LogToFile("Open bussinessSkill failed with execption." . e)	
-			SendAlertEmail()
+			; SendAlertEmail()  ; I used to have an email alert, if failed can all my phone, but just for simple, removed it.
 			Return 0		
 		}
 
@@ -224,7 +215,6 @@ DC[]{
 			this.GroupPage.PreRongZi(which)
 			this.GroupPage.RongZiOKinternal()
 			}
-			this.RZ := 1		
 			LogToFile("RongZi done.")
 			Return 1
 		}
@@ -233,34 +223,6 @@ DC[]{
 			Return 0
 		}
 	}
-
-	PrepareRongZi(which){
-		try{
-		this.PrepareGameWindow(this.winName)
-		this.GroupPage.GroupCheZi()
-		this.GroupPage.PreRongZi(which)
-		LogToFile("this.GroupPage.PreRongZi() done. ")
-		Return 1
-		}
-		Catch e{
-		LogToFile("this.GroupPage.PreRongZi() get exception: " . e)
-		Return 0
-		}
-	}
-
-	CalcRongZi(){
-		try{
-		this.PrepareGameWindow(this.winName)
-		LogToFile("Start to CalcRongZi.")
-		this.GroupPage.CalculateRZ()
-		LogToFile("CalcRongZi() done.")
-		Return 1
-		}
-		Catch e{
-		LogToFile("CalcRongZi() get exception: " . e)
-		Return 0
-		}
-	}	
 
 	ShangZhanReport(){
 		try{
@@ -326,37 +288,13 @@ DC[]{
 		}
 	}
 
-	ReloadGame(){
-		try{
-		this.PrepareGameWindow(this.winName)
-		LogToFile("Start to ReloadGame.")			
-		this.ShopHomepage.Reload()
-		LogToFile("ReloadGame done.")
-		return 1
-		}
-		Catch e{
-		LogToFile("excetion while ReloadGame: " . e)
-		WinClose, % this.winName
-		return 0
-		}
-	}	
-
-    GuanGuJYS(name)
-	{
-		this.PrepareGameWindow(this.winName)
-		LogToFile("Start to GuanGuJYS.")			
-		this.ShopHomepage.GuanGu(name)
-		LogToFile("GuanGuJYS done.")
-		}
-		Catch e{
-		LogToFile("excetion while GuanGuJYS: " . e)
-		4399sfGame.CloseAnySubWindow()
-	}
+; <========================  拼图  ===========================>
 
 	GetCard(times){
 		try{
 		this.PrepareGameWindow(this.winName)
-		LogToFile("Start to GetCard, times: " . times)			
+		LogToFile("Start to GetCard, times: " . times)
+		this.ShopHomepage.GetDailayTaskMoney()					
 		this.ShopHomepage.GetCards(times)
 		LogToFile("GetCard done.")
 		}
@@ -366,8 +304,8 @@ DC[]{
 		}
 	}	
 
-
 ; <========================  天梯  ===========================>
+
 	GetTianTi(){
 		try{
 		LogToFile("Start to Play Tian Ti.")			

@@ -5,44 +5,53 @@
 SetWorkingDir %A_ScriptDir%
 SetBatchLines -1
 
+;=========================== GUI Components ========================================
+
 Gui Add, Text, x25 y20 w124 h25 +0x200, 任务选项
 
 Gui Add, Text, vExecTime x25 y55 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
 Gui Add, Edit, vTimeStart x230 y55 w100 h21 +Number
 
+
 Gui Add, CheckBox, visGFiance x25 y88 w50 h23, 融资
 Gui Add, ComboBox, vFianceSeq xp+50 w30, 1|2|3|4|5
-
 Gui Add, CheckBox, visPlayTurnTable xp+60 y88 w60 h23, 转盘x10
-Gui Add, ComboBox, vTurnTableTime xp+60 w30, 1|2|3|4|5|6|7
+Gui Add, ComboBox, vTurnTableTime xp+60 w30, 0|1|2|3|4|5|6|7
 Gui Add, CheckBox, vTimespeed xp+35 h23, 转前买加速
 Gui Add, CheckBox, vLoginagain xp+83 h23, 之前重登
 
 
+Gui Add, CheckBox, visGInjection x25 yp+31 w45, 注资
+Gui Add, ComboBox, vInjectionSeq xp+50 w30, 1|2|3
+Gui Add, CheckBox, visShopping xp+60 yp+5 w55, 商店买
+Gui Add, ComboBox, vShoppingAt xp+55 yp+0 w40, 1-1|1-2|1-3|1-4|2-1|2-2|2-3|2-4
+Gui Add, CheckBox, visHunter xp+50 w81, 黑名单偷猎
+Gui Add, CheckBox, visLand xp+83 w81, 地产入驻
 
-Gui Add, CheckBox, visGInjection x25 y+m w45, 注资
-Gui Add, ComboBox, vInjectionSeq x+m w30, 1|2|3
-Gui Add, CheckBox, visBuy xp+55 yp+5 , 购买转盘
-Gui Add, CheckBox, visHunter xp+95 w81, 黑名单偷猎
-Gui Add, CheckBox, visLand x+m w81, 地产入驻
 
-Gui Add, CheckBox, visCaiTuan x25 y+m w81 h23, 财团收钱
-Gui Add, CheckBox, visShare xp+110 w88 h23, 分享20钻石
-Gui Add, CheckBox, visCard xp+95 w82 h23, 刷拼图
+Gui Add, CheckBox, visCaiTuan x25 yp+29, 财团收钱
+Gui Add, CheckBox, visShare xp+110 , 分享20钻石
+Gui Add, CheckBox, visCard xp+105 , 刷拼图
+Gui Add, CheckBox, visOpenBS xp+83, 开商技
+
 
 Gui Add, ListView, vUlist x430 y25 w125 h303 gMyListView, UserTit|ID|Num
 for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
 
-Gui Add, Text, cRed vTips x25 y262 w164 h23 +0x200,
-Gui Add, CheckBox, visRecordingOn x25 y280 w81 h23, 开启录屏
-Gui Add, CheckBox, visClose x+m y280 w120 h23, 任务完成保留窗口
-Gui Add, Button, vBtnOpenLog x25 y304 w142 h23 gOpenLog, 查看当日log文件..
-Gui Add, Button, vBtnCreateTask x16 y346 w115 h41 gCreateTask, 创建任务
-Gui Add, Button, vBtnStopTask x138 y346 w108 h42 gReloading, 重置任务(F12)
-Gui Add, Button, vBtnPauseTask x261 y348 w117 h40 gGuiPause, 暂停任务(F7恢复)
-Gui Add, Button, vBtnClose x390 y348 w117 h40 gGuiClose, 关闭(F8)
+Gui Add, Text, cRed vTips x25 y240 w164 h23 +0x200,
+
+Gui Add, CheckBox, visRecordingOn x25 y+m, 开启录屏
+Gui Add, CheckBox, visClose x+M, 任务完成保留窗口
+
+Gui Add, Button, vBtnOpenLog x23 yp+29 gOpenLog, 查看当日日志文件...  
+Gui Add, Button, vBtnOpenPic x+M gOpenPic, 查看商店商品列表...  
+
+Gui Add, Button, vBtnCreateTask x22 y346 w115 h41 gCreateTask, 创建任务
+Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
+Gui Add, Button, vBtnPauseTask x+M  w117 h40 gGuiPause, 暂停任务(F7恢复)
+Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
 
 
 GuiControl, Disable, BtnStopTask
@@ -51,25 +60,15 @@ Gui Show, w588 h420, Tasks
 
 Return
 
-
-;ControlGet, SelectedItems, list, Selected,vLV
-
-MyListView:
-if (A_GuiEvent = "DoubleClick")
-{
-    LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
-    LV_GetText(gameID, A_EventInfo,2)  ; Get the text from the row's first field.
-    Launch4399GamePri(userName,gameID)
-}
-return
+;=========================== Create Task  ========================================
 
 CreateTask:
 
-    ;======================= Verification ========================================
+;--------------------------- Get the control values -----------------------------
+
     ControlGet, SelectedUsersC, List,Count Selected, SysListView321, Tasks
 
-    GuiControlGet, isZhuZiSelected,, isGInjection
-    GuiControlGet, zhuziWhich,, InjectionSeq
+    GuiControlGet, TimeStart 
 
     GuiControlGet, isRongZiSelected,, isGFiance
     GuiControlGet, RongziWhich,, FianceSeq
@@ -79,14 +78,22 @@ CreateTask:
     GuiControlGet, isbuyTimespeed,, Timespeed
     GuiControlGet, isLoginagain,, Loginagain
 
+    GuiControlGet, isZhuZiSelected,, isGInjection
+    GuiControlGet, zhuziWhich,, InjectionSeq
+    GuiControlGet, isShoppingSelected,, isShopping
+    GuiControlGet, ShoppingAtWhich,, ShoppingAt
+    GuiControlGet, isHunterSelected,, isHunter            
+    GuiControlGet, isLandSelected,, isLand    
+
     GuiControlGet, isCaiTuanSelected,, isCaiTuan
     GuiControlGet, isShareSelected,, isShare
-    GuiControlGet, isHunterSelected,, isHunter            
-
-    GuiControlGet, isBuySelected,, isBuy
     GuiControlGet, isCardSelected,, isCard
+    GuiControlGet, isOpenBSSelected,, isOpenBS
+
+    GuiControlGet, isRecordingOnSelected,, isRecordingOn            
     GuiControlGet, isClose,, isClose
 
+;------------------------------ Verification -------------------------------------
 
     if (isZhuZiSelected and zhuziWhich = "")
     {
@@ -106,58 +113,61 @@ CreateTask:
         Return
     }
 
+    if (isShoppingSelected and ShoppingAtWhich = "")
+    {
+        MsgBox, Please select which to buy!
+        Return
+    }
+
     if (SelectedUsersC < 1)
     {
         MsgBox, Please select at least one user!
         Return
     }
 
+;------------------------------ Button Control -------------------------------------
 
     GuiControl, Disable, BtnCreateTask
     GuiControl, Enable, BtnStopTask
     GuiControl, Enable, BtnPauseTask
     GuiControl, Disable, TimeStart
 
-    GuiControlGet, TimeStart 
+;------------------------------ Execution Time Control ------------------------------
+
     if !(TimeStart = "")
     {
         TimeNow := A_Hour A_Min A_Sec
         while !(TimeStart = TimeNow)
         {
             TimeNow := A_Hour A_Min A_Sec
-            GuiControl,, Tips, % "执行倒计时：" . Floor(WaitTime(TimeStart)/60) . " 分 " . Round(mod(WaitTime(TimeStart),60),0) . " 秒"
+            GuiControl,, Tips, % "执行倒计时：" 
+            . Floor(WaitTime(TimeStart)/60) . " 分 " . Round(mod(WaitTime(TimeStart),60),0) . " 秒"
             sleep 1000
         }
     }
-    
-    GuiControlGet, isRecordingOnSelected,, isRecordingOn        
+
+;------------------------------ Recording Control -------------------------------------
+
     if isRecordingOnSelected
         GameRecordingOn()
+
+;------------------------------ Loop the selected users --------------------------------
 
     ControlGet, SelectedUsers, List,Selected, SysListView321, Tasks
     {
         Loop, Parse, SelectedUsers, `n  ; Rows are delimited by linefeeds (`n).
         {
-            RowNumber := A_Index
-
             U := StrSplit(A_LoopField, A_Tab)
             user := new 4399UserTask(U[1],!isClose)
 
-            if isCaiTuanSelected
-                user.GetCaiTuan()
-
-            if visLandSelected
-                user.GetLand()
-
-            if isHunterSelected
-                user.Hunter(0)
-
-            if isZhuZiSelected
-                user.Zhuzi(zhuziWhich)
+;------------------------------ Execute the selected task --------------------------------
 
             if isRongZiSelected
                 user.Rongzi(RongziWhich)
-            
+
+            if isOpenBSSelected
+                user.OpenBusinessSkill()
+
             if isPlayTurnTableSelected
             {
                 if isLoginagain
@@ -168,23 +178,37 @@ CreateTask:
                 user.ZhuanPan(TurnTableTimes,isbuyTimespeed)                
             }
 
-            if isBuySelected
+            if isHunterSelected
+                user.Hunter(0)
+
+            if isLandSelected
+                user.GetLand()
+
+            if isZhuZiSelected
+                user.Zhuzi(zhuziWhich)
+
+            if isShoppingSelected
+                user.Shopping(ShoppingAtWhich)
+
+            if isCaiTuanSelected
                 user.GetCaiTuan()
 
             if isShareSelected
                 user.GetCard(1)
 
             if isCardSelected
-                user.GetCard()
+                user.GetCard(150)
 
             user := ""
-            ;Loop, Parse, A_LoopField, %A_Tab%  ; Fields (columns) in each row are delimited by tabs (A_Tab).
-            ;    MsgBox Row #%RowNumber% Col #%A_Index% is %A_LoopField%.
         }
     }
 
+;------------------------------ End Recording --------------------------------
+
     if isRecordingOnSelected
         GameRecordingOff()
+
+;----------------------------- Reset some controls -----------------------------
 
     GuiControl,, Tips,
     GuiControl,, TimeStart,
@@ -194,9 +218,24 @@ CreateTask:
     GuiControl,Disable, BtnPauseTask
 Return
 
-OpenLog:
+;=================================================== Control events ====================================================
+
+MyListView:                             ;双击用户列表，登陆用户，并修改窗口名称
+if (A_GuiEvent = "DoubleClick")
+{
+    LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
+    LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
+    Launch4399GamePri(userName,gameID)
+}
+return
+
+OpenLog:                                    ;打开日志文件
     FormatTime, Dayfolder,, yyyyMMdd        
-    run % logPath . "\\" . Dayfolder .  "_log.txt"
+    run % A_ScriptDir . "\log\" . Dayfolder .  "_log.txt"
+return
+
+OpenPic:                                    ;打开商店列表
+    run % A_ScriptDir . "\ShoppingList.png"
 return
 
 GuiPause:

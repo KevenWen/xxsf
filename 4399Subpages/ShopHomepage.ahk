@@ -68,7 +68,7 @@ class ShopHomePage{
             if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
                 colcount++
             else
-                this.CloseAnySubWindow()
+                4399sfGame.CloseAnySubWindow()
 
             if colcount	> 1
                 break
@@ -107,7 +107,7 @@ class ShopHomePage{
 				sleep 200
 			}
 			if !PixelColorExist("0x97E2E4",327, 633,10)	;close 分享成功或拼图窗口
-				this.closeSpeSubWindow(1)
+				4399sfGame.closeSpeSubWindow(1)
 			sleep 200
 		}
         sleep 5000
@@ -132,8 +132,10 @@ class ShopHomePage{
 
 	GetDailayTaskMoney()
 	{
-		if PixelColorExist("0xD12A06",473, 308,20) ;每日任务,如偷满10次
+        this.GetHomePage()
+		if !PixelColorExist("0xE4FCFF",479, 310,100) ;每日任务,如偷满10次
 		{
+		    LogToFile("Find a daily task award, going to click. ")
 			Click 495, 315
 			sleep 200
 			Click 420, 420 ;Task 1

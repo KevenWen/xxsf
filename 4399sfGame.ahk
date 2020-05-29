@@ -11,6 +11,7 @@ class 4399sfGame
 
 ; <===================================  Properties declare  =======================================>
 
+; nothing for now.
 
 ; <===================================  Sub Classes for each page  ================================>
 
@@ -24,9 +25,6 @@ class 4399sfGame
 ; <==================================  Command functionalities  ====================================>
 	PrepareGameWindow(name)
 	{	
-		WinClose Cisco AnyConnect				;The VPN windows may exist					
-		WinClose, IrfanView						;The capture screen error windows may exist	
-
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = name)
 			Return
@@ -55,8 +53,6 @@ class 4399sfGame
 		Loop
 		{
 			WinClose, %windowname%
-			WinClose Cisco AnyConnect	;The VPN windows may exist	
-			WinClose, IrfanView			;The capture screen error windows may exist				
 
 			if A_Index > 2				
 					throw "Cannot launch Game!"
@@ -123,10 +119,10 @@ class 4399sfGame
 
 	CloseAnySubWindow()
 	{
-		if PixelColorExist("0x5BD157",286, 536,10) ;Share to window
+		if PixelColorExist("0x5BD157",286, 536,10) ;Share to... window
 		{
 			click 414, 439
-			sleep 300
+			sleep 1000
 		}
 
 		loop 5
@@ -161,6 +157,11 @@ class 4399sfGame
 
 	CloseSpeSubWindow(n)
 	{
+		if PixelColorExist("0x5BD157",286, 536,10) ;Share to window
+		{
+			click 414, 439
+			sleep 1000
+		}
 		loop %n%
 		{
 			ImageSearch, Px, Py, 400, 169, 511, 609, % A_ScriptDir . "\\blockofwhite.bmp"
@@ -192,43 +193,9 @@ class 4399sfGame
 	{
 		WinGetActiveTitle, titlename
 		if numTable[titlename] = ""
-			return 16
+			return 16						;默认最低16注
 		else
-			return numTable[titlename]
+			return numTable[titlename]		;配置在ini文件里的注数
 	}
-
-   CheckName()
-	{
-		;18-xhhz, 19-01, 20-02,21-03, 22-04,23-05,35-06, 24-yun, 25-long,26-hou, 27-supper
-		;phy: supper=10 yun=8 song=2 long=7 hou=9 xhhz= sf01=11 sf01=1 sf03=3 sf04=4 sf05=5
-		Switch % this.winName
-		{
-			Case "song":
-				return % (this.sequ in 20,2)?1:0
-			Case "long":
-				return % (this.sequ in 25,7)?1:0
-			Case "hou":
-				return % (this.sequ in 26,9)?1:0				
-			Case "yun":
-				return % (this.sequ in 24,8)?1:0
-			Case "supper":
-				return % (this.sequ in 27,10)?1:0							
-			Case "xhhz":
-				return % (this.sequ = 18)?1:0
-			Case "sf01":
-				return % (this.sequ in 1,19)?1:0
-			Case "sf03":
-				return % (this.sequ in 3,21)?1:0
-			Case "sf04":
-				return % (this.sequ in 4,22)?1:0
-			Case "sf05":
-				return % (this.sequ in 5,23)?1:0
-			Case "sf06":
-				return % (this.sequ in 11,35)?1:0
-			Default:
-				return 0	
-		}
-	}
-
 }
 

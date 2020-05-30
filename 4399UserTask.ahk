@@ -202,6 +202,17 @@ DC[]{
 		}
 	}
 
+	GetCaiTuan()
+	{
+		try{
+		this.PrepareGameWindow(this.winName)
+		this.CaiTuanPage.GetCaiTuanMoney()	
+		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
+		}
+		Catch e{
+		LogToFile("excetion while GetCaiTuanMoney(): " . e)
+		}
+	}
 ; <========================  商会相关  ===========================>
 
 	ZhuZi(which){

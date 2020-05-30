@@ -43,7 +43,7 @@ DC[]{
 		LogToFile("")
 		LogToFile("Log started for :" . windowname . ", seq: " . seqid)
 		
-		if (seqid = 0) or (StrLen(seqid) > 20)
+		if (seqid = "") or (StrLen(seqid) > 20)
 		{
 			LogToFile("seq is empty or too long, terminated. ")
 			Return

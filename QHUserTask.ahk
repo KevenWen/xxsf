@@ -39,6 +39,12 @@ DC[]{
 		this.isclosed := isclose
 		seqid := idtable[windowname]
 
+		if (seqid = "") or (StrLen(seqid) > 20)
+		{
+			LogToFile("seq is empty or too long, terminated. ")
+			Return
+		}
+
 		try
 		{
 			IfWinExist, %windowname%

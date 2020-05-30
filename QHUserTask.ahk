@@ -32,9 +32,9 @@ DC[]{
 }
 ; <================================  Constructure functions  ================================>
 
-	__New(windowname,isclose=1)
+	__New(windowname="xxsf",isclose=1)
 	{
-		LogToFile("`nLog started for QH xxsf.")
+		LogToFile("`nLog started for QH user: " . windowname)
 		this.winName := windowname
 		this.isclosed := isclose
 		seqid := idtable[windowname]

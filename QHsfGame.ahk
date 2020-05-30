@@ -60,7 +60,7 @@ class QHsfGame
 			{
 				if A_index > 20
 					Continue 2
-				if PixelColorExist("0x41B6AC",368, 783,100)
+				if PixelColorExist("0xFFFEF5",387, 709,100)
 				{
 					this.CloseQHMenu()	
 					sleep 200

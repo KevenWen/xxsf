@@ -69,7 +69,7 @@ return
     Launch4399GamePri("yun",24)
 return
 ^Numpad4::    ;88888
-    new QHUser(0)
+    new QHUser("xxsf",0)
 return
 ^Numpad5::    ;SF27_Supper
     Launch4399GamePri("supper",27)

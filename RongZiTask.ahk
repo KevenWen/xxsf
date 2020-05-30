@@ -52,7 +52,7 @@ Rongzi_0:
     For index,value in  ["supper","sf06","xhhz"]
         new 4399UserTask(value,0).PrepareRongZi(index+2)
 
-    new QHUser(0).PrepareRongZi(2)
+    new QHUser("xxsf",0).PrepareRongZi(2)
     GameRecordingOff()
 
     
@@ -63,7 +63,7 @@ Rongzi_0:
 
     For index,value in  ["supper","sf06","xhhz"]
         new 4399UserTask(value,0).RongZi(index+2)
-    new QHUser(0).RongZi(2)
+    new QHUser("xxsf",0).RongZi(2)
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
     For index,value in  ["supper","sf06","xhhz","xxsf"]
@@ -72,7 +72,7 @@ Rongzi_0:
         if _RZ < 1
         {
            if value = xxsf
-               new QHUser().RongZi(2)
+               new QHUser("xxsf").RongZi(2)
             else 
                new 4399UserTask(value,0).RongZi(index+2)              
         }
@@ -93,7 +93,7 @@ Rongzi_0:
 
     For index,value in  ["sf06","supper","xhhz"]
        new 4399UserTask(value).Getland()
-    new QHUser().Getland()
+    new QHUser("xxsf").Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")
@@ -103,7 +103,7 @@ Rongzi_0:
         if _DC < 1
         {
            if value = xxsf
-               new QHUser().Getland()
+               new QHUser("xxsf").Getland()
             else 
                new 4399UserTask(value).Getland()              
         }
@@ -136,7 +136,7 @@ Rongzi_N:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    new QHUser(0)
+    new QHUser("xxsf",0)
     For index,value in  ["supper","xhhz","sf06"]
        new 4399UserTask(value,0)
     GameRecordingOff()
@@ -144,7 +144,7 @@ Rongzi_N:
     WaitForTime(000000)   ;Make sure we are start after 00:00
     GameRecordingOn()
     ;---------------------- Tasks ------------------------
-    new QHUser().Getland()
+    new QHUser("xxsf").Getland()
 
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
@@ -160,7 +160,7 @@ Rongzi_N:
         if _DC < 1
         {
            if value = xxsf
-               new QHUser().Getland()
+               new QHUser("xxsf").Getland()
             else 
                new 4399UserTask(value).Getland()              
         }
@@ -184,7 +184,7 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    new QHUser(0)
+    new QHUser("xxsf",0)
     For index,value in  ["supper","xhhz","hou"]
             new 4399UserTask(value,0)
     GameRecordingOff()
@@ -196,7 +196,7 @@ Rongzi_2:
 
     For index,value in  ["supper","xhhz","hou"]
         new 4399UserTask(value,0).GetLand()
-    new QHUser(0).Getland()
+    new QHUser("xxsf",0).Getland()
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
@@ -209,7 +209,7 @@ Rongzi_2:
         new 4399UserTask(value,0).RongZi(index) 
 
     WinClose supper
-    new QHUser().RongZi(4)
+    new QHUser("xxsf").RongZi(4)
 
 
    ;---------------------- Hunter ------------------------
@@ -226,14 +226,14 @@ Rongzi_2:
         if _RZ < 1
         {
            if value = xxsf
-               new QHUser().RongZi(4)
+               new QHUser("xxsf").RongZi(4)
             else 
                new 4399UserTask(value).RongZi(index)              
         }   
         if _DC < 1
         {
            if value = xxsf
-               new QHUser().Getland()
+               new QHUser("xxsf").Getland()
             else 
                new 4399UserTask(value).Getland()              
         }

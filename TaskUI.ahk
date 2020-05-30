@@ -2,6 +2,11 @@
 #SingleInstance Force
 #NoEnv
 #include 4399UserTask.ahk
+#include QHUserTask.ahk
+#include LDGame.ahk
+#include YQXGame.ahk
+#include 6322Game.ahk
+
 SetWorkingDir %A_ScriptDir%
 SetBatchLines -1
 
@@ -35,7 +40,7 @@ Gui Add, CheckBox, visCard xp+105 , 刷拼图
 Gui Add, CheckBox, visOpenBS xp+83, 开商技
 
 
-Gui Add, ListView, vUlist x430 y25 w125 h303 gMyListView, UserTit|ID|Num
+Gui Add, ListView, vUlist x420 y25 w145 h303 gMyListView, UserTitle..|ID|Num
 for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
@@ -158,7 +163,16 @@ CreateTask:
         Loop, Parse, SelectedUsers, `n  ; Rows are delimited by linefeeds (`n).
         {
             U := StrSplit(A_LoopField, A_Tab)
-            user := new 4399UserTask(U[1],!isClose)
+            if (U[1] = "xxsf")
+                user := new QHUser(!isClose)
+            else if (U[1] = "LDGame")
+                user := new LDGame(!isClose)
+            else if (U[1] = "YQXGame")
+                user := new YQXGame(!isClose)
+            else if (U[1] = "6322Game")
+                user := new 6322Game(!isClose)
+            Else    
+                user := new 4399UserTask(U[1],!isClose)
 
 ;------------------------------ Execute the selected task --------------------------------
 
@@ -226,7 +240,16 @@ if (A_GuiEvent = "DoubleClick")
 {
     LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
     LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
-    Launch4399GamePri(userName,gameID)
+    if (userName = "xxsf")
+        new QHUser(0)
+    else if (userName = "LDGame")
+        new LDGame(0)
+    else if (userName = "YQXGame")
+        new YQXGame(0)
+    else if (userName = "6322Game")
+        new 6322Game(0)
+    Else
+        Launch4399GamePri(userName,gameID)
 }
 return
 

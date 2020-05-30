@@ -76,7 +76,6 @@ class 4399sfGame
 					if A_Index > 15
 					{
 						LogToFile("the up array clicked 15 times with no response!")
-						CaptureScreen()
 						Continue 2
 					}
 
@@ -93,7 +92,6 @@ class 4399sfGame
 			}
 			Catch e
 			{
-				CaptureScreen()
 				LogToFile("Start Game timeout, going to retry..." . e)
 				Continue
 			}
@@ -113,7 +111,6 @@ class 4399sfGame
 				if A_Index > 5
 				{
 					LogToFile("homepage not show expected and not sub window found!")
-					CaptureScreen()
 					Continue 2
 				}
 				sleep 1000			

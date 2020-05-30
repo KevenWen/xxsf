@@ -38,7 +38,7 @@ DC[]{
 	{
 		this.winName := windowname
 		this.isclosed := isclose
-		IniRead, seqid, config.ini, users, %windowname%, 0
+		seqid := idtable[windowname]
 
 		LogToFile("")
 		LogToFile("Log started for :" . windowname . ", seq: " . seqid)

@@ -52,6 +52,7 @@ Gui Add, CheckBox, visClose x+M, 任务完成保留窗口
 
 Gui Add, Button, vBtnOpenLog x23 yp+29 gOpenLog, 查看当日日志文件...  
 Gui Add, Button, vBtnOpenPic x+M gOpenPic, 查看商店商品列表...  
+Gui Add, Button, vBtnOpenSpy x+M gOpenSpy, 打开WinSpy...  
 
 Gui Add, Button, vBtnCreateTask x22 y346 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
@@ -164,7 +165,7 @@ CreateTask:
         {
             U := StrSplit(A_LoopField, A_Tab)
             if (U[1] = "xxsf")
-                user := new QHUser(!isClose)
+                user := new QHUser(U[1],!isClose)
             else if (U[1] = "LDGame")
                 user := new LDGame(!isClose)
             else if (U[1] = "YQXGame")
@@ -241,7 +242,7 @@ if (A_GuiEvent = "DoubleClick")
     LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
     LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
     if (userName = "xxsf")
-        new QHUser(0)
+        new QHUser(userName,0)
     else if (userName = "LDGame")
         new LDGame(0)
     else if (userName = "YQXGame")
@@ -260,6 +261,10 @@ return
 
 OpenPic:                                    ;打开商店列表
     run % A_ScriptDir . "\img\ShoppingList.png"
+return
+
+OpenSpy:
+    run % A_ScriptDir . "\Lib\WindowSpy.ahk"
 return
 
 GuiPause:

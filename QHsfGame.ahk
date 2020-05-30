@@ -42,7 +42,7 @@ class QHsfGame
 			throw "Game not existing!"
 	}
 
-	LaunchqhGame()
+	LaunchQHGame(Sequ,windowname)
 	{
 		Loop
 		{
@@ -51,9 +51,9 @@ class QHsfGame
 					break
 					throw "Cannot launch qun hei Game!"
 				}
-			WinClose, xxsf
-			WinClose Cisco AnyConnect	;The VPN windows may exist					
-			run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30
+			WinClose, %windowname%
+			WinClose Cisco AnyConnect	;The VPN windows may exist
+			run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
 			sleep 5000
 			Winmove,xxsf,,933,19,600,959			
 			loop

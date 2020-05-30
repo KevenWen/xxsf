@@ -32,25 +32,26 @@ DC[]{
 }
 ; <================================  Constructure functions  ================================>
 
-	__New(isclose=1)
+	__New(windowname,isclose=1)
 	{
-		this.winName := xxsf
-		this.isclosed := isclose
 		LogToFile("`nLog started for QH xxsf.")
+		this.winName := windowname
+		this.isclosed := isclose
+		seqid := idtable[windowname]
 
 		try
 		{
-			IfWinExist, xxsf
-        	{
-				WinActivate, xxsf
-				Winmove,xxsf,,933,19,600,959
+			IfWinExist, %windowname%
+			{
+				WinActivate %windowname%
+				Winmove,%windowname%,,933,19,600,959
 				sleep, % s["short"]
 				LogToFile("Find existing window named xxsf. " )
 			}
 			else
 			{
-				LogToFile("Going to open game.")
-				this.LaunchQHGame()
+				LogToFile("Going to open game.")	
+				this.LaunchQHGame(seqid,windowname)
 				LogToFile("Game opened.")
 			}
 		}

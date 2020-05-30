@@ -96,7 +96,7 @@ class LandPage{
                     sleep 300
                     CaptureScreen()	                    
                     click 465, 406
-                    sleep 200
+                    sleep 500
                 }
 				if PixelColorExist("0xFD8F45",446, 257,10)
                 {

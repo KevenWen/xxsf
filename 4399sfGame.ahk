@@ -86,7 +86,7 @@ class 4399sfGame
 						break
 				}
 
-				WaitPixelColor("0xFFFEF5",371, 686,10000) ;waiting for Start game button
+				WaitPixelColor("0xFFFEF5",371, 686,15000) ;waiting for Start game button
 				sleep 500
 				click 343, 766
 				WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.

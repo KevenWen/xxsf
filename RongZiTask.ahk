@@ -206,9 +206,16 @@ Rongzi_2:
    ;---------------------- RongZi ------------------------
 
     For index,value in  ["supper","xhhz","hou"]
-        new 4399UserTask(value).RongZi(index) 
+        new 4399UserTask(value,0).RongZi(index) 
 
+    WinClose supper
     new QHUser().RongZi(4)
+
+
+   ;---------------------- Hunter ------------------------
+
+    for index,value in  ["hou","xhhz"]
+        new 4399UserTask(value).Hunter(1)
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
@@ -247,11 +254,6 @@ Rongzi_2:
             new 4399UserTask(value).Getland()    
     } 
     LogtoFile("Remote verification done.")
-
-   ;---------------------- Hunter ------------------------
-
-    for index,value in  ["hou","xhhz"]
-        new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
 Return

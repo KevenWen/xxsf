@@ -55,7 +55,6 @@ DC[]{
 			{
 				WinActivate %windowname%			
 				Winmove,%windowname%,,829,23,600,959
-				click % HB[1]
 				LogToFile("Find existing window named: " . windowname)
 				sleep 200
 			}

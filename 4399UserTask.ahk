@@ -346,6 +346,23 @@ DC[]{
 		Return 0
 		}
 	}
+
+; <========================  拼图  ===========================>
+
+	GetCard(times){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to GetCard, times: " . times)
+		this.ShopHomepage.GetDailayTaskMoney()					
+		this.ShopHomepage.GetCards(times)
+		LogToFile("GetCard done.")
+		}
+		Catch e{
+		LogToFile("excetion while GetCard: " . e)
+		WinClose, % this.winName
+		}
+	}
+
 ; <========================  天梯  ===========================>
 	GetTianTi(){
 		try{

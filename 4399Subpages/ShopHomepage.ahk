@@ -46,6 +46,7 @@ class ShopHomePage{
 			sleep 300
 			click 453, 388  ;Close double money window if any.
 			sleep 200
+			CaptureScreen()	
 			n++  
 		}
         sleep 1000
@@ -89,12 +90,12 @@ class ShopHomePage{
 		sleep 300
 		click 429, 577  ;card button
 		sleep 500
+		CaptureScreen()
 		4399sfGame.CloseAnySubWindow()
 	}
 
 	GetCards(times=150)
 	{
-        this.GetHomePage()
 		click 246, 196	;click 礼包 button
 		sleep 500
 		Loop %times%		;循环150次，可按需要调整
@@ -114,26 +115,13 @@ class ShopHomePage{
 		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口
 	}
 
-    GuanGu(name)
-    {
-        this.GetHomePage()
-        click 375, 266
-        PixelColorExist("0xFFFFF3",380, 274,10)
-        click 380, 274
-        sleep 100
-        send %name%
-        sleep 100
-        click 450, 271
-        sleep 500
-        click 421, 346, 20
-        sleep 500
-		4399sfGame.CloseAnySubWindow()
-    }
 
 	GetDailayTaskMoney()
 	{
-		if PixelColorExist("0xD12A06",473, 308,20) ;每日任务,如偷满10次
+        this.GetHomePage()
+		if !PixelColorExist("0xE4FCFF",479, 310,100) ;每日任务,如偷满10次
 		{
+		    LogToFile("Find a daily task award, going to click. ")
 			Click 495, 315
 			sleep 200
 			Click 420, 420 ;Task 1

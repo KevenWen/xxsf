@@ -116,7 +116,7 @@ class QHsfGame
 		WinClose, IrfanView			;The capture screen error windows may exist		
 		loop 5
 		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -151,7 +151,7 @@ class QHsfGame
 	{
 		loop %n%
 		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -167,7 +167,7 @@ class QHsfGame
 
 	SubWindowExist()
 	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			return 0
 		else if (ErrorLevel = 1) ;Image not found 
@@ -267,7 +267,7 @@ class QHsfGame
 		loop
 		{
 			this.CloseAnySubWindow()
-			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\\blockofyellow.bmp"
+			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 

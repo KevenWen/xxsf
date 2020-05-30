@@ -163,7 +163,7 @@ class YQXGame
 	{
 		loop 5
 		{
-			ImageSearch, Px, Py, 341, 139, 537,512 , % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 341, 139, 537,512 , % A_ScriptDir . "\img\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -181,7 +181,7 @@ class YQXGame
 	{
 		loop %n%
 		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 
 			else if (ErrorLevel = 1) ;Image not found 
@@ -197,7 +197,7 @@ class YQXGame
 
 	SubWindowExist()
 	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\\blockofwhite.bmp"
+		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
 		if (ErrorLevel = 2)  ;Execption when conduct the search
 			return 0
 		else if (ErrorLevel = 1) ;Image not found 
@@ -297,7 +297,7 @@ class YQXGame
 		loop
 		{
 			this.CloseAnySubWindow()
-			ImageSearch, Px, Py, 253, 490, 500, 910, % A_ScriptDir . "\\blockofyellow.bmp"
+			ImageSearch, Px, Py, 253, 490, 500, 910, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 

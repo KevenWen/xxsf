@@ -15,17 +15,8 @@ global UserIni = ""
 global UserIniRemote = ""
 global BaiduNetDiskPath = ""
 
-global supper_id 
-global yun_id 
-global song_id
-global hou_id
-global long_id
-global xhhz_id
-global sf01_id 
-global sf03_id 
-global sf04_id
-global sf05_id
-global sf06_id
+global idTable := {}
+global numTable := {}
 
 
 IniRead, logPath, config.ini, path, logPath
@@ -41,17 +32,23 @@ IniRead, BaiduNetDiskPath, config.ini, path, BaiduNetDiskPath
 IniRead, UserIni, config.ini, path, UserIni
 IniRead, UserIniRemote, config.ini, path, UserIniRemote
 
-IniRead, supper_id, config.ini, users, supper
-IniRead, yun_id, config.ini, users, yun
-IniRead, song_id, config.ini, users, song
-IniRead, long_id, config.ini, users, long
-IniRead, hou_id, config.ini, users, hou
-IniRead, xhhz_id, config.ini, users, xhhz
-IniRead, sf01_id, config.ini, users, sf01
-IniRead, sf03_id, config.ini, users, sf03
-IniRead, sf04_id, config.ini, users, sf04
-IniRead, sf05_id, config.ini, users, sf05
-IniRead, sf06_id, config.ini, users, sf06
+IniRead, content, config.ini, users/num                 ;取用户信息，显示于taskui界面上
+Loop, Parse, Content, `n, `r
+{
+
+    ; ignore all commented lines
+    If RegExMatch(A_LoopField, "^\s*;")
+        Continue
+
+    ; split the line into $Key and $Value
+    RegEx := "^(?P<Key>[^=]*?)=(?P<Value>.*)"
+    If RegExMatch(A_LoopField, RegEx, $)
+    {
+        IDZS := StrSplit($Value,"/")
+        idTable[$Key] := IDZS[1]
+        numTable[$Key] := IDZS[2]
+    }
+}
 
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
 
@@ -302,9 +299,9 @@ LogToFile(TextToLog)
     FormatTime, CurrentDateTime,, HH:mm:ss
     FormatTime, Dayfolder,, yyyyMMdd
     if TextToLog = ""
-        FileAppend, % "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
+        FileAppend, % "`n", % A_ScriptDir . "\\log\\" . Dayfolder .  "_log.txt"
     Else
-        FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % logPath . "\\" . Dayfolder .  "_log.txt"
+        FileAppend, % CurrentDateTime . ": " . TextToLog . "`n", % A_ScriptDir . "\\log\\" . Dayfolder .  "_log.txt"
     }
     catch e {
         ;Nothing need do here

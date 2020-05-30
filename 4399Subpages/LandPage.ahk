@@ -137,7 +137,7 @@ class LandPage{
         loop
         {
             4399sfGame.CloseAnySubWindow()
-            ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\\blockofyellow.bmp"
+            ImageSearch, Px, Py, 113, 429, 504, 827, % A_ScriptDir . "\img\blockofyellow.bmp"
             if (ErrorLevel = 2)  ;Execption when conduct the search
                 throw "ImageSearch not work, please check." 
             else if (ErrorLevel = 1) ;Image not found 

@@ -26,10 +26,9 @@ class CaiTuanPage{
 	GetCaiTuanMoney()
 	{
 		this.GetCaiTuanPage()
-		WaitPixelColorAndClickThrowErr("0x3E515C",307, 879,2000) ;cai tuan button
-		sleep 200
-		WaitPixelColorAndClickThrowErr("0xFFDFAB",457, 234,2000) ;Shou Ru button	
 		sleep 100
+		click 467, 244
+		sleep 300
 	}
 
 	TTOperation()

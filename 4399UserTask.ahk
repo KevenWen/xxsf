@@ -90,6 +90,20 @@ DC[]{
 	
 ; <==================================  Command Tasks  ====================================>
 
+	ReloadGame(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to ReloadGame.")			
+		this.ShopHomepage.Reload()
+		LogToFile("ReloadGame done.")
+		return 1
+		}
+		Catch e{
+		LogToFile("excetion while ReloadGame: " . e)
+		WinClose, % this.winName
+		return 0
+		}
+	}
 
 ; <========================  地产入驻  ===========================>
 	

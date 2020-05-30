@@ -35,7 +35,7 @@ class ShopHomePage{
 		WaitPixelColorAndClickThrowErr("0xD17622",505, 387,2000) ;ZhuanPan
 		sleep 200
 		n=1  ; 10 x n times
-		while (n < times)
+		while (n < times+1)
 		{
 			WaitPixelColorAndClickThrowErr("0xF4452A",395,746,2000) ;Ten Times Button
 			sleep 200
@@ -46,11 +46,40 @@ class ShopHomePage{
 			sleep 300
 			click 453, 388  ;Close double money window if any.
 			sleep 200
-			CaptureScreen()	
 			n++  
 		}
         sleep 1000
 	}
+
+
+    Reload()
+    {
+        this.GetHomePage()
+        click 496, 200      ;settings button
+        PixelColorExist("0xFFFFF3",150, 698,2000) ;Setting Window
+        click 403, 640   ;switch server
+        if !PixelColorExist("0xFFFEF5",371, 686,15000) ;Setting Window        
+            throw, "Reload waiting 10 secs and timeout!"
+        click 297, 771
+        sleep 2000
+        colcount := 0
+        loop
+        {				
+            if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
+                colcount++
+            else
+                4399sfGame.CloseAnySubWindow()
+
+            if colcount	> 1
+                break
+            if A_Index > 5
+            {
+                LogToFile("homepage not show expected and not sub window found!")
+                throw "Reload waiting 5 times still not get the homepage!"
+            }
+            sleep 1000		
+        }
+    }
 
 	GetGiftScreen()
 	{
@@ -60,12 +89,12 @@ class ShopHomePage{
 		sleep 300
 		click 429, 577  ;card button
 		sleep 500
-		CaptureScreen()
 		4399sfGame.CloseAnySubWindow()
 	}
 
-	GetCard(times=150)
+	GetCards(times=150)
 	{
+        this.GetHomePage()
 		click 246, 196	;click 礼包 button
 		sleep 500
 		Loop %times%		;循环150次，可按需要调整
@@ -78,12 +107,28 @@ class ShopHomePage{
 				sleep 200
 			}
 			if !PixelColorExist("0x97E2E4",327, 633,10)	;close 分享成功或拼图窗口
-				this.closeSpeSubWindow(1)
+				4399sfGame.closeSpeSubWindow(1)
 			sleep 200
 		}
-		this.CloseSpeSubWindow(30)	;关闭所有子窗口
+        sleep 5000
+		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口
 	}
 
+    GuanGu(name)
+    {
+        this.GetHomePage()
+        click 375, 266
+        PixelColorExist("0xFFFFF3",380, 274,10)
+        click 380, 274
+        sleep 100
+        send %name%
+        sleep 100
+        click 450, 271
+        sleep 500
+        click 421, 346, 20
+        sleep 500
+		4399sfGame.CloseAnySubWindow()
+    }
 
 	GetDailayTaskMoney()
 	{

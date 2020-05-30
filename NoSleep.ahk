@@ -6,7 +6,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;#NoTrayIcon				; No system tray icon
 #SingleInstance force
 
-SetTimer,KeepAwake,227000         ;run every 4 minutes
+; ==================================== Void Computer sleep =================================
+
+SetTimer,KeepAwake,227000         ;run every 227 secs
 return
  
 KeepAwake:
@@ -15,23 +17,46 @@ KeepAwake:
 }
 return
 
+; ====================================== click events =======================================
+
 global toggle := 0
-F4::
+F4::                        ; Press F4 then keep clicking 36 times.
     global countN = 0
     toggle := !toggle
     if (toggle){        
-        SetTimer, Timer_click, 10
+        SetTimer, Timer_click37, 10
     } else {
-        SetTImer, Timer_click, Off
+        SetTImer, Timer_click37, Off
     }
 return
 
-Timer_click:
+F3::                    ; Press F3 then keep clicking 12 times, usually for get land.
+    global countN = 0
+    toggle := !toggle
+    if (toggle){        
+        SetTimer, Timer_click12, 10
+    } else {
+        SetTImer, Timer_click12, Off
+    }
+return
+
+
+Timer_click37:
     click    
     countN+=1
     if (countN > 36)
     {
         toggle := !toggle
-        SetTImer, Timer_click, Off
+        SetTImer, Timer_click37, Off
+    }      
+return
+
+Timer_click12:
+    click    
+    countN+=1
+    if (countN > 11)
+    {
+        toggle := !toggle
+        SetTImer, Timer_click12, Off
     }      
 return

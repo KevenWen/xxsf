@@ -1,10 +1,11 @@
 #NoEnv
 SetBatchLines, -1
+SetWorkingDir, %A_ScriptDir%
 #include Functions.ahk
 #Include Socket.ahk
 #Include Jxon.ahk
 #Include RemoteObj.ahk
-#include 4399UserTask.ahk
+#include ..\4399UserTask.ahk
 
 MyClass := new ExampleClass()
 Remote := new RemoteObj(MyClass, ["10.154.10.6", 1337])

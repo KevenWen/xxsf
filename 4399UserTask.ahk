@@ -62,13 +62,11 @@ DC[]{
 			{
 				LogToFile("Going to open game.")
 				this.Launch4399Game(seqid,windowname)
-				CaptureScreen()
 				LogToFile("Game opened.")
 			}
 		}
 		Catch e
 			{
-				CaptureScreen()
 				LogToFile("Game open failed: " . e)
 				return
 			}
@@ -116,10 +114,7 @@ DC[]{
 		return 1
 		}
 		Catch e
-		{
-		LogToFile("GetLand() get exception: " . e)
-		CaptureScreen()
-		}
+			LogToFile("GetLand() get exception: " . e)
 	}
 
 ; <========================  每周商技开启  ===========================>
@@ -133,7 +128,6 @@ DC[]{
 				this.GroupPage.GetGroupPage()
 				if this.GroupPage.isBussinessSkillLight()
 				{
-					CaptureScreen()
 					LogToFile("BussinessSkill is light, checking at index: " . A_Index)
 					Break
 				}	
@@ -144,10 +138,8 @@ DC[]{
 						SendAlertEmail()
 						throw "BussinessSkill still gray after loop 2 times."
 					}
-					CaptureScreen()
 					LogToFile("Find BussinessSkill not opened, going to open it, index: " . A_Index)				
 					this.GroupPage.OpenSJ()
-					CaptureScreen()
 					sleep 500
 					LogToFile("After open BussinessSkill.")
 					Return 1		
@@ -156,8 +148,7 @@ DC[]{
 			}
 		}
 		Catch e {
-			LogToFile("Open bussinessSkill failed with execption." . e)
-			CaptureScreen()			
+			LogToFile("Open bussinessSkill failed with execption." . e)	
 			SendAlertEmail()
 			Return 0		
 		}
@@ -175,7 +166,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while GetCaiTuanMoney(): " . e)
-		CaptureScreen()
 		}
 
 		try{
@@ -187,7 +177,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while Sunkai or save_refresh: " . e)
-		CaptureScreen()
 		}
 
 		try{
@@ -198,7 +187,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while SelectPeopleAndstolen or GetResult: " . e)
-		CaptureScreen()
 		}
 	}
 
@@ -229,7 +217,6 @@ DC[]{
 		}
 		Catch e{
 			LogToFile("this.GroupPage.GroupZhuZi get exception: " . e)
-			CaptureScreen()
 			Return 0
 		}
 	}
@@ -253,7 +240,6 @@ DC[]{
 		}
 		Catch e{
 			LogToFile("this.GroupPage.RongZi() get exception: " . e)
-			CaptureScreen()
 			Return 0
 		}
 	}
@@ -263,13 +249,11 @@ DC[]{
 		this.PrepareGameWindow(this.winName)
 		this.GroupPage.GroupCheZi()
 		this.GroupPage.PreRongZi(which)
-		CaptureScreen()
 		LogToFile("this.GroupPage.PreRongZi() done. ")
 		Return 1
 		}
 		Catch e{
 		LogToFile("this.GroupPage.PreRongZi() get exception: " . e)
-		CaptureScreen()
 		Return 0
 		}
 	}
@@ -284,7 +268,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("CalcRongZi() get exception: " . e)
-		CaptureScreen()
 		Return 0
 		}
 	}	
@@ -306,7 +289,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("ShangZhanReport() get exception: " . e)
-		CaptureScreen()
 		Return 0
 		}
 	}	
@@ -317,12 +299,10 @@ DC[]{
 		LogToFile("Start to GetShopping at:" . which)
 		this.GroupPage.GetShopping(which)
 		LogToFile("GetShopping done.")
-		CaptureScreen()
 		Return 1
 		}
 		Catch e{
 		LogToFile("GetShopping() get exception: " . e)
-		CaptureScreen()
 		Return 0
 		}
 	}
@@ -340,7 +320,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while Sunkai or save_refresh: " . e)
-		CaptureScreen()
 		}
 
 		try{			
@@ -353,7 +332,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while this.ShopHomepage.PlayZhuanPan: " . e)
-		CaptureScreen()
 		Return 0
 		}
 	}
@@ -383,7 +361,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while Play Tian Ti: " . e)
-		CaptureScreen()
 		WinClose, % this.winName
 		}
 	}	

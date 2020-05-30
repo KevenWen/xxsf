@@ -177,7 +177,8 @@ WaitPixelColorAndClickThrowErr(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
 
 CaptureScreen()
 {
-/*
+    if !FileExist(i_viewpath)
+        return
 	try
 	{
         ifWinExist,IrfanView            ;If run too often, may have load exe error
@@ -202,11 +203,12 @@ CaptureScreen()
 		LogToFile("Screen captured failed: " . e)
         WinClose, IrfanView        
 	}
-*/
 }
 
 CaptureScreenAll()
 {
+    if !FileExist(i_viewpath)
+        return
 	try
 	{
         FormatTime, Dayfolder,, yyyyMMdd
@@ -330,7 +332,6 @@ RongZiOKEmu()
             click % PopWin["okbtn"]
             sleep, % s["short"]
             click % PopWin["okbtn"]
-            CaptureScreen()
         }   
     }
 }

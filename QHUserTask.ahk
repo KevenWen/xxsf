@@ -56,7 +56,6 @@ DC[]{
 		}
 		Catch e
 			{
-				CaptureScreen()
 				LogToFile("Game open failed: " . e)
 				return
 			}
@@ -90,7 +89,6 @@ DC[]{
 		Catch e
 		{
 		LogtoFile("QH GetLand() get exception: " . e)
-		CaptureScreen()
 		}
 	}
 
@@ -109,7 +107,6 @@ DC[]{
 			LogToFile("this.GroupZhuZi done.")
 		} Catch e{
 			LogToFile("this.GroupZhuZi get exception: " . e)
-			CaptureScreen()
 		}
 	}
 
@@ -131,7 +128,6 @@ DC[]{
 		}
 		Catch e{
 			LogToFile("this.RongZi() get exception: " . e)
-			CaptureScreen()
 		}
 	}
 
@@ -144,7 +140,6 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("this.PreRongZi() get exception: " . e)
-		CaptureScreen()
 		}
 	}
 

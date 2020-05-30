@@ -85,7 +85,6 @@ class LandPage{
 			sleep 200
 			click 293, 592     ;点击确定
 			sleep 200
-			CaptureScreen()
     		loop 4
 			{
                 click 361, 704	   ;再次确认注入
@@ -93,20 +92,17 @@ class LandPage{
                 if PixelColorExist("0xFFFFF3",312, 549,1000) ;确认注入提示框
                 {
                     click 302, 593     ;点击确定
-                    sleep 300
-                    CaptureScreen()	                    
+                    sleep 300               
                     click 465, 406
                     sleep 500
                 }
 				if PixelColorExist("0xFD8F45",446, 257,10)
                 {
-					LogToFile("Land business click OK done, loop times: " . A_index)
-                    CaptureScreen()	                              
+					LogToFile("Land business click OK done, loop times: " . A_index)                           
                     Return 1
                 }					
 			}
-            LogToFile("Land business double check failed, will Getland again." )	
-            CaptureScreen()			
+            LogToFile("Land business double check failed, will Getland again." )
             return 0									
 		}
 		else
@@ -123,7 +119,6 @@ class LandPage{
         4399sfGame.CloseAnySubWindow()
         if !PixelColorExist("0x706B59",268, 415,10) and PixelColorExist("0x706B59",375, 417,10) ;the gray color on the top
         {
-            CaptureScreen()
             LogToFile("Land business already done, no action needed." )
             return  
         }
@@ -154,7 +149,6 @@ class LandPage{
             else if (ErrorLevel = 0) ;Image found 
             {
                 LogToFile("Image found when loop times: " . A_Index)
-                CaptureScreen()	
                 ;MouseMove, %Px%, %Py%
                 click %Px%, %Py%
                 sleep 200                        
@@ -178,13 +172,11 @@ class LandPage{
                     sleep 100
                     if PixelColorExist("0xFFFFF3",312, 549,3000)     ;确定提示框存在              
                     {
-                        click 302, 593      ;点击确定
-                        CaptureScreen()      
+                        click 302, 593      ;点击确定  
                         WaitPixelColorAndClick("0xFBFBFB",479, 192,1000)
                     }	
                     else
                     {
-                        CaptureScreen()
                         LogToFile("Exception while DiCcanJinzhu2: not found the OK button, will continue")
                         Continue 
                     }
@@ -192,13 +184,11 @@ class LandPage{
                 else
                 {
                     LogToFile("0xFFFEF5 and 0x5A7965 exception, will continue")
-                    CaptureScreen()
                     Continue
                 }
 
                 if !PixelColorExist("0x706B59",504, 373,200) and !PixelColorExist("0x706B59",506, 414,10) ;the button is exist
                 {
-                    CaptureScreen()
                     LogToFile("Land business done, num is " . num)
 			        sleep 200                     
                     Break  

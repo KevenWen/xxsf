@@ -46,7 +46,6 @@ class ShopHomePage{
 			sleep 300
 			click 453, 388  ;Close double money window if any.
 			sleep 200
-			CaptureScreen()	
 			n++  
 		}
         sleep 1000
@@ -90,7 +89,6 @@ class ShopHomePage{
 		sleep 300
 		click 429, 577  ;card button
 		sleep 500
-		CaptureScreen()
 		4399sfGame.CloseAnySubWindow()
 	}
 

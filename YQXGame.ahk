@@ -27,11 +27,9 @@ class YQXGame
 			try{
 			this.LaunchYQXGame()
 			LogToFile("YQXPlayer Started.")
-			CaptureScreen()
 			}
 			Catch e{
 			LogToFile("YQXPlayer window not fond and start game failed: " . e)
-			CaptureScreen()
 			Return
 			}
 		}
@@ -87,7 +85,6 @@ class YQXGame
 		Catch e
 		{
 		LogToFile("GetLand() get exception: " . e)
-		CaptureScreen()
 		}
 	}
 
@@ -97,13 +94,11 @@ class YQXGame
 		try{
 		this.PrepareGameWindow()
 		this.Suankai()
-		CaptureScreen()		
 		LogToFile("Suankai() done for YQXPlayer.")
 		}
 		Catch e
 		{
 		LogToFile("Suankai() get exception: " . e)
-		CaptureScreen()
 		}
 
 		try{	
@@ -113,7 +108,6 @@ class YQXGame
 		Catch e
 		{
 		LogToFile("PlayZhuanPan() get exception: " . e)
-		CaptureScreen()
 		}		
 	}
 
@@ -135,7 +129,6 @@ class YQXGame
 			LogToFile("RongZi() done for YQXPlayer.")
 		} catch e {
 			LogToFile("RongZi() get exception: " . e)
-			CaptureScreen()		
 		}
 	}
 
@@ -247,7 +240,6 @@ class YQXGame
 			sleep 200
 			click 281, 661     ;点击确定
 			sleep 200
-			CaptureScreen()
 			loop 4
 			{
 				click 355, 780	   ;再次确认注入
@@ -262,12 +254,10 @@ class YQXGame
 				if PixelColorExist("0xFD8F45",439, 309,10)  ;角色入驻 color
 				{				
 					LogToFile("Land business click OK done, loop times: " . A_index)
-					CaptureScreen()
 					return 1 	
 				}
 			}
-			LogToFile("Land business double check failed, will Getland again." )	
-			CaptureScreen()			
+			LogToFile("Land business double check failed, will Getland again." )
 			return 0									
 		}
 		else
@@ -282,7 +272,6 @@ class YQXGame
 		sleep 300
 		if !PixelColorExist("0x706B59",228, 472,100) and PixelColorExist("0x706B59",348,472,10)			;the gray color next refresh time
 		{
-			CaptureScreen()
 			LogToFile("YQX Land business already done, no action needed." )
 			return  
 		}
@@ -312,7 +301,6 @@ class YQXGame
 			else if (ErrorLevel = 0) ;Image found
 			{
 				LogToFile("LD Image found when loop times: " . A_Index)
-				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
 				if PixelColorExist("0xFFFEF5",154, 533,1000) 		;经营资源输入框存在
@@ -334,12 +322,10 @@ class YQXGame
 					if PixelColorExist("0xFBFBFB",461, 454,300) ;确认注入提示框
 					{
 						click 301, 661     ;点击确定
-						CaptureScreen()
 						WaitPixelColorAndClick("0xFBFBFB",472, 236,1000)
 					}
 					else
 					{
-						CaptureScreen()
 						LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
 						Continue						 
 					}
@@ -347,13 +333,11 @@ class YQXGame
 				else
 				{
 					LogToFile("0xFFFEF5 and 0x5A7965 exception.")
-					CaptureScreen()
 					Continue
 				}
 
 				if !PixelColorExist("0x706B59",528, 446,200) and !PixelColorExist("0x706B59",526, 474,10) ;the button is exist
 				{
-					CaptureScreen()
 					LogToFile("YQX LD Land business done.")
 					sleep 200                     
 					Break  
@@ -422,7 +406,6 @@ class YQXGame
 			click 445, 447  ;Close double money window if any.
 			sleep 200
 			click 433, 432
-			CaptureScreen()	
 			n++  
 		}
         sleep 1000
@@ -477,14 +460,12 @@ class YQXGame
 			throw, "Already RongZi, not zero!"
 
 			mousemove, 200, 640
-			CaptureScreen()			
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
 			click, 39
 			SetDefaultMouseSpeed 2	
-			SendMode Input
-			CaptureScreen()											
+			SendMode Input				
 			sleep, % s["mid"]
 
 			if !PixelColorExist("0xFFFFF3",250,450,10) ;存在没有更多金币提示.!
@@ -499,7 +480,6 @@ class YQXGame
 				sleep 200
 				if PixelColorExist("0xFBFBFB",477, 318,1000)
 					click 477, 318
-				CaptureScreen()	
 				sleep 200		
 				break					
 			}

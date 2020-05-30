@@ -78,7 +78,6 @@ class GroupPage{
 		}		
 
 		sleep 100
-		CaptureScreen()	
 	}
 
     GetShopping(flag)
@@ -153,7 +152,6 @@ class GroupPage{
 	GroupZhuZi(which)
 	{
 		this.GetGroupPage2()
-		CaptureScreen()
 		loop 8		;有可能有红包挡住，等几秒钟再试
 		{
 			if PixelColorExist("0xFFF8CE",272, 320,10)
@@ -182,7 +180,6 @@ class GroupPage{
 			LogToFile("ZhuZi already done yet, no need do again.")
 
 		sleep, % s["short"]
-		CaptureScreen()
 		sleep, % s["longer"]		
 	}
 
@@ -251,7 +248,6 @@ class GroupPage{
 	{
 		click % PopWin["okbtn"]
 		sleep, % s["short"]
-		CaptureScreen()		
 		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
 			click % PopWin["clobtn"]
 	}
@@ -262,7 +258,6 @@ class GroupPage{
 		{
 			if !PixelColorExist("0xFFFFFF",139, 400,10) and !PixelColorExist("0xB2A68C",300, 650,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
-				CaptureScreen()
 				4399sfGame.CloseSpeSubWindow(1)
 				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}	
@@ -272,8 +267,7 @@ class GroupPage{
 				LogToFile("RongZiOKpublic find OK window, going to click")			
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
-				click % PopWin["okbtn"]
-				CaptureScreen()				
+				click % PopWin["okbtn"]		
 				sleep, % s["short"]
 				break
 			}	
@@ -386,23 +380,16 @@ class GroupPage{
 	GetZhuZiList()
 	{
 		this.GetGroupPage2()
-		sleep 200
-		CaptureScreen()	
-		sleep 200
+		sleep 1000
 		MouseClickDrag, Left, 302, 853,304, 483
-		sleep 500
-		CaptureScreen()		
-		sleep 500
+		sleep 1000
 		MouseClickDrag, Left, 302, 853,304, 483
-		sleep 500
-		CaptureScreen()		
 		sleep 1000
 	}
 
 	GetShangZhanList()
 	{
 		this.GetGroupPage()
-		CaptureScreen()		
 		sleep 2000
 		if PixelColorExist("0xFFF8CE",121, 471,10) ;ShangZhang Button not exist
 			throw "Shangzhnag not start yet!"
@@ -412,20 +399,6 @@ class GroupPage{
 		CaptureScreen()		
 		sleep 2000
 		CaptureScreen()				
-		/* 
-		sleep 180000
-		Loop
-		{	CaptureScreen()		
-			sleep 2000
-
-			if PixelColorExist("0xFFFFF3",417, 474,10)
-				break  ; Check if End
-			if (A_Index > 35)
-				break ; if timeout	
-
-			sleep 90000
-		}
-		*/
 	}
 
 }

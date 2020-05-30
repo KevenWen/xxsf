@@ -27,11 +27,9 @@ class 6322Game
 			try{
 			this.Launch6322Game()
 			LogToFile("6322Player Started.")
-			CaptureScreen()
 			}
 			Catch e{
 			LogToFile("6322Player window not fond and start game failed: " . e)
-			CaptureScreen()
 			Return
 			}
 		}
@@ -87,7 +85,6 @@ class 6322Game
 		Catch e
 		{
 		LogToFile("GetLand() get exception: " . e)
-		CaptureScreen()
 		}
 	}
 
@@ -97,13 +94,11 @@ class 6322Game
 		try{
 		this.PrepareGameWindow()
 		this.Suankai()
-		CaptureScreen()		
 		LogToFile("Suankai() done for 6322Player.")
 		}
 		Catch e
 		{
 		LogToFile("Suankai() get exception: " . e)
-		CaptureScreen()
 		}
 
 		try{	
@@ -113,7 +108,6 @@ class 6322Game
 		Catch e
 		{
 		LogToFile("PlayZhuanPan() get exception: " . e)
-		CaptureScreen()
 		}		
 	}
 
@@ -135,7 +129,6 @@ class 6322Game
 			LogToFile("RongZi() done for 6322Player.")
 		} catch e {
 			LogToFile("RongZi() get exception: " . e)
-			CaptureScreen()		
 		}
 	}
 
@@ -247,7 +240,6 @@ class 6322Game
 			sleep 200
 			click 281, 627     ;点击确定
 			sleep 200
-			CaptureScreen()
 			loop 4
 			{
 				click 361, 758	   ;再次确认注入
@@ -255,20 +247,17 @@ class 6322Game
 				if PixelColorExist("0xFFFFF3",274, 583,1000) ;确认注入提示框
 				{
 					click 281, 627     ;点击确定
-					sleep 300
-					CaptureScreen()				
+					sleep 300		
 					click 468, 404
 					sleep 200
 				}
 				if PixelColorExist("0xFD8F45",457, 236,10)  ;角色入驻 color
 				{				
 					LogToFile("Land business click OK done, loop times: " . A_index)
-					CaptureScreen()
 					return 1 	
 				}
 			}
 			LogToFile("Land business double check failed, will Getland again." )	
-			CaptureScreen()			
 			return 0									
 		}
 		else
@@ -283,7 +272,6 @@ class 6322Game
 		sleep 300
 		if !PixelColorExist("0x706B59",252, 420,10) and PixelColorExist("0x706B59",358, 420,10)		;the gray color next refresh time
 		{
-			CaptureScreen()
 			LogToFile("Land business already done, no action needed." )
 			return  
 		}
@@ -313,7 +301,6 @@ class 6322Game
 			else if (ErrorLevel = 0) ;Image found
 			{
 				LogToFile("LD Image found when loop times: " . A_Index)
-				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
 				if PixelColorExist("0xFFFEF5",141, 485,1000) 		;经营资源输入框存在
@@ -335,12 +322,10 @@ class 6322Game
 					if PixelColorExist("0xFFFFF3",301, 582,300) ;确认注入提示框
 					{
 						click 301, 632     ;点击确定
-						CaptureScreen()
 						WaitPixelColorAndClick("0xFBFBFB",492, 158,1000)
 					}
 					else
 					{
-						CaptureScreen()
 						LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
 						Continue						 
 					}
@@ -348,13 +333,11 @@ class 6322Game
 				else
 				{
 					LogToFile("0xFFFEF5 and 0x5A7965 exception.")
-					CaptureScreen()
 					Continue
 				}
 
 				if !PixelColorExist("0x706B59",526, 385,100) and !PixelColorExist("0x706B59",526, 415,10) ;the button is exist
 				{
-					CaptureScreen()
 					LogToFile("6322 LD Land business done.")
 					sleep 200                     
 					Break  
@@ -423,7 +406,6 @@ class 6322Game
 			click 465, 388  ;Close double money window if any.
 			sleep 200
 			click 408, 239
-			CaptureScreen()	
 			n++  
 		}
         sleep 1000
@@ -478,14 +460,12 @@ class 6322Game
 			throw, "Already RongZi, not zero!"
 
 			mousemove, 204, 604
-			CaptureScreen()			
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
 			click, 38
 			SetDefaultMouseSpeed 2	
-			SendMode Input
-			CaptureScreen()											
+			SendMode Input									
 			sleep, % s["mid"]
 
 			if !PixelColorExist("0xFFFFF3",248, 395,10) ;存在没有更多金币提示.!
@@ -500,7 +480,6 @@ class 6322Game
 				sleep 200
 				if PixelColorExist("0xFBFBFB",494, 252,1000)
 					click 494, 252
-				CaptureScreen()	
 				sleep 200		
 				break					
 			}

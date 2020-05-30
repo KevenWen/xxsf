@@ -25,8 +25,7 @@ class QHsfGame
 
 	PrepareGameWindow()
 	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist				
+		WinClose Cisco AnyConnect	;The VPN windows may exist		
 
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = "xxsf")
@@ -53,8 +52,7 @@ class QHsfGame
 					throw "Cannot launch qun hei Game!"
 				}
 			WinClose, xxsf
-			WinClose Cisco AnyConnect	;The VPN windows may exist	
-			WinClose, IrfanView			;The capture screen error windows may exist					
+			WinClose Cisco AnyConnect	;The VPN windows may exist					
 			run "C:\Users\keven\AppData\Roaming\360Game5\bin\360Game.exe" -action:opengame -gid:4 -gaid:30
 			sleep 5000
 			Winmove,xxsf,,933,19,600,959			
@@ -215,7 +213,6 @@ class QHsfGame
 			sleep 200
 			click 303, 609     ;点击确定
 			sleep 200
-			CaptureScreen()
     		loop 4
 			{
 				click 376, 726	   ;再次确认注入
@@ -224,19 +221,16 @@ class QHsfGame
 				{
 					click 303, 609     ;点击确定
 					sleep 300
-					CaptureScreen() 
 					click 477, 398
 					sleep 200
 				}
 				if PixelColorExist("0xFD8F45",463, 250,10)
                 {        
 					LogToFile("Land business click OK done, loop times: " . A_index)
-					CaptureScreen()	     
                     Return 1
                 }					
 			}
-			LogToFile("Land business double check failed, will Getland again." )	
-			CaptureScreen()			
+			LogToFile("Land business double check failed, will Getland again." )
 			return 0									
 		}
 		else
@@ -253,7 +247,6 @@ class QHsfGame
 		this.CloseAnySubWindow()
         if !PixelColorExist("0x706B59",227, 417,10) and PixelColorExist("0x706B59",361, 417,10)     ;the gray color on the top
         {
-            CaptureScreen()
             LogToFile("Land business already done, no action needed." )
             return  
         } 
@@ -281,13 +274,11 @@ class QHsfGame
 				send {LButton up}
 				sleep 50
 				click 570, 840
-				CaptureScreen()				
 				sleep 200
 			}
 			else if (ErrorLevel = 0)  ;Image found
 			{
                 LogToFile("QH Image found when loop times: " . A_Index)
-				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
 				if PixelColorExist("0xFFFEF5",190, 480,1000) 		;经营资源输入框存在
@@ -309,12 +300,10 @@ class QHsfGame
 					if PixelColorExist("0xFBFBFB",478, 396,300) ;确认注入提示框
                     {
                         click 305, 611     ;点击确定
-						CaptureScreen()
                         WaitPixelColorAndClick("0xFBFBFB",495, 180,1000)
                     }
 					else
                     {
-    					CaptureScreen()
                         LogToFile("Exception while QHDiCcanJinzhu: not found the OK button, will continue") 
 						Continue
 					}
@@ -322,13 +311,11 @@ class QHsfGame
 				else
 				{
                     LogToFile("0xFFFEF5 and 0x5A7965 exception, will continue")
-                    CaptureScreen()
 					Continue
 				}
 
                 if !PixelColorExist("0x706B59",574, 383,200) and !PixelColorExist("0x706B59",574, 416,10) ;the button is exist
                 {
-                    CaptureScreen()
                     LogToFile("QH Land business done.")
                     Break  
                 }
@@ -370,7 +357,6 @@ class QHsfGame
 	GroupZhuZi(which)
 	{
 		this.GetGroupPage2()
-		CaptureScreen()
 		loop 8		;有可能有红包挡住，等几秒钟再试
 		{
 			if PixelColorExist("0xFFF8CE",250, 320,10)
@@ -394,9 +380,7 @@ class QHsfGame
 		else
 			LogToFile("ZhuZi already done yet, no need do again.")
 
-		sleep, % s["short"]
-		CaptureScreen()
-		sleep, % s["mid"]		
+		sleep, % s["short"]	
 	}
 
 	CheZi()
@@ -456,7 +440,6 @@ class QHsfGame
 	{
 		click % PopWin["okbtn"]
 		sleep, % s["mid"]
-		CaptureScreen()
 		if PixelColorExist("0xFFFEF5", 401, 419,3000) ;close the sub window if the first window closed
 			click % PopWin["qhclobtn"]
 	}
@@ -467,7 +450,6 @@ class QHsfGame
 		{
 			if !PixelColorExist("0xFFFFFF",140, 402,10) and !PixelColorExist("0xB2A68C",308, 666,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
-				CaptureScreen()	
 				4399sfGame.CloseSpeSubWindow(1)
 				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}			
@@ -477,7 +459,6 @@ class QHsfGame
 				click % PopWin["okbtn"]
 				sleep, % s["short"]
 				click % PopWin["okbtn"]
-				CaptureScreen()					
 				sleep, % s["short"]
 				break
 			}

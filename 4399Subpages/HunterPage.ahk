@@ -38,7 +38,6 @@ class HunterPage{
     SelectPeopleAndstolen(islieshou){
         n :=1
         SuccessCount :=1
-        CaptureScreen()
         while (n<7 and SuccessCount<6)
         {
             try
@@ -52,7 +51,6 @@ class HunterPage{
             }
             catch e ;Ignore any error during one operation and go ahead to next one.
             {
-                CaptureScreen()
                 LogToFile("Exception within ToulieOpreation:" . e)                	
             }
             Finally 
@@ -113,9 +111,7 @@ class HunterPage{
     GetResult(){
         this.GetHunterPage()                                                           
         click 166, 805          ;偷猎记录
-        sleep 300        
-        CaptureScreen()
-        sleep 200
+        sleep 500
         WaitPixelColorAndClick("0xFBFBFB",492, 217,1000)
         LogToFile("Huntered GetResult done.")	
     }

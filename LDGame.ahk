@@ -27,11 +27,9 @@ class LDGame
 			try{
 			this.LaunchLDGame()
 			LogToFile("LDPlayer Started.")
-			CaptureScreen()
 			}
 			Catch e{
 			LogToFile("LDPlayer window not fond and start game failed: " . e)
-			CaptureScreen()
 			Return
 			}
 		}
@@ -99,7 +97,6 @@ class LDGame
 		Catch e
 		{
 		LogToFile("GetLand() get exception: " . e)
-		CaptureScreen()
 		}
 	}
 
@@ -123,8 +120,7 @@ class LDGame
 			LogToFile("RongZi() done for LDPlayer")		
 			this.RZ := 1	
 		} catch e {
-			LogToFile("RongZi() get exception: " . e)
-			CaptureScreen()		
+			LogToFile("RongZi() get exception: " . e)	
 		}
 	}
 
@@ -133,7 +129,6 @@ class LDGame
 	PrepareGameWindow()
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
 
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = "LDPlayer")
@@ -223,7 +218,6 @@ class LDGame
 			Click 281, 625     ;点击确定
 			sleep 200
 			Click 281, 625     ;点击确定
-			CaptureScreen()
 			sleep 300
 			loop 4
 			{
@@ -233,19 +227,16 @@ class LDGame
 				{
 					click 281, 625     						;点击确定
 					sleep 300
-					CaptureScreen()
 					click 468, 406
 					sleep 200
 				}
 				if PixelColorExist("0xFD8F45",456, 238,10)
 				{				
 					LogToFile("Land business click OK done, loop times: " . A_index)
-					CaptureScreen()
 					return 1 	
 				}
 			}
-			LogToFile("Land business double check failed, will Getland again." )	
-			CaptureScreen()			
+			LogToFile("Land business double check failed, will Getland again." )
 			return 0	
 		}
 		else
@@ -260,7 +251,6 @@ class LDGame
 		sleep 300
         if !PixelColorExist("0x706B59",251,418,100) and PixelColorExist("0x706B59",361,418,10) ;the gray color on the button left
         {
-            CaptureScreen()
             LogToFile("Land business already done, no action needed." )
             return  
         }  
@@ -290,7 +280,6 @@ class LDGame
 			else if (ErrorLevel = 0) ;Image found
 			{
                 LogToFile("LD Image found when loop times: " . A_Index)
-				CaptureScreen()	
 				click %Px%, %Py%
 				sleep 200
 				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
@@ -312,12 +301,10 @@ class LDGame
 					if PixelColorExist("0xFBFBFB",468, 391,300) ;确认注入提示框
                     {
                         click 305, 625     ;点击确定
-						CaptureScreen()
                         WaitPixelColorAndClick("0xFBFBFB",485, 161,1000)
                     }
 					else
                     {
-    					CaptureScreen()
                         LogToFile("Exception while LDDiCcanJinzhu: not found the OK button")
 						Continue						 
 					}
@@ -325,13 +312,11 @@ class LDGame
 				else
 				{
                     LogToFile("0xFFFEF5 and 0x5A7965 exception.")
-                    CaptureScreen()
 					Continue
 				}
 
                 if !PixelColorExist("0x706B59",520, 423,200) and !PixelColorExist("0x706B59",520, 382,10) ;the button is exist
                 {
-                    CaptureScreen()
                     LogToFile("LD Land business done.")
 			        sleep 200                     
                     Break  
@@ -379,7 +364,6 @@ class LDGame
 				sleep 1000
 				click 88, 247				;商会 tab
 				sleep 200
-				CaptureScreen()
 				if PixelColorExist("0xFFFEF5",395, 444,2000) ;商战配置中的白色块
 					break
 			}
@@ -404,17 +388,13 @@ class LDGame
 			}
 
 			sleep 1000
-			CaptureScreen()
 			click 506, 228  ; 关闭subwindow
 			sleep 300
 			this.SJ := 1
 			LogToFile("OpenBusinessSkill() done for LDPlayer")
 		}
 		Catch e
-		{
-		LogToFile("OpenBusinessSkill() get exception: " . e)
-		CaptureScreen()
-		}
+			LogToFile("OpenBusinessSkill() get exception: " . e)
 	}
 
 	ClickRongZiOKPublic()
@@ -433,7 +413,6 @@ class LDGame
 			{
 				click 310, 627
 				sleep, % s["short"]
-				CaptureScreen()
 			}	
 		}
 	}
@@ -450,15 +429,13 @@ class LDGame
 			if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 
-			mousemove, 200, 600
-			CaptureScreen()			
+			mousemove, 200, 600	
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
 			click, 40
 			SetDefaultMouseSpeed 2	
-			SendMode Input
-			CaptureScreen()							
+			SendMode Input						
 			sleep, % s["mid"]
 
 			if !PixelColorExist("0xFFFFF3",246, 396,10) ;存在没有更多金币提示.!
@@ -473,7 +450,6 @@ class LDGame
 				sleep 200
 				if PixelColorExist("0xFBFBFB",495, 249,1000)
 					click 477, 318
-				CaptureScreen()	
 				sleep 200
 				break
 			}
@@ -485,7 +461,6 @@ class LDGame
 	LaunchLDGame()
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
 		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"  
 		LogToFile("Start to Launch LDGame. ")			
 		sleep 40000

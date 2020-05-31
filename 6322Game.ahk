@@ -394,7 +394,7 @@ class 6322Game
 		WaitPixelColorAndClickThrowErr("0xD17622",523, 389,2000) ;ZhuanPan
 		sleep 200
 		n=1  ; 10 x n times
-		while (n < times)
+		while (n < times+1)
 		{
 			WaitPixelColorAndClickThrowErr("0xF4452A",407, 810,2000) ;Ten Times Button
 			sleep 200

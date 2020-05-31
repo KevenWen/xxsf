@@ -4,7 +4,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 #include 4399UserTask.ahk
 #include QHuserTask.ahk
-#include RDPGame.ahk
 ;#include Socket.ahk
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;

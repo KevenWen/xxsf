@@ -235,6 +235,7 @@ Rongzi_N:
     else
        WinClose 6322Player
 
+    GameRecordingOff()
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","sf06"]

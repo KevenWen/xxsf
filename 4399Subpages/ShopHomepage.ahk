@@ -98,16 +98,17 @@ class ShopHomePage{
 		sleep 500
 		Loop %times%		;循环150次，可按需要调整
 		{	
-			WaitPixelColorAndClick("0x1657B0",288, 491,10,1000) ;click 每日分享 button
-			WaitPixelColorAndClick("0xFCFEFE",347, 640,10,500)  ;click 立即分享 button
-			if PixelColorExist("0x5BD157", 285, 530,10) 		;close "分享到" 提示
+			WaitPixelColorAndClick("0x1657B0",288, 491,10) ;click 每日分享 button
+            if PixelColorExist("0xFFFFF3",293, 570,10)
+                click 294, 651
+			if PixelColorExist("0x5BD157", 285, 531,10) 		;close "分享到" 提示
 			{
 				click 414, 432
 				sleep 200
 			}
-			if !PixelColorExist("0x97E2E4",327, 633,10)	;close 分享成功或拼图窗口
+			if !PixelColorExist("0xFFFFF3",306, 601,10)	;close 分享成功或拼图窗口
 				4399sfGame.closeSpeSubWindow(1)
-			sleep 200
+			sleep 300
 		}
         sleep 5000
 		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口

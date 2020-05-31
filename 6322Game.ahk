@@ -432,7 +432,7 @@ class 6322Game
 
 	isRongZiprepared()
 	{
-		return (PixelColorExist("0xB0B0B0",497, 251,100) or PixelColorExist("0x7C7C7C",497, 251,10))
+		return (PixelColorExist("0xB0B0B0",497, 251,100) or PixelColorExist("0x7C7C7C",497, 251,10) or PixelColorExist("0x575757",497, 251,10))
 	}
 
 	ClickRongZiOKPublic()

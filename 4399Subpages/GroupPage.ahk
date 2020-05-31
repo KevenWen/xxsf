@@ -123,7 +123,7 @@ class GroupPage{
 
 	isRongZiprepared()
 	{
-		return (PixelColorExist("0xB0B0B0",480, 268,100) or PixelColorExist("0x7C7C7C",480, 268,10))
+		return (PixelColorExist("0xB0B0B0",480, 268,100) or PixelColorExist("0x7C7C7C",480, 268,10) or PixelColorExist("0x575757",480, 268,10))
 	}
 
 	OpenSJ()

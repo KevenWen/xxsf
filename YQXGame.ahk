@@ -432,18 +432,26 @@ class YQXGame
 
 	isRongZiprepared()
 	{
-		return (PixelColorExist("0xB0B0B0",475, 320,100) or PixelColorExist("0x7C7C7C",475, 320,10))
+		return (PixelColorExist("0xB0B0B0",475, 320,100) or PixelColorExist("0x7C7C7C",475, 320,10) or PixelColorExist("0x575757",475, 320,10))
 	}
 
 	ClickRongZiOKPublic()
 	{
-		click 285, 733
-		sleep, % s["short"]
+		loop 3
+		{
+			if PixelColorExist("0x796A55",32, 918,10) or PixelColorExist("0xB0B0B0",476, 319,10) ; the color in the left bottom
+				break
+			else
+			{
+				this.CloseSpeSubWindow(1)
+				LogToFile("Closed a sub windows while ClickRongZiOKPublic.")
+			}
+		}
+
 		click 310, 666
-		sleep, % s["short"]		
-		click 310, 666
 		sleep, % s["short"]
-		if PixelColorExist("0xFBFBFB",477, 318,1000) ; the color under in the OK window
+
+		if PixelColorExist("0xAD9779",32, 918,1000) ; the color in the left bottom
 			this.CloseAnySubWindow()
 	}
 

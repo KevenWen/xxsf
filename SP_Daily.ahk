@@ -93,8 +93,9 @@ Rongzi_0:
     ;if mod(A_YDay-118,7) = 0
         ;new LDGame(0).OpenBusinessSkill()
  
-    new YQXGame(0).RongZi()
     new 6322Game(0).RongZi() 
+    new YQXGame(0).RongZi()
+
     For index,value in ["hou"]
         new 4399UserTask(value,0).RongZi(index+1)
 
@@ -129,7 +130,7 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
     new 6322Game(0).ZhuanPan(4)
-    WinClose hou    
+    new 4399UserTask("hou",0).ReloadGame()
     new 4399UserTask("hou",0).ZhuanPan(3,1)
     new YQXGame(0).ZhuanPan(3)
 

@@ -209,7 +209,7 @@ CreateTask:
                 user.GetCaiTuan()
 
             if isShareSelected
-                user.GetCard(1)
+                user.GetCard(2)
 
             if isCardSelected
                 user.GetCard(150)
@@ -256,6 +256,8 @@ return
 
 OpenLog:                                    ;打开日志文件
     FormatTime, Dayfolder,, yyyyMMdd        
+    run % A_ScriptDir . "\log\"
+    sleep 500
     run % A_ScriptDir . "\log\" . Dayfolder .  "_log.txt"
 return
 

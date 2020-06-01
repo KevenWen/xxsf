@@ -92,23 +92,32 @@ class ShopHomePage{
 		4399sfGame.CloseAnySubWindow()
 	}
 
-	GetCards(times=150)
+	GetCards(times=120)
 	{
 		click 246, 196	;click 礼包 button
 		sleep 500
 		Loop %times%		;循环150次，可按需要调整
 		{	
-			WaitPixelColorAndClick("0x1657B0",288, 491,10) ;click 每日分享 button
-            if PixelColorExist("0xFFFFF3",293, 570,10)
-                click 294, 651
+			if PixelColorExist("0x1657B0",288, 491,10)     ;click 每日分享 button
+            {
+                click 288, 491
+                sleep 100
+            }
 			if PixelColorExist("0x5BD157", 285, 531,10) 		;close "分享到" 提示
 			{
 				click 414, 432
-				sleep 200
-			}
+				sleep 400
+                LogToFile("find share to tip when loop: " . A_Index)
+			}            
+            if PixelColorExist("0xFFFFF3",126, 612,10)      ;click 立即分享 button
+            {
+                click 294, 651
+                LogToFile("clicked share times: " . A_Index)
+                sleep 200
+            }
 			if !PixelColorExist("0xFFFFF3",306, 601,10)	;close 分享成功或拼图窗口
 				4399sfGame.closeSpeSubWindow(1)
-			sleep 300
+            LogToFile("loop times: " . A_Index)
 		}
         sleep 5000
 		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口

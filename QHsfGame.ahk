@@ -284,7 +284,7 @@ class QHsfGame
 				if PixelColorExist("0xFFFEF5",190, 480,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",331, 353,10)      ;且上面图片显示是闲置土地
 				{
-					click,265, 465, 41 ;金币23
+					click,265, 465, 36 ;金币23
 					sleep 100
 					;click,265, 530, 5 ;金币17
 					;sleep 100
@@ -366,7 +366,7 @@ class QHsfGame
 		}
 		if PixelColorExist("0xFFF8CE",231, 305,100) ; 还没有注过资.
 		{
-			loop 42
+			loop 38
 			{
 				click % StockPos[which]
 				sleep 50
@@ -419,7 +419,7 @@ class QHsfGame
 		sleep, % s["long"]		
 
 		SetDefaultMouseSpeed 10
-		click,200, 574, 40
+		click,200, 574, 37
 		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]
 

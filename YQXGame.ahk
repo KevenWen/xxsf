@@ -440,14 +440,22 @@ class YQXGame
 		loop 3
 		{
 			if PixelColorExist("0x796A55",32, 918,10) or PixelColorExist("0xB0B0B0",476, 319,10) ; the color in the left bottom
+			{
+				LogToFile("Only two sub windows which is as expected now.")
 				break
+			}
 			else
 			{
 				this.CloseSpeSubWindow(1)
 				LogToFile("Closed a sub windows while ClickRongZiOKPublic.")
+				sleep 50
 			}
 		}
 
+		;click 283,734
+		;sleep, % s["short"]
+		click 310, 666
+		sleep, % s["short"]		
 		click 310, 666
 		sleep, % s["short"]
 

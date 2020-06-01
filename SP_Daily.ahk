@@ -84,14 +84,14 @@ Rongzi_0:
     FileAppend,,% UserIni               
     GameRecordingOff()
 
-    WaitForTime(235950)
+    WaitForTime(235955)
     GameRecordingOn()
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK -----------------
     new LDGame(0).RongZi()  
     
-    ;if mod(A_YDay-118,7) = 0
-        ;new LDGame(0).OpenBusinessSkill()
+    if mod(A_YDay-118,7) = 0
+        new LDGame(0).OpenBusinessSkill()
  
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
@@ -101,14 +101,14 @@ Rongzi_0:
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
-/*
+
     if mod(A_YDay-118,7) = 0
     {
         IniRead, _SJ, % UserIni,LDPlayer,SJ,0
         if _SJ < 1 and mod(A_YDay-118,7) = 0
             new LDGame(0).OpenBusinessSkill() 
     }
-*/
+
     For index,value in ["hou"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
@@ -130,7 +130,6 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
     new 6322Game(0).ZhuanPan(4)
-    new 4399UserTask("hou",0).ReloadGame()
     new 4399UserTask("hou",0).ZhuanPan(3,1)
     new YQXGame(0).ZhuanPan(3)
 
@@ -190,7 +189,6 @@ Return
 Rongzi_N:
 
     ;------------------ Prepare game ---------------------
-	;IniWrite, 0, % UserIni,LDPlayer,SJ
     FileDelete % UserIniRemote
     FileDelete % UserIni
     FileAppend,,% UserIni  
@@ -200,7 +198,7 @@ Rongzi_N:
     new 6322Game(0)
     GameRecordingOff()
 
-    WaitForTime(0000)   ;Make sure we are start after 00:00
+    WaitForTime(000000)   ;Make sure we are start after 00:00
     GameRecordingOn()
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
@@ -339,6 +337,7 @@ Rongzi_2:
             new 4399UserTask(value).Getland()
     }
 
+    GameRecordingOff()
     Sleep 300000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","hou"]

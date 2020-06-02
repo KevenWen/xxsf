@@ -5,7 +5,7 @@ SetBatchLines, -1
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-class 6322Game
+class DQGame
 {
 
 ;=========================================  Common functions  ===============================================
@@ -14,22 +14,22 @@ class 6322Game
 		this.isclosed := isclose
 
 		LogToFile("")
-		LogToFile("Log started for 6322Player." )		
+		LogToFile("Log started for DQPlayer." )		
 
-		IfWinExist, 6322Player
+		IfWinExist, DQPlayer
 		{
-			WinActivate 6322Player
+			WinActivate DQPlayer
 			Sleep 100
-			LogToFile("Find existing window named 6322Player. ")
+			LogToFile("Find existing window named DQPlayer. ")
 		}
 		else
 		{
 			try{
-			this.Launch6322Game()
-			LogToFile("6322Player Started.")
+			this.LaunchDQGame()
+			LogToFile("DQPlayer Started.")
 			}
 			Catch e{
-			LogToFile("6322Player window not fond and start game failed: " . e)
+			LogToFile("DQPlayer window not fond and start game failed: " . e)
 			Return
 			}
 		}
@@ -39,38 +39,38 @@ class 6322Game
 	{
 		if this.isclosed
 		{
-			WinClose, 6322Player
+			WinClose, DQPlayer
 			sleep 100
 		}
 		else
-			WinMinimize, 6322Player
+			WinMinimize, DQPlayer
 
-		LogToFile("Log Ended for 6322Player.`n")
+		LogToFile("Log Ended for DQPlayer.`n")
     }
 
 ; <==================================  Properties  ====================================>
 
 	RZ[]{
 		get{
-			IniRead, value,% UserIni,6322Player,RZ,0
+			IniRead, value,% UserIni,DQPlayer,RZ,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,6322Player,RZ
-			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Rztime			
+			IniWrite, % value, % UserIni,DQPlayer,RZ
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,DQPlayer,Rztime			
 		}
 	}
 
 	DC[]{
 		get{
-			IniRead, value, % UserIni,6322Player,DC,0
+			IniRead, value, % UserIni,DQPlayer,DC,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,6322Player,DC
-			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Dctime					
+			IniWrite, % value, % UserIni,DQPlayer,DC
+			IniWrite, % A_Min . ":" . A_Sec, % UserIni,DQPlayer,Dctime					
 		}
 	}
 ; <========================  地产入驻  ===========================>
@@ -80,7 +80,7 @@ class 6322Game
 		this.PrepareGameWindow()
 		this.DiCanJinzhu()
 		this.DC := 1
-		LogToFile("GetLand() done for 6322Player.")
+		LogToFile("GetLand() done for DQPlayer.")
 		}
 		Catch e
 		{
@@ -94,7 +94,7 @@ class 6322Game
 		try{
 		this.PrepareGameWindow()
 		this.Suankai()
-		LogToFile("Suankai() done for 6322Player.")
+		LogToFile("Suankai() done for DQPlayer.")
 		}
 		Catch e
 		{
@@ -126,7 +126,7 @@ class 6322Game
 				this.RongZiPri()
 			}
 			this.RZ := 1
-			LogToFile("RongZi() done for 6322Player.")
+			LogToFile("RongZi() done for DQPlayer.")
 		} catch e {
 			LogToFile("RongZi() get exception: " . e)
 		}
@@ -140,12 +140,12 @@ class 6322Game
 		WinClose, IrfanView			;The capture screen error windows may exist		
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "6322Player")
+		if (CurTitle = "DQPlayer")
 			Return
 
-		IfWinExist, 6322Player
+		IfWinExist, DQPlayer
         {
-			WinActivate, 6322Player
+			WinActivate, DQPlayer
 			sleep 200
 		}
 		Else
@@ -486,16 +486,19 @@ class 6322Game
 
 	;=========================================  Launch Game  ===============================================
 
-	Launch6322Game()
-	{
+	LaunchDQGame()
+	{		
+		LogToFile("Not implement yet... ")	
+		throw "Not implement yet... "
+	/*	
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
-		run %LDGamePath% launchex --index 3 --packagename "com.tantanyou.sf"  
+		run %LDGamePath% launchex --index 2 --packagename "com.iflytek.cbg.wxyy.gamebox"  
 		LogToFile("Start to Launch LDGame. ")			
 		sleep 10000
-		IfWinExist, 6322Player
+		IfWinExist, DQPlayer
 		{
-			WinActivate, 6322Player
+			WinActivate, DQPlayer
 			sleep 200
 			Loop
 			{
@@ -515,13 +518,14 @@ class 6322Game
 				}
 
 				if A_Index > 60
-					throw "6322Player start wait timeout"
+					throw "DQPlayer start wait timeout"
 
 				sleep 2000
 			}
 		}
 		Else
-			throw "6322Player window not exist"
+			throw "DQPlayer window not exist"
+	*/
 	}
 }
 

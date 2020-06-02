@@ -6,6 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
+#include DQGame.ahk
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
@@ -261,7 +262,8 @@ Rongzi_2:
     
     L := new LDGame(0)
     Y := new YQXGame(0)  
-    N := new 6322Game(0)           
+    N := new 6322Game(0)
+    D := new DQGame(0)           
     For index,value in ["sf06"]
         new 4399UserTask(value,0)
 
@@ -276,15 +278,15 @@ Rongzi_2:
     For index,value in ["sf06"]
         new 4399UserTask(value,0).Getland()
 
-    For index,value in ["L","Y","N"]
+    For index,value in ["L","Y","N","D"]
         %value%.GetLand()
 
-    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
+    WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
      For index,value in ["sf06"]
         new 4399UserTask(value).RongZi(index+1)
     
-    For index,value in ["L","Y","N"]
+    For index,value in ["L","Y","N","D"]
         %value%.RongZi()
 
     ;--------------------  Verification --------------------
@@ -325,6 +327,16 @@ Rongzi_2:
         N.GetLand()
 
     WinClose 6322Player
+
+    IniRead, _RZ, % UserIni,DQPlayer,RZ,0
+    if _RZ < 1
+        D.RongZi()
+    
+    IniRead, _DC, % UserIni,DQPlayer,DC,0
+    if _DC < 1
+        D.GetLand()
+
+    WinClose DQPlayer
 
     For index,value in  ["sf06"]
     {

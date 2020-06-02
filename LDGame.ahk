@@ -285,13 +285,11 @@ class LDGame
 				if PixelColorExist("0xFFFEF5",141, 484,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",300, 270,10)      ;且上面图片显示是闲置土地
 				{
-					click,226, 470, 41 ;金币23 326,470  426,470
+					click,235, 470, 11 ;经营1
 					sleep 100
-					click,326, 470, 4   ;钻石4经营
+					click,235, 540, 18  ;经营2
 					sleep 100
-					click,326, 540, 1  ;钻石管理  326,540 426, 540
-					sleep 100
-					click,326, 607, 1  ;钻石决策
+					click,235, 610, 11  ;经营3
 					sleep 300					
                     if !PixelColorExist("0xFEEDC7",82, 391,10) and !PixelColorExist("0xFEEDC7",79, 378,10) ;没有显示金钱不够提示
                         throw "Not enough money warning show!"

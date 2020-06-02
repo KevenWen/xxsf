@@ -202,7 +202,7 @@ Rongzi_2:
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
 
-    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
+    WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
    ;---------------------- RongZi ------------------------
 
@@ -220,7 +220,7 @@ Rongzi_2:
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","hou","xhhz","xxsf"]
+    For index,value in  ["supper","hou","xhhz"] ;,"xxsf"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0
         IniRead, _DC, % UserIni, % value, DC,0              

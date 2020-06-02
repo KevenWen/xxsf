@@ -306,13 +306,11 @@ class YQXGame
 				if PixelColorExist("0xFFFEF5",154, 533,1000) 		;经营资源输入框存在
 				and PixelColorExist("0x5A7965",300, 404,10)      ;且上面图片显示是闲置土地
 				{
-					click,235, 520, 38 ;金币
+					click,235, 520, 11  ;经营1
 					sleep 100
-					;click,241, 585, 6 ;金币
-					;sleep 100
-					click,415, 585, 2 ;资源卡
+					click,235, 585, 17  ;经营2
 					sleep 100
-					click,326, 650, 2  ;钻石注决策资源
+					click,235, 650, 11  ;经营3
 					sleep 300					
 					if !PixelColorExist("0xFEEDC7",92, 449,10) ;没有显示金钱不够提示
 						throw "Not enough money warning show!"

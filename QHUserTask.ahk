@@ -88,7 +88,7 @@ DC[]{
 	GetLand()
 	{
 		try{
-		this.PrepareGameWindow()	
+		PrepareGameWindow(this.winName)	
 		this.DiCanJinzhu()
 		this.DC := 1		
 		LogtoFile("QH GetLand() done. ")
@@ -109,7 +109,7 @@ DC[]{
 			Return
 		}
 		try{
-			this.PrepareGameWindow()
+			PrepareGameWindow(this.winName)
 			this.GroupZhuZi(which)
 			LogToFile("this.GroupZhuZi done.")
 		} Catch e{
@@ -120,7 +120,7 @@ DC[]{
 	RongZi(which=5)
 	{
 		try{
-			this.PrepareGameWindow()
+			PrepareGameWindow(this.winName)
 
 			if this.isRongZiprepared(){			
 			LogToFile("Find RongZi prepared, going to click OK. ")			
@@ -141,7 +141,7 @@ DC[]{
 	PrepareRongZi(which)
 	{
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.CheZi()
 		this.PreRongZi(which)
 		}

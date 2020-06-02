@@ -90,7 +90,7 @@ DC[]{
 
 	ReloadGame(){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("Start to ReloadGame.")			
 		this.ShopHomepage.Reload()
 		LogToFile("ReloadGame done.")
@@ -107,7 +107,7 @@ DC[]{
 	
 	GetLand(){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		this.LandPage.DiCanJinzhu(this.Getzhushu())
 		LogToFile("GetLand() done, winname: " . this.winName)
 		this.DC := 1
@@ -121,7 +121,7 @@ DC[]{
 
 	OpenBusinessSkill(){	
 		try{
-			this.PrepareGameWindow(this.winName)
+			PrepareGameWindow(this.winName)
 			loop
 			{
 				this.GroupPage.GetGroupPage2()	
@@ -160,7 +160,7 @@ DC[]{
 	Hunter(islieshou){ ; 1 will from lieshou, 0 or others will from blacklist
 		try{
 		SendMode Input
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		this.GetCaiTuanPage.GetCaiTuanMoney()	
 		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
 		}
@@ -193,7 +193,7 @@ DC[]{
 	GetCaiTuan()
 	{
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		this.CaiTuanPage.GetCaiTuanMoney()	
 		LogToFile("this.GetCaiTuanPage.GetCaiTuanMoney() done. ")
 		}
@@ -211,7 +211,7 @@ DC[]{
 		}
 
 		try{
-			this.PrepareGameWindow(this.winName)
+			PrepareGameWindow(this.winName)
 			this.GroupPage.GroupZhuZi(which)
 			Return 1
 		}
@@ -223,7 +223,7 @@ DC[]{
 
 	RongZi(which=3){
 		try{
-			this.PrepareGameWindow(this.winName)
+			PrepareGameWindow(this.winName)
 
 			if this.GroupPage.isRongZiprepared(){
 			LogToFile("Find RongZi prepared, going to click OK. ")			
@@ -246,7 +246,7 @@ DC[]{
 
 	PrepareRongZi(which){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		this.GroupPage.GroupCheZi()
 		this.GroupPage.PreRongZi(which)
 		LogToFile("this.GroupPage.PreRongZi() done. ")
@@ -260,7 +260,7 @@ DC[]{
 
 	CalcRongZi(){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("Start to CalcRongZi.")
 		this.GroupPage.CalculateRZ()
 		LogToFile("CalcRongZi() done.")
@@ -275,7 +275,7 @@ DC[]{
 	ShangZhanReport(){
 		try{
 		SendMode Event
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("Start to get ShangZhanReport.")
 		this.OrderPage.GetBussinessWarOrder()
 		LogToFile("Start to get GetBussinessWarOrder.")		
@@ -295,7 +295,7 @@ DC[]{
 
 	Shopping(which){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("Start to GetShopping at:" . which)
 		this.GroupPage.GetShopping(which)
 		LogToFile("GetShopping done.")
@@ -311,7 +311,7 @@ DC[]{
 
 	ZhuanPan(times,buytime=1){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("start to ZhuPan, times: " . times)
 		this.LandPage.SuanKai()	
 		LogToFile("this.LandPage.SuanKai() done. ")
@@ -340,7 +340,7 @@ DC[]{
 
 	GetCard(times){
 		try{
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		LogToFile("Start to GetCard, times: " . times)
 		this.ShopHomepage.GetDailayTaskMoney()					
 		this.ShopHomepage.GetCards(times)
@@ -356,7 +356,7 @@ DC[]{
 	GetTianTi(){
 		try{
 		LogToFile("Start to Play Tian Ti.")			
-		this.PrepareGameWindow(this.winName)
+		PrepareGameWindow(this.winName)
 		this.CaiTuanPage.TTOperation()
 		}
 		Catch e{

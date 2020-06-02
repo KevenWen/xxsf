@@ -23,7 +23,7 @@ class QHsfGame
 
 	}
 
-	PrepareGameWindow()
+	PrepareGameWindow(this.winName)
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist		
 
@@ -83,16 +83,16 @@ class QHsfGame
 			{				
 				if A_index > 10
 					Continue 2
-				if this.SubWindowExist()
-					this.CloseAnySubWindow()
+				if SubWindowExist()
+					closeAnySubWindow()
 				sleep 1000
 				if PixelColorExist("0xEFFEFF",56, 920,10) 	; double check again on the shop button				
 				{	
 					sleep 1000								; give one more secs to check if other pop window will come
-					if !this.SubWindowExist()
+					if !SubWindowExist()
 						break 2								; looks all good here, break the main loop
 					else{
-						this.CloseAnySubWindow()
+						closeAnySubWindow()
 						break 2	
 					}
 				}	
@@ -108,73 +108,6 @@ class QHsfGame
 		sleep 100
 	}
 
-	CloseAnySubWindow()
-	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
-		loop 5
-		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				if PixelColorExist("0x1657B0",335, 421,10) ;Daily awards
-				{
-					click 446, 416
-					sleep 100
-					click 446, 503
-					sleep 100
-					click 446, 589
-					sleep 100
-				}
-				if PixelColorExist("0xFBFBFB",500, 216,20) ;限时活动
-				{
-					click 445, 480
-					sleep 100
-					click 436, 383
-					sleep 100				
-				}
-				
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	CloseSpeSubWindow(n)
-	{
-		loop %n%
-		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	SubWindowExist()
-	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-		if (ErrorLevel = 2)  ;Execption when conduct the search
-			return 0
-		else if (ErrorLevel = 1) ;Image not found 
-			return 0
-		else if (ErrorLevel = 0) ;Image found
-			return 1
-	}
-
-
 	CloseQHMenu()
 	{
 		if PixelColorExist("0xF7EF5F",566, 572,1000) ;群黑图标
@@ -189,7 +122,7 @@ class QHsfGame
 		loop{
             if A_Index > 2
                 throw "Not able to GetLandPage."
-            this.closeAnySubWindow()
+            closeAnySubWindow()
             click % HB[1]
             sleep 200
             click % HB[2]
@@ -244,7 +177,7 @@ class QHsfGame
 		this.GetLandpage()
 		sleep 500
 		SendMode Event
-		this.CloseAnySubWindow()
+		closeAnySubWindow()
         if !PixelColorExist("0x706B59",227, 417,10) and PixelColorExist("0x706B59",361, 417,10)     ;the gray color on the top
         {
             LogToFile("Land business already done, no action needed." )
@@ -259,14 +192,14 @@ class QHsfGame
 		sleep 200
 		loop
 		{
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			ImageSearch, Px, Py, 140, 429, 530, 817, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
 			else if (ErrorLevel = 1) ;Image not found 
 			{
 				sleep 200
-				this.CloseAnySubWindow()							
+				closeAnySubWindow()							
 				Mousemove,570, 840
 				send {LButton down}
 				sleep 100				
@@ -334,7 +267,7 @@ class QHsfGame
 		loop{
 			if A_Index > 2
 				throw "Not able to GetGroupPage, PixelColorExist 0xFFFEF5 492 354 not exist."
-			this.closeAnySubWindow()
+			closeAnySubWindow()
 			click % HB[5]
 			sleep 100			
 			if PixelColorExist("0xFFFEF5",550, 354,2000)			;白色人数框
@@ -450,7 +383,7 @@ class QHsfGame
 		{
 			if !PixelColorExist("0xFFFFFF",140, 402,10) and !PixelColorExist("0xB2A68C",308, 666,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
-				4399sfGame.CloseSpeSubWindow(1)
+				CloseSpeSubWindow(1)
 				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}			
 			if PixelColorExist("0xFEFFFF",345, 593,10)
@@ -463,7 +396,7 @@ class QHsfGame
 				break
 			}
 
-			if !4399sfGame.SubWindowExist()
+			if !SubWindowExist()
 				throw "Not found RongZi OK button!"
 		}
 	}

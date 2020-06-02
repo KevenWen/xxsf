@@ -9,9 +9,10 @@ class LDGame
 {
 
 ;=========================================  Common functions  ===============================================
-	__New(isclose=1)
+	__New(windowname,isclose=1)
 	{
 		this.isclosed := isclose
+		this.winName := windowname
 
 		LogToFile("")
 		LogToFile("Log started for LDPlayer." )		
@@ -89,7 +90,7 @@ class LDGame
 	
 	GetLand(){
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.DiCanJinzhu()
 		this.DC := 1
 		LogToFile("GetLand() done for LDPlayer")
@@ -105,7 +106,7 @@ class LDGame
 	RongZi()
 	{
 		try{
-			this.PrepareGameWindow()		
+			PrepareGameWindow(this.winName)		
 			if this.isRongZiprepared()
 			{
 				LogToFile("Find RongZi prepared, Going to click OK.")		
@@ -126,76 +127,12 @@ class LDGame
 
 ;=========================================  Common functions  ===============================================
 
-	PrepareGameWindow()
-	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-
-		WinGetActiveTitle, CurTitle
-		if (CurTitle = "LDPlayer")
-			Return
-
-		IfWinExist, LDPlayer
-        {
-			WinActivate, LDPlayer
-			sleep 200
-		}
-		Else
-			throw "Game not existing!"
-	}
-
-	CloseAnySubWindow()
-	{
-		loop 5
-		{
-			ImageSearch, Px, Py, 341, 139, 537,512 , % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{				
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}
-	}
-
-	CloseSpeSubWindow(n)
-	{
-		loop %n%
-		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	SubWindowExist()
-	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-		if (ErrorLevel = 2)  ;Execption when conduct the search
-			return 0
-		else if (ErrorLevel = 1) ;Image not found 
-			return 0
-		else if (ErrorLevel = 0) ;Image found
-			return 1
-	}
-
 ;=========================================  land functions  ===============================================
 	GetLandpage(){
 		loop{
             if A_Index > 2
                 throw "Not able to GetLandPage."
-            this.closeAnySubWindow()
+            closeAnySubWindow()
             click 50, 965
             sleep 500
             click 117, 965
@@ -264,7 +201,7 @@ class LDGame
 		sleep 200
 		loop
 		{
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			ImageSearch, Px, Py, 253, 431, 527, 901, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
@@ -333,12 +270,12 @@ class LDGame
 
 	GetGroupPage4()
 	{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		loop
 		{
 			if A_index > 2
 				throw, "Tried 2 times, still not able to GetGroupPage4."
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			click 356, 984				;商会 button
 			sleep 300
 			click 459, 248				;融资 tab
@@ -355,9 +292,9 @@ class LDGame
 
 	OpenBusinessSkill(){
 		try{
-			this.PrepareGameWindow()
+			PrepareGameWindow(this.winName)
 			loop 3 {
-				this.CloseAnySubWindow()
+				closeAnySubWindow()
 				click 356, 984				;商会 button
 				sleep 300
 				click 239, 241				;注资 tab
@@ -405,10 +342,10 @@ class LDGame
 		sleep, % s["short"]		
 		loop 5
 		{
-			if !this.SubWindowExist()
+			if !SubWindowExist()
 				break
 			if !PixelColorExist("0xB2A68C",278, 680,10) ; the color under in the OK window
-				this.CloseSpeSubWindow(1)
+				CloseSpeSubWindow(1)
 			if PixelColorExist("0xB2A68C",278, 680,100)
 			{
 				click 310, 627
@@ -424,7 +361,7 @@ class LDGame
 			if A_index > 2
 				throw, "Tried 2 times but still not able to complete RongZi."
 
-			this.CloseAnySubWindow()			
+			closeAnySubWindow()			
 			click, 403, 724	   							  ; 固定注洒店
 			if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
@@ -478,7 +415,7 @@ class LDGame
 					LogToFile("Find Start button, going to Click it. ")	
 					run %LDExePath% -s 0 input tap 450 1300,, Hide
 					sleep 10000
-					this.CloseAnySubWindow()
+					closeAnySubWindow()
 					Break
 				}
 

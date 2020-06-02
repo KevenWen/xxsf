@@ -5,7 +5,7 @@ class HunterPage{
 		loop{
 			if A_Index > 2
 				throw "Not able to GetHunterPage, PixelColorExist 0xFFFEF5 494 703 not exist."
-            4399sfGame.closeAnySubWindow()
+            CloseAnySubWindow()
             click % HB[1]
             sleep 200
             click % HB[3]
@@ -75,7 +75,7 @@ class HunterPage{
     }
 
     TouLieOpration(){
-        4399sfGame.CloseAnySubWindow()
+        CloseAnySubWindow()
         if !PixelColorExist("0x74BDFA",431, 530,2000)
             throw "Not able to open people Stolen page!"
 

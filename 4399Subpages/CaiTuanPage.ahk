@@ -6,7 +6,7 @@ class CaiTuanPage{
 		loop{
 			if A_Index > 2
 				throw "Not able to GetCaiTuanPage.PixelColorExist 0xFFFEF5 497 333 not exist."
-			4399sfGame.closeAnySubWindow()
+			CloseAnySubWindow()
 			click % HB[1]
 			sleep 100
 			click % HB[4]

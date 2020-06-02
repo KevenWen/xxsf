@@ -9,9 +9,10 @@ class YQXGame
 {
 
 ;=========================================  Common functions  ===============================================
-	__New(isclose=1)
+	__New(windowname,isclose=1)
 	{
 		this.isclosed := isclose
+		this.winName := windowname
 
 		LogToFile("")
 		LogToFile("Log started for YQXPlayer." )		
@@ -77,7 +78,7 @@ class YQXGame
 	
 	GetLand(){
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.DiCanJinzhu()
 		this.DC := 1
 		LogToFile("GetLand() done for YQXPlayer.")
@@ -92,7 +93,7 @@ class YQXGame
 	
 	Zhuanpan(times){
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.Suankai()
 		LogToFile("Suankai() done for YQXPlayer.")
 		}
@@ -116,7 +117,7 @@ class YQXGame
 	RongZi()
 	{
 		try{
-			this.PrepareGameWindow()
+			PrepareGameWindow(this.winName)
 			if this.isRongZiprepared() {
 				LogToFile("Find RongZi prepared, Going to click OK.")		
 				this.ClickRongZiOKPublic()
@@ -134,77 +135,12 @@ class YQXGame
 
 ;=========================================  Common functions  ===============================================
 
-	PrepareGameWindow()
-	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
-
-		WinGetActiveTitle, CurTitle
-		if (CurTitle = "YQXPlayer")
-			Return
-
-		IfWinExist, YQXPlayer
-        {
-			WinActivate, YQXPlayer
-			sleep 200
-		}
-		Else
-			throw "Game not existing!"
-	}
-
-	CloseAnySubWindow()
-	{
-		loop 5
-		{
-			ImageSearch, Px, Py, 341, 139, 537,512 , % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{				
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}
-	}
-
-	CloseSpeSubWindow(n)
-	{
-		loop %n%
-		{
-			ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	SubWindowExist()
-	{
-		ImageSearch, Px, Py, 370, 160, 586, 550, % A_ScriptDir . "\img\blockofwhite.bmp"
-		if (ErrorLevel = 2)  ;Execption when conduct the search
-			return 0
-		else if (ErrorLevel = 1) ;Image not found 
-			return 0
-		else if (ErrorLevel = 0) ;Image found
-			return 1
-	}
-
 ;=========================================  land functions  ===============================================
 	GetLandpage(){
 		loop{
             if A_Index > 2
                 throw "Not able to GetLandPage."
-            this.closeAnySubWindow()
+            closeAnySubWindow()
             click 50, 965
             sleep 500
             click 117, 965
@@ -285,7 +221,7 @@ class YQXGame
 		sleep 200
 		loop
 		{
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			ImageSearch, Px, Py, 253, 490, 500, 910, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
@@ -383,12 +319,12 @@ class YQXGame
         sleep 100
         click 394, 625 ;Save button
         sleep 1000
-        this.CloseAnySubWindow()
+        closeAnySubWindow()
     }
 
 	PlayZhuanPan(times = 6)
 	{
-        this.closeAnySubWindow()
+        closeAnySubWindow()
 		click 39, 970
 		sleep 200		
 		WaitPixelColorAndClickThrowErr("0xD17622",526, 446,2000) ;ZhuanPan
@@ -415,12 +351,12 @@ class YQXGame
 
 	GetGroupPage4()
 	{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		loop
 		{
 			if A_index > 2
 				throw, "Tried 2 times, still not able to GetGroupPage4."
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			click 356, 984				;商会 button
 			sleep 300
 			click 445, 312				;融资 tab					
@@ -446,7 +382,7 @@ class YQXGame
 			}
 			else
 			{
-				this.CloseSpeSubWindow(1)
+				CloseSpeSubWindow(1)
 				LogToFile("Closed a sub windows while ClickRongZiOKPublic.")
 				sleep 50
 			}
@@ -460,7 +396,7 @@ class YQXGame
 		sleep, % s["short"]
 
 		if PixelColorExist("0xAD9779",32, 918,1000) ; the color in the left bottom
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 	}
 
 	RongZiPri()
@@ -470,7 +406,7 @@ class YQXGame
 			if A_index > 2
 				throw, "Tried 2 times but still not able to complete RongZi."
 
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			click 138,475	   							  ; 固定注游乐
 			if !PixelColorExist("0xFFFEF5",211, 640,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
@@ -528,7 +464,7 @@ class YQXGame
 					LogToFile("Find Start button, going to Click it. ")	
 					click 279, 849
 					sleep 10000
-					this.CloseAnySubWindow()
+					closeAnySubWindow()
 					Break
 				}
 

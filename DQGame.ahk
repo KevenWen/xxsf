@@ -9,9 +9,10 @@ class DQGame
 {
 
 ;=========================================  Common functions  ===============================================
-	__New(isclose=1)
+	__New(windowname,isclose=1)
 	{
 		this.isclosed := isclose
+		this.winName := windowname
 
 		LogToFile("")
 		LogToFile("Log started for 6322Player." )		
@@ -57,6 +58,13 @@ class DQGame
 			return %value%
 		}
 
+global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"]            ; home buttons
+global	SB := ["100, 260","230,260","330,260","420,260"]                                            ; shanghui buttons
+global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                              ; 5个企业 coordinates
+global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
+global	PopWin := {okbtn: "324, 608", clobtn: "480, 266",qhclobtn: "500, 266",zhuziok: "507, 320"}  ; button positions
+global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}                      ; 融资的按钮
+global  StockPos := ["155, 415","310, 415","460, 415"] 
 
 	LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 	Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633" 
@@ -101,7 +109,7 @@ class DQGame
 	
 	GetLand(){
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.DiCanJinzhu()
 		this.DC := 1
 		LogToFile("GetLand() done for 6322Player.")
@@ -116,7 +124,7 @@ class DQGame
 	
 	Zhuanpan(times){
 		try{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		this.Suankai()
 		LogToFile("Suankai() done for 6322Player.")
 		}
@@ -140,7 +148,7 @@ class DQGame
 	RongZi()
 	{
 		try{
-			this.PrepareGameWindow()
+			PrepareGameWindow(this.winName)
 			if this.isRongZiprepared() {
 				LogToFile("Find RongZi prepared, Going to click OK.")		
 				this.ClickRongZiOKPublic()
@@ -158,77 +166,13 @@ class DQGame
 
 ;=========================================  Common functions  ===============================================
 
-	PrepareGameWindow()
-	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
-
-		WinGetActiveTitle, CurTitle
-		if (CurTitle = "6322Player")
-			Return
-
-		IfWinExist, 6322Player
-        {
-			WinActivate, 6322Player
-			sleep 200
-		}
-		Else
-			throw "Game not existing!"
-	}
-
-	CloseAnySubWindow()
-	{
-		loop 5
-		{
-			ImageSearch, Px, Py, 370, 130, 537,512 , % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{				
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}
-	}
-
-	CloseSpeSubWindow(n)
-	{
-		loop %n%
-		{
-			ImageSearch, Px, Py, 370, 130, 537, 512, % A_ScriptDir . "\img\blockofwhite.bmp"
-			if (ErrorLevel = 2)  ;Execption when conduct the search
-				throw "ImageSearch not work, please check." 
-			else if (ErrorLevel = 1) ;Image not found 
-				Break
-			else if (ErrorLevel = 0) ;Image found
-			{
-				click %Px%, %Py%
-				sleep 200
-			}
-			sleep 100
-		}	
-	}
-
-	SubWindowExist()
-	{
-		ImageSearch, Px, Py, 370, 130, 537, 512, % A_ScriptDir . "\img\blockofwhite.bmp"
-		if (ErrorLevel = 2)  ;Execption when conduct the search
-			return 0
-		else if (ErrorLevel = 1) ;Image not found 
-			return 0
-		else if (ErrorLevel = 0) ;Image found
-			return 1
-	}
 
 ;=========================================  land functions  ===============================================
 	GetLandpage(){
 		loop{
             if A_Index > 2
                 throw "Not able to GetLandPage."
-            this.closeAnySubWindow()
+            closeAnySubWindow()
             click 50, 965
             sleep 500
             click 117, 965
@@ -309,7 +253,7 @@ class DQGame
 		sleep 200
 		loop
 		{
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			ImageSearch, Px, Py, 253, 432, 500, 900, % A_ScriptDir . "\img\blockofyellow.bmp"
 			if (ErrorLevel = 2)  ;Execption when conduct the search
 				throw "ImageSearch not work, please check." 		
@@ -407,12 +351,12 @@ class DQGame
         sleep 100
         click 407, 584 ;Save button
         sleep 1000
-        this.CloseAnySubWindow()
+        closeAnySubWindow()
     }
 
 	PlayZhuanPan(times = 6)
 	{
-        this.closeAnySubWindow()
+        closeAnySubWindow()
 		click 39, 970
 		sleep 200		
 		WaitPixelColorAndClickThrowErr("0xD17622",523, 389,2000) ;ZhuanPan
@@ -439,12 +383,12 @@ class DQGame
 
 	GetGroupPage4()
 	{
-		this.PrepareGameWindow()
+		PrepareGameWindow(this.winName)
 		loop
 		{
 			if A_index > 2
 				throw, "Tried 2 times, still not able to GetGroupPage4."
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			click 356, 984				;商会 button
 			sleep 300
 			click 468, 247				;融资 tab					
@@ -468,7 +412,7 @@ class DQGame
 		click 277, 638
 		sleep, % s["short"]
 		if PixelColorExist("0xFBFBFB",495, 250,1000) ; the color under in the OK window
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 	}
 
 	RongZiPri()
@@ -478,7 +422,7 @@ class DQGame
 			if A_index > 2
 				throw, "Tried 2 times but still not able to complete RongZi."
 
-			this.CloseAnySubWindow()
+			closeAnySubWindow()
 			click 170, 733	   							  ; 固定注能源
 			if !PixelColorExist("0xFFFEF5",204, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
@@ -536,7 +480,7 @@ class DQGame
 					LogToFile("Find Start button, going to Click it. ")	
 					click 277, 835
 					sleep 10000
-					this.CloseAnySubWindow()
+					closeAnySubWindow()
 					Break
 				}
 

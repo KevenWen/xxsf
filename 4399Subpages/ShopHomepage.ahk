@@ -6,7 +6,7 @@ class ShopHomePage{
 		loop{
 			if A_Index > 2
 				throw "Not able to ShopHomePage, PixelColorExist 0xFFFFFF 500 200 not exist."
-            4399sfGame.closeAnySubWindow()
+            CloseAnySubWindow()
             click % HB[1]
             sleep 100
             if PixelColorExist("0xFFFFFF",500, 200,2000)		;设置按钮白色
@@ -26,7 +26,7 @@ class ShopHomePage{
         sleep 100
         click 404, 554 ;Save button
         sleep 1000
-        4399sfGame.CloseAnySubWindow()
+        CloseAnySubWindow()
     }
 
 	PlayZhuanPan(times = 6)
@@ -68,7 +68,7 @@ class ShopHomePage{
             if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
                 colcount++
             else
-                4399sfGame.CloseAnySubWindow()
+                CloseAnySubWindow()
 
             if colcount	> 1
                 break
@@ -83,13 +83,13 @@ class ShopHomePage{
 
 	GetGiftScreen()
 	{
-		4399sfGame.CloseAnySubWindow()
+		CloseAnySubWindow()
 		sleep 100
 		click 246, 196	;gift pack button
 		sleep 300
 		click 429, 577  ;card button
 		sleep 500
-		4399sfGame.CloseAnySubWindow()
+		CloseAnySubWindow()
 	}
 
 	GetCards(times=120)
@@ -116,11 +116,11 @@ class ShopHomePage{
                 sleep 200
             }
 			if !PixelColorExist("0xFFFFF3",306, 601,10)	;close 分享成功或拼图窗口
-				4399sfGame.closeSpeSubWindow(1)
+				CloseSpeSubWindow(1)
             LogToFile("loop times: " . A_Index)
 		}
         sleep 5000
-		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口
+		CloseSpeSubWindow(30)	;关闭所有子窗口
 	}
 
 

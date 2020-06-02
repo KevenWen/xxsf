@@ -1,11 +1,10 @@
 ﻿#SingleInstance, Force
 SetBatchLines, -1
-#Include, Functions.ahk
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-class DQGame
+class DQGame extends LDBase
 {
 
 ;=========================================  Common functions  ===============================================
@@ -15,13 +14,13 @@ class DQGame
 		this.winName := windowname
 
 		LogToFile("")
-		LogToFile("Log started for 6322Player." )		
+		LogToFile("Log started for game: ". this.winname)		
 
-		IfWinExist, 6322Player
+		IfWinExist, % this.winName
 		{
-			WinActivate 6322Player
+			WinActivate, % this.winName
 			Sleep 100
-			LogToFile("Find existing window named 6322Player. ")
+			LogToFile("Find existing window named " . this.winName)
 		}
 		else
 		{
@@ -30,7 +29,7 @@ class DQGame
 			LogToFile("Game Started.")
 			}
 			Catch e{
-			LogToFile("6322Player window not fond and start game failed: " . e)
+			LogToFile(this.winName . " window not fond and start game failed: " . e)
 			Return
 			}
 		}
@@ -40,31 +39,25 @@ class DQGame
 	{
 		if this.isclosed
 		{
-			WinClose, 6322Player
+			WinClose, % this.winName
 			sleep 100
 		}
 		else
-			WinMinimize, 6322Player
+			WinMinimize, % this.winName
 
-		LogToFile("Log Ended for 6322Player.`n")
+		LogToFile("Log Ended for " . this.winName . ". `n")
     }
 
 ; <==================================  Properties  ====================================>
 
 
-	HomepagePos[]{
-		get{
-			IniRead, value,% UserIni,6322Player,RZ,0
-			return %value%
-		}
-
-global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"]            ; home buttons
-global	SB := ["100, 260","230,260","330,260","420,260"]                                            ; shanghui buttons
-global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                              ; 5个企业 coordinates
-global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
-global	PopWin := {okbtn: "324, 608", clobtn: "480, 266",qhclobtn: "500, 266",zhuziok: "507, 320"}  ; button positions
-global	RZWin := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}                      ; 融资的按钮
-global  StockPos := ["155, 415","310, 415","460, 415"] 
+	global	HB := ["45, 980","120, 980","200, 980","280, 980","360, 980","440, 980"]            		; home buttons
+	global	SB := ["100, 250","230,250","330,250","420,250"]                                            ; shanghui buttons
+	global	BC := ["120, 430","400, 430","280, 560","180, 730","390, 730"]                              ; 5个企业 coordinates
+	global	LandPos := {Tab1: "85, 235", prepared1: "", prepared2: ""
+					, Tab2: "235, 235"				}
+	global	RongZiPos := {rzarea: "200,570", yesbtn: "333, 565", chezibtn: "430, 560"}                  ; 融资的按钮
+	global  ZhuZiPos := ["155, 415","310, 415","460, 415"] 
 
 	LieshoucoList := ["490,296","490,366","490,436","490,506","490,576","490,647"]
 	Arrayphy := {btn1: "1069, 662", btn2: "798, 629", btn_2: "798, 692", btn3: "522, 633" 
@@ -72,36 +65,36 @@ global  StockPos := ["155, 415","310, 415","460, 415"]
 
 	RZ[]{
 		get{
-			IniRead, value,% UserIni,6322Player,RZ,0
+			IniRead, value,% UserIni,% this.winName,RZ,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,6322Player,RZ
+			IniWrite, % value, % UserIni,% this.winName,RZ
 			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Rztime			
 		}
 	}
 
 	DC[]{
 		get{
-			IniRead, value, % UserIni,6322Player,DC,0
+			IniRead, value, % UserIni,% this.winName,DC,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,6322Player,DC
+			IniWrite, % value, % UserIni,% this.winName,DC
 			IniWrite, % A_Min . ":" . A_Sec, % UserIni,6322Player,Dctime					
 		}
 	}
 
 	SJ[]{
 		get{
-			IniRead, value, % UserIni,LDPlayer,SJ,0
+			IniRead, value, % UserIni,% this.winName,SJ,0
 			return %value%
 		}
 
 		set{
-			IniWrite, % value, % UserIni,LDPlayer,SJ
+			IniWrite, % value, % UserIni,% this.winName,SJ
 			IniWrite, % A_Sec . ":" . A_Sec, % UserIni,LDPlayer,Sjtime					
 		}
 

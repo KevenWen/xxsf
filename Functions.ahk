@@ -82,6 +82,25 @@ PixelColorExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10)
     }
 }
 
+PixelColorXYExist(p_DesiredColor,pxy,p_TimeOut=10) 
+{
+    p_Pos   :=  StrSplit(pxy,",")
+    l_Start := A_TickCount
+    Loop {
+        PixelGetColor, l_OutputColor, % p_Pos[1], % p_Pos[2], RGB	
+		If ( ErrorLevel )
+            Return 0
+        If ( l_OutputColor = p_DesiredColor )
+        {
+            sleep 50
+            Return 1            
+        }    
+        If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)
+            Return 0
+    }
+}
+
+
 PixelColorNotExist(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=10) 
 {
     l_Start := A_TickCount

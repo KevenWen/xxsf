@@ -453,7 +453,7 @@ class DQGame
 				throw, "Tried 2 times but still not able to complete RongZi."
 
 			this.CloseAnySubWindow()
-			click 170, 733	   							  ; 固定注能源
+			click 270, 580	   							  ; 固定金融3
 			if !PixelColorExist("0xFFFEF5",204, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 
@@ -488,13 +488,9 @@ class DQGame
 
 	LaunchDQGame()
 	{		
-		LogToFile("Not implement yet... ")	
-		throw "Not implement yet... "
-	/*	
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
 		run %LDGamePath% launchex --index 2 --packagename "com.iflytek.cbg.wxyy.gamebox"  
-		LogToFile("Start to Launch LDGame. ")			
+		LogToFile("Start to Launch DQGame. ")			
 		sleep 10000
 		IfWinExist, DQPlayer
 		{
@@ -502,10 +498,11 @@ class DQGame
 			sleep 200
 			Loop
 			{
-				if PixelColorExist("0xFFFFFF",255, 388,100) ; or PixelColorExist("0xFFFFFF",272, 265,100) ;remote or local
+				if PixelColorExist("0xFF6666",23, 359,10) ; Recently played button exist
 				{
-					LogToFile("Find accout window, going to Click Enter. ")	
-					click 347, 559
+					LogToFile("Recently played button exist, going to Click it. ")	
+					click 85, 347
+					sleep 3000
 				}
 
 				if PixelColorExist("0xFFFEF5",370, 735,10)
@@ -520,12 +517,12 @@ class DQGame
 				if A_Index > 60
 					throw "DQPlayer start wait timeout"
 
-				sleep 2000
+				sleep 1000
 			}
 		}
 		Else
 			throw "DQPlayer window not exist"
-	*/
+
 	}
 }
 

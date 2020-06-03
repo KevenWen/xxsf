@@ -156,7 +156,7 @@ Rongzi_N:
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","xhhz","xxsf","sf06"]
+    For index,value in  ["supper","xhhz","sf06"] ;,"xxsf"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1

@@ -6,6 +6,7 @@
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
+#include DQGame.ahk
 
 SetWorkingDir %A_ScriptDir%
 SetBatchLines -1
@@ -172,6 +173,8 @@ CreateTask:
                 user := new YQXGame(!isClose)
             else if (U[1] = "6322Game")
                 user := new 6322Game(!isClose)
+            else if (U[1] = "DQGame")
+                user := new DQGame(!isClose)
             Else    
                 user := new 4399UserTask(U[1],!isClose)
 

@@ -469,7 +469,7 @@ class YQXGame
 				throw, "Tried 2 times but still not able to complete RongZi."
 
 			this.CloseAnySubWindow()
-			click 138,475	   							  ; 固定注游乐
+			click 180,750	   							  ; 固定注能源4
 			if !PixelColorExist("0xFFFEF5",211, 640,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 

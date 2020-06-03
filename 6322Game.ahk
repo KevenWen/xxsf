@@ -453,7 +453,7 @@ class 6322Game
 				throw, "Tried 2 times but still not able to complete RongZi."
 
 			this.CloseAnySubWindow()
-			click 170, 733	   							  ; 固定注能源
+			click 390,410	   							  ; 固定注科技2
 			if !PixelColorExist("0xFFFEF5",204, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 

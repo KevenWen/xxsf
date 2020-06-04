@@ -85,7 +85,7 @@ Rongzi_0:
     ;---------------------- ZhuanPan -----------------------
     new 4399UserTask("sf06",0).ReloadGame()
     new 4399UserTask("sf06",0).ZhuanPan(2,1)
-    new 4399UserTask("xhhz",0).ZhuanPan(3,0)
+    new 4399UserTask("xhhz",0).ZhuanPan(5,0)
     ;----------------------- Hunter ------------------------
     For index,value in  ["sf06","xhhz"]
         new 4399UserTask(value,0).Hunter(1)

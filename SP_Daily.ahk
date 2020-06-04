@@ -136,8 +136,9 @@ Rongzi_0:
         new DQGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
-    new 6322Game(0).ZhuanPan(4)
-    new DQGame(0).ZhuanPan(2)    
+    WinClose hou
+    new 6322Game(0).ZhuanPan(3)
+    new DQGame(0).ZhuanPan(3)
     new 4399UserTask("hou",0).ZhuanPan(3,1)
     new YQXGame(0).ZhuanPan(3)
 

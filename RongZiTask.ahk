@@ -88,12 +88,12 @@ Rongzi_0:
     new 4399UserTask("sf06",0).ZhuanPan(2,1)     
     new 4399UserTask("xhhz",0).ZhuanPan(5,0)
     ;----------------------- Hunter ------------------------
-    For index,value in  ["supper","sf06","xhhz","song"]
+    For index,value in  ["hou","sf06","song","xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["supper","supper","xhhz","song","sf06]
+    For index,value in  ["supper","hou","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
     ;new QHUser("xxsf").Getland()
     
@@ -124,7 +124,7 @@ Rongzi_N:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz","sf06","song"]
+    For index,value in  ["supper","sf06","xhhz","song"]
        new 4399UserTask(value,0)
     GameRecordingOff()
 

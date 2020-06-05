@@ -3,6 +3,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance force
 #Include 4399UserTask.ahk
+#include QHuserTask.ahk
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
@@ -15,35 +16,6 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 
 ;Gosub, Rongzi_0  ;for testing only
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
-
-/*
-TargetTime = 1400  ; run at 2pm, which is 1400.
-
-StringLeft, TargetDateTime, A_Now, 8  ; Put just YYYYMMDD into the variable.
-TargetDateTime = %TargetDateTime%%TargetTime%
-TimeUntilTarget = %TargetDateTime%
-TimeUntilTarget -= %A_Now%, seconds
-if TimeUntilTarget < 0
-{
-     [color=red]MsgBox The target time is already past![/color]
-     ExitApp
-}
-TimeUntilTarget *= 1000 ; Convert to milliseconds.
-SetTimer, Timer1, %TimeUntilTarget%
-return
-
-Timer1:
-SetTimer, Timer1, off  ; i.e. perform this subroutine only once.
-; In case you want to be warned before it happens, in case it changes the
-; active window or otherwise disrupts what the user is working on:
-SplashTexton,,, It's about to happen.
-Sleep, 3000
-SplashTextOff
-; And here perform whatever action you wanted scheduled:
-; ...
-return
-*/
-
 
 SetTimer, Task2020, 1000  ;run every 1 secs
 Return

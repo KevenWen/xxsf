@@ -147,6 +147,8 @@ class 4399sfGame
 				if PixelColorExist("0xFBFBFB",471, 214,100) ;限时活动
 				{
 					click 449, 471
+					sleep 50
+					click 428, 299
 					sleep 100
 				}
 				

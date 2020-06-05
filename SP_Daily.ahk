@@ -75,32 +75,31 @@ return
 
 Rongzi_0:
 
+    FileDelete % UserIni
+    FileDelete % UserIniRemote   
+    FileAppend,,% UserIni               
+
     new LDGame(0)    
     new YQXGame(0)
     new 6322Game(0)
     new DQGame(0)           
-    For index,value in ["hou"]
-        new 4399UserTask(value,0).PrepareRongZi(index)
-    FileDelete % UserIni
-    FileDelete % UserIniRemote   
-    FileAppend,,% UserIni               
+    new QHUser("xxsf",0)
+    
     GameRecordingOff()
 
     WaitForTime(235955)
     GameRecordingOn()
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK -----------------
-    new LDGame(0).RongZi()  
+    new LDGame(0).RongZi() 
     
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
-    new DQGame(0).RongZi()  
-
-    For index,value in ["hou"]
-        new 4399UserTask(value,0).RongZi(index)
+    new DQGame(0).RongZi()
+    new QHUser("xxsf",0).RongZi(index)
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
@@ -110,13 +109,6 @@ Rongzi_0:
         IniRead, _SJ, % UserIni,LDPlayer,SJ,0
         if _SJ < 1 and mod(A_YDay-118,7) = 0
             new LDGame(0).OpenBusinessSkill() 
-    }
-
-    For index,value in ["hou"]
-    {
-        IniRead, _RZ, % UserIni, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value,0).RongZi(index)              
     }
 
     IniRead, _RZ, % UserIni,LDPlayer,RZ,0
@@ -136,10 +128,9 @@ Rongzi_0:
         new DQGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
-    WinClose hou
+
     new 6322Game(0).ZhuanPan(3)
     new DQGame(0).ZhuanPan(3)
-    new 4399UserTask("hou",0).ZhuanPan(3,1)
     new YQXGame(0).ZhuanPan(3)
 
     ;-------------------- GetLand and hunter ------------------------
@@ -148,12 +139,7 @@ Rongzi_0:
     new YQXGame().GetLand()
     new 6322Game().GetLand()
     new DQGame().GetLand()  
-    
-    For index,value in ["hou"]
-        new 4399UserTask(value,0).Hunter(1)
-
-    For index,value in ["hou"]
-        new 4399UserTask(value).GetLand()
+    new QHUser("xxsf").GetLand()
 
     ;-------------------  Verification 2 ------------------
     sleep 1000
@@ -171,19 +157,12 @@ Rongzi_0:
     if _RZ < 1
         new DQGame().Getland()
 
-    For index,value in  ["hou"]
-    {
-        IniRead, _DC, % UserIni, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    }
-
     LogtoFile("Verification 2 done.")
     
     GameRecordingOff()
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","sf06","xhhz"]
+    For index,value in  ["supper","sf06","xhhz","song","hou"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
@@ -211,6 +190,7 @@ Rongzi_N:
     new YQXGame(0)
     new 6322Game(0)
     new DQGame(0)
+    new QHUser("xxsf",0)    
     GameRecordingOff()
 
     WaitForTime(000000)   ;Make sure we are start after 00:00
@@ -219,10 +199,12 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
 
+    new QHUser("xxsf").GetLand()    
     new LDGame(0).GetLand()
     new YQXGame(0).GetLand()
     new 6322Game(0).GetLand()
     new DQGame(0).GetLand()
+
     ;-------------------  Verification ------------------
     sleep 1000
     LogtoFile("Start to do verification...")
@@ -254,13 +236,13 @@ Rongzi_N:
     IniRead, _DC, % UserIni,DQPlayer,DC,0
     if _DC < 1
         new 6322Game().GetLand()
-
-    WinClose DQPlayer
+    else
+        WinClose DQPlayer
 
     GameRecordingOff()
     Sleep 1200000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","xhhz","sf06","song"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1
@@ -284,8 +266,7 @@ Rongzi_2:
     Y := new YQXGame(0)  
     N := new 6322Game(0)
     D := new DQGame(0)           
-    For index,value in ["sf06"]
-        new 4399UserTask(value,0)
+    new QHUser("xxsf",0)
 
     GameRecordingOff()
 
@@ -295,19 +276,15 @@ Rongzi_2:
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    For index,value in ["sf06"]
-        new 4399UserTask(value,0).Getland()
-
+    new QHUser("xxsf",0).GetLand()   
     For index,value in ["L","Y","N","D"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-     For index,value in ["sf06"]
-        new 4399UserTask(value,0).RongZi(index+1)
-    
     For index,value in ["L","Y","N","D"]
         %value%.RongZi()
+    new QHUser("xxsf").RongZi(1)    
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
@@ -358,21 +335,10 @@ Rongzi_2:
 
     WinClose DQPlayer
 
-    For index,value in  ["sf06"]
-    {
-        IniRead, _DC, % UserIni, % value, DC,0   
-        IniRead, _RZ, % UserIni, % value, RZ,0
-
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index+1)      
-        if _DC < 1
-            new 4399UserTask(value).Getland()
-    }
-
     GameRecordingOff()
     Sleep 300000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  

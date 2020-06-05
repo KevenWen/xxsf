@@ -207,7 +207,7 @@ class LDGame
 
 	isPrepared()
 	{
-        if A_Sec > 20
+        if A_Sec > 25
         {
             LogToFile("Land business just click time expired, current secs: " . A_Sec)
             return 0

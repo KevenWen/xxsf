@@ -64,7 +64,7 @@ Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
 GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
 
-Menu, Tray, Icon, % A_ScriptDir . "\img\i.ico"
+Menu, Tray, Icon, % A_ScriptDir . "\img\i3.ico"
 Gui Show, w588 h420, Tasks
 
 Return

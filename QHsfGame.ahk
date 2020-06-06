@@ -134,7 +134,7 @@ class QHsfGame
 
 	isPrepared()
 	{
-        if A_Sec > 20
+        if A_Sec > 25
         {
             LogToFile("Land business just click time expired, current secs: " . A_Sec)
             return 0
@@ -217,13 +217,11 @@ class QHsfGame
 				if PixelColorExist("0xFFFEF5",190, 480,1000) 		;经营资源输入框存在
 				   and PixelColorExist("0x5A7965",331, 353,10)      ;且上面图片显示是闲置土地
 				{
-					click,265, 465, 36 ;金币23
+					click,265, 465, 11 ;经营1
 					sleep 100
-					;click,265, 530, 5 ;金币17
-					;sleep 100
-					click,433, 530, 3 ;资源卡6
+					click,265, 530, 15 ;经营2
 					sleep 100
-					click,350, 594, 3  ;3份钻石注决策资源
+					click,265, 594, 11  ;经营3
 					sleep 300					
                     if !PixelColorExist("0xFEEDC7",119, 391,10) and !PixelColorExist("0xFEEDC7",478, 391,10) ;左右两边都没有显示金钱不够提示
                         throw "Not enough money warning show!"

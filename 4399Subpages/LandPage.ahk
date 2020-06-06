@@ -72,7 +72,7 @@ class LandPage{
 
 	isPrepared()
 	{
-        if A_Sec > 20
+        if A_Sec > 25
         {
             LogToFile("Land business just click time expired, current secs: " . A_Sec)
             return 0
@@ -155,16 +155,12 @@ class LandPage{
                 if PixelColorExist("0xFFFEF5",169, 472,1000)    ;经营资源输入框存在
                 and PixelColorExist("0x5A7965",331, 353,10)     ;且上面图片显示是闲置土地
                 {
-                    Mousemove,255, 460
-                    click, % num-6                  ;金币注经营资源
-                    sleep 100
-                    Mousemove,255, 520
-                    click, 5                        ;金币注管理资源                    
-                    sleep 100
-                    click,425,580, 2				;2资源卡注决策资源
-                    sleep 100
-                    click,330,580, 3				;3份钻石注决策资源
-                    sleep 300
+					click,265, 465, 11 ;经营1
+					sleep 100
+					click,265, 525, 15  ;经营2
+					sleep 100
+					click,265, 585, 11  ;经营3
+					sleep 300	
                     if !PixelColorExist("0xFEEDC7",122, 389,10) and !PixelColorExist("0xFEEDC7",460, 398,10) ;左右两边都没有显示金钱不够提示
                         throw "Not enough money warning show!"
 

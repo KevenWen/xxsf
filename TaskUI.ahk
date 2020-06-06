@@ -6,6 +6,7 @@
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
+#include DQGame.ahk
 
 SetWorkingDir %A_ScriptDir%
 SetBatchLines -1
@@ -62,6 +63,8 @@ Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
 
 GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
+
+Menu, Tray, Icon, % A_ScriptDir . "\img\i3.ico"
 Gui Show, w588 h420, Tasks
 
 Return
@@ -172,6 +175,8 @@ CreateTask:
                 user := new YQXGame(!isClose)
             else if (U[1] = "6322Game")
                 user := new 6322Game(!isClose)
+            else if (U[1] = "DQGame")
+                user := new DQGame(!isClose)
             Else    
                 user := new 4399UserTask(U[1],!isClose)
 
@@ -249,6 +254,8 @@ if (A_GuiEvent = "DoubleClick")
         new YQXGame(0)
     else if (userName = "6322Game")
         new 6322Game(0)
+    else if (userName = "DQGame")
+        new DQGame(0)    
     Else
         Launch4399GamePri(userName,gameID)
 }

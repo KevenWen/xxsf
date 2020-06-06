@@ -7,6 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
+#include DQGame.ahk
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
@@ -54,6 +55,7 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     new LDGame(0)
     new YQXGame(0)
     new 6322Game(0)
+    new DQGame(0)
 
 F7::Pause   ;pause the script
 F8::ExitApp ;stop the script

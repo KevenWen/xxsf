@@ -83,31 +83,27 @@ Rongzi_0:
         ;new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("sf06",0).ReloadGame()
-    new 4399UserTask("sf06",0).ZhuanPan(2,1)
-    new 4399UserTask("xhhz",0).ZhuanPan(3,0)
+    new 4399UserTask("song",0).ZhuanPan(5,1)
+    new 4399UserTask("hou",0).ZhuanPan(5,1)   
+    new 4399UserTask("sf06",0).ZhuanPan(2,1)     
+    new 4399UserTask("xhhz",0).ZhuanPan(5,0)
     ;----------------------- Hunter ------------------------
-    For index,value in  ["sf06","xhhz"]
+    For index,value in  ["hou","sf06","song","xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["sf06","supper","xhhz"]
+    For index,value in  ["supper","hou","xhhz","song","sf06"]
        new 4399UserTask(value).Getland()
     ;new QHUser("xxsf").Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")
-    For index,value in  ["supper","sf06","xhhz"] ;,"xxsf"]
+    For index,value in  ["supper","sf06","xhhz","hou","song"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
-        {
-           if value = xxsf
-               new QHUser("xxsf").Getland()
-            else 
-               new 4399UserTask(value).Getland()              
-        }
+            new 4399UserTask(value).Getland()
     }
     LogtoFile("Verification 2 done.")
 
@@ -115,16 +111,6 @@ Rongzi_0:
     sleep 120000   
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["hou"]
-    {
-        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index+2)
-
-        IniRead, _DC, % UserIniRemote, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()    
-    } 
     LogtoFile("Remote verification done.")
 
     WinClose 360游戏大厅
@@ -138,41 +124,34 @@ Rongzi_N:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    new QHUser("xxsf",0)
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","sf06","xhhz","song"]
        new 4399UserTask(value,0)
     GameRecordingOff()
 
     WaitForTime(235959)
     GameRecordingOn()
     ;---------------------- Tasks ------------------------
-    new QHUser("xxsf").Getland()
 
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
 
-    For index,value in  ["supper","xhhz","sf06"]
-       new 4399UserTask(value).Getland()
+    For index,value in  ["supper","xhhz","sf06","song"]
+       new 4399UserTask(value,0).Getland()
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","xhhz","xxsf","sf06"]
+    For index,value in  ["supper","xhhz","sf06","song"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
-        {
-           if value = xxsf
-               new QHUser("xxsf").Getland()
-            else 
-               new 4399UserTask(value).Getland()              
-        }
+            new 4399UserTask(value,0).Getland()
     }
-
+    WinClose supper
     iniFileSync()
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","sf06"]
+    For index,value in ["xhhz","sf06","song"]
         new 4399UserTask(value).Hunter(1)
 
     WinClose 360游戏大厅
@@ -186,74 +165,51 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    new QHUser("xxsf",0)
-    For index,value in  ["supper","xhhz","hou"]
-            new 4399UserTask(value,0)
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
+        new 4399UserTask(value,0)
     GameRecordingOff()
 
     WaitForTime(235959)
     GameRecordingOn()
    ;---------------------- Getland ------------------------
 
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
         new 4399UserTask(value,0).GetLand()
-    new QHUser("xxsf",0).Getland()
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()   
    ;---------------------- Waiting ------------------------
 
-    WaitForTime(0002,0)   ;Make sure we are start after 00:02, start even if later than 02
+    WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
    ;---------------------- RongZi ------------------------
 
-    For index,value in  ["supper","xhhz","hou"]
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
         new 4399UserTask(value,0).RongZi(index) 
 
     WinClose supper
-    new QHUser("xxsf").RongZi(4)
-
 
    ;---------------------- Hunter ------------------------
 
-    for index,value in  ["hou","xhhz"]
+    for index,value in  ["hou","xhhz","song","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","hou","xhhz","xxsf"]
+    For index,value in  ["supper","hou","xhhz","song","sf06"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0
-        IniRead, _DC, % UserIni, % value, DC,0              
+        IniRead, _DC, % UserIni, % value, DC,0 
+
         if _RZ < 1
-        {
-           if value = xxsf
-               new QHUser("xxsf").RongZi(4)
-            else 
-               new 4399UserTask(value).RongZi(index)              
-        }   
+            new 4399UserTask(value).RongZi(index)
         if _DC < 1
-        {
-           if value = xxsf
-               new QHUser("xxsf").Getland()
-            else 
-               new 4399UserTask(value).Getland()              
-        }
+            new 4399UserTask(value).Getland()
     }
     LogtoFile("Verification done.")
 
     sleep 60000    
     iniFileSync()
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["sf06"]
-    {
-        IniRead, _RZ, % UserIniRemote, % value, RZ,0        
-        if _RZ < 1  
-            new 4399UserTask(value).RongZi(index+2)
-
-        IniRead, _DC, % UserIniRemote, % value, DC,0        
-        if _DC < 1
-            new 4399UserTask(value).Getland()    
-    } 
     LogtoFile("Remote verification done.")
 
     WinClose 360游戏大厅

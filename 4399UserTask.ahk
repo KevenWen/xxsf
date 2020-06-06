@@ -274,6 +274,7 @@ DC[]{
 
 	ShangZhanReport(){
 		try{
+		GameRecordingOn()
 		SendMode Event
 		PrepareGameWindow(this.winName)
 		LogToFile("Start to get ShangZhanReport.")
@@ -285,10 +286,12 @@ DC[]{
 		LogToFile("Start to get GetZhuZiList.")		
 		this.GroupPage.GetShangZhanList()
 		LogToFile("ShangZhanReport task done.")
-		Return 1		
+		GameRecordingOff()		
+		Return 1
 		}
 		Catch e{
 		LogToFile("ShangZhanReport() get exception: " . e)
+		GameRecordingOff()
 		Return 0
 		}
 	}	

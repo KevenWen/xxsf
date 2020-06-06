@@ -212,7 +212,7 @@ Rongzi_N:
         WinClose DQPlayer
 
     GameRecordingOff()
-    Sleep 1200000
+    Sleep 120000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","sf06","song"]
     {
@@ -308,7 +308,7 @@ Rongzi_2:
     WinClose DQPlayer
 
     GameRecordingOff()
-    Sleep 300000
+    Sleep 180000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","hou","song","sf06"]
     {

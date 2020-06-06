@@ -40,6 +40,7 @@ Gui Add, CheckBox, visShare xp+110 , 分享20钻石
 Gui Add, CheckBox, visCard xp+105 , 刷拼图
 Gui Add, CheckBox, visOpenBS xp+83, 开商技
 
+Gui Add, CheckBox, visCalRZ x25 yp+29, 计算融资
 
 Gui Add, ListView, vUlist x420 y25 w145 h303 gMyListView, UserTitle..|ID|Num
 for key,num in numTable
@@ -98,6 +99,8 @@ CreateTask:
     GuiControlGet, isShareSelected,, isShare
     GuiControlGet, isCardSelected,, isCard
     GuiControlGet, isOpenBSSelected,, isOpenBS
+
+    GuiControlGet, isCalRZSelected,, isCalRZ
 
     GuiControlGet, isRecordingOnSelected,, isRecordingOn            
     GuiControlGet, isClose,, isClose
@@ -212,6 +215,9 @@ CreateTask:
 
             if isCaiTuanSelected
                 user.GetCaiTuan()
+
+            if isCalRZSelected
+                user.CalcRongZi()
 
             if isShareSelected
                 user.GetCard(2)

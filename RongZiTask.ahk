@@ -108,10 +108,9 @@ Rongzi_0:
     LogtoFile("Verification 2 done.")
 
     GameRecordingOff()
-    sleep 120000   
+    LogtoFile("Start to do iniFileSync...")
     iniFileSync()
-    LogtoFile("Start to do remote verification...")
-    LogtoFile("Remote verification done.")
+    LogtoFile("iniFileSync  done.")
 
     WinClose 360游戏大厅
 Return
@@ -207,10 +206,9 @@ Rongzi_2:
     }
     LogtoFile("Verification done.")
 
-    sleep 60000    
+    LogtoFile("Start to do iniFileSync...")
     iniFileSync()
-    LogtoFile("Start to do remote verification...")
-    LogtoFile("Remote verification done.")
+    LogtoFile("iniFileSync  done.")
 
     WinClose 360游戏大厅
 Return

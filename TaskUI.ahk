@@ -52,9 +52,10 @@ Gui Add, Text, cRed vTips x25 y240 w164 h23 +0x200,
 Gui Add, CheckBox, visRecordingOn x25 y+m, 开启录屏
 Gui Add, CheckBox, visClose x+M, 任务完成保留窗口
 
-Gui Add, Button, vBtnOpenLog x23 yp+29 gOpenLog, 查看当日日志文件...  
-Gui Add, Button, vBtnOpenPic x+M gOpenPic, 查看商店商品列表...  
-Gui Add, Button, vBtnOpenSpy x+M gOpenSpy, 打开WinSpy...  
+Gui Add, Button, x23 yp+29 gOpenLog, 查看日志文件...  
+Gui Add, Button, x+M gOpenPic, 查看商品列表...  
+Gui Add, Button, x+M gOpenSpy, 打开WinSpy...  
+Gui Add, Button, x+M gOpenNoSleep, 运行NoSleep...
 
 Gui Add, Button, vBtnCreateTask x22 y346 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
@@ -65,7 +66,7 @@ Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
 GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
 
-Menu, Tray, Icon, % A_ScriptDir . "\img\i3.ico"
+Menu, Tray, Icon, % A_ScriptDir . "\img\i1.ico"
 Gui Show, w588 h420, Tasks
 
 Return
@@ -280,6 +281,10 @@ return
 
 OpenSpy:
     run % A_ScriptDir . "\Lib\WindowSpy.ahk"
+return
+
+OpenNoSleep:
+    run % A_ScriptDir . "\NoSleep.exe"
 return
 
 GuiPause:

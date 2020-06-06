@@ -40,9 +40,9 @@ Gui Add, CheckBox, visShare xp+110 , 分享20钻石
 Gui Add, CheckBox, visCard xp+105 , 刷拼图
 Gui Add, CheckBox, visOpenBS xp+83, 开商技
 
-Gui Add, CheckBox, visCalRZ x25 yp+29, 计算融资
+Gui Add, CheckBox, visCalRZ x25 yp+29, 融资计算
 
-Gui Add, ListView, vUlist x420 y25 w145 h303 gMyListView, UserTitle..|ID|Num
+Gui Add, ListView, vUlist x420 y25 w145 h325 gMyListView, UserTitle..|ID|Num
 for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
@@ -57,7 +57,11 @@ Gui Add, Button, x+M gOpenPic, 查看商品列表...
 Gui Add, Button, x+M gOpenSpy, 打开WinSpy...  
 Gui Add, Button, x+M gOpenNoSleep, 运行NoSleep...
 
-Gui Add, Button, vBtnCreateTask x22 y346 w115 h41 gCreateTask, 创建任务
+Gui Add, Button, x23 yp+32 gRunVSCode, 打开VS_Code....
+Gui Add, Button, x+M gRunSF, 执行SF_Daily.....
+Gui Add, Button, x+M gRunSP, 执行SP_Daily.
+
+Gui Add, Button, vBtnCreateTask x22 y380 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
 Gui Add, Button, vBtnPauseTask x+M  w117 h40 gGuiPause, 暂停任务(F7恢复)
 Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
@@ -67,7 +71,7 @@ GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
 
 Menu, Tray, Icon, % A_ScriptDir . "\img\i1.ico"
-Gui Show, w588 h420, Tasks
+Gui Show, w588 h460, Tasks
 
 Return
 
@@ -285,6 +289,18 @@ return
 
 OpenNoSleep:
     run % A_ScriptDir . "\NoSleep.exe"
+return
+
+RunVSCode:
+    run "C:\Users\keven\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+return
+
+RunSF:
+    run % A_ScriptDir . "\SF_Daily.ahk"
+return
+
+RunSP:
+    run % A_ScriptDir . "\SP_Daily.ahk"
 return
 
 GuiPause:

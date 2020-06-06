@@ -15,6 +15,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 */
 
 ;Gosub, Rongzi_0  ;for testing only
+Menu, Tray, Icon, % A_ScriptDir . "\img\phy.ico"
+
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
 
 SetTimer, Task2020, 1000  ;run every 1 secs

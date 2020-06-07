@@ -171,11 +171,12 @@ Rongzi_N:
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
+    new QHUser("xxsf").GetLand()  
+    new LDGame(0).GetLand()
+
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
 
-    new QHUser("xxsf").GetLand()    
-    new LDGame(0).GetLand()
     new YQXGame(0).GetLand()
     new 6322Game(0).GetLand()
     new DQGame(0).GetLand()

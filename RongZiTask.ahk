@@ -132,11 +132,11 @@ Rongzi_N:
     WaitForTime(000001)    
     ;---------------------- Tasks ------------------------
 
-    if mod(A_YDay-118,7) = 0
-        new 4399UserTask("supper").OpenBusinessSkill()    
-
     For index,value in  ["supper","xhhz","sf06","song"]
        new 4399UserTask(value,0).Getland()
+
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusinessSkill()    
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")

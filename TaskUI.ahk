@@ -63,12 +63,11 @@ Gui Add, Button, x+M gRunSP, 执行SP_Daily.
 Gui Add, Button, x+M gRunTesting, 执行ScriptTest.
 
 Gui Add, Button, vBtnCreateTask x22 y380 w115 h41 gCreateTask, 创建任务
-Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
+Gui Add, Button, x+M  w108 h42 gReloading, 重置任务(F12)
 Gui Add, Button, vBtnPauseTask x+M  w117 h40 gGuiPause, 暂停任务(F7恢复)
-Gui Add, Button, vBtnClose x+M  w117 h40 gGuiClose, 关闭(F8)
+Gui Add, Button, x+M  w117 h40 gGuiClose, 关闭(F8)
 
 
-GuiControl, Disable, BtnStopTask
 GuiControl, Disable, BtnPauseTask
 
 Menu, Tray, Icon, % A_ScriptDir . "\img\i1.ico"
@@ -146,7 +145,6 @@ CreateTask:
 ;------------------------------ Button Control -------------------------------------
 
     GuiControl, Disable, BtnCreateTask
-    GuiControl, Enable, BtnStopTask
     GuiControl, Enable, BtnPauseTask
     GuiControl, Disable, TimeStart
 

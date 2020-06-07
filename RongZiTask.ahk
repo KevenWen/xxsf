@@ -56,7 +56,7 @@ Rongzi_0:
 
     
 
-    WaitForTime(235950)
+    WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK --------------------
@@ -127,8 +127,9 @@ Rongzi_N:
        new 4399UserTask(value,0)
     GameRecordingOff()
 
-    WaitForTime(235959)
+    WaitForTime(235945)
     GameRecordingOn()
+    WaitForTime(000001)    
     ;---------------------- Tasks ------------------------
 
     if mod(A_YDay-118,7) = 0
@@ -168,8 +169,9 @@ Rongzi_2:
         new 4399UserTask(value,0)
     GameRecordingOff()
 
-    WaitForTime(235959)
+    WaitForTime(235945)
     GameRecordingOn()
+    WaitForTime(000001)  
    ;---------------------- Getland ------------------------
 
     For index,value in  ["supper","xhhz","hou","song","sf06"]

@@ -61,7 +61,7 @@ Rongzi_0:
     
     GameRecordingOff()
 
-    WaitForTime(235955)
+    WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK -----------------
@@ -167,8 +167,9 @@ Rongzi_N:
     new QHUser("xxsf",0)    
     GameRecordingOff()
 
-    WaitForTime(000000)   ;Make sure we are start after 00:00
+    WaitForTime(235945)
     GameRecordingOn()
+    WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
@@ -244,8 +245,10 @@ Rongzi_2:
 
     GameRecordingOff()
 
-    WaitForTime(000000)   ;Make sure we are start after 00:00:01
+    WaitForTime(235945)
     GameRecordingOn()
+    WaitForTime(000001)   ;Make sure we are start after 00:00:01
+
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
@@ -256,9 +259,10 @@ Rongzi_2:
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
+    new QHUser("xxsf").RongZi(1)   
     For index,value in ["L","Y","N","D"]
         %value%.RongZi()
-    new QHUser("xxsf").RongZi(1)    
+ 
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
@@ -310,7 +314,7 @@ Rongzi_2:
     WinClose DQPlayer
 
     GameRecordingOff()
-    Sleep 180000
+    Sleep 240000
     LogtoFile("Start to do remote verification...")
     For index,value in  ["supper","xhhz","hou","song","sf06"]
     {

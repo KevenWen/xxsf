@@ -100,13 +100,6 @@ class QHsfGame
 		}
 	}
 
-	GetQHCaiTuanMoney()
-	{
-		WaitPixelColorAndClickThrowErr("0x3E515C",290, 914,2000) ;cai tuan button
-		sleep 200
-		WaitPixelColorAndClickThrowErr("0xFFFCF6",552, 230,2000) ;Shou Ru button	
-		sleep 100
-	}
 
 	CloseAnySubWindow()
 	{
@@ -324,6 +317,73 @@ class QHsfGame
 
 		}
 		SendMode Input		
+	}
+
+
+;=========================================  CaiTuan functions  ===============================================
+
+	GetCaiTuanPage()
+	{
+		loop{
+			if A_Index > 2
+				throw "Not able to GetCaiTuanPage.PixelColorExist 0xFFFEF5 497 333 not exist."
+			this.closeAnySubWindow()
+			click % HB[1]
+			sleep 100
+			click % HB[4]
+			sleep 200
+			if PixelColorExist("0xFFFEF5",552, 334,2000)			;白色公关资金框
+				Break
+		}	
+	}
+
+	GetTianTiPage()
+	{
+		This.GetCaiTuanPage()
+		click 69, 179
+		WaitPixelColor("0xFFFEF5",177, 387,2000)  ;白色股份资金框
+	}
+
+	TianTiOpration(Times)
+	{
+		this.GetTianTiPage()
+		loop %Times%
+		{
+			click 539, 444
+			if PixelColorExist("0xFFFFF3",149, 566,1000) ;立即到账
+			{
+				LogToFile("TianTi start immediately. ")	
+				click 300, 609
+				sleep 200
+			}
+			click 547, 274		;开始 button
+			if PixelColorExist("0xFFFEF5",265, 860,1000) ; Add 钻石
+			{
+				click 265,853,1
+				sleep 100
+				Click 365,853,0
+				sleep 100
+				click 465,853,0
+				sleep 100	
+			}		
+			WaitPixelColorNotExist("0xFFFEF5",265,860,20000)
+			LogToFile("TianTi finished, total times: " . A_index)			
+			CaptureScreen()
+			sleep 300
+			click 265,853
+			sleep 300
+			click 539, 444				;上一次分配
+			CaptureScreen()			
+			sleep 300
+		}
+	}
+
+	GetQHCaiTuanMoney()
+	{
+		WaitPixelColorAndClickThrowErr("0x3E515C",290, 914,2000) ;cai tuan button
+		sleep 200
+		WaitPixelColorAndClickThrowErr("0xFFFCF6",552, 230,2000) ;Shou Ru button	
+		sleep 100
 	}
 
 ;=========================================  group functions  ===============================================

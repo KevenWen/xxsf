@@ -60,6 +60,7 @@ Gui Add, Button, x+M gOpenNoSleep, 运行NoSleep...
 Gui Add, Button, x23 yp+32 gRunVSCode, 打开VS_Code....
 Gui Add, Button, x+M gRunSF, 执行SF_Daily.....
 Gui Add, Button, x+M gRunSP, 执行SP_Daily.
+Gui Add, Button, x+M gRunTesting, 执行ScriptTest.
 
 Gui Add, Button, vBtnCreateTask x22 y380 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, vBtnStopTask x+M  w108 h42 gReloading, 重置任务(F12)
@@ -301,6 +302,10 @@ return
 
 RunSP:
     run % A_ScriptDir . "\SP_Daily.ahk"
+return
+
+RunTesting:
+    run % A_ScriptDir . "\Scripttesting.ahk"
 return
 
 GuiPause:

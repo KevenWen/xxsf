@@ -187,7 +187,7 @@ CaptureScreen()
         If (ErrorLevel = 0) ; If it is not running
         {
             FormatTime, Dayfolder,, yyyyMMdd
-            path := % logPath . "\\" . Dayfolder . "Screens\\" . A_now . ".png"
+            path := % A_ScriptDir . "\\log\\" . Dayfolder . "Screens\\" . A_now . ".png"
             Run, % i_viewpath . " /capture=3" . " /convert=" . path		
             LogToFile("Screen")
         }

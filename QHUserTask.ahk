@@ -171,4 +171,17 @@ DC[]{
 		LogtoFile("QH Hunter not implement yet.")
 	}
 
+	TianTi(Times)
+	{
+		try{
+		LogtoFile("Start QH TianTi task.")
+		this.PrepareGameWindow()
+		this.TianTiOpration(Times)
+		LogtoFile("QH TianTi task done.")		
+		}
+		Catch e{
+		LogToFile("TianTi task get exception: " . e)
+		}
+	}
+
 }

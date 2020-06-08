@@ -20,7 +20,7 @@ CoordMode, Mouse, window
 
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
-    .PrepareRongZi(3).OpenBusinessSkill()
+    .PrepareRongZi(3).OpenBusinessSkill().TianTi(10)
 
 */
 

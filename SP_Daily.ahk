@@ -103,9 +103,9 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 6322Game(0).ZhuanPan(3)
-    new DQGame(0).ZhuanPan(3)
-    new YQXGame(0).ZhuanPan(3)
+    new 6322Game(0).ZhuanPan(1)
+    new DQGame(0).ZhuanPan(1)
+    new YQXGame(0).ZhuanPan(1)
 
     ;-------------------- GetLand and hunter ------------------------
 
@@ -136,7 +136,7 @@ Rongzi_0:
     GameRecordingOff()
     Sleep 180000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","sf06","xhhz","song","hou"]
+    For index,value in  ["supper","xhhz","song","hou"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  
@@ -218,7 +218,7 @@ Rongzi_N:
     GameRecordingOff()
     Sleep 120000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","sf06","song"]
+    For index,value in  ["supper","xhhz","song"]
     {
         IniRead, _DC, % UserIniRemote, % value, DC,0        
         if _DC < 1
@@ -317,7 +317,7 @@ Rongzi_2:
     GameRecordingOff()
     Sleep 240000
     LogtoFile("Start to do remote verification...")
-    For index,value in  ["supper","xhhz","hou","song","sf06"]
+    For index,value in  ["supper","xhhz","hou","song"]
     {
         IniRead, _RZ, % UserIniRemote, % value, RZ,0        
         if _RZ < 1  

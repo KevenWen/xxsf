@@ -504,14 +504,14 @@ class QHsfGame
 
     RongZiOKpublic()
 	{
-		loop 3
+		loop
 		{
-			if !PixelColorExist("0xFFFFFF",140, 402,10) and !PixelColorExist("0xB2A68C",308, 666,10) ;左上白点和确定button下的第二个弹出窗口color
+			if !PixelColorExist("0xFFFFFF",139, 401,10) and !PixelColorExist("0xB2A68C",308, 666,10) ;左上白点和确定button下的第二个弹出窗口color
 			{
 				4399sfGame.CloseSpeSubWindow(1)
 				LogToFile("RongZiOKpublic closed an unexpected window.")															
 			}			
-			if PixelColorExist("0xFEFFFF",345, 593,10)
+			if PixelColorExist("0xFFFFFF",139, 401,10)												;左上白点
 			{
 				LogToFile("RongZiOKpublic find OK window, going to click")					
 				click % PopWin["okbtn"]
@@ -521,8 +521,8 @@ class QHsfGame
 				break
 			}
 
-			if !4399sfGame.SubWindowExist()
-				throw "Not found RongZi OK button!"
+			if !4399sfGame.SubWindowExist() or A_index > 3
+				throw "Not found RongZi OK button or loop times out!"
 		}
 	}
 

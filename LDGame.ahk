@@ -353,39 +353,46 @@ class LDGame
 
 	OpenBusinessSkill(){
 		try{
+			LogToFile("Start to do OpenBusinessSkill. ")
 			this.PrepareGameWindow()
 			loop 3 {
 				this.CloseAnySubWindow()
 				click 356, 984				;商会 button
 				sleep 300
-				click 239, 241				;注资 tab
-				sleep 1000
-				click 88, 247				;商会 tab
-				sleep 200
 				if PixelColorExist("0xFFFEF5",395, 444,2000) ;商战配置中的白色块
 					break
 			}
 
 			if PixelColorExist("0xA1FF3D",205, 590,100){
-				LogToFile("Already opened, no need more action. ")
-				this.SJ := 1  
-				return
+				click 239, 241				;注资 tab
+				sleep 1000
+				click 88, 247				;商会 tab
+				sleep 200 
+				if PixelColorExist("0xA1FF3D",205, 590,100) ;refresh and double check
+				{
+					LogToFile("Already opened, no need more action. ")
+					this.SJ := 1  
+					return
+				}
 			}
 			click 108, 590					  				;赚钱上的绿点
 			sleep 100
 			For index, value in OpenSJListLD  				;开启赚钱/偷猎/融资/地产技能
 			{
-				PixelColorExist("0xF1E4B8",315, 542,1500)    ;知已知彼框上颜色
-				sleep 200
+				if !PixelColorExist("0xF1E4B8",315, 542,500)    ;知已知彼框上颜色
+					this.CloseSpeSubWindow(1)
+				if !this.SubWindowExist()
+					throw, "Subwindows not exit!"
 				click, % value
 				PixelColorExist("0xFFFFF3",315, 542,1000)	;开启 button
 				sleep 200
-				click 350, 610
+				click 350, 610								;开启 button
+				sleep 200
 				LogToFile("OpenBusinessSkill() for: " . index)			
 				;WaitPixelColorAndClick("0xFBFBFB", 500, 410,1000)	;关闭 button, for testing only
 			}
 
-			sleep 1000
+			sleep 100
 			click 506, 228  ; 关闭subwindow
 			sleep 300
 			this.SJ := 1

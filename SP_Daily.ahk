@@ -171,7 +171,6 @@ Rongzi_N:
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
-    new QHUser("xxsf").GetLand()  
     new LDGame(0).GetLand()
 
     if mod(A_YDay-118,7) = 0
@@ -180,7 +179,7 @@ Rongzi_N:
     new YQXGame(0).GetLand()
     new 6322Game(0).GetLand()
     new DQGame(0).GetLand()
-
+    new QHUser("xxsf").GetLand()  
     ;-------------------  Verification ------------------
     sleep 1000
     LogtoFile("Start to do verification...")
@@ -260,10 +259,10 @@ Rongzi_2:
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    new QHUser("xxsf").RongZi(1)   
     For index,value in ["L","Y","N","D"]
         %value%.RongZi()
  
+    new QHUser("xxsf").RongZi(1)   
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")

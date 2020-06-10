@@ -20,6 +20,13 @@ class 6322Game
 		{
 			WinActivate 6322Player
 			Sleep 100
+			if PixelColorExist("0xFFFEF5",370, 735,10)
+			{
+				LogToFile("Find existing window with start button, going to Click it. ")	
+				click 277, 835
+				sleep 10000
+				this.CloseAnySubWindow()
+			}			
 			LogToFile("Find existing window named 6322Player. ")
 		}
 		else
@@ -140,13 +147,20 @@ class 6322Game
 		WinClose, IrfanView			;The capture screen error windows may exist		
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "6322Player")
+		if (CurTitle = "6322Player") and !PixelColorExist("0xFFFEF5",370, 735,10)
 			Return
 
 		IfWinExist, 6322Player
         {
 			WinActivate, 6322Player
 			sleep 200
+			if PixelColorExist("0xFFFEF5",370, 735,10)
+			{
+				LogToFile("Find Start button, going to Click it. ")	
+				click 277, 835
+				sleep 10000
+				this.CloseAnySubWindow()
+			}	
 		}
 		Else
 			throw "Game not existing!"

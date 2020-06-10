@@ -20,6 +20,13 @@ class LDGame
 		{
 			WinActivate LDPlayer		
 			Sleep 100
+			if PixelColorExist("0xFFFEF5",382, 727,10)
+			{
+				LogToFile("Find Start button, going to Click it. ")	
+				click 278, 834 
+				sleep 10000
+				this.CloseAnySubWindow()
+			}			
 			LogToFile("Find existing window named LDPlayer. ")		
 		}
 		else
@@ -131,13 +138,20 @@ class LDGame
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "LDPlayer")
+		if (CurTitle = "LDPlayer") and !PixelColorExist("0xFFFEF5",382, 727,10)
 			Return
 
 		IfWinExist, LDPlayer
         {
 			WinActivate, LDPlayer
 			sleep 200
+			if PixelColorExist("0xFFFEF5",382, 727,10)
+			{
+				LogToFile("Find Start button, going to Click it. ")	
+				click 278, 834 
+				sleep 10000
+				this.CloseAnySubWindow()
+			}				
 		}
 		Else
 			throw "Game not existing!"
@@ -468,26 +482,30 @@ class LDGame
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"  
 		LogToFile("Start to Launch LDGame. ")			
-		sleep 40000
+		sleep 20000
 		IfWinExist, LDPlayer
 		{
 			WinActivate, LDPlayer
 			sleep 200
 			Loop
 			{
-				LogToFile("Find Started window, going to Click AD. ")	
-				run %LDExePath% -s 0 input tap 828 406,, Hide
+				if PixelColorExist("0xFFFFFF",148, 257,10) and !PixelColorExist("0xFFFFFF",148, 270,10)				
+				{
+					LogToFile("Find Started window, going to Click AD. ")	
+					click 512, 290
+					sleep 5000
+				}
 
 				if PixelColorExist("0xFFFEF5",382, 727,10)
 				{
 					LogToFile("Find Start button, going to Click it. ")	
-					run %LDExePath% -s 0 input tap 450 1300,, Hide
+					click 278, 834 
 					sleep 10000
 					this.CloseAnySubWindow()
 					Break
 				}
 
-				if A_Index > 60
+				if A_Index > 30
 					throw "LDPlayer start wait timeout"
 
 				sleep 2000

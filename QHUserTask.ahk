@@ -74,7 +74,7 @@ DC[]{
 		{
 			WinClose, xxsf
 			sleep 100
-			WinMinimize, 360游戏大厅
+			WinClose, 360游戏大厅
 		}
 		else
 			WinMinimize, xxsf

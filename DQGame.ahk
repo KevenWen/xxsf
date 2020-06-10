@@ -20,6 +20,13 @@ class DQGame
 		{
 			WinActivate DQPlayer
 			Sleep 100
+			if PixelColorExist("0xFFFEF5",370, 735,10)
+			{
+				LogToFile("Find existing window with Start button, going to Click it. ")	
+				click 277, 835
+				sleep 10000
+				this.CloseAnySubWindow()
+			}
 			LogToFile("Find existing window named DQPlayer. ")
 		}
 		else
@@ -147,6 +154,13 @@ class DQGame
         {
 			WinActivate, DQPlayer
 			sleep 200
+			if PixelColorExist("0xFFFEF5",370, 735,10)
+			{
+				LogToFile("PrepareGameWindow Find Start button, going to Click it. ")	
+				click 277, 835
+				sleep 10000
+				this.CloseAnySubWindow()
+			}			
 		}
 		Else
 			throw "Game not existing!"

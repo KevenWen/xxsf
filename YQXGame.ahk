@@ -20,6 +20,13 @@ class YQXGame
 		{
 			WinActivate YQXPlayer	
 			Sleep 100
+			if PixelColorExist("0xFFFEF5",359, 754,10)
+			{
+				LogToFile("Find existing window with start button, going to Click it. ")	
+				click 279, 849
+				sleep 10000
+				this.CloseAnySubWindow()
+			}
 			LogToFile("Find existing window named YQXPlayer. ")		
 		}
 		else
@@ -136,17 +143,23 @@ class YQXGame
 
 	PrepareGameWindow()
 	{
-		WinClose Cisco AnyConnect	;The VPN windows may exist	
-		WinClose, IrfanView			;The capture screen error windows may exist		
+		WinClose Cisco AnyConnect	;The VPN windows may exist
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "YQXPlayer")
+		if (CurTitle = "YQXPlayer") and !PixelColorExist("0xFFFEF5",359, 754,10)
 			Return
 
 		IfWinExist, YQXPlayer
         {
 			WinActivate, YQXPlayer
 			sleep 200
+			if PixelColorExist("0xFFFEF5",359, 754,10)
+			{
+				LogToFile("Find Start button, going to Click it. ")	
+				click 279, 849
+				sleep 10000
+				this.CloseAnySubWindow()
+			}			
 		}
 		Else
 			throw "Game not existing!"

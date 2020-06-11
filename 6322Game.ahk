@@ -242,9 +242,9 @@ class 6322Game
 
 	isPrepared()
 	{		
-        if A_Sec > 25
+        if A_Sec > 25 or A_Min > 0
         {
-            LogToFile("Land business just click time expired, current secs: " . A_Sec)
+            LogToFile("Land business just click time expired, current time: " . A_Min . "mins, secs: " . A_Sec)
             return 0
         }
 		if PixelColorExist("0x7C7C7C",491, 159,10) or PixelColorExist("0xB0B0B0",491, 159,10)

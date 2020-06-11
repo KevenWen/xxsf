@@ -254,7 +254,7 @@ Rongzi_2:
         L.OpenBusinessSkill()
 
     new QHUser("xxsf",0).GetLand()   
-    For index,value in ["L","Y","N","D"]
+    For index,value in ["Y","N","D","L"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02

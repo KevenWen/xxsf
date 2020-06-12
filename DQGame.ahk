@@ -398,8 +398,24 @@ class DQGame
         this.CloseAnySubWindow()
     }
 
-	PlayZhuanPan(times = 6)
+	BuyTimePlus()
 	{
+		this.GetGroupPage3()
+		if PixelColorExist("0xC59A18",208, 655,50)  ; 2-2
+		{
+			click 208, 655
+			sleep 200
+			click 278, 628		;确定button
+			;click 476, 398    	;close button , for testing only
+			sleep 200
+		}
+	}
+
+	PlayZhuanPan(times = 6, BuyTimeplus = 0)
+	{
+        if BuyTimeplus
+			this.BuyTimePlus()
+		
         this.closeAnySubWindow()
 		click 39, 970
 		sleep 200		
@@ -424,6 +440,22 @@ class DQGame
 	}
 
 ;=========================================  Group functions  ===============================================
+
+	GetGroupPage3()
+	{
+		this.PrepareGameWindow()
+		loop
+		{
+			if A_index > 2
+				throw, "Tried 2 times, still not able to GetGroupPage4."
+			this.CloseAnySubWindow()
+			click 356, 984				;商会 button
+			sleep 300
+			click 333, 249				;商店 tab					
+			if PixelColorExist("0xFFECD4",478, 895,2000) ;稀有道具下面空白块颜色
+				break
+		}
+	}
 
 	GetGroupPage4()
 	{

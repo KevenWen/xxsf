@@ -29,8 +29,7 @@ Task2020:
     ;TimeToMeet = 235459
 
     If (TimeToMeet = 235459)
-    { 
-        GameRecordingOn()
+    {
         if mod(A_YDay,4)=0            ;RongZi at 00:00
             Gosub, Rongzi_0
         else if mod(A_YDay,2) > 0     ;not a RongZi day
@@ -38,7 +37,6 @@ Task2020:
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
         
-        GameRecordingOff()
         UploadNetDisk()
         ExitApp
     }
@@ -59,8 +57,6 @@ Rongzi_0:
     new DQGame(0)           
     new QHUser("xxsf",0)
     
-    GameRecordingOff()
-
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
@@ -70,6 +66,7 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
+    ;LDGame 5, 6322 2, DQ 3, YQX 4, xxsf 1
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
     new DQGame(0).RongZi()
@@ -103,9 +100,9 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    new 6322Game(0).ZhuanPan(1)
-    new DQGame(0).ZhuanPan(1)
-    new YQXGame(0).ZhuanPan(1)
+    new 6322Game(0).ZhuanPan(2,1)
+    new DQGame(0).ZhuanPan(1,1)
+    new YQXGame(0).ZhuanPan(2)
 
     ;-------------------- GetLand and hunter ------------------------
 
@@ -164,8 +161,7 @@ Rongzi_N:
     new YQXGame(0)
     new 6322Game(0)
     new DQGame(0)
-    new QHUser("xxsf",0)    
-    GameRecordingOff()
+    new QHUser("xxsf",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -242,8 +238,6 @@ Rongzi_2:
     N := new 6322Game(0)
     D := new DQGame(0)           
     new QHUser("xxsf",0)
-
-    GameRecordingOff()
 
     WaitForTime(235945)
     GameRecordingOn()

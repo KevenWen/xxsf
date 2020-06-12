@@ -68,7 +68,7 @@ class GroupPage{
 			LogToFile("Shopping buy 1-1")		
 		}
 
-		if PixelColorExist("0x63B0FF",240, 600,100) ;2-2
+		if PixelColorExist("0xC59A18",231, 617,100) ;2-2
 		{
 			click 240, 599
 			sleep 300

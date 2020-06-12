@@ -25,7 +25,6 @@ myTcp.disconnect()
 
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0 
 
-GameRecordingOn()
 if mod(A_YDay,4)=0            ;RongZi at 00:00
     Gosub, Rongzi_0
 else if mod(A_YDay,2) > 0     ;not a RongZi day
@@ -33,7 +32,6 @@ else if mod(A_YDay,2) > 0     ;not a RongZi day
 else
     Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
 
-GameRecordingOff()
 UploadNetDisk()
 ExitApp
 
@@ -51,10 +49,7 @@ Rongzi_0:
     For index,value in  ["supper","song","xhhz","hou"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
-    ;new QHUser("xxsf",0).PrepareRongZi(2)
-    GameRecordingOff()
-
-    
+    ;new QHUser("xxsf",0).PrepareRongZi(2)    
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -83,8 +78,8 @@ Rongzi_0:
         ;new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(4,0)   
-    new 4399UserTask("song",0).ZhuanPan(7,0)
+    new 4399UserTask("hou",0).ZhuanPan(1,1)   
+    new 4399UserTask("song",0).ZhuanPan(7,1)
     new 4399UserTask("xhhz",0).ZhuanPan(1,0)
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","song","xhhz"]
@@ -124,7 +119,6 @@ Rongzi_N:
 
     For index,value in  ["supper","xhhz","song"]
        new 4399UserTask(value,0)
-    GameRecordingOff()
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -152,7 +146,8 @@ Rongzi_N:
 
     For index,value in ["xhhz","song"]
         new 4399UserTask(value).Hunter(1)
-
+    
+    GameRecordingOff()
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks 2 ================================================>
@@ -166,7 +161,6 @@ Rongzi_2:
 
     For index,value in  ["supper","xhhz","hou","song"]
         new 4399UserTask(value,0)
-    GameRecordingOff()
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -211,6 +205,7 @@ Rongzi_2:
     iniFileSync()
     LogtoFile("iniFileSync  done.")
 
+    GameRecordingOff()
     WinClose 360游戏大厅
 Return
 

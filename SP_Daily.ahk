@@ -7,7 +7,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include LDGame.ahk
 #include YQXGame.ahk
 #include 6322Game.ahk
-#include DQGame.ahk
 /*
 new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .Getland().GetTianTi().ZhuanPan(7).ShangZhanReport().CalcRongZi()
@@ -53,8 +52,7 @@ Rongzi_0:
 
     new LDGame(0)    
     new YQXGame(0)
-    new 6322Game(0)
-    new DQGame(0)           
+    new 6322Game(0)    
     new QHUser("xxsf",0)
     
     WaitForTime(235945)
@@ -69,7 +67,6 @@ Rongzi_0:
     ;LDGame 5, 6322 2, DQ 3, YQX 4, xxsf 1
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
-    new DQGame(0).RongZi()
     new QHUser("xxsf",0).RongZi(index)
 
     ;-------------------  Verification 1 -------------------
@@ -94,14 +91,10 @@ Rongzi_0:
     if _RZ < 1
         new 6322Game(0).RongZi()
 
-    IniRead, _RZ, % UserIni,DQPlayer,RZ,0
-    if _RZ < 1
-        new DQGame(0).RongZi()
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
     new 6322Game(0).ZhuanPan(2,1)
-    new DQGame(0).ZhuanPan(1,1)
     new YQXGame(0).ZhuanPan(2)
 
     ;-------------------- GetLand and hunter ------------------------
@@ -109,7 +102,6 @@ Rongzi_0:
     new LDGame().GetLand()
     new YQXGame().GetLand()
     new 6322Game().GetLand()
-    new DQGame().GetLand()  
     new QHUser("xxsf").GetLand()
 
     ;-------------------  Verification 2 ------------------
@@ -123,10 +115,6 @@ Rongzi_0:
     IniRead, _DC, % UserIni,YQXPlayer,DC,0
     if _DC < 1
         new YQXGame().GetLand()
-
-    IniRead, _RZ, % UserIni,DQPlayer,RZ,0
-    if _RZ < 1
-        new DQGame().Getland()
 
     LogtoFile("Verification 2 done.")
     
@@ -160,7 +148,6 @@ Rongzi_N:
     new LDGame(0)
     new YQXGame(0)
     new 6322Game(0)
-    new DQGame(0)
     new QHUser("xxsf",0)
 
     WaitForTime(235945)
@@ -174,7 +161,6 @@ Rongzi_N:
 
     new YQXGame(0).GetLand()
     new 6322Game(0).GetLand()
-    new DQGame(0).GetLand()
     new QHUser("xxsf").GetLand()  
     ;-------------------  Verification ------------------
     sleep 1000
@@ -204,12 +190,6 @@ Rongzi_N:
     else
        WinClose 6322Player
 
-    IniRead, _DC, % UserIni,DQPlayer,DC,0
-    if _DC < 1
-        new 6322Game().GetLand()
-    else
-        WinClose DQPlayer
-
     GameRecordingOff()
     Sleep 120000
     LogtoFile("Start to do remote verification...")
@@ -235,8 +215,7 @@ Rongzi_2:
     
     L := new LDGame(0)
     Y := new YQXGame(0)  
-    N := new 6322Game(0)
-    D := new DQGame(0)           
+    N := new 6322Game(0)       
     new QHUser("xxsf",0)
 
     WaitForTime(235945)
@@ -248,12 +227,12 @@ Rongzi_2:
         L.OpenBusinessSkill()
 
     new QHUser("xxsf",0).GetLand()   
-    For index,value in ["Y","N","D","L"]
+    For index,value in ["Y","N","L"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    For index,value in ["L","Y","N","D"]
+    For index,value in ["L","Y","N"]
         %value%.RongZi()
  
     new QHUser("xxsf").RongZi(1)   
@@ -296,16 +275,6 @@ Rongzi_2:
         N.GetLand()
 
     WinClose 6322Player
-
-    IniRead, _RZ, % UserIni,DQPlayer,RZ,0
-    if _RZ < 1
-        D.RongZi()
-    
-    IniRead, _DC, % UserIni,DQPlayer,DC,0
-    if _DC < 1
-        D.GetLand()
-
-    WinClose DQPlayer
 
     GameRecordingOff()
     Sleep 240000

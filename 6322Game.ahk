@@ -97,7 +97,7 @@ class 6322Game
 
 ; <========================  转盘  ===========================>
 	
-	Zhuanpan(times){
+	Zhuanpan(times,buytimeplus = 0){
 		try{
 		this.PrepareGameWindow()
 		this.Suankai()
@@ -109,7 +109,7 @@ class 6322Game
 		}
 
 		try{	
-		this.PlayZhuanPan(times)
+		this.PlayZhuanPan(times,buytimeplus)
 		LogToFile("PlayZhuanPan done!")		
 		}
 		Catch e
@@ -408,6 +408,7 @@ class 6322Game
 			click 278, 628		;确定button
 			;click 476, 398    	;close button , for testing only
 			sleep 200
+			LogToFile("Bought timeplus 2-2.")
 		}
 	}
 

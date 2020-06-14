@@ -359,6 +359,32 @@ Launch4399GamePri(windowname,Sequ)
     Winmove,%windowname%,,829,23,600,959			
 }
 
+LaunchQHGamePri(windowname,Sequ)
+{
+    IfWinExist %windowname%
+    {
+        WinActivate %windowname%
+        Return
+    }
+
+    run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
+    sleep 4000
+    WinGetActiveTitle, Title
+    if !InStr(Title, "xxsf")
+        MsgBox, "The active windows is not include string xxsf" 
+    WinSetTitle,%Title%,, %windowname%
+    Winmove,%windowname%,,829,23,600,959			
+}
+
+Getzhushu()
+{
+    WinGetActiveTitle, titlename
+    if numTable[titlename] = ""
+        return 16						;默认最低16注
+    else
+        return numTable[titlename]		;配置在ini文件里的注数
+}
+
 FTPUpload(srv, usr, pwd, lfile, rfile)
 {
     static a := "AHK-FTP-UL"

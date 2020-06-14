@@ -109,7 +109,7 @@ class LandPage{
 			return 0
 	}
 
-    DiCanJinzhu(num)
+    DiCanJinzhu()
     {
 		if this.isPrepared()
 			return
@@ -185,7 +185,7 @@ class LandPage{
 
                 if !PixelColorExist("0x706B59",504, 373,200) and !PixelColorExist("0x706B59",506, 414,10) ;the button is exist
                 {
-                    LogToFile("Land business done, num is " . num)
+                    LogToFile("Land business done, num is 37 by default")
 			        sleep 200                     
                     Break  
                 }                      

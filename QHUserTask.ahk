@@ -9,30 +9,30 @@ class QHUser extends QHsfGame
 
 RZ[]{
 	get{
-		IniRead, value,% UserIni,xxsf,RZ,0
+		IniRead, value,% UserIni,% this.winName,RZ,0
 		return %value%
 	}
 
 	set{
-		IniWrite, % value, % UserIni,xxsf,RZ
-		IniWrite, % A_Min . ":" . A_Sec, % UserIni,xxsf,Rztime		
+		IniWrite, % value, % UserIni,% this.winName,RZ
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni,% this.winName,Rztime		
 	}
 }
 
 DC[]{
 	get{
-		IniRead, value, % UserIni,xxsf,DC,0
+		IniRead, value, % UserIni,% this.winName,DC,0
 		return %value%
 	}
 
 	set{
-		IniWrite, % value, % UserIni,xxsf,DC
-		IniWrite, % A_Min . ":" . A_Sec, % UserIni,xxsf,Dctime
+		IniWrite, % value, % UserIni,% this.winName,DC
+		IniWrite, % A_Min . ":" . A_Sec, % UserIni,% this.winName,Dctime
 	}
 }
 ; <================================  Constructure functions  ================================>
 
-	__New(windowname="xxsf",isclose=1)
+	__New(windowname,isclose=1)
 	{
 		LogToFile("`nLog started for QH user: " . windowname)
 		this.winName := windowname
@@ -52,13 +52,12 @@ DC[]{
 				WinActivate %windowname%
 				Winmove,%windowname%,,933,19,600,959
 				sleep, % s["short"]
-				LogToFile("Find existing window named xxsf. " )
+				LogToFile("Find existing window named: " . windowname)
 			}
 			else
 			{
-				LogToFile("Going to open game.")	
-				this.LaunchQHGame(seqid,windowname)
-				LogToFile("Game opened.")
+				LogToFile("QH user not exist, terminated. ")
+				Return
 			}
 		}
 		Catch e
@@ -72,12 +71,12 @@ DC[]{
     {
 		if this.isclosed
 		{
-			WinClose, xxsf
+			WinClose, % this.winName
 			sleep 100
 			WinClose, 360游戏大厅
 		}
 		else
-			WinMinimize, xxsf
+			WinMinimize, % this.winName
 		LogToFile("Log Ended. `n")
     }
 	
@@ -88,7 +87,7 @@ DC[]{
 	GetLand()
 	{
 		try{
-		this.PrepareGameWindow()	
+		this.PrepareGameWindow(this.winName)	
 		this.DiCanJinzhu()
 		this.DC := 1		
 		LogtoFile("QH GetLand() done. ")
@@ -109,7 +108,7 @@ DC[]{
 			Return
 		}
 		try{
-			this.PrepareGameWindow()
+			this.PrepareGameWindow(this.winName)
 			this.GroupZhuZi(which)
 			LogToFile("this.GroupZhuZi done.")
 		} Catch e{
@@ -120,7 +119,7 @@ DC[]{
 	RongZi(which=5)
 	{
 		try{
-			this.PrepareGameWindow()
+			this.PrepareGameWindow(this.winName)
 
 			if this.isRongZiprepared(){			
 			LogToFile("Find RongZi prepared, going to click OK. ")			
@@ -141,7 +140,7 @@ DC[]{
 	PrepareRongZi(which)
 	{
 		try{
-		this.PrepareGameWindow()
+		this.PrepareGameWindow(this.winName)
 		this.CheZi()
 		this.PreRongZi(which)
 		}
@@ -152,9 +151,25 @@ DC[]{
 
 ; <========================  转盘  ===========================>
 
-	ZhuPan(times)
-	{	
-		LogtoFile("QH ZhuPan not implement yet.")
+	Zhuanpan(times,buytimeplus = 0){
+		try{
+		this.PrepareGameWindow(this.winName)
+		this.Suankai()
+		LogToFile("Suankai() done for QH user.")
+		}
+		Catch e
+		{
+		LogToFile("Suankai() get exception: " . e)
+		}
+
+		try{	
+		this.PlayZhuanPan(times,buytimeplus)
+		LogToFile("PlayZhuanPan done!")		
+		}
+		Catch e
+		{
+		LogToFile("PlayZhuanPan() get exception: " . e)
+		}		
 	}
 
 ; <========================  每周商技开启  ===========================>
@@ -175,7 +190,7 @@ DC[]{
 	{
 		try{
 		LogtoFile("Start QH TianTi task.")
-		this.PrepareGameWindow()
+		this.PrepareGameWindow(this.winName)
 		this.TianTiOpration(Times)
 		LogtoFile("QH TianTi task done.")		
 		}

@@ -161,7 +161,7 @@ class GroupPage{
 		}
 		if PixelColorExist("0xFFF8CE",272, 302,100) ; 还没有注过资.
 		{
-			num := % 4399sfGame.Getzhushu()
+			num := % Getzhushu()
 			loop %num%
 			{
 				click % StockPos[which]
@@ -228,7 +228,7 @@ class GroupPage{
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
-			click, % 4399sfGame.Getzhushu()-1
+			click, % Getzhushu()-1
 			SetDefaultMouseSpeed 2		
 			sleep, % s["mid"]
 

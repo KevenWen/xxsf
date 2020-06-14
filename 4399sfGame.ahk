@@ -192,15 +192,5 @@ class 4399sfGame
 		else if (ErrorLevel = 0) ;Image found
 			return 1
 	}
-
-   Getzhushu()
-	{
-		WinGetActiveTitle, titlename
-		if numTable[titlename] = ""
-			return 16						;默认最低16注
-		else
-			return numTable[titlename]		;配置在ini文件里的注数
-	}
-
 }
 

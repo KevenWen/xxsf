@@ -444,7 +444,7 @@ class LDGame
 				throw, "Tried 2 times but still not able to complete RongZi."
 
 			this.CloseAnySubWindow()			
-			click, 403, 724	   							  ; 固定注洒店
+			click, 403, 724	   							  ; 固定注洒店 5
 			if !PixelColorExist("0xFFFEF5",203, 604,2000) ; 不是显示0份
 			throw, "Already RongZi, not zero!"
 

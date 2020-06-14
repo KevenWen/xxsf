@@ -108,7 +108,7 @@ DC[]{
 	GetLand(){
 		try{
 		this.PrepareGameWindow(this.winName)
-		this.LandPage.DiCanJinzhu(this.Getzhushu())
+		this.LandPage.DiCanJinzhu()
 		LogToFile("GetLand() done, winname: " . this.winName)
 		this.DC := 1
 		return 1
@@ -312,7 +312,7 @@ DC[]{
 
 ; <========================  转盘  ===========================>
 
-	ZhuanPan(times,buytime=1){
+	ZhuanPan(times,buytime=0){
 		try{
 		this.PrepareGameWindow(this.winName)
 		LogToFile("start to ZhuPan, times: " . times)

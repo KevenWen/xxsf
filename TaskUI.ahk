@@ -41,7 +41,7 @@ Gui Add, CheckBox, visOpenBS xp+83, 开商技
 
 Gui Add, CheckBox, visCalRZ x25 yp+29, 融资计算
 
-Gui Add, ListView, vUlist x420 y25 w145 h325 gMyListView, UserTitle..|ID|Num
+Gui Add, ListView, vUlist x420 y25 w145 h345 gMyListView, UserTitle..|ID|Num
 for key,num in numTable
         LV_Add("", key,idTable[key],num)
 
@@ -173,7 +173,7 @@ CreateTask:
         Loop, Parse, SelectedUsers, `n  ; Rows are delimited by linefeeds (`n).
         {
             U := StrSplit(A_LoopField, A_Tab)
-            if (U[1] = "xxsf")
+            if (U[1] = "88888" or U[1] = "steve" or U[1] = "dq" or U[1] = "boy")
                 user := new QHUser(U[1],!isClose)
             else if (U[1] = "LDGame")
                 user := new LDGame(!isClose)
@@ -253,8 +253,8 @@ if (A_GuiEvent = "DoubleClick")
 {
     LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
     LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
-    if (userName = "xxsf")
-        new QHUser(userName,0)
+    if (userName = "88888" or userName = "steve" or userName = "dq" or userName = "boy")
+        LaunchQHGamePri(userName,gameID)
     else if (userName = "LDGame")
         new LDGame(0)
     else if (userName = "YQXGame")

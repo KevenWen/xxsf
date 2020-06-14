@@ -52,8 +52,7 @@ Rongzi_0:
 
     new LDGame(0)    
     new YQXGame(0)
-    new 6322Game(0)    
-    new QHUser("xxsf",0)
+    new 6322Game(0)
     
     WaitForTime(235945)
     GameRecordingOn()
@@ -64,10 +63,10 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
-    ;LDGame 5, 6322 2, DQ 3, YQX 4, xxsf 1
+    ;LDGame 5, 6322 2, DQ 3, YQX 4, steve 1
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
-    new QHUser("xxsf",0).RongZi(index)
+    new QHUser("dq",0).RongZi(index)
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
@@ -102,7 +101,7 @@ Rongzi_0:
     new LDGame().GetLand()
     new YQXGame().GetLand()
     new 6322Game().GetLand()
-    new QHUser("xxsf").GetLand()
+    new QHUser("dq").GetLand()
 
     ;-------------------  Verification 2 ------------------
     sleep 1000
@@ -148,7 +147,7 @@ Rongzi_N:
     new LDGame(0)
     new YQXGame(0)
     new 6322Game(0)
-    new QHUser("xxsf",0)
+    new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -161,7 +160,7 @@ Rongzi_N:
 
     new YQXGame(0).GetLand()
     new 6322Game(0).GetLand()
-    new QHUser("xxsf").GetLand()  
+    new QHUser("dq").GetLand()  
     ;-------------------  Verification ------------------
     sleep 1000
     LogtoFile("Start to do verification...")
@@ -216,7 +215,7 @@ Rongzi_2:
     L := new LDGame(0)
     Y := new YQXGame(0)  
     N := new 6322Game(0)       
-    new QHUser("xxsf",0)
+    new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -226,16 +225,15 @@ Rongzi_2:
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    new QHUser("xxsf",0).GetLand()   
     For index,value in ["Y","N","L"]
         %value%.GetLand()
+    new QHUser("dq",0).GetLand()   
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
     For index,value in ["L","Y","N"]
         %value%.RongZi()
- 
-    new QHUser("xxsf").RongZi(1)   
+     new QHUser("dq").RongZi(3)   
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")

@@ -9,40 +9,26 @@ class QHsfGame
 {
 
 ;=========================================  Common functions  ===============================================
-	ResizeQHWindow()
-	{
-		;CoordMode, Pixel, window  
-		;CoordMode, Mouse, window
-		
-		IfWinExist xxsf
-		{
-			WinActivate
-			;Winmove,xxsf,,933,19,628,937
-			Winmove,xxsf,,933,19,600,959
-		}		
-
-	}
-
-	PrepareGameWindow()
+	PrepareGameWindow(name)
 	{
 		WinClose Cisco AnyConnect	;The VPN windows may exist		
 
 		WinGetActiveTitle, CurTitle
-		if (CurTitle = "xxsf")
+		if (CurTitle = name)
 			Return
 
-		IfWinExist, xxsf
+		IfWinExist, %name%
         {
-			WinSet, AlwaysOnTop, On, xxsf
-			WinActivate, xxsf
+			WinSet, AlwaysOnTop, On, %name%
+			WinActivate, %name%
 			sleep 200
-			WinSet, AlwaysOnTop, Off, xxsf			
+			WinSet, AlwaysOnTop, Off, %name%			
 		}
 		Else
-			throw "Game not existing!"
+			throw "Game not existing: " . name
 	}
 
-	LaunchQHGame(Sequ,windowname)
+	LaunchQHGame(Sequ,windowname)   ;Be carefull to call this function since it can not detect which sever to load
 	{
 		Loop
 		{
@@ -55,7 +41,7 @@ class QHsfGame
 			WinClose Cisco AnyConnect	;The VPN windows may exist
 			run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
 			sleep 5000
-			Winmove,xxsf,,933,19,600,959			
+			Winmove,%windowname%,,933,19,600,959			
 			loop
 			{
 				if A_index > 20
@@ -192,6 +178,14 @@ class QHsfGame
         } 
 	}
 
+	GetLandPage2(){
+            this.GetLandpage()
+            click 202, 250
+            sleep 200
+            if !PixelColorExist("0xFEE79B",28, 851,4000)		;左下角颜色	
+                throw, "Nob able to GetLandPage2 "
+	}
+
 	isPrepared()
 	{
         if A_Sec > 25 or A_Min > 0
@@ -319,6 +313,40 @@ class QHsfGame
 		SendMode Input		
 	}
 
+    SuanKai()
+    {
+	    this.GetLandPage2()
+
+		click 417, 781  ; NiuShi button
+		sleep 200
+		if PixelColorExist("0xFFF8CE",421, 361,1000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+			click 430, 472                            ; Use button
+		else
+			click 501, 222							  ; close button
+
+        sleep 200
+        click 248, 778 ; JBP button
+        sleep 200
+
+		if PixelColorExist("0xFFF8CE",421, 361,1000)  ;窗口上方空白颜色，如果是1500钻石窗口，颜色会不一样
+			click 430, 472                            ; Use button
+		else
+			click 501, 222							  ; close button
+
+        sleep 200		
+
+        click 46, 915
+        ;Setting Button
+        WaitPixelColorAndClickThrowErr("0xFFFFFF",566, 187,3000)
+        ;Setting page
+        if !PixelColorExist("0xFFFFF3",145, 700,3000) ;左下空白
+            throw "Setting page cannot found!"
+
+        sleep 100
+        click 410, 565 ;Save button
+        sleep 1000
+        this.CloseAnySubWindow()
+    }
 
 ;=========================================  CaiTuan functions  ===============================================
 
@@ -406,6 +434,12 @@ class QHsfGame
 		WaitPixelColor("0xFFFEF5",186, 420,2000)			;白色总股份资本框
 	}
 
+	GetGroupPage3(){
+		this.GetGroupPage()
+		click % SB[3]
+		WaitPixelColor("0xFFFEF5",220, 407,2000)			;白色商会币框
+	}
+
 	GetGroupPage4(){
 		this.GetGroupPage()
 		click % SB[4]
@@ -424,7 +458,8 @@ class QHsfGame
 		}
 		if PixelColorExist("0xFFF8CE",231, 305,100) ; 还没有注过资.
 		{
-			loop 38
+			num := % Getzhushu()
+			loop %num%
 			{
 				click % StockPos[which]
 				sleep 50
@@ -477,7 +512,8 @@ class QHsfGame
 		sleep, % s["long"]		
 
 		SetDefaultMouseSpeed 10
-		click,200, 574, 37
+		num := % Getzhushu()-1
+		click,200, 574, %num%
 		SetDefaultMouseSpeed 2		
 		sleep, % s["mid"]
 
@@ -526,8 +562,50 @@ class QHsfGame
 		}
 	}
 
-}
+	BuyTimePlus()
+	{
+		this.GetGroupPage3()
+		/*
+		if PixelColorExist("0xC59A18",208, 655,50)  ; 2-2
+		{
+			click 208, 655
+			sleep 200
+			click 278, 628		;确定button
+			;click 476, 398    	;close button , for testing only
+			sleep 200
+			LogToFile("Bought timeplus 2-2.")
+		}
+		*/
+	}
 
+	PlayZhuanPan(times = 6, BuyTimeplus = 0)
+	{
+        if BuyTimeplus
+			this.BuyTimePlus()
+
+        this.closeAnySubWindow()
+		click 41, 914
+		sleep 200		
+		WaitPixelColorAndClickThrowErr("0xD17622",575, 390,2000) ;ZhuanPan
+		sleep 200
+		n=1  ; 10 x n times
+		while (n < times+1)
+		{
+			WaitPixelColorAndClickThrowErr("0xF4452A",416, 769,2000) ;Ten Times Button
+			sleep 200
+			LogToFile("one time..")	
+			PixelColorExist("0xFBFBFB",422, 257,5000) ;Finished once
+			sleep 200
+			click 422, 257
+			sleep 300
+			click 480, 398  ;Close double money window if any.
+			sleep 200
+			n++  
+		}
+        sleep 1000
+	}
+
+}
 
 
 

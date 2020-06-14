@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;#include Socket.ahk
 
 ; Phy 肉沫茄子-5; supper-4; hou-2; long-3;
-; phy2 yun-1; xxsf/8888-5; 
+; phy2 yun-1; 8888-5; 
 ; home  02/song-2; xhhz-4;
 
 CoordMode, Pixel, window  
@@ -49,8 +49,6 @@ Rongzi_0:
     For index,value in  ["supper","song","xhhz","hou"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
-    ;new QHUser("xxsf",0).PrepareRongZi(2)    
-
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
@@ -58,24 +56,19 @@ Rongzi_0:
 
     For index,value in  ["supper","song","xhhz","hou"]
         new 4399UserTask(value,0).RongZi(index)
-    ;new QHUser("xxsf",0).RongZi(2)
+
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["supper","song","xhhz","hou"] ;,"xxsf"]
+    For index,value in  ["supper","song","xhhz","hou"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1
-        {
-           if value = xxsf
-               new QHUser("xxsf").RongZi(2)
-            else 
-               new 4399UserTask(value,0).RongZi(index)              
-        }
+            new 4399UserTask(value,0).RongZi(index)
     }
 
     LogtoFile("Verification 1 done.")
-    ;if mod(A_YDay-118,7) = 0
-        ;new 4399UserTask("supper").OpenBusinessSkill()
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusinessSkill()
 
     ;---------------------- ZhuanPan -----------------------
     new 4399UserTask("hou",0).ZhuanPan(1,1)   
@@ -89,7 +82,6 @@ Rongzi_0:
 
     For index,value in  ["supper","hou","xhhz","song"]
        new 4399UserTask(value).Getland()
-    ;new QHUser("xxsf").Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")

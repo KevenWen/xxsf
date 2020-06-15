@@ -39,7 +39,7 @@ class GroupPage{
 	{
 		this.GetGroupPage3() ;Shop button
 		
-		if PixelColorExist("0x63B0FF",345, 474,100) ;1-3
+		if PixelColorExist("0xC59A18",339, 493,100) ;1-3
 		{
 			click 345, 474
 			sleep 300
@@ -48,7 +48,7 @@ class GroupPage{
 			LogToFile("Shopping buy 1-3")				
 		}
 
-		if PixelColorExist("0x63B0FF",450, 474,100) ;1-4
+		if PixelColorExist("0xC59A18",442, 493,100) ;1-4
 		{
 			click 450, 474
 			sleep 300
@@ -58,7 +58,7 @@ class GroupPage{
 		}
 
 
-		if PixelColorExist("0x63B0FF",135, 474,100) ;Row 1-1
+		if PixelColorExist("0xC59A18",130, 493,100) ;Row 1-1
 		{
 			click 135, 474
 			sleep 300

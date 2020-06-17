@@ -605,15 +605,41 @@ class QHsfGame
 	BuyTimePlus()
 	{
 		this.GetGroupPage3()
-
-		if PixelColorExist("0xC59A18",82, 650,50)  ; 2-2 (actually 2-1 in qh)
+		if PixelColorExist("0xC59A18",300, 517,100) ;1-3
 		{
-			click 73, 648
+			click 345, 474
+			sleep 300
+			click 300, 608
+			sleep 200		
+			LogToFile("Shopping buy 1-3")				
+		}
+
+		if PixelColorExist("0xC59A18",409, 518,100) ;1-4
+		{
+			click 450, 474
+			sleep 300
+			click 300, 608
+			sleep 200		
+			LogToFile("Shopping buy 1-4")				
+		}
+
+		if PixelColorExist("0xC59A18",81, 518,100) ;Row 1-1
+		{
+			click 135, 474
+			sleep 300
+			click 300, 608 ;OK button
+			sleep 200			
+			LogToFile("Shopping buy 1-1")		
+		}
+		
+		if PixelColorExist("0xC59A18",80, 650,100) ;Row 2-2
+		{
+			click 80, 650
 			sleep 200
 			click 301, 609		;确定button
 			;click 479, 400    	;close button , for testing only
 			sleep 200
-			LogToFile("Bought timeplus 2-2.")			
+			LogToFile("Bought timeplus 2-2, actually 2-1 in qh.")			
 		}
 	}
 

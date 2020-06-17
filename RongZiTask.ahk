@@ -42,8 +42,7 @@ ExitApp
 
 Rongzi_0:
 
-    FileDelete % UserIni
-    FileDelete % UserIniRemote       
+    FileDelete % UserIni 
     FileAppend,,% UserIni
 
     For index,value in  ["supper","song","xhhz","hou"]
@@ -69,18 +68,21 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()
+    WinClose supper
 
     ;---------------------- ZhuanPan -----------------------
-    new 4399UserTask("hou",0).ZhuanPan(1,1)   
-    new 4399UserTask("song",0).ZhuanPan(7,1)
-    new 4399UserTask("xhhz",0).ZhuanPan(1,0)
+    ;new 4399UserTask("hou",0).ReloadGame()
+    new 4399UserTask("hou",0).ZhuanPan(2,1)
+    new 4399UserTask("song",0).ZhuanPan(1,1)
+    new 4399UserTask("xhhz",0).ZhuanPan(3,0)
+
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","song","xhhz"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["supper","hou","xhhz","song"]
+    For index,value in  ["hou","xhhz","song","supper"]
        new 4399UserTask(value).Getland()
     
     ;--------------------  Verification --------------------
@@ -94,10 +96,6 @@ Rongzi_0:
     LogtoFile("Verification 2 done.")
 
     GameRecordingOff()
-    LogtoFile("Start to do iniFileSync...")
-    iniFileSync()
-    LogtoFile("iniFileSync  done.")
-
     WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks N ================================================>
@@ -105,7 +103,6 @@ Return
 Rongzi_N:
 
     ;---------------------- Prepare ------------------------
-    FileDelete % UserIniRemote
     FileDelete % UserIni
     FileAppend,,% UserIni
 
@@ -132,7 +129,6 @@ Rongzi_N:
             new 4399UserTask(value,0).Getland()
     }
     WinClose supper
-    iniFileSync()
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
@@ -147,7 +143,6 @@ Return
 Rongzi_2:
 
     ;---------------------- Prepare ------------------------
-    FileDelete % UserIniRemote   
     FileDelete % UserIni
     FileAppend,,% UserIni
 
@@ -192,10 +187,6 @@ Rongzi_2:
             new 4399UserTask(value).Getland()
     }
     LogtoFile("Verification done.")
-
-    LogtoFile("Start to do iniFileSync...")
-    iniFileSync()
-    LogtoFile("iniFileSync  done.")
 
     GameRecordingOff()
     WinClose 360游戏大厅

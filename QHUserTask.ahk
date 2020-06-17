@@ -151,6 +151,19 @@ DC[]{
 
 ; <========================  转盘  ===========================>
 
+	ReloadGame(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("Start to ReloadGmae.")
+		this.Reload()
+		LogToFile("ReloadGmae done.")		
+		}
+		Catch e
+		{
+		LogToFile("ReloadGame() get exception: " . e)
+		}
+	}
+
 	Zhuanpan(times,buytimeplus = 0){
 		try{
 		this.PrepareGameWindow(this.winName)

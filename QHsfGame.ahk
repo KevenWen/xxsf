@@ -86,6 +86,46 @@ class QHsfGame
 		}
 	}
 
+	Reload()
+	{
+		this.closeAnySubWindow()
+		click 43, 914
+		sleep 100
+		if PixelColorExist("0xFFFFFF",565, 188,1000)
+		{
+			click 565, 188
+			sleep 200
+			click 415, 649
+			sleep 3000
+		}
+
+		if PixelColorExist("0xFFFEF5",387, 709,10000)
+			click 368, 783 ;click the start button
+		else
+			throw, "Not able to get the start game button while reload."
+
+		sleep 3000			
+		loop
+		{				
+			if A_index > 10
+				throw, "Not able to get the homepage while reload."
+			if this.SubWindowExist()
+				this.CloseAnySubWindow()
+			sleep 1000
+			if PixelColorExist("0xEFFEFF",56, 920,10) 	; double check again on the shop button				
+			{	
+				sleep 1000								; give one more secs to check if other pop window will come
+				if !this.SubWindowExist()
+					break 								; looks all good here, break the main loop
+				else{
+					this.CloseAnySubWindow()
+					break 
+				}
+			}	
+		}		
+	}
+
+
 
 	CloseAnySubWindow()
 	{
@@ -565,17 +605,16 @@ class QHsfGame
 	BuyTimePlus()
 	{
 		this.GetGroupPage3()
-		/*
-		if PixelColorExist("0xC59A18",208, 655,50)  ; 2-2
+
+		if PixelColorExist("0xC59A18",82, 650,50)  ; 2-2 (actually 2-1 in qh)
 		{
-			click 208, 655
+			click 73, 648
 			sleep 200
-			click 278, 628		;确定button
-			;click 476, 398    	;close button , for testing only
+			click 301, 609		;确定button
+			;click 479, 400    	;close button , for testing only
 			sleep 200
-			LogToFile("Bought timeplus 2-2.")
+			LogToFile("Bought timeplus 2-2.")			
 		}
-		*/
 	}
 
 	PlayZhuanPan(times = 6, BuyTimeplus = 0)

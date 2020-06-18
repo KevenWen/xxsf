@@ -24,7 +24,7 @@ Task2020:
 
     If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
     {
-        For index,value in  ["sf06","sf05","long","yun"]
+        For index,value in  ["sf05","long","yun"]
         {
             %value% := new 4399UserTask(value)
             sleep 5000
@@ -38,7 +38,7 @@ Task2020:
 
     If (TimeToMeet = 065000) or (TimeToMeet = 140000)  ; TouLie from black list
     {
-        For index,value in  ["song","sf01","sf03","sf04","sf05","sf06"]
+        For index,value in  ["sf01","sf03","sf04","sf05"]
             new 4399UserTask(value).Hunter(0)
         UploadNetDisk()
     }  

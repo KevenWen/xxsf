@@ -146,7 +146,7 @@ Rongzi_2:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz","hou","song"]
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
         new 4399UserTask(value,0)
 
     WaitForTime(235945)
@@ -154,7 +154,7 @@ Rongzi_2:
     WaitForTime(000001)  
    ;---------------------- Getland ------------------------
 
-    For index,value in  ["supper","xhhz","hou","song"]
+    For index,value in  ["supper","hou","song","sf06","xhhz"]
         new 4399UserTask(value,0).GetLand()
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()   
@@ -164,19 +164,21 @@ Rongzi_2:
 
    ;---------------------- RongZi ------------------------
 
-    For index,value in  ["supper","xhhz","hou","song"]
+    For index,value in  ["supper","xhhz","hou","song","sf06"]
         new 4399UserTask(value,0).RongZi(index) 
 
     WinClose supper
+    winclose song
+    winclose sf06
 
    ;---------------------- Hunter ------------------------
 
-    for index,value in  ["hou","xhhz","song"]
+    for index,value in  ["hou","xhhz","song","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","hou","xhhz","song"]
+    For index,value in  ["supper","hou","xhhz","song","sf06"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0
         IniRead, _DC, % UserIni, % value, DC,0 

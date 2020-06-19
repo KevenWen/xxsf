@@ -272,7 +272,7 @@ class LDGame
 		SendMode Event
 		Mousemove,520, 878
 		send {LButton down}
-		Mousemove,520, 130,4
+		Mousemove,520, 90,3
 		send {LButton up}
 		click 520, 878	
 		sleep 200

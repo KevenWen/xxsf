@@ -122,13 +122,16 @@ class LandPage{
             LogToFile("Land business already done, no action needed." )
             return  
         }
-        sleep 100                
-        Mousemove,510, 825
-        send {LButton down}
-        Mousemove,510, 140,4
-        send {LButton up}
-        click 510, 825
-        sleep 200
+        sleep 100
+        loop 2
+        {
+            Mousemove,510, 825
+            send {LButton down}
+            Mousemove,510, 180,6
+            send {LButton up}
+            click 510, 825        
+            sleep 200 
+        }
         loop
         {
             4399sfGame.CloseAnySubWindow()

@@ -293,7 +293,7 @@ class 6322Game
 		SendMode Event
 		Mousemove,525, 900
 		send {LButton down}
-		Mousemove,525, 100,5
+		Mousemove,525, 90,3
 		send {LButton up}
 		click 525, 900
 		sleep 200

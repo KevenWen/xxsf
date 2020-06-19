@@ -106,7 +106,7 @@ Rongzi_N:
     FileDelete % UserIni
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz","song"]
+    For index,value in  ["supper","xhhz","song","sf06"]
        new 4399UserTask(value,0)
 
     WaitForTime(235945)
@@ -114,7 +114,7 @@ Rongzi_N:
     WaitForTime(000001)    
     ;---------------------- Tasks ------------------------
 
-    For index,value in  ["supper","xhhz","song"]
+    For index,value in  ["supper","xhhz","song","sf06"]
        new 4399UserTask(value,0).Getland()
 
     if mod(A_YDay-118,7) = 0
@@ -122,7 +122,7 @@ Rongzi_N:
 
    ;------------------- Verification ---------------------
     LogtoFile("Start to do verification...")
-    For index,value in  ["supper","xhhz","song"]
+    For index,value in  ["supper","xhhz","song","sf06"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -132,7 +132,7 @@ Rongzi_N:
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","song"]
+    For index,value in ["xhhz","song","sf06"]
         new 4399UserTask(value).Hunter(1)
     
     GameRecordingOff()

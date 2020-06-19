@@ -52,7 +52,8 @@ Rongzi_0:
     new LDGame(0)    
     new YQXGame(0)
     new 6322Game(0)
-    
+    new QHUser("dq",0)
+
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
@@ -65,7 +66,7 @@ Rongzi_0:
     ;LDGame 5, 6322 2, DQ 3, YQX 4, steve 1
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
-    new QHUser("dq",0).RongZi(index)
+    new QHUser("dq",0).RongZi(3)
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
@@ -115,23 +116,21 @@ Rongzi_N:
     FileDelete % UserIni
     FileAppend,,% UserIni  
 
-    new LDGame(0)
-    new YQXGame(0)
-    new 6322Game(0)
-    new QHUser("dq",0)
+    L := new LDGame(0)
+    Y := new YQXGame(0)  
+    N := new 6322Game(0)       
+    D := new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
-    new LDGame(0).GetLand()
+    For index,value in ["Y","N","L","D"]
+        %value%.GetLand()
+    WinClose dq
 
     if mod(A_YDay-118,7) = 0
-        new LDGame(0).OpenBusinessSkill()
-
-    new YQXGame(0).GetLand()
-    new 6322Game(0).GetLand()
-    new QHUser("dq").GetLand()  
+        L.OpenBusinessSkill()
     ;-------------------  Verification ------------------
     sleep 1000
     LogtoFile("Start to do verification...")
@@ -176,7 +175,7 @@ Rongzi_2:
     L := new LDGame(0)
     Y := new YQXGame(0)  
     N := new 6322Game(0)       
-    new QHUser("dq",0)
+    D := new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -184,18 +183,17 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
 
-    For index,value in ["Y","N","L"]
+    For index,value in ["Y","N","L","D"]
         %value%.GetLand()
-    new QHUser("dq",0).GetLand()   
 
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    For index,value in ["L","Y","N"]
+    For index,value in ["L","Y","N","D"]
         %value%.RongZi()
-     new QHUser("dq").RongZi(3)   
+    WinClose dq
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")

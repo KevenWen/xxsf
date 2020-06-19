@@ -277,13 +277,16 @@ class QHsfGame
             LogToFile("Land business already done, no action needed." )
             return  
         } 
-		Mousemove,570, 840
-		send {LButton down}
-		Mousemove,570, 80,3
-		send {LButton up}		
-		sleep 100	
-		click 570, 840
-		sleep 200
+		loop 2
+		{
+			Mousemove,570, 840
+			send {LButton down}
+			Mousemove,570,140,6
+			send {LButton up}		
+			sleep 100	
+			click 570, 840
+			sleep 200
+		}
 		loop
 		{
 			this.CloseAnySubWindow()

@@ -93,7 +93,7 @@ class HunterPage{
             WaitPixelColorAndClickThrowErr("0x2A1E17",228, 744,3000)
             Loop
             {
-                if PixelColorExist("0xFEC120",450, 742,10) ;进度条到了		
+                if PixelColorExist("0xFEC120",460, 742,10) ;进度条到了		
                     break
                 if PixelColorExist("0xE2413E",334, 611,10) ;OK button
                     break

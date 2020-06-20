@@ -10,8 +10,8 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
     .PrepareRongZi(3).OpenBusinessSkill()
 */
 
-Gosub, Rongzi_0  ;for testing only
-Menu, Tray, Icon, % A_ScriptDir . "\img\phy.ico"
+;Gosub, Rongzi_0  ;for testing only
+Menu, Tray, Icon, % A_ScriptDir . "\img\sz.ico"
 
 shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
 
@@ -21,8 +21,6 @@ Return
 Task2020:
 
     FormatTime, TimeToMeet,,HHmmss
-
-    ;TimeToMeet = 235459
 
     If (TimeToMeet = 235459)
     {
@@ -47,7 +45,7 @@ Rongzi_0:
     FileAppend,,% UserIni               
 
 
-    new 4399UserTask("supper",0)
+    new 4399UserTask("xhhz",0)
     new 4399UserTask("song",0)
 
     WaitForTime(235945)
@@ -55,14 +53,14 @@ Rongzi_0:
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK -----------------
     new 4399UserTask("song",0).RongZi(3) 
-    new 4399UserTask("supper",0).RongZi(4) 
+    new 4399UserTask("xhhz",0).RongZi(4) 
 
     ;-------------------- ZhuanPan ----------------------
     new 4399UserTask("song",0).ZhuanPan(2,1)
-
+    new 4399UserTask("xhhz",0).ZhuanPan(2,1)
     ;-------------------- GetLand and hunter ------------------------
 
-    new 4399UserTask("supper").GetLand()
+    new 4399UserTask("xhhz").GetLand()
     new 4399UserTask("song").GetLand()    
   
     GameRecordingOff()

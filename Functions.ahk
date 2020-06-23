@@ -266,6 +266,8 @@ GameRecordingOn()
 	catch e
 	{
 		;Ignore the error here.
+        CaptureScreen()
+        sleep 200
 		LogToFile("Game recording turn on failed: " . e)
 	}
 }
@@ -337,6 +339,8 @@ RongZiOKEmu()
 }
 UploadNetDisk()
 {
+    if !FileExist(BaiduNetDiskPath)
+    return
     Run, % BaiduNetDiskPath
     sleep 600000
     Process, close, baidunetdisk.exe

@@ -16,8 +16,6 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 ;Gosub, Rongzi_0  ;for testing only
 Menu, Tray, Icon, % A_ScriptDir . "\img\phy.ico"
 
-shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
-
 SetTimer, Task2020, 1000  ;run every 1 secs
 Return
 
@@ -191,8 +189,9 @@ Rongzi_2:
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    For index,value in ["L","Y","N","D"]
+    For index,value in ["L","Y","N"]
         %value%.RongZi()
+    D.RongZi(3)     
     WinClose dq
 
     ;--------------------  Verification --------------------
@@ -241,52 +240,9 @@ Rongzi_2:
 Return
 
 ;<========================================= HotKeys ================================================>
-; 8-yun, 7-long, 9-hou, 10-supper, 2-02/song	
 
 ^NumpadDot::
     CaptureScreen()
-return
-
-^NumpadMult::
-   For index,value in  ["song","yun","long"]
-       new 4399UserTask(value,0)
-return
-
-^NumpadAdd::      ;LDPlayer
-   run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan" 
-return
-
-^Numpad1::     ;02/song
-    Launch4399GamePri("song",2)
-return
-^Numpad2::     ;Long
-    Launch4399GamePri("long",7)
-return
-^Numpad3::      ;Yun
-    Launch4399GamePri("yun",8)
-return
-^Numpad4::    ;88888
-    new QHUser(0)
-return
-^Numpad5::    ;SF27_Supper
-    Launch4399GamePri("supper",10)
-return
-
-^Numpad6::     ;06
-    new 4399UserTask("sf06",0)
-return
-
-^Numpad0::     ;01
-    new 4399UserTask("sf01",0)
-return
-^Numpad7::     ;03
-    new 4399UserTask("sf03",0)
-return
-^Numpad8::     ;04
-    new 4399UserTask("sf04",0)
-return
-^Numpad9::     ;05
-    new 4399UserTask("sf05",0)
 return
 
 F12::ExitApp ;stop the script

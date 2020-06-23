@@ -13,8 +13,6 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 ;Gosub, Rongzi_0  ;for testing only
 Menu, Tray, Icon, % A_ScriptDir . "\img\sz.ico"
 
-shangjiday := % mod(A_YDay-117,7)=0 ? 1:0
-
 SetTimer, Task2020, 1000  ;run every 1 secs
 Return
 
@@ -31,7 +29,6 @@ Task2020:
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
         
-        UploadNetDisk()
         ExitApp
     }
 

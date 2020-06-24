@@ -96,7 +96,8 @@ class ShopHomePage{
 	{
 		click 246, 196	;click 礼包 button
 		sleep 500
-		Loop %times%		;循环150次，可按需要调整
+        c := 0
+		Loop
 		{	
 			if PixelColorExist("0x1657B0",288, 491,10)     ;click 每日分享 button
             {
@@ -107,17 +108,25 @@ class ShopHomePage{
 			{
 				click 414, 432
 				sleep 400
+                c++
                 LogToFile("find share to tip when loop: " . A_Index)
 			}            
             if PixelColorExist("0xFFFFF3",126, 612,10)      ;click 立即分享 button
             {
                 click 294, 651
-                LogToFile("clicked share times: " . A_Index)
+                LogToFile("clicked share to at: " . A_Index . "click pop window count: " . c)
                 sleep 200
             }
-			if !PixelColorExist("0xFFFFF3",306, 601,10)	;close 分享成功或拼图窗口
-				4399sfGame.closeSpeSubWindow(1)
-            LogToFile("loop times: " . A_Index)
+			if !PixelColorExist("0xFFFFF3",306, 620,10)	;close 分享成功或拼图窗口
+			{
+	            4399sfGame.closeSpeSubWindow(1)
+                c++
+            }
+            if c > times
+            {
+                LogToFile("loop times: " . A_Index . "click pop window total count: " . c)
+                break   
+            }
 		}
         sleep 5000
 		4399sfGame.CloseSpeSubWindow(30)	;关闭所有子窗口

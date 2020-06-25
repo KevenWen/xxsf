@@ -47,8 +47,7 @@ Rongzi_0:
     FileDelete % UserIni
     FileAppend,,% UserIni               
 
-    new LDGame(0)    
-    new YQXGame(0)
+    new LDGame(0)
     new 6322Game(0)
     new QHUser("steve",0)
     new QHUser("dq",0)
@@ -62,9 +61,8 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new LDGame(0).OpenBusinessSkill()
  
-    ;LDGame 5, 6322 2, DQ 3, YQX 4, steve 1
-    new 6322Game(0).RongZi() 
-    new YQXGame(0).RongZi()
+    ;LDGame 5, 6322 2, DQ 3,steve 1
+    new 6322Game(0).RongZi()
     new QHUser("steve").RongZi(3)
     new QHUser("dq").RongZi(1)
 
@@ -82,10 +80,6 @@ Rongzi_0:
     if _RZ < 1
         new LDGame(0).RongZi()
 
-    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
-    if _RZ < 1
-        new YQXGame(0).RongZi()
-
     IniRead, _RZ, % UserIni,6322Player,RZ,0
     if _RZ < 1
         new 6322Game(0).RongZi()
@@ -94,12 +88,10 @@ Rongzi_0:
     ;-------------------- ZhuanPan ----------------------
 
     new 6322Game(0).ZhuanPan(2,1)
-    new YQXGame(0).ZhuanPan(1)
 
     ;-------------------- GetLand and hunter ------------------------
 
     new LDGame().GetLand()
-    new YQXGame().GetLand()
     new 6322Game().GetLand()
 
     GameRecordingOff()
@@ -115,7 +107,6 @@ Rongzi_N:
     FileAppend,,% UserIni  
 
     L := new LDGame(0)
-    Y := new YQXGame(0)  
     N := new 6322Game(0)       
     D := new QHUser("dq",0)
 
@@ -123,7 +114,7 @@ Rongzi_N:
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
-    For index,value in ["Y","N","L","D"]
+    For index,value in ["L","N","D"]
         %value%.GetLand()
     WinClose dq
 
@@ -145,12 +136,6 @@ Rongzi_N:
     else
        WinClose LDPlayer
 
-    IniRead, _DC, % UserIni,YQXPlayer,DC,0
-    if _DC < 1
-        new YQXGame().GetLand()
-    else
-       WinClose YQXPlayer
-
     IniRead, _DC, % UserIni,6322Player,DC,0
     if _DC < 1
         new 6322Game().GetLand()
@@ -171,7 +156,6 @@ Rongzi_2:
     FileAppend,,% UserIni
     
     L := new LDGame(0)
-    Y := new YQXGame(0)  
     N := new 6322Game(0)       
     D := new QHUser("dq",0)
 
@@ -181,7 +165,7 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
 
-    For index,value in ["Y","N","L","D"]
+    For index,value in ["L","N","D"]
         %value%.GetLand()
 
     if mod(A_YDay-118,7) = 0
@@ -189,7 +173,7 @@ Rongzi_2:
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    For index,value in ["L","Y","N"]
+    For index,value in ["L","N"]
         %value%.RongZi()
     D.RongZi(3)     
     WinClose dq
@@ -212,16 +196,6 @@ Rongzi_2:
         L.GetLand()
 
     WinClose LDPlayer
-
-    IniRead, _RZ, % UserIni,YQXPlayer,RZ,0
-    if _RZ < 1
-        Y.RongZi()
-    
-    IniRead, _DC, % UserIni,YQXPlayer,DC,0
-    if _DC < 1
-        Y.GetLand()
-
-    WinClose YQXPlayer
 
     IniRead, _RZ, % UserIni,6322Player,RZ,0
     if _RZ < 1

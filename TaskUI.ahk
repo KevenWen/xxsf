@@ -49,7 +49,7 @@ for key,num in numTable
 Gui Add, Text, cRed vTips x25 y240 w164 h23 +0x200,
 
 Gui Add, CheckBox, visRecordingOn x25 y+m, 开启录屏
-Gui Add, CheckBox, visClose x+M, 任务完成保留窗口
+Gui Add, CheckBox, visClose x+M, 任务完成关闭窗口
 
 Gui Add, Button, x23 yp+29 gOpenLog, 查看日志文件...  
 Gui Add, Button, x+M gOpenPic, 查看商品列表...  
@@ -174,15 +174,15 @@ CreateTask:
         {
             U := StrSplit(A_LoopField, A_Tab)
             if (U[1] = "88888" or U[1] = "steve" or U[1] = "dq" or U[1] = "boy")
-                user := new QHUser(U[1],!isClose)
+                user := new QHUser(U[1],isClose)
             else if (U[1] = "LDGame")
-                user := new LDGame(!isClose)
+                user := new LDGame(isClose)
             else if (U[1] = "YQXGame")
-                user := new YQXGame(!isClose)
+                user := new YQXGame(isClose)
             else if (U[1] = "6322Game")
-                user := new 6322Game(!isClose)
+                user := new 6322Game(isClose)
             Else    
-                user := new 4399UserTask(U[1],!isClose)
+                user := new 4399UserTask(U[1],isClose)
 
 ;------------------------------ Execute the selected task --------------------------------
 
@@ -224,7 +224,7 @@ CreateTask:
                 user.GetCard(2)
 
             if isCardSelected
-                user.GetCard(150)
+                user.GetCard(200)
 
             user := ""
         }

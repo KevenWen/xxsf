@@ -355,12 +355,22 @@ Launch4399GamePri(windowname,Sequ)
     }
 
     run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
-    sleep 4000
-    WinGetActiveTitle, Title
-    if !InStr(Title, "xiaoxiao")
-        MsgBox, "The active windows is not named xiaoxiaoshoufu" 
-    WinSetTitle,%Title%,, %windowname%
-    Winmove,%windowname%,,829,23,600,959			
+    Loop
+    {
+        sleep 1000
+        WinGetActiveTitle, Title
+        if InStr(Title, "xiaoxiao")
+        {
+            WinSetTitle,%Title%,, %windowname%
+            Winmove,%windowname%,,829,23,600,959
+            return	
+        }
+        if (A_index > 8)
+        {
+            MsgBox, "No active windows named xiaoxiaoshoufu. " 
+            return
+        }        
+    }		
 }
 
 LaunchQHGamePri(windowname,Sequ)
@@ -372,12 +382,22 @@ LaunchQHGamePri(windowname,Sequ)
     }
 
     run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
-    sleep 4000
-    WinGetActiveTitle, Title
-    if !InStr(Title, "xxsf")
-        MsgBox, "The active windows is not include string xxsf" 
-    WinSetTitle,%Title%,, %windowname%
-    Winmove,%windowname%,,829,23,600,959			
+    Loop
+    {
+        sleep 1000
+        WinGetActiveTitle, Title
+        if InStr(Title, "xxsf")
+        {
+            WinSetTitle,%Title%,, %windowname%
+            Winmove,%windowname%,,829,23,600,959	
+            return	
+        }
+        if (A_index > 8)
+        {
+        MsgBox, "The active windows is not named xxsf" 
+        return
+        }        
+    }    
 }
 
 Getzhushu()

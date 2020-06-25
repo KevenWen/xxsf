@@ -94,11 +94,14 @@ class ShopHomePage{
 
 	GetCards(times=120)
 	{
-		click 246, 196	;click 礼包 button
-		sleep 500
         c := 0
 		Loop
 		{	
+            if PixelColorExist("0xFF5D5D",238, 206,10)     ;click 礼包 button
+            {
+                click 246, 196
+                sleep 500
+            }
 			if PixelColorExist("0x1657B0",288, 491,10)     ;click 每日分享 button
             {
                 click 288, 491

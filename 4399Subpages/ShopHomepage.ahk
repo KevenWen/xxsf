@@ -107,24 +107,24 @@ class ShopHomePage{
 			if PixelColorExist("0x5BD157", 285, 531,10) 		;close "分享到" 提示
 			{
 				click 414, 432
-				sleep 400
+				sleep 200
                 c++
                 LogToFile("find share to tip when loop: " . A_Index)
 			}            
             if PixelColorExist("0xFFFFF3",126, 612,10)      ;click 立即分享 button
             {
                 click 294, 651
-                LogToFile("clicked share to at: " . A_Index . "click pop window count: " . c)
-                sleep 200
+                LogToFile("clicked share to at: " . A_Index . ", click pop window count: " . c)
+                sleep 100
             }
 			if !PixelColorExist("0xFFFFF3",306, 620,10)	;close 分享成功或拼图窗口
 			{
 	            4399sfGame.closeSpeSubWindow(1)
                 c++
             }
-            if c > times
+            if (c > times or A_Index > 500)
             {
-                LogToFile("loop times: " . A_Index . "click pop window total count: " . c)
+                LogToFile("loop times: " . A_Index . ", click pop window total count: " . c)
                 break   
             }
 		}

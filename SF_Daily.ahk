@@ -86,9 +86,10 @@ Rongzi_0:
     WinClose supper
 
     ;---------------------- ZhuanPan -----------------------
-    ;new 4399UserTask("hou",0).ReloadGame()
-    new 4399UserTask("hou",0).ZhuanPan(2,1)
-    new 4399UserTask("sf06",0).ZhuanPan(5,1)
+    new 4399UserTask("sf06",0).ReloadGame()
+    new 4399UserTask("sf06",0).ZhuanPan(4,1)    
+    new 4399UserTask("hou",0).ZhuanPan(1,0)
+
 
     ;----------------------- Hunter ------------------------
     For index,value in  ["hou","sf06"]

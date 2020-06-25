@@ -408,25 +408,25 @@ class 6322Game
 			click 278, 628
 			sleep 200		
 			LogToFile("Shopping buy 1-3")				
-		}
 
-		if PixelColorExist("0xC59A18",409, 518,100) ;1-4
-		{
-			click 454, 511
-			sleep 300
-			click 278, 628
-			sleep 200		
-			LogToFile("Shopping buy 1-4")				
-		}
+			if PixelColorExist("0xC59A18",409, 518,1000) ;1-4
+			{
+				click 454, 511
+				sleep 300
+				click 278, 628
+				sleep 200		
+				LogToFile("Shopping buy 1-4")				
+			}
 
-		if PixelColorExist("0xC59A18",81, 518,100) ;Row 1-1
-		{
-			click 91, 510
-			sleep 300
-			click 278, 628 ;OK button	
-			;click 462, 394	;Close button, for testing perpose	
-			sleep 200			
-			LogToFile("Shopping buy 1-1")		
+			if PixelColorExist("0xC59A18",81, 518,1000) ;Row 1-1
+			{
+				click 91, 510
+				sleep 300
+				click 278, 628 ;OK button	
+				;click 462, 394	;Close button, for testing perpose	
+				sleep 200			
+				LogToFile("Shopping buy 1-1")		
+			}
 		}
 
 		if PixelColorExist("0xC59A18",208, 655,50)  ; 2-2

@@ -46,26 +46,25 @@ class GroupPage{
 			click 323, 593
 			sleep 200		
 			LogToFile("Shopping buy 1-3")				
-		}
 
-		if PixelColorExist("0xC59A18",442, 493,100) ;1-4
-		{
-			click 450, 474
-			sleep 300
-			click 323, 593
-			sleep 200		
-			LogToFile("Shopping buy 1-4")				
-		}
+			if PixelColorExist("0xC59A18",442, 493,1000) ;1-4
+			{
+				click 450, 474
+				sleep 300
+				click 323, 593
+				sleep 200		
+				LogToFile("Shopping buy 1-4")				
+			}
 
-
-		if PixelColorExist("0xC59A18",130, 493,100) ;Row 1-1
-		{
-			click 135, 474
-			sleep 300
-			click 323, 593 ;OK button	
-			;click 462, 394	;Close button, for testing perpose	
-			sleep 200			
-			LogToFile("Shopping buy 1-1")		
+			if PixelColorExist("0xC59A18",130, 493,1000) ;Row 1-1
+			{
+				click 135, 474
+				sleep 300
+				click 323, 593 ;OK button	
+				;click 462, 394	;Close button, for testing perpose	
+				sleep 300			
+				LogToFile("Shopping buy 1-1")		
+			}
 		}
 
 		if PixelColorExist("0xC59A18",231, 617,100) ;2-2
@@ -73,11 +72,9 @@ class GroupPage{
 			click 240, 599
 			sleep 300
 			click 323, 593
-			sleep 200
+			sleep 300
 			LogToFile("Shopping buy 2-2")				
 		}		
-
-		sleep 100
 	}
 
     GetShopping(flag)

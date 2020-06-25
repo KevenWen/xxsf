@@ -51,6 +51,7 @@ Rongzi_0:
     new YQXGame(0)
     new 6322Game(0)
     new QHUser("steve",0)
+    new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -64,7 +65,8 @@ Rongzi_0:
     ;LDGame 5, 6322 2, DQ 3, YQX 4, steve 1
     new 6322Game(0).RongZi() 
     new YQXGame(0).RongZi()
-    new QHUser("steve",0).RongZi(3)
+    new QHUser("steve").RongZi(3)
+    new QHUser("dq").RongZi(1)
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
@@ -90,8 +92,7 @@ Rongzi_0:
 
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
-    ;new QHUser("dq",0).ReloadGame()
-    ;new QHUser("dq",0).ZhuanPan(3,1)
+
     new 6322Game(0).ZhuanPan(2,1)
     new YQXGame(0).ZhuanPan(1)
 
@@ -100,8 +101,7 @@ Rongzi_0:
     new LDGame().GetLand()
     new YQXGame().GetLand()
     new 6322Game().GetLand()
-    new QHUser("steve").GetLand()
-  
+
     GameRecordingOff()
     WinClose 360游戏大厅
 Return

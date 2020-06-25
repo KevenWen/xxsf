@@ -53,6 +53,7 @@ Rongzi_0:
     new 4399UserTask("xhhz",0).RongZi(4) 
 
     ;-------------------- ZhuanPan ----------------------
+    ;new 4399UserTask("song",0).ReloadGame()    
     new 4399UserTask("song",0).ZhuanPan(2,1)
     new 4399UserTask("xhhz",0).ZhuanPan(2,1)
     ;-------------------- GetLand and hunter ------------------------

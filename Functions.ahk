@@ -363,6 +363,9 @@ Launch4399GamePri(windowname,Sequ)
         {
             WinSetTitle,%Title%,, %windowname%
             Winmove,%windowname%,,829,23,600,959
+            ToolTip, % "Game Opened for sequ: " . Sequ, 0,0
+            sleep 1000
+            ToolTip
             return	
         }
         if (A_index > 8)
@@ -389,7 +392,10 @@ LaunchQHGamePri(windowname,Sequ)
         if InStr(Title, "xxsf")
         {
             WinSetTitle,%Title%,, %windowname%
-            Winmove,%windowname%,,829,23,600,959	
+            Winmove,%windowname%,,829,23,600,959
+            ToolTip, % "Game Opened for sequ: " . Sequ, 0,0
+            sleep 1000
+            ToolTip
             return	
         }
         if (A_index > 8)

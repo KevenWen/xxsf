@@ -28,10 +28,10 @@ new 4399UserTask("long",0).Shopping("2-1").Hunter(0).ZhuZi(2).RongZi(5)
 
 
 
-  ExitApp
+
     
     run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
-
+    ExitApp
     For index,value in ["sf01","sf03","sf04","sf05","yun","long","song"]
     {
         %value% := new 4399UserTask(value,0)

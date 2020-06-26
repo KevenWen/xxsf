@@ -183,8 +183,7 @@ Rongzi_2:
         new 4399UserTask(value,0).RongZi(index) 
 
     WinClose supper
-    winclose song
-    winclose sf06
+    winclose hou
 
    ;---------------------- Hunter ------------------------
 

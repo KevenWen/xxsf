@@ -158,6 +158,7 @@ Rongzi_2:
     L := new LDGame(0)
     N := new 6322Game(0)       
     D := new QHUser("dq",0)
+    S := new QHUser("steve",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -165,7 +166,7 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
 
-    For index,value in ["L","N","D"]
+    For index,value in ["L","N","D","S"]
         %value%.GetLand()
 
     if mod(A_YDay-118,7) = 0
@@ -175,8 +176,10 @@ Rongzi_2:
 
     For index,value in ["L","N"]
         %value%.RongZi()
-    D.RongZi(3)     
+    D.RongZi(3)
+    S.RongZi(1)   
     WinClose dq
+    WinClose steve
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")

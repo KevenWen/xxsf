@@ -25,19 +25,16 @@ Task2020:
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
 
         UploadNetDisk()
-    }
 
-
-    If (TimeToMeet = 002500)  ; xiao hao zhuzi / Hunter
-    {
-        For index,value in  ["long","yun"]
+        if mod(A_YDay,2) > 0
         {
-            %value% := new 4399UserTask(value)
-            sleep 5000
-            if mod(A_YDay,2) > 0                         
-                ;%value%.RongZi(mod(index,5)+1)
+            For index,value in  ["long","yun"]
+            {
+                %value% := new 4399UserTask(value)
+                sleep 5000
                 %value%.RongZi(3)
-            %value% := ""
+                %value% := ""
+            }
         }
     }
 

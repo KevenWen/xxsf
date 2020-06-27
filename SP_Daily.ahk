@@ -109,14 +109,16 @@ Rongzi_N:
     L := new LDGame(0)
     N := new 6322Game(0)       
     D := new QHUser("dq",0)
+    S := new QHUser("steve",0)
 
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
-    For index,value in ["L","N","D"]
+    For index,value in ["S","L","N","D"]
         %value%.GetLand()
     WinClose dq
+    winClose steve
 
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
@@ -166,7 +168,7 @@ Rongzi_2:
 
     ;-------------------- Tasks ---------------------
 
-    For index,value in ["L","N","D","S"]
+    For index,value in ["S","L","N","D"]
         %value%.GetLand()
 
     if mod(A_YDay-118,7) = 0
@@ -177,7 +179,8 @@ Rongzi_2:
     For index,value in ["L","N"]
         %value%.RongZi()
     D.RongZi(3)
-    S.RongZi(1)   
+    S.RongZi(1) 
+    sleep 1000  
     WinClose dq
     WinClose steve
 

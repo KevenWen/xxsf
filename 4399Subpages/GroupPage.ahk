@@ -9,7 +9,7 @@ class GroupPage{
 			4399sfGame.closeAnySubWindow()
 			click % HB[5]
             sleep 100			
-			if PixelColorExist("0xFFFEF5",492, 354,4000)			;白色人数框
+			if PixelColorExist("0xFFFEF5",492, 354,4000)	;白色人数框
 				break
 		}
 	}
@@ -18,26 +18,38 @@ class GroupPage{
 	{
 		this.GetGroupPage()
 		click % SB[2]
-		WaitPixelColor("0xFFFEF5",138, 420,4000)			;白色总股份资本框
+		WaitPixelColor("0xFFFEF5",138, 420,4000)	;白色总股份资本框
 	}
 
     GetGroupPage3()
 	{
 		this.GetGroupPage()
 		click % SB[3]
-		WaitPixelColor("0xFEF5EA",497, 319,4000)			;商店上的红白条
+		WaitPixelColor("0xFEF5EA",497, 319,4000)	;商店上的红白条
 	}
 
     GetGroupPage4()
 	{
 		this.GetGroupPage()
 		click % SB[4]
-		WaitPixelColor("0x91B65A",461, 349,4000)			;科技企业后的绿色
+		WaitPixelColor("0x91B65A",461, 349,4000)	;科技企业后的绿色
+	}
+
+	RefreshShoppingList()
+	{
+		this.GetGroupPage3() 						;Shop page
+		click 453, 430
+		sleep 200
+		if PixelColorExist("0xFFFFF3",183, 542,100) ;1000 块提示框左下白色
+		{
+			click 296, 594 							;OK button
+			sleep 300
+		}
 	}
 
     BuyTimeSpeedplus()
 	{
-		this.GetGroupPage3() ;Shop button
+		this.GetGroupPage3() 						;Shop page
 		
 		if PixelColorExist("0xC59A18",339, 493,100) ;1-3
 		{

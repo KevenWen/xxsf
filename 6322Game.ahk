@@ -509,10 +509,10 @@ class 6322Game
 
 	ClickRongZiOKPublic()
 	{
-		click 277, 691
-		sleep, % s["short"]
 		click 277, 638
 		sleep, % s["short"]		
+		click 277, 691
+		sleep, % s["short"]
 		click 277, 638
 		sleep, % s["short"]
 		if PixelColorExist("0xFBFBFB",495, 250,1000) ; the color under in the OK window

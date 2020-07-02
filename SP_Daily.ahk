@@ -63,8 +63,8 @@ Rongzi_0:
  
     ;LDGame 5, 6322 2, DQ 3,steve 1
     new 6322Game(0).RongZi()
-    new QHUser("steve").RongZi(3)
-    new QHUser("dq",0).RongZi(1)
+    new QHUser("steve").RongZi(1)
+    new QHUser("dq",0).RongZi(3)
 
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
@@ -87,7 +87,7 @@ Rongzi_0:
     LogtoFile("Verification 1 done.")    
     ;-------------------- ZhuanPan ----------------------
 
-    ;new 6322Game(0).ZhuanPan(2,1)
+    new 6322Game(0).ZhuanPan(0,1)
 
     ;-------------------- GetLand and hunter ------------------------
 

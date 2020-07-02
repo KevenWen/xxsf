@@ -43,25 +43,28 @@ Rongzi_0:
 
 
     new 4399UserTask("hou",0)
-    new 4399UserTask("sf06",0)
+    new 4399UserTask("song",0)
 
     WaitForTime(235945)
     GameRecordingOn()
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK -----------------
-    new 4399UserTask("sf06",0).RongZi(3) 
+    new 4399UserTask("song",0).RongZi(3) 
     new 4399UserTask("hou",0).RongZi(4) 
 
     ;-------------------- ZhuanPan ----------------------
     ;new 4399UserTask("song",0).ReloadGame()    
-    ;new 4399UserTask("sf06",0).ZhuanPan(2,1)
-    new 4399UserTask("sf06",0).GetLand()
-    new 4399UserTask("hou",0).GetLand()    
-    new 4399UserTask("hou",0).ZhuanPan(3,0,0)
+    new 4399UserTask("song",0).ZhuanPan(5,1)
+    new 4399UserTask("hou",0).ZhuanPan(1,0)
+
     ;-------------------- GetLand and hunter ------------------------
 
-    new 4399UserTask("sf06").Hunter(1)  
-    new 4399UserTask("hou").Hunter(1)    
+    new 4399UserTask("song").Hunter(1)  
+    new 4399UserTask("hou").Hunter(1) 
+
+    new 4399UserTask("song",0).GetLand()
+    new 4399UserTask("hou",0).GetLand()
+
     GameRecordingOff()
     LogtoFile("Rongzi_0 done.")    
     WinClose 360游戏大厅

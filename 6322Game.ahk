@@ -22,10 +22,15 @@ class 6322Game
 			Sleep 100
 			if PixelColorExist("0xFFFEF5",370, 735,10)
 			{
+				try{
 				LogToFile("Find existing window with start button, going to Click it. ")	
-				click 277, 835
-				sleep 10000
-				this.CloseAnySubWindow()
+				this.Mid6322Game()
+				LogToFile("Mid6322Game done. ")					
+				}
+				Catch e{
+				LogToFile("6322Player window fond bug start mid game failed: " . e)
+				Return
+				}
 			}			
 			LogToFile("Find existing window named 6322Player. ")
 		}
@@ -401,7 +406,7 @@ class 6322Game
 	BuyTimePlus()
 	{
 		this.GetGroupPage3()
-		if PixelColorExist("0xC59A18",300, 517,100) ;1-3
+		if PixelColorExist("0xC59A18",300, 517,1000) ;1-3
 		{
 			click 330, 510
 			sleep 300
@@ -597,5 +602,26 @@ class 6322Game
 		Else
 			throw "6322Player window not exist"
 	}
+
+	Mid6322Game()
+	{
+		click 277, 835
+		sleep 2000
+		loop
+		{
+			if A_index > 15
+				throw, "Load Middle Game timeout."
+			if PixelColorExist("0x988C5A",83, 982,10) 
+			or PixelColorExist("0xD9C880",83, 982,10) 
+			or PixelColorExist("0x6B633F",83, 982,10)
+			{
+				sleep 2000
+				this.CloseAnySubWindow()
+				break					
+			}
+			else
+				sleep 1000
+		}
+	}	
 }
 

@@ -57,7 +57,7 @@ Rongzi_0:
     FileDelete % UserIni 
     FileAppend,,% UserIni
 
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","xhhz","song","hou"]
         new 4399UserTask(value,0).PrepareRongZi(index)
 
     WaitForTime(235945)
@@ -65,12 +65,12 @@ Rongzi_0:
     WaitForTime(000000)
     ;-------------------- ClickRongZiOK --------------------
 
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","xhhz","song","hou"]
         new 4399UserTask(value,0).RongZi(index)
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 1...")
-    For index,value in  ["supper","xhhz","sf06"]
+    For index,value in  ["supper","xhhz","song","hou"]
     {
         IniRead, _RZ, % UserIni, % value, RZ,0        
         if _RZ < 1
@@ -81,25 +81,26 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()
     WinClose supper
+    winclose song
 
     ;---------------------- ZhuanPan -----------------------
-    ;new 4399UserTask("sf06",0).ReloadGame()
-    new 4399UserTask("xhhz",0).ZhuanPan(2,1)    
-    new 4399UserTask("sf06",0).ZhuanPan(0,1)
 
+    ;new 4399UserTask("xhhz",0).ReloadGame()    
+    new 4399UserTask("xhhz",0).ZhuanPan(1,1)    
+    new 4399UserTask("hou",0).ZhuanPan(3,0)  
 
     ;----------------------- Hunter ------------------------
-    For index,value in  ["xhhz","sf06"]
+    For index,value in  ["xhhz","hou"]
         new 4399UserTask(value,0).Hunter(1)
 
     ;---------------------- Getland ------------------------
 
-    For index,value in  ["xhhz","sf06","supper"]
+    For index,value in  ["xhhz","hou","supper","song"]
        new 4399UserTask(value).Getland()
     
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification 2...")
-    For index,value in  ["xhhz","sf06","supper"]
+    For index,value in  ["xhhz","song","supper"]
     {
         IniRead, _DC, % UserIni, % value, DC,0        
         if _DC < 1
@@ -144,7 +145,7 @@ Rongzi_N:
     LogtoFile("Verification done.")    
     ;---------------------- Hunter ------------------------
 
-    For index,value in ["xhhz","song","sf06"]
+    For index,value in ["xhhz","sf06"]
         new 4399UserTask(value).Hunter(1)
     
     GameRecordingOff()
@@ -181,10 +182,11 @@ Rongzi_2:
 
     WinClose supper
     winclose hou
+    winclose song
 
    ;---------------------- Hunter ------------------------
 
-    for index,value in  ["xhhz","song","sf06"]
+    for index,value in  ["xhhz","sf06"]
         new 4399UserTask(value).Hunter(1)
 
     ;--------------------  Verification --------------------

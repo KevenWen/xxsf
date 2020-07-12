@@ -57,6 +57,12 @@ DC[]{
 				Winmove,%windowname%,,829,23,600,959
 				LogToFile("Find existing window named: " . windowname)
 				sleep 200
+				if PixelColorExist("0xFFFEF5",371, 686,10)
+				{
+					LogToFile("Find game is load in the middle, going to start Mid4399Game().")						
+					this.Mid4399Game()
+					LogToFile("Mid4399Game done.")					
+				}
 			}
 			else
 			{
@@ -373,7 +379,19 @@ DC[]{
 		}
 		Catch e{
 		LogToFile("excetion while Play Tian Ti: " . e)
-		WinClose, % this.winName
+		}
+	}	
+
+	GetZZList(){
+		try{
+		LogToFile("Start to GetZZList.")			
+		this.PrepareGameWindow(this.winName)
+		SendMode Event
+		this.GroupPage.GetZhuZiList()
+		SendMode input		
+		}
+		Catch e{
+		LogToFile("excetion while GetZZList: " . e)
 		}
 	}	
 

@@ -88,11 +88,11 @@ Rongzi_0:
     ;-------------------- ZhuanPan ----------------------
 
     new 6322Game(0).ZhuanPan(0,1)
-
+    new QHUser("dq").ZhuanPan(3,1)
     ;-------------------- GetLand and hunter ------------------------
 
-    new LDGame().GetLand()
     new 6322Game().GetLand()
+    new LDGame().GetLand()    
     new QHUser("dq").GetLand()
 
     GameRecordingOff()
@@ -116,6 +116,8 @@ Rongzi_N:
     GameRecordingOn()
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
     For index,value in ["S","L","N","D"]
         %value%.GetLand()
     WinClose dq
@@ -168,12 +170,11 @@ Rongzi_2:
     WaitForTime(000001)   ;Make sure we are start after 00:00:01
 
     ;-------------------- Tasks ---------------------
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
 
     For index,value in ["S","L","N","D"]
         %value%.GetLand()
-
-    if mod(A_YDay-118,7) = 0
-        L.OpenBusinessSkill()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 

@@ -393,7 +393,9 @@ class GroupPage{
 		MouseClickDrag, Left, 302, 853,304, 483
 		sleep 1000
 		MouseClickDrag, Left, 302, 853,304, 483
-		sleep 1000
+		sleep 500
+		CaptureScreen()	
+		sleep 500
 	}
 
 	GetShangZhanList()

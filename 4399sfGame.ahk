@@ -120,6 +120,31 @@ class 4399sfGame
 		}	
 	}
 
+	Mid4399Game()
+	{
+		click 343, 766
+		WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
+
+		sleep 2000
+		colcount := 0		
+		loop
+		{				
+			if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
+				colcount++
+			else
+				this.CloseAnySubWindow()
+
+			if colcount	> 1
+				break
+			if A_Index > 5
+			{
+				LogToFile("homepage not show expected and not sub window found!")
+				throw,"homepage not show expected and not sub window found!"
+			}
+			sleep 1000			
+		}
+	}
+
 	CloseAnySubWindow()
 	{
 		if PixelColorExist("0x5BD157",286, 536,10) ;Share to... window

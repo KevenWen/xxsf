@@ -51,6 +51,7 @@ Rongzi_0:
     new 6322Game(0)
     new QHUser("steve",0)
     new QHUser("dq",0)
+    new 4399UserTask("sf06",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -63,9 +64,22 @@ Rongzi_0:
  
     ;LDGame 5, 6322 2, DQ 3,steve 1
     new 6322Game(0).RongZi()
-    new QHUser("steve").RongZi(1)
+    new QHUser("steve",0).RongZi(1)
     new QHUser("dq",0).RongZi(3)
+    new 4399UserTask("sf06",0).RongZi(4)  
 
+    ;-------------------- ZhuanPan ----------------------
+    new 4399UserTask("sf06",0).ZhuanPan(4,1)  
+    new 6322Game(0).ZhuanPan(3,1)
+    new QHUser("dq").ZhuanPan(2,0)
+  
+    ;-------------------- GetLand and hunter ------------------------
+    new 4399UserTask("sf06",0).Hunter(1)    
+    new 6322Game().GetLand()
+    new LDGame().GetLand()  
+    new QHUser("dq").GetLand()
+    new QHUser("steve").GetLand()
+    new 4399UserTask("sf06").GetLand()
     ;-------------------  Verification 1 -------------------
     LogtoFile("Start to do verification 1...")
 
@@ -83,18 +97,8 @@ Rongzi_0:
     IniRead, _RZ, % UserIni,6322Player,RZ,0
     if _RZ < 1
         new 6322Game(0).RongZi()
-
-    LogtoFile("Verification 1 done.")    
-    ;-------------------- ZhuanPan ----------------------
-
-    new 6322Game(0).ZhuanPan(0,1)
-    new QHUser("dq").ZhuanPan(3,1)
-    ;-------------------- GetLand and hunter ------------------------
-
-    new 6322Game().GetLand()
-    new LDGame().GetLand()    
-    new QHUser("dq").GetLand()
-
+    LogtoFile("Verification 1 done.")
+        
     GameRecordingOff()
     WinClose 360游戏大厅
 Return

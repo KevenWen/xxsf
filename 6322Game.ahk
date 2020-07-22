@@ -296,12 +296,17 @@ class 6322Game
 		}
 		sleep 200
 		SendMode Event
-		Mousemove,525, 900
-		send {LButton down}
-		Mousemove,525, 90,3
-		send {LButton up}
-		click 525, 900
-		sleep 200
+		loop 2  ;loop two times to move a bit end.
+		{
+			Mousemove,525, 900,2
+			send {LButton down}
+			Mousemove,525, 100,3
+			send {LButton up}
+			sleep 200		
+			click 525, 900
+			sleep 200
+		}
+		
 		loop
 		{
 			this.CloseAnySubWindow()

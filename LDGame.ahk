@@ -270,12 +270,16 @@ class LDGame
         }  
 		sleep 200
 		SendMode Event
-		Mousemove,520, 878
-		send {LButton down}
-		Mousemove,520, 90,3
-		send {LButton up}
-		click 520, 878	
-		sleep 200
+		loop 2 
+		{
+			Mousemove,520, 878
+			send {LButton down}
+			Mousemove,520, 100,3
+			send {LButton up}
+			click 520, 878	
+			sleep 200
+		}
+
 		loop
 		{
 			this.CloseAnySubWindow()

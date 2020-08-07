@@ -1,6 +1,6 @@
 ﻿#SingleInstance, Force
 SetBatchLines, -1
-#Include, 4399sfGame.ahk
+#Include, Functions.ahk
 SendMode Input 
 
 class gamesf

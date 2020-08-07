@@ -1,6 +1,7 @@
 ﻿#include gamesf.ahk
+#include .\Lib\Chrome.ahk
 
-class gamesf4399 extends gamesf 
+class 4399ch extends gamesf 
 {
 
 ; <===================================  Sub Classes for each page  ================================>
@@ -15,14 +16,66 @@ class gamesf4399 extends gamesf
 ; <==================================  Properties  ====================================>
 
 
-
 ; <================================  Constructure functions  ================================>
 
-	__New()
-	{}
+	__New(uname,isclose=1)
+	{
+		this.winName := uname
+		this.isclosed := isclose
+
+		try
+		{
+			IfWinExist, ahk_exe chrome.exe
+			{
+				WinActivate, ahk_exe chrome.exe			
+				WinGetPos, X, Y, W, H, ahk_exe chrome.exe	
+				if not (W=609 and H=1006)
+					Winmove,ahk_exe chrome.exe,,829,12,609,1006
+				LogToFile("Find existing chrome window.")
+				sleep 200
+			}
+			else
+			{
+				LogToFile("Going to open game.")
+				;this.Launch4399Game(seqid,windowname)
+				LogToFile("Game opened.")
+			}
+
+			if (Chromes := Chrome.FindInstances())
+				ChromeInst := {"base": Chrome, "DebugPort": Chromes.MinIndex()}
+			page := ChromeInst.GetPageByURL(uname,"contains")
+			if !IsObject(page)
+			{
+				LogToFile("The page in new doesnot find! ")
+				return
+			}
+			page.call("Page.bringToFront")
+			sleep 100
+		}
+		Catch e
+		{
+			LogToFile("Game open failed: " . e)
+			return
+		}
+	}
 
     __Delete()
-    {}
+    {
+		if this.isclosed
+		{
+			if (Chromes := Chrome.FindInstances())
+				ChromeInst := {"base": Chrome, "DebugPort": Chromes.MinIndex()}
+			page := ChromeInst.GetPageByURL(this.winName,"contains")
+			if !IsObject(page)
+			{
+				LogToFile("The page in delete() not find! ")
+				return
+			}
+			page.call("Page.close")
+			sleep 200
+		}
+		LogToFile("Log Ended for: " . this.winName . ".`n")
+	}
 	
 ; <==================================  Command Tasks  ====================================>
 
@@ -31,8 +84,24 @@ class gamesf4399 extends gamesf
 	
 
 
-; <========================  每周商技开启  ===========================>
+; <========================  商会相关  ===========================>
+isRongZiprepared()
+{
+	return 0
+}
 
+RongZiOKpublic()
+{
+	ToolTip, "RongZiOKPublicClick",825,25
+	sleep 5000
+}
+PreRongZi(which)
+{}
+RongZiOKinternal()
+{
+	ToolTip, "RongZiOKinternal",825,25
+	sleep 5000	
+}
 
 
 ; <========================  偷猎  ===========================>
@@ -44,125 +113,58 @@ class gamesf4399 extends gamesf
 	{	
 		WinClose Cisco AnyConnect				;The VPN windows may exist					
 		WinClose, IrfanView						;The capture screen error windows may exist	
-
+/*
 		WinGetActiveTitle, CurTitle
 		if (CurTitle = name)
 			Return
+*/
+		LogToFile("")
+		LogToFile("Log switch for: " . name)
 		
-		IfWinExist,%name%
+		IfWinExist,ahk_exe chrome.exe
 		{
-			WinSet, AlwaysOnTop, On, %name%
-			WinActivate, %name%			
-			LogToFile("")
-			LogToFile("Log switch for: " . name)
-			sleep 100
-			WinSet, AlwaysOnTop, Off, %name%			
+			WinActivate, ahk_exe chrome.exe		
+
+			if (Chromes := Chrome.FindInstances())
+				ChromeInst := {"base": Chrome, "DebugPort": Chromes.MinIndex()}
+			page := ChromeInst.GetPageByURL(name,"contains")
+			if !IsObject(page)
+			{
+				LogToFile("The page doesnot find! ")
+				throw "Chrome page not exist: " . name
+			}
+
+			page.call("Page.bringToFront")
+			sleep 200	
 		}
 		Else
 			throw "Window name not exist: " . name
 	}
 
-	Close4399Game(windowname)
+	Close4399Game(name)
 	{
-		WinClose, %windowname%
+		if (Chromes := Chrome.FindInstances())
+			ChromeInst := {"base": Chrome, "DebugPort": Chromes.MinIndex()}
+		page := ChromeInst.GetPageByURL(name,"contains")
+		if !IsObject(page)
+		{
+			LogToFile("The page doesnot find for: " . name)
+			return
+		}
+
+		page.call("Page.bringToFront")
+		sleep 200
 	}
 
 	Launch4399Game(Sequ,windowname)
 	{
-		WinClose, xiaoxiaoshoufu  ; Never use the default name, otherwise cannot get correct zhushu
-		Loop
-		{
-			WinClose, %windowname%
-			WinClose Cisco AnyConnect	;The VPN windows may exist	
-			WinClose, IrfanView			;The capture screen error windows may exist				
-
-			if A_Index > 2				
-					throw "Cannot launch Game!"
-			try 
-			{
-				run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
-				sleep 5000
-				WinGetActiveTitle, Title
-				if !InStr(Title, "xiaoxiao")
-					throw "The active windows is not named xiaoxiaoshoufu" 
-				WinSetTitle,%Title%,, %windowname%
-				WinSet, AlwaysOnTop, On, %windowname%				
-				Winmove,%windowname%,,829,23,600,959				
-				WaitPixelColor("0x232D4D",544, 84,15000)			;Waiting for up array		
-				loop
-				{	
-					if A_Index > 15
-					{
-						LogToFile("the up array clicked 15 times with no response!")
-						Continue 2
-					}
-
-					click, 566, 83
-					sleep 1000
-					if !PixelColorExist("0x232D4D",544, 84,10) ;Click the up array if it  exist
-						break
-				}
-
-				WaitPixelColor("0xFFFEF5",371, 686,15000) ;waiting for Start game button
-				sleep 500
-				click 343, 766
-				WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
-			}
-			Catch e
-			{
-				LogToFile("Start Game timeout, going to retry..." . e)
-				Continue
-			}
-	
-			sleep 2000
-			colcount := 0
-			
-			loop
-			{				
-				if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
-					colcount++
-				else
-					this.CloseAnySubWindow()
-
-				if colcount	> 1
-					break
-				if A_Index > 5
-				{
-					LogToFile("homepage not show expected and not sub window found!")
-					Continue 2
-				}
-				sleep 1000			
-			}
-		    WinSet, AlwaysOnTop, Off, %windowname%
-			break
-		}	
+		; not implement yet
 	}
 
 	Mid4399Game()
 	{
-		click 343, 766
-		WaitPixelColorNotExist("0xB5DF65",521, 601,8000)        ;Waiting for the login page gone.
-
-		sleep 2000
-		colcount := 0		
-		loop
-		{				
-			if PixelColorExist("0xCEC870",524, 91,10) ;the color in the top right corner
-				colcount++
-			else
-				this.CloseAnySubWindow()
-
-			if colcount	> 1
-				break
-			if A_Index > 5
-			{
-				LogToFile("homepage not show expected and not sub window found!")
-				throw,"homepage not show expected and not sub window found!"
-			}
-			sleep 1000			
-		}
+		; not implement yet
 	}
-
 
 
 }

@@ -56,10 +56,15 @@ class QHsfGame
 
 				If PixelColorExist("0xFE901A",365, 541,100)
 				{
-					click 365, 541 ;click the account button
-					sleep 1500
-					click 356, 545 ;click the manully login button
-					sleep 500
+					if (windowname = "dq") or (windowname = "88888")
+					{
+						click 365, 541 ;click the account button
+						sleep 1500
+						click 356, 545 ;click the manully login button
+						sleep 500
+					}
+					else
+						return
 				}
 				sleep 1000
 			}

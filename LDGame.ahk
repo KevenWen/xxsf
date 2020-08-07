@@ -493,10 +493,10 @@ class LDGame
 			sleep 200
 			Loop
 			{
-				if PixelColorExist("0xFFFFFF",148, 257,10) and !PixelColorExist("0xFFFFFF",148, 270,10)				
+				if PixelColorExist("0xFFFFFF",148, 257,10) and !PixelColorExist("0xFFFFFF",148, 294,10)				
 				{
 					LogToFile("Find Started window, going to Click AD. ")	
-					click 512, 290
+					click 489, 316
 					sleep 5000
 				}
 
@@ -504,8 +504,7 @@ class LDGame
 				{
 					LogToFile("Find Start button, going to Click it. ")	
 					click 278, 834 
-					sleep 10000
-					this.CloseAnySubWindow()
+					sleep 1000
 					Break
 				}
 

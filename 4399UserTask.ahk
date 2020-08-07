@@ -94,6 +94,13 @@ DC[]{
 	
 ; <==================================  Command Tasks  ====================================>
 
+	CloseGame(){
+		WinClose, % this.winName
+		sleep 100
+		WinMinimize, 360游戏大厅
+		LogToFile("Log Ended for: " . this.winName . ".`n")
+	}
+
 	ReloadGame(){
 		try{
 		this.PrepareGameWindow(this.winName)

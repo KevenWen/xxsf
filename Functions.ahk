@@ -112,7 +112,11 @@ WaitPixelColor(p_DesiredColor,p_PosX,p_PosY,p_TimeOut=1000)
             Return 1            
         } 
         If ( p_TimeOut ) && ( A_TickCount - l_Start >= p_TimeOut)
-            throw, % "WaitPixelColor has error, desired color: " . p_DesiredColor
+        {
+            Mousemove %p_PosX%, %p_PosY%
+            throw, % "WaitPixelColor has error, desired color: " . p_DesiredColor . ", now color: " . l_OutputColor
+        }
+
     }
 }
 

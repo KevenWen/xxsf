@@ -27,9 +27,7 @@ Task2020:
 
     If (TimeToMeet = 235459)
     {
-        if mod(A_YDay,4)=0            ;RongZi at 00:00
-            Gosub, Rongzi_0
-        else if mod(A_YDay,2) > 0     ;not a RongZi day
+        if mod(A_YDay,2) > 0     ;not a RongZi day
             Gosub, Rongzi_N
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
@@ -43,64 +41,7 @@ return
 ;<========================================= Sub Tasks 0 ================================================>
 
 Rongzi_0:
-
-    FileDelete % UserIni
-    FileAppend,,% UserIni               
-
-    new LDGame(0)
-    new 6322Game(0)
-    new QHUser("steve",0)
-    new QHUser("dq",0)
-    new 4399UserTask("sf06",0)
-
-    WaitForTime(235945)
-    GameRecordingOn()
-    WaitForTime(000000)
-    ;-------------------- ClickRongZiOK -----------------
-    new LDGame(0).RongZi() 
-    
-    if mod(A_YDay-118,7) = 0
-        new LDGame(0).OpenBusinessSkill()
- 
-    ;LDGame 5, 6322 2, DQ 3,steve 1
-    new 6322Game(0).RongZi()
-    new QHUser("steve",0).RongZi(1)
-    new QHUser("dq",0).RongZi(3)
-    new 4399UserTask("sf06",0).RongZi(4)  
-
-    ;-------------------- ZhuanPan ----------------------
-    new 4399UserTask("sf06",0).ZhuanPan(4,1)  
-    new 6322Game(0).ZhuanPan(3,1)
-    new QHUser("dq").ZhuanPan(2,0)
-  
-    ;-------------------- GetLand and hunter ------------------------
-    new 4399UserTask("sf06",0).Hunter(1)    
-    new 6322Game().GetLand()
-    new LDGame().GetLand()  
-    new QHUser("dq").GetLand()
-    new QHUser("steve").GetLand()
-    new 4399UserTask("sf06").GetLand()
-    ;-------------------  Verification 1 -------------------
-    LogtoFile("Start to do verification 1...")
-
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1 and mod(A_YDay-118,7) = 0
-            new LDGame(0).OpenBusinessSkill() 
-    }
-
-    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
-    if _RZ < 1
-        new LDGame(0).RongZi()
-
-    IniRead, _RZ, % UserIni,6322Player,RZ,0
-    if _RZ < 1
-        new 6322Game(0).RongZi()
-    LogtoFile("Verification 1 done.")
-        
-    GameRecordingOff()
-    WinClose 360游戏大厅
+;Nothing to do now
 Return
 
 ;<========================================= Sub Tasks N ================================================>
@@ -112,9 +53,10 @@ Rongzi_N:
     FileAppend,,% UserIni  
 
     L := new LDGame(0)
-    N := new 6322Game(0)       
-    D := new QHUser("dq",0)
+    N := new 6322Game(0)
+    Y := new YQXGame(0)         
     S := new QHUser("steve",0)
+    D := new QHUser("dq",0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -122,34 +64,17 @@ Rongzi_N:
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
-    For index,value in ["S","L","N","D"]
+    For index,value in ["Y","S","N","D","L"]
         %value%.GetLand()
-    WinClose dq
     winClose steve
+    winClose dq    
 
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
-    ;-------------------  Verification ------------------
-    sleep 1000
-    LogtoFile("Start to do verification...")
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            new LDGame().OpenBusinessSkill()
-    }
 
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
-    if _DC < 1
-        new LDGame().GetLand()
-    else
-       WinClose LDPlayer
-
-    IniRead, _DC, % UserIni,6322Player,DC,0
-    if _DC < 1
-        new 6322Game().GetLand()
-    else
-       WinClose 6322Player
+    WinClose YQXPlayer
+    WinClose LDPlayer
+    WinClose 6322Player
 
     GameRecordingOff()
     LogtoFile("Verification done.")
@@ -165,9 +90,10 @@ Rongzi_2:
     FileAppend,,% UserIni
     
     L := new LDGame(0)
-    N := new 6322Game(0)       
-    D := new QHUser("dq",0)
+    N := new 6322Game(0)      
     S := new QHUser("steve",0)
+    D := new QHUser("dq",0)    
+    Y := new YQXGame(0)
 
     WaitForTime(235945)
     GameRecordingOn()
@@ -177,18 +103,19 @@ Rongzi_2:
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    For index,value in ["S","L","N","D"]
+    For index,value in ["S","Y","D","L","N"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
-    For index,value in ["L","N"]
+    For index,value in ["Y","L","N"]
         %value%.RongZi()
-    D.RongZi(3)
-    S.RongZi(1) 
+    S.RongZi(1)
+    D.RongZi(3) 
+
     sleep 1000  
-    WinClose dq
     WinClose steve
+    WinClose dq
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
@@ -199,30 +126,15 @@ Rongzi_2:
         if _SJ < 1
             L.OpenBusinessSkill()
     }
-    IniRead, _RZ, % UserIni,LDPlayer,RZ,0
-    if _RZ < 1
-        L.RongZi()
-    
-    IniRead, _DC, % UserIni,LDPlayer,DC,0
-    if _DC < 1
-        L.GetLand()
-
+ 
+    WinClose YQXPlayer
     WinClose LDPlayer
-
-    IniRead, _RZ, % UserIni,6322Player,RZ,0
-    if _RZ < 1
-        N.RongZi()
-    
-    IniRead, _DC, % UserIni,6322Player,DC,0
-    if _DC < 1
-        N.GetLand()
-
     WinClose 6322Player
 
     GameRecordingOff()
-
-    LogtoFile("Verification done.")
+    sleep 5000
     WinClose 360游戏大厅
+
 Return
 
 ;<========================================= HotKeys ================================================>

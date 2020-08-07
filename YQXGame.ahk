@@ -490,7 +490,7 @@ class YQXGame
 			sleep, % s["short"]
 			SetDefaultMouseSpeed 30
 			SendMode Event
-			click, 39
+			click, 58
 			SetDefaultMouseSpeed 2	
 			SendMode Input				
 			sleep, % s["mid"]
@@ -520,14 +520,23 @@ class YQXGame
 		WinClose Cisco AnyConnect	;The VPN windows may exist	
 		WinClose, IrfanView			;The capture screen error windows may exist		
 		run %LDGamePath% launchex --index 1 --packagename "com.dh.flash.game.minigame"  
-		LogToFile("Start to Launch LDGame. ")			
+		LogToFile("Start to Launch LDGame. ")
+		
 		sleep 10000
 		IfWinExist, YQXPlayer
 		{
 			WinActivate, YQXPlayer
 			sleep 200
 			Loop
-			{
+			{				
+				/*
+				if PixelColorExist("0xFFFDFF",281, 272,100)  ;The AD window
+				{
+					LogToFile("Find last time play window, going to Click play. ")	
+					click 281, 374
+				}
+				*/
+
 				if PixelColorExist("0xFFFDFF",281, 272,100) or PixelColorExist("0xFFFDFF",272, 265,100) ;remote or local
 				{
 					LogToFile("Find last time play window, going to Click play. ")	
@@ -538,8 +547,7 @@ class YQXGame
 				{
 					LogToFile("Find Start button, going to Click it. ")	
 					click 279, 849
-					sleep 10000
-					this.CloseAnySubWindow()
+					sleep 1000
 					Break
 				}
 

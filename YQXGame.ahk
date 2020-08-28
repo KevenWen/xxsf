@@ -253,7 +253,7 @@ class YQXGame
 			sleep 200
 			click 281, 661     ;点击确定
 			sleep 200
-			loop 4
+			loop 6
 			{
 				click 355, 780	   ;再次确认注入
 				sleep 200
@@ -529,15 +529,13 @@ class YQXGame
 			sleep 200
 			Loop
 			{				
-				/*
-				if PixelColorExist("0xFFFDFF",281, 272,100)  ;The AD window
+				if PixelColorExist("0xE45C31",474, 259,10)  ;The AD window
 				{
-					LogToFile("Find last time play window, going to Click play. ")	
-					click 281, 374
+					LogToFile("Find AD window, going to Click close. ")	
+					click 474, 259
 				}
-				*/
 
-				if PixelColorExist("0xFFFDFF",281, 272,100) or PixelColorExist("0xFFFDFF",272, 265,100) ;remote or local
+				if PixelColorExist("0xFFFDFF",281, 272,100) or PixelColorExist("0xFFFDFF",272, 265,10) ;remote or local
 				{
 					LogToFile("Find last time play window, going to Click play. ")	
 					click 281, 374

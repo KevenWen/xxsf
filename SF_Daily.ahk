@@ -13,7 +13,7 @@ Return
 Task2020:
 
     FormatTime, TimeToMeet,,HHmmss
-    TimeToMeet = 235458
+    ;TimeToMeet = 235458
 
     If (TimeToMeet = 235458) ; Rong zi task, and also shopping / zhuanpan / openshangji
     {
@@ -28,7 +28,12 @@ Task2020:
 
         new 4399UserTask("xhhz",0).Getland()
         if mod(A_YDay,2) > 0
+        {
             new 4399UserTask("xhhz",0).RongZi(3)
+            new 4399UserTask("hou",0).RongZi(3)
+            new 4399UserTask("hou").Getland()            
+        }
+        new 4399UserTask("xhhz",0).ZhuanPan(7,0)
         new 4399UserTask("xhhz").Hunter(1)        
     }
 
@@ -71,11 +76,18 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper",0).OpenBusinessSkill()
 
+
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper",0).OpenBusinessSkill()
+
+    ;new 4399UserTask("sf06",0).ZhuanPan(4,0)
+    ;new 4399UserTask("long",0).ZhuanPan(3,0)  
+    ;new 4399UserTask("song",0).ZhuanPan(4,0)         
     For index,value in ["long","yun","song","sf06","supper"]
         %value%.CloseGame()
 
     ;---------------------- ZhuanPan -----------------------
-    ;new 4399UserTask("xhhz",0).ZhuanPan(6,0)
+    
     ;----------------------- Hunter ------------------------
     ;---------------------- Getland ------------------------    
     ;--------------------  Verification --------------------
@@ -97,7 +109,7 @@ Rongzi_N:
     
     GameRecordingOff()
     Sleep 5000
-    WinClose 360游戏大厅
+    ;WinClose 360游戏大厅
 Return
 ;<========================================= Sub Tasks 2 ================================================>
 
@@ -134,7 +146,7 @@ Rongzi_2:
 
     GameRecordingOff()
     sleep 5000
-    WinClose 360游戏大厅
+    ;WinClose 360游戏大厅
 Return
 
 

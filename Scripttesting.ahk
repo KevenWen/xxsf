@@ -13,7 +13,83 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
 
-    run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
+ run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
+ exitapp
+;s := new 4399UserTask("song")
+
+loop 5
+{
+    b := new QHUser("boy",0)
+    WinActivate,boy
+    sleep 500
+    if !PixelColorExist("0xF4452A",166, 773,10)        
+    {
+        click 565, 382
+        sleep 500        
+    }
+    click 166, 773
+    sleep 3200
+    ToolTip, startsearch....................., 10, 10
+    PixelSearch, Px, Py, 105, 246, 517, 622, 0xC71A13, 3, Fast RGB
+    ToolTip,, 10, 10
+    if ErrorLevel
+    {
+        ;LogToFile("Red color is not found in in 120, 268, 474, 605")
+        LogToFile("Red color is not found in 105, 246, 517, 6225")
+        click 480, 256
+        sleep 500
+        continue        
+    }
+    else
+    { 
+        LogToFile("Find red color in x,y: " . Px . "," . Py)
+        MouseMove, Px, Py
+
+        if (Px < 230) and (Px > 140)
+        {
+            click 480, 256
+            sleep 500
+            continue
+        }
+
+        if (Px < 415) and (Px > 350)
+        {
+            click 480, 256
+            sleep 500
+            continue
+        }
+
+    }
+/*
+    click 463, 261
+    sleep 500
+    s.CloseGame()
+    continue
+*/
+    sleep 2000
+    CaptureScreen()
+    Loop
+    {
+        if A_Index > 10
+            break
+
+        if !PixelColorExist("0xFBFBFB",479, 255,50)
+        {
+            b.CloseSpeSubWindow(1)
+            sleep 300
+        }
+        else
+            Break
+        
+        sleep 200
+    }
+    ;click 463, 259
+}
+
+
+    ;msgbox, % mod(A_YDay-1,2)
+    ;run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
+    ;run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "NoSleep.ahk" /out NoSleep.exe /icon "./img/i0.ico"
     ExitApp
 
 SetTitleMatchMode 2

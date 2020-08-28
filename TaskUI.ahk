@@ -224,7 +224,7 @@ CreateTask:
                 user.GetCard(2)
 
             if isCardSelected
-                user.GetCard(200)
+                user.GetCard(300)
 
             user := ""
         }

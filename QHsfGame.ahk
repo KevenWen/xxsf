@@ -39,7 +39,11 @@ class QHsfGame
 				}
 			WinClose, %windowname%
 			WinClose Cisco AnyConnect	;The VPN windows may exist
-			run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
+			if A_ComputerName = wyh31301
+				run %4399GamePath% -action:opengame -gid:1 -gaid:%Sequ%
+			else
+				run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
+			
 			sleep 5000
 			Winmove,%windowname%,,933,19,600,959			
 			loop
@@ -245,7 +249,7 @@ class QHsfGame
 			sleep 200
 			click 303, 609     ;点击确定
 			sleep 200
-    		loop 4
+    		loop 6
 			{
 				click 376, 726	   ;再次确认注入
 				sleep 200

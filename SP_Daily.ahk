@@ -58,13 +58,13 @@ Rongzi_N:
     S := new QHUser("steve",0)
     D := new QHUser("dq",0)
 
-    WaitForTime(235945)
+    WaitForTime(235955)
     GameRecordingOn()
-    WaitForTime(000001)   ;Make sure we are start after 00:00
+    WaitForTime(000002)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
-    For index,value in ["Y","S","N","D","L"]
+    For index,value in ["S","Y","L","N","D"]
         %value%.GetLand()
     winClose steve
     winClose dq    
@@ -95,16 +95,17 @@ Rongzi_2:
     D := new QHUser("dq",0)    
     Y := new YQXGame(0)
 
-    WaitForTime(235945)
+    WaitForTime(235955)
     GameRecordingOn()
-    WaitForTime(000001)   ;Make sure we are start after 00:00:01
+    WaitForTime(000002)   ;Make sure we are start after 00:00:01
 
     ;-------------------- Tasks ---------------------
+
+    For index,value in ["S","Y","L","D","N"]
+        %value%.GetLand()
+
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
-
-    For index,value in ["S","Y","D","L","N"]
-        %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
 
@@ -118,14 +119,8 @@ Rongzi_2:
     WinClose dq
 
     ;--------------------  Verification --------------------
-    LogtoFile("Start to do verification...")
-
     if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            L.OpenBusinessSkill()
-    }
+        L.OpenBusinessSkill()
  
     WinClose YQXPlayer
     WinClose LDPlayer

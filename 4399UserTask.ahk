@@ -325,6 +325,27 @@ DC[]{
 
 ; <========================  转盘  ===========================>
 
+	ZhuanPan1(){
+		try{
+		this.PrepareGameWindow(this.winName)
+		LogToFile("start to ZhuPan, times: " . times)
+		}
+		Catch e{
+		LogToFile("excetion while Sunkai or save_refresh: " . e)
+		}
+
+		try{
+		this.ShopHomepage.PlayZhuanPan1(times)
+		LogToFile("this.ShopHomepage.PlayZhuanPan done!")
+		Return 1
+		}
+		Catch e{
+		LogToFile("excetion while this.ShopHomepage.PlayZhuanPan: " . e)
+		Return 0
+		}
+	}
+
+
 	ZhuanPan(times,buytime=0,shoprefresh=0){
 		try{
 		this.PrepareGameWindow(this.winName)

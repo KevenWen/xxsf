@@ -44,7 +44,7 @@ return
 Timer_click37:
     click    
     countN+=1
-    if (countN > 36)
+    if (countN > 39)
     {
         toggle := !toggle
         SetTImer, Timer_click37, Off

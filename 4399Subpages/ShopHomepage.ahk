@@ -51,6 +51,27 @@ class ShopHomePage{
         sleep 1000
 	}
 
+	PlayZhuanPan1()
+	{
+        this.GetHomePage()
+		WaitPixelColorAndClickThrowErr("0xD17622",505, 387,2000) ;ZhuanPan
+		sleep 200
+		n=1  ; 10 x n times
+		while (n < times+1)
+		{
+			WaitPixelColorAndClickThrowErr("0xF4452A",163, 747,2000) ;One Times Button
+			sleep 200
+			LogToFile("one time..")	
+			PixelColorExist("0xFBFBFB",398, 267,5000) ;Finished once
+			sleep 200
+			click 398, 267
+			sleep 300
+			click 453, 388  ;Close double money window if any.
+			sleep 200
+			n++  
+		}
+        sleep 1000
+	}
 
     Reload()
     {

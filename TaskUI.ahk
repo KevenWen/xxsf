@@ -253,7 +253,7 @@ if (A_GuiEvent = "DoubleClick")
 {
     LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
     LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
-    if (userName = "88888" or userName = "steve" or userName = "dq" or userName = "boy")
+    if (userName = "eight" or userName = "steve" or userName = "dq" or userName = "boy")
         LaunchQHGamePri(userName,gameID)
     else if (userName = "LDGame")
         new LDGame(0)

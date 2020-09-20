@@ -33,7 +33,6 @@ Task2020:
             new 4399UserTask("hou",0).RongZi(3)
             new 4399UserTask("hou").Getland()            
         }
-        new 4399UserTask("xhhz",0).ZhuanPan(7,0)
         new 4399UserTask("xhhz").Hunter(1)        
     }
 
@@ -107,6 +106,9 @@ Rongzi_N:
     if mod(A_YDay-118,7) = 0
         new 4399UserTask("supper").OpenBusinessSkill()    
     
+    if mod(A_YDay-118,7) = 0
+        new 4399UserTask("supper").OpenBusinessSkill()        
+      
     GameRecordingOff()
     Sleep 5000
     ;WinClose 360游戏大厅

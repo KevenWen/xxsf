@@ -27,12 +27,14 @@ Task2020:
 
     If (TimeToMeet = 235459)
     {
-        if mod(A_YDay,2) > 0     ;not a RongZi day
+        if mod(A_YDay,4)=0            ;RongZi at 00:00
+            Gosub, Rongzi_0
+        else if mod(A_YDay,2) > 0     ;not a RongZi day
             Gosub, Rongzi_N
         else
             Gosub, Rongzi_2           ;RongZi one by one, delay 2 minutes at 00:02
         
-        UploadNetDisk()
+        ;UploadNetDisk()
         ExitApp
     }
 
@@ -41,7 +43,61 @@ return
 ;<========================================= Sub Tasks 0 ================================================>
 
 Rongzi_0:
-;Nothing to do now
+
+    ;------------------ Prepare game ---------------------
+    L := new LDGame(0)
+    N := new 6322Game(0)  
+    D := new QHUser("dq",0)
+    E := new QHUser("eight",0)
+    
+    song := new 4399UserTask("song",0)
+    long := new 4399UserTask("long",0)
+    sf06 := new 4399UserTask("sf06",0)
+    yun := new 4399UserTask("yun",0)
+    supper := new 4399UserTask("supper",0)
+    
+    For index,value in  ["long","yun","song","sf06","supper"]
+        %value%.PrepareRongZi(index)
+
+    WaitForTime(000000)
+    ;-------------------- ClickRongZiOK --------------------
+
+    For index,value in ["long","yun","song","sf06","supper"]
+        %value%.RongZi(index)
+
+    if mod(A_YDay-118,7) = 0
+        supper.OpenBusinessSkill()
+
+    if mod(A_YDay-118,7) = 0
+        supper.OpenBusinessSkill()
+
+    For index,value in ["long","yun","song","sf06","supper"]
+        %value%.CloseGame()
+
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
+
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
+
+    For index,value in ["N","L","E","D"]
+        %value%.GetLand()
+
+    WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
+    ;--------------------- Tasks ------------------------
+
+    For index,value in ["N","L","E","D"]
+        %value%.RongZi()
+
+    winClose dq    
+    winClose eight
+
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
+
+    WinClose LDPlayer
+    WinClose 6322Player
+
 Return
 
 ;<========================================= Sub Tasks N ================================================>
@@ -55,20 +111,20 @@ Rongzi_N:
     Y := new YQXGame(0)         
     S := new QHUser("steve",0)
     D := new QHUser("dq",0)
-    E := new QHUser("88888",0)        
+    E := new QHUser("eight",0)        
     B := new QHUser("boy",0)   
-    WaitForTime(235945)
-    GameRecordingOn()
+
     WaitForTime(000001)   ;Make sure we are start after 00:00
     ;--------------------- Tasks ------------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
-    For index,value in ["B","S","Y","N","L","E","D"]
+    For index,value in ["Y","S","B","N","L","E","D"]
         %value%.GetLand()
+
+    winClose dq
+    winClose eight
     winClose steve
-    winClose dq    
-    winClose 88888 
-    winClose boy    
+    winClose boy
 
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
@@ -77,7 +133,6 @@ Rongzi_N:
     WinClose LDPlayer
     WinClose 6322Player
 
-    GameRecordingOff()
     LogtoFile("Verification done.")
 
 Return
@@ -89,22 +144,41 @@ Rongzi_2:
     ;-------------------- Prepare game -----------------------
     
     L := new LDGame(0)
-    N := new 6322Game(0)      
+    N := new 6322Game(0) 
+    Y := new YQXGame(0)       
     S := new QHUser("steve",0)
     D := new QHUser("dq",0)
-    E := new QHUser("88888",0)             
-    Y := new YQXGame(0)
+    B := new QHUser("boy",0) 
+    H := new 4399user("happy",0)
 
+    song := new 4399UserTask("song",0)
+    long := new 4399UserTask("long",0)
+    sf06 := new 4399UserTask("sf06",0)
+    yun := new 4399UserTask("yun",0)
+    supper := new 4399UserTask("supper",0)
 
-    WaitForTime(235945)
-    GameRecordingOn()
+    WaitForTime(000000)
+    ;-------------------- ClickRongZiOK --------------------
+
+    For index,value in ["long","yun","song","sf06","supper"]
+        %value%.RongZi(index)
+
     WaitForTime(000001)   ;Make sure we are start after 00:00:01
 
     ;-------------------- Tasks ---------------------
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    For index,value in ["S","Y","D","L","E","N"]
+    if mod(A_YDay-118,7) = 0
+        L.OpenBusinessSkill()
+
+    if mod(A_YDay-118,7) = 0
+        supper.OpenBusinessSkill()
+
+    if mod(A_YDay-118,7) = 0
+        supper.OpenBusinessSkill()
+
+    For index,value in ["S","Y","B","D","L","E","N"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
@@ -114,27 +188,19 @@ Rongzi_2:
     S.RongZi(1)
     D.RongZi(3) 
 
+    For index,value in ["long","yun","song","sf06","supper"]
+        %value%.RongZi(index)
+
     sleep 1000  
     WinClose steve
     WinClose dq
 
     ;--------------------  Verification --------------------
     LogtoFile("Start to do verification...")
-
-    if mod(A_YDay-118,7) = 0
-    {
-        IniRead, _SJ, % UserIni,LDPlayer,SJ,0
-        if _SJ < 1
-            L.OpenBusinessSkill()
-    }
  
     WinClose YQXPlayer
     WinClose LDPlayer
     WinClose 6322Player
-
-    GameRecordingOff()
-    sleep 5000
-    WinClose 360游戏大厅
 
 Return
 

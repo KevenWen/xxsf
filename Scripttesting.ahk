@@ -12,7 +12,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 CoordMode, Pixel, window  
 CoordMode, Mouse, window
-
+;msgbox, % mod(A_YDay,4)
  run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
  exitapp
 ;s := new 4399UserTask("song")

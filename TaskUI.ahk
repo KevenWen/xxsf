@@ -12,7 +12,7 @@ SetBatchLines -1
 
 ;=========================== GUI Components ========================================
 
-Gui Add, Text, x25 y20 w124 h25 +0x200, 任务选项
+Gui Add, Text, x25 y20 w124 h25 +0x200, % "任务选项" A_YDay " Mod " Mod(A_YDay,4)
 
 Gui Add, Text, vExecTime x25 y55 w210 h23 +0x200, 执行时间（如000001, 留空立即执行)：
 Gui Add, Edit, vTimeStart x230 y55 w100 h21 +Number

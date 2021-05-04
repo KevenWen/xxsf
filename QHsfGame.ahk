@@ -44,6 +44,10 @@ class QHsfGame
 			else
 				run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
 			
+			if (windowname = "boy") or (windowname = "steve")
+			{
+				return
+			}
 			sleep 5000
 			Winmove,%windowname%,,933,19,600,959			
 			loop

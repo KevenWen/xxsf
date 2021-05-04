@@ -25,6 +25,15 @@ Task2020:
 
     ;TimeToMeet = 235459
 
+    If ((TimeToMeet = 000001) and mod(A_YDay-118,7) = 0)
+    {
+        new LDGame(0).OpenBusinessSkill()
+        new 4399UserTask("supper",0).OpenBusinessSkill()
+        new LDGame(0).OpenBusinessSkill()  
+        new 4399UserTask("supper",0).OpenBusinessSkill()
+        ExitApp
+    }
+/*
     If (TimeToMeet = 235459)
     {
         if mod(A_YDay,4)=0            ;RongZi at 00:00
@@ -37,10 +46,13 @@ Task2020:
         ;UploadNetDisk()
         ExitApp
     }
+*/
 
 return
 
 ;<========================================= Sub Tasks 0 ================================================>
+
+
 
 Rongzi_0:
 
@@ -49,6 +61,8 @@ Rongzi_0:
     N := new 6322Game(0)  
     D := new QHUser("dq",0)
     E := new QHUser("eight",0)
+    H := new 4399UserTask("hou",0)
+    X := new 4399UserTask("xhhz",0)
     
     song := new 4399UserTask("song",0)
     long := new 4399UserTask("long",0)
@@ -80,20 +94,19 @@ Rongzi_0:
     if mod(A_YDay-118,7) = 0
         L.OpenBusinessSkill()
 
-    For index,value in ["N","L","E","D"]
+    For index,value in ["N","L","E","D","H","X"]
         %value%.GetLand()
 
     WaitForTime(000230,0)   ;Make sure we are start after 00:02, start even if later than 02
     ;--------------------- Tasks ------------------------
 
-    For index,value in ["N","L","E","D"]
+    For index,value in ["N","L","E","D","H","X"]
         %value%.RongZi()
 
     winClose dq    
     winClose eight
-
-    if mod(A_YDay-118,7) = 0
-        L.OpenBusinessSkill()
+    winClose hou
+    winClose xhhz
 
     WinClose LDPlayer
     WinClose 6322Player

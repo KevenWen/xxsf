@@ -56,7 +56,8 @@ DC[]{
 			}
 			else
 			{
-				LogToFile("QH user not exist, terminated. ")
+				QHsfGame.LaunchQHGame(seqid,windowname)
+				;LogToFile("QH user not exist, terminated. ")
 				Return
 			}
 		}

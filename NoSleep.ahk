@@ -6,6 +6,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;#NoTrayIcon				; No system tray icon
 #SingleInstance force
 
+#Include, Functions.ahk
+
 ; ==================================== Void Computer sleep =================================
 
 SetTimer,KeepAwake,227000         ;run every 227 secs
@@ -20,43 +22,83 @@ return
 ; ====================================== click events =======================================
 
 global toggle := 0
-F4::                        ; Press F4 then keep clicking 36 times.
+F4::                        ; Press F4 then keep clicking 42 times.
     global countN = 0
     toggle := !toggle
     if (toggle){        
-        SetTimer, Timer_click37, 10
+        SetTimer, Timer_click42, 10
     } else {
-        SetTImer, Timer_click37, Off
+        SetTImer, Timer_click42, Off
     }
 return
 
-F3::                    ; Press F3 then keep clicking 12 times, usually for get land.
+F3::                    ; Press F3 then keep clicking 16 times, usually for get land.
     global countN = 0
     toggle := !toggle
     if (toggle){        
-        SetTimer, Timer_click12, 10
+        SetTimer, Timer_click16, 10
     } else {
-        SetTImer, Timer_click12, Off
+        SetTImer, Timer_click16, Off
     }
 return
 
+F2::                    ; Press F2 then keep clicking 3 times, usually for get land.
+    global countN = 0
+    toggle := !toggle
+    if (toggle){        
+        SetTimer, Timer_click3, 10
+    } else {
+        SetTImer, Timer_click3, Off
+    }
+return
 
-Timer_click37:
+F1::                    ; Press F2 then keep clicking times according to the window name.
+    global countN = 0
+    toggle := !toggle
+    if (toggle){        
+        SetTimer, Timer_click_specify, 10
+    } else {
+        SetTImer, Timer_click_specify, Off
+    }
+return
+
+Timer_click42:
     click    
     countN+=1
-    if (countN > 39)
+    if (countN > 41)
     {
         toggle := !toggle
-        SetTImer, Timer_click37, Off
+        SetTImer, Timer_click42, Off
     }      
 return
 
-Timer_click12:
+Timer_click16:
     click    
     countN+=1
-    if (countN > 11)
+    if (countN > 15)
     {
         toggle := !toggle
-        SetTImer, Timer_click12, Off
+        SetTImer, Timer_click16, Off
+    }      
+return
+
+Timer_click3:
+    click    
+    countN+=1
+    if (countN > 2)
+    {
+        toggle := !toggle
+        SetTImer, Timer_click3, Off
+    }      
+return
+
+Timer_click_specify:
+    click    
+    countN+=1
+    num := Getzhushu()
+    if (countN > num-1)
+    {
+        toggle := !toggle
+        SetTImer, Timer_click_specify, Off
     }      
 return

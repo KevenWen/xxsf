@@ -261,6 +261,35 @@ if (A_GuiEvent = "DoubleClick")
         new YQXGame(0)
     else if (userName = "6322Game")
         new 6322Game(0)
+    else if (userName = "all")
+    {
+        LaunchLDGames()
+        
+        new QHUser("eight")
+        new QHUser("boy")
+        new QHUser("dq")
+        new QHUser("steve")
+        new 4399UserTask("song",0)
+        new 4399UserTask("long",0)
+        new 4399UserTask("sf06",0)
+        new 4399UserTask("yun",0)
+        new 4399UserTask("supper",0)
+    } 
+    else if (userName = "allzz")
+    {
+        LaunchLDGames()
+        
+        new QHUser("eight")
+        new QHUser("boy")
+        new QHUser("dq")
+        new QHUser("steve")
+        new 4399UserTask("song",0)
+        new 4399UserTask("long",0)
+        new 4399UserTask("sf06",0)
+        new 4399UserTask("yun",0)
+        new 4399UserTask("supper",0)
+        new 4399UserTask("xxhz",0)
+    }             
     Else
         Launch4399GamePri(userName,gameID)
 }

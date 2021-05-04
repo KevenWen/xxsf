@@ -53,7 +53,7 @@ Loop, Parse, Content, `n, `r
 global s :={short: "200", mid: "500", long: "1000", longer: "2000", longest: "3000"}        ; sleep interval times
 
 global	HB := ["70, 910","145, 910","225, 910","305, 910","380, 910","445, 910"]            ; home buttons
-global	SB := ["100, 260","230,260","330,260","420,260"]                                            ; shanghui buttons
+global	SB := ["120, 260","200,260","280,260","360,260"]                                            ; shanghui buttons
 global	BC := ["170, 400","420, 400","310, 560","220, 690","410, 690"]                              ; 5个企业 coordinates
 global	TT := ["134, 481","391, 481","282, 605","232, 691","425, 691"]                              ; Tooltip positions
 global	PopWin := {okbtn: "324, 608", clobtn: "480, 266",qhclobtn: "500, 266",zhuziok: "507, 320"}  ; button positions
@@ -409,6 +409,32 @@ LaunchQHGamePri(windowname,Sequ)
         }        
     }    
 }
+
+	LaunchLDGames()
+	{
+		;qieziroumo
+		run %LDGamePath% launchex --index 0 --packagename "com.wydsf2.ewan"
+        sleep 3000
+        WinWait, LDPlayer
+        ; Move the window found by WinWait to the upper-left corner of the screen.
+        WinMove, 12,9
+        sleep 1000 
+		;duwoxing
+		run %LDGamePath% launchex --index 1 --packagename "com.dh.flash.game.minigame"
+        WinWait, YQXPlayer
+        WinMove, 360,9
+        sleep 1000
+		;yuqianxuan
+		run %LDGamePath% launchex --index 2 --packagename "com.tantanyou.sf"
+        WinWait, 6322Player
+        WinMove, 1300,9
+        sleep 1000
+		;6322
+		run %LDGamePath% launchex --index 3 --packagename "com.dh.flash.game.minigame"
+        WinWait, RealYQXPlayer
+        WinMove, 817,9
+        sleep 1000
+	}
 
 Getzhushu()
 {

@@ -289,7 +289,26 @@ if (A_GuiEvent = "DoubleClick")
         new 4399UserTask("yun",0)
         new 4399UserTask("supper",0)
         new 4399UserTask("xxhz",0)
+    }     
+    else if (userName = "allld")
+    {
+        LaunchLDGames()
     }             
+    else if (userName = "allqh")
+    {        
+        new QHUser("eight")
+        new QHUser("boy")
+        new QHUser("dq")
+        new QHUser("steve")
+    }
+    else if (userName = "all4399")
+    {
+        new 4399UserTask("song",0)
+        new 4399UserTask("long",0)
+        new 4399UserTask("sf06",0)
+        new 4399UserTask("yun",0)
+        new 4399UserTask("supper",0)
+    }        
     Else
         Launch4399GamePri(userName,gameID)
 }

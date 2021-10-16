@@ -44,6 +44,11 @@ class QHsfGame
 			else
 				run %4399GamePath% -action:opengame -gid:4 -gaid:%Sequ%
 			
+			Sleep, 5000
+			WinGetActiveTitle, Title
+			if !InStr(Title, "xxsf")
+				throw "The active windows is not named xxsf" 
+			WinSetTitle,%Title%,, %windowname%
 			if (windowname = "boy") or (windowname = "steve")
 			{
 				return
@@ -64,7 +69,7 @@ class QHsfGame
 
 				If PixelColorExist("0xFE901A",365, 541,100)
 				{
-					if (windowname = "dq") or (windowname = "88888")
+					if (windowname = "dq") or (windowname = "eight")
 					{
 						click 365, 541 ;click the account button
 						sleep 1500

@@ -19,10 +19,10 @@ class LandPage{
 	GetLandPage2()
 	{
 		this.GetLandPage()
-		WaitPixelColorAndClick("0xFFFFFF",284, 247,1000)	;地产投资白色点
+		WaitPixelColorAndClick("0xFFFFFF",155, 249,1000)	;地产投资白色点
 		if !PixelColorExist("0xFFFEF5",421, 393,2000)		;白色总点击数框
         {
-            WaitPixelColorAndClick("0xFFFFFF",284, 247,1000)	;click again just in case.
+            WaitPixelColorAndClick("0xFFFFFF",155, 249,1000)	;click again just in case.
             WaitPixelColor("0xFFFEF5",421, 393,2000)
         }    
 	}

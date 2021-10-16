@@ -62,6 +62,26 @@ F1::                    ; Press F2 then keep clicking times according to the win
     }
 return
 
+<+F1::                    ; Press Shift + F1 then keep clicking 8w times.
+    global countN = 0
+    toggle := !toggle
+    if (toggle){        
+        SetTimer, Timer_click8w, 10
+    } else {
+        SetTImer, Timer_click8w, Off
+    }
+return
+
+F5::                    ; Press Shift + F1 then keep clicking 8w times.
+    global countN = 0
+    toggle := !toggle
+    if (toggle){        
+        SetTimer, Timer_click8w, 10
+    } else {
+        SetTImer, Timer_click8w, Off
+    }
+return
+
 Timer_click42:
     click    
     countN+=1
@@ -85,10 +105,20 @@ return
 Timer_click3:
     click    
     countN+=1
-    if (countN > 2)
+    if (countN > 3)
     {
         toggle := !toggle
         SetTImer, Timer_click3, Off
+    }      
+return
+
+Timer_click8w:
+    click    
+    countN+=1
+    if (countN > 800000)
+    {
+        toggle := !toggle
+        SetTImer, Timer_click8w, Off
     }      
 return
 

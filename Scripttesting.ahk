@@ -15,7 +15,8 @@ CoordMode, Mouse, window
 ;msgbox, % mod(A_YDay,4)
 
 
-run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/i1.ico"
+run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/home.ico"
+run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI_new.ahk" /out TaskUI_new.exe /icon "./img/sz.ico"
 run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "NoSleep.ahk" /out NoSleep.exe /icon "./img/i0.ico"
  exitapp
 ;s := new 4399UserTask("song")

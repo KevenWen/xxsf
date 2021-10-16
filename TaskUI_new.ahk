@@ -30,7 +30,7 @@ Gui Add, CheckBox, visGInjection x25 yp+31 w45, 注资
 Gui Add, ComboBox, vInjectionSeq xp+50 w30, 1|2|3
 Gui Add, CheckBox, visShopping xp+60 yp+5 w55, 商店买
 Gui Add, ComboBox, vShoppingAt xp+55 yp+0 w40, 1-1|1-2|1-3|1-4|2-1|2-2|2-3|2-4
-Gui Add, CheckBox, visHunter xp+50 w81, 黑名单偷猎
+Gui Add, CheckBox, visHunter xp+50 w81, 猎手偷猎
 Gui Add, CheckBox, visLand xp+83 w81, 地产入驻
 
 
@@ -70,7 +70,7 @@ Gui Add, Button, x+M  w117 h40 gGuiClose, 关闭(F8)
 GuiControl, Disable, BtnPauseTask
 
 Menu, Tray, Icon, % A_ScriptDir . "\img\i1.ico"
-Gui Show, w588 h460, Tasks
+Gui Show, w588 h460, Tasks_new
 
 run % A_ScriptDir . "\NoSleep.exe"
 Return
@@ -204,7 +204,7 @@ CreateTask:
             }
 
             if isHunterSelected
-                user.Hunter(0)
+                user.Hunter(1)
 
             if isLandSelected
                 user.GetLand()
@@ -353,7 +353,7 @@ OpenSpy:
 return
 
 OpenNoSleep:
-    run % A_ScriptDir . "\NoSleep.exe"
+    ;run % A_ScriptDir . "\NoSleep.exe"
 return
 
 RunVSCode:

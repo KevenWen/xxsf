@@ -14,11 +14,33 @@ CoordMode, Pixel, window
 CoordMode, Mouse, window
 ;msgbox, % mod(A_YDay,4)
 
+; wb := ComObject("InternetExplorer.Application")
+; wb.Visible := True
+; wb.Navigate("Google.com")
+; ;wb := IEGet()
+; wb.Document.All.q.Value := "site:autohotkey.com tutorial"
 
+;  exitapp
+
+; password = Kalle
+; password := Recoding(password)
+; MsgBox, % password
+; password := Recoding(password)
+; MsgBox, % password
+; ExitApp
+
+; Recoding(Password)
+; {
+;    Loop, Parse, Password
+;     Pass2 .=Chr(Asc(A_LoopField)^0x1004)
+;    Return Pass2 
+; }
+
+
+; MsgBox("abcd")
 run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI.ahk" /out TaskUI.exe /icon "./img/home.ico"
-run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "TaskUI_new.ahk" /out TaskUI_new.exe /icon "./img/sz.ico"
 run "E:\AhkScriptManager-master\Compiler\Ahk2Exe.exe"  /in "NoSleep.ahk" /out NoSleep.exe /icon "./img/i0.ico"
- exitapp
+exitapp
 ;s := new 4399UserTask("song")
 
 loop 5

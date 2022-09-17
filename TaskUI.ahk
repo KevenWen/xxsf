@@ -35,11 +35,6 @@ Gui Add, CheckBox, visLand xp+83 w81, 地产入驻
 
 
 Gui Add, CheckBox, visCaiTuan x25 yp+29, 财团收钱
-Gui Add, CheckBox, visShare xp+110 , 分享20钻石
-Gui Add, CheckBox, visCard xp+105 , 刷拼图
-Gui Add, CheckBox, visOpenBS xp+83, 开商技
-
-Gui Add, CheckBox, visCalRZ x25 yp+29, 融资计算
 
 Gui Add, ListView, vUlist x420 y25 w145 h345 gMyListView, UserTitle..|ID|Num
 for key,num in numTable
@@ -48,18 +43,11 @@ for key,num in numTable
 
 Gui Add, Text, cRed vTips x25 y240 w164 h23 +0x200,
 
-Gui Add, CheckBox, visRecordingOn x25 y+m, 开启录屏
 Gui Add, CheckBox, visClose x+M, 任务完成关闭窗口
 
 Gui Add, Button, x23 yp+29 gOpenLog, 查看日志文件...  
-Gui Add, Button, x+M gOpenPic, 查看商品列表...  
 Gui Add, Button, x+M gOpenSpy, 打开WinSpy...  
 Gui Add, Button, x+M gOpenNoSleep, 运行NoSleep...
-
-Gui Add, Button, x23 yp+32 gRunVSCode, 打开VS_Code....
-Gui Add, Button, x+M gRunSF, 执行SF_Daily.....
-Gui Add, Button, x+M gRunSP, 执行SP_Daily.
-Gui Add, Button, x+M gRunSZ, 执行SZ_Daily..
 
 Gui Add, Button, vBtnCreateTask x22 y380 w115 h41 gCreateTask, 创建任务
 Gui Add, Button, x+M  w108 h42 gReloading, 重置任务(F12)
@@ -101,11 +89,6 @@ CreateTask:
     GuiControlGet, isLandSelected,, isLand    
 
     GuiControlGet, isCaiTuanSelected,, isCaiTuan
-    GuiControlGet, isShareSelected,, isShare
-    GuiControlGet, isCardSelected,, isCard
-    GuiControlGet, isOpenBSSelected,, isOpenBS
-
-    GuiControlGet, isCalRZSelected,, isCalRZ
 
     GuiControlGet, isRecordingOnSelected,, isRecordingOn            
     GuiControlGet, isClose,, isClose
@@ -162,11 +145,6 @@ CreateTask:
         }
     }
 
-;------------------------------ Recording Control -------------------------------------
-
-    if isRecordingOnSelected
-        GameRecordingOn()
-
 ;------------------------------ Loop the selected users --------------------------------
 
     ControlGet, SelectedUsers, List,Selected, SysListView321, Tasks
@@ -189,9 +167,6 @@ CreateTask:
 
             if isRongZiSelected
                 user.Rongzi(RongziWhich)
-
-            if isOpenBSSelected
-                user.OpenBusinessSkill()
 
             if isPlayTurnTableSelected
             {
@@ -217,15 +192,6 @@ CreateTask:
 
             if isCaiTuanSelected
                 user.GetCaiTuan()
-
-            if isCalRZSelected
-                user.CalcRongZi()
-
-            if isShareSelected
-                user.GetCard(2)
-
-            if isCardSelected
-                user.GetCard(300)
 
             user := ""
         }
@@ -254,86 +220,7 @@ if (A_GuiEvent = "DoubleClick")
 {
     LV_GetText(userName, A_EventInfo,1)  ; Get the text from the row's first field.
     LV_GetText(gameID, A_EventInfo,2)    ; Get the text from the row's second field.
-    if (userName = "eight" or userName = "steve" or userName = "dq" or userName = "boy")
-        LaunchQHGamePri(userName,gameID)
-    else if (userName = "LDGame")
-        new LDGame(0)
-    else if (userName = "YQXGame")
-        new YQXGame(0)
-    else if (userName = "6322Game")
-        new 6322Game(0)
-    else if (userName = "all")
-    {
-        LaunchLDGames()
-        
-        new QHUser("eight",0)
-        new QHUser("boy",0)
-        new QHUser("dq",0)
-        new QHUser("steve",0)
-        new 4399UserTask("song",0)
-        new 4399UserTask("long",0)
-        new 4399UserTask("sf06",0)
-        new 4399UserTask("yun",0)
-        new 4399UserTask("supper",0)
-    } 
-    else if (userName = "allzz")
-    {
-        LaunchLDGames()
-        
-        new QHUser("eight",0)
-        new QHUser("boy",0)
-        new QHUser("dq",0)
-        new QHUser("steve",0)
-        new 4399UserTask("song",0)
-        new 4399UserTask("long",0)
-        new 4399UserTask("sf06",0)
-        new 4399UserTask("yun",0)
-        new 4399UserTask("supper",0)
-        new 4399UserTask("xxhz",0)
-    }     
-    else if (userName = "allld")
-    {
-        LaunchLDGames()
-    }             
-    else if (userName = "allqh")
-    {        
-        new QHUser("eight",0)
-        new QHUser("boy",0)
-        new QHUser("dq",0)
-        new QHUser("steve",0)
-    }
-    else if (userName = "all4399")
-    {
-        new 4399UserTask("song",0)
-        new 4399UserTask("long",0)
-        new 4399UserTask("sf06",0)
-        new 4399UserTask("yun",0)
-        new 4399UserTask("supper",0)
-    }        
-    else if (userName = "allclose")
-    {
-        WinClose, ahk_exe 360Game.exe
-        WinClose, eight
-        WinClose, xxsf
-        WinClose, boy
-        WinClose, steve
-        WinClose, dq
-
-        WinClose, song
-        WinClose, long
-        WinClose, sf06
-        WinClose, yun
-        WinClose, supper
-        WinClose, xxhz
-
-        WinClose, LDPlayer
-        WinClose, YQXPlayer
-        WinClose, 6322Player
-        WinClose, RealYQXPlayer
-
-    }   
-    Else
-        Launch4399GamePri(userName,gameID)
+    Runuser(userName)
 }
 return
 
@@ -344,9 +231,10 @@ OpenLog:                                    ;打开日志文件
     run % A_ScriptDir . "\log\" . Dayfolder .  "_log.txt"
 return
 
-OpenPic:                                    ;打开商店列表
-    run % A_ScriptDir . "\img\ShoppingList.png"
-return
+Runuser(username){
+    run py "E:\AhkScriptManager-master\Py4399\foruser.py" %username%,E:\AhkScriptManager-master\Py4399
+}                                    ;login from python
+
 
 OpenSpy:
     run % A_ScriptDir . "\Lib\WindowSpy.ahk"
@@ -354,22 +242,6 @@ return
 
 OpenNoSleep:
     run % A_ScriptDir . "\NoSleep.exe"
-return
-
-RunVSCode:
-    run "C:\Users\keven\AppData\Local\Programs\Microsoft VS Code\Code.exe"
-return
-
-RunSF:
-    run % A_ScriptDir . "\SF_Daily.ahk"
-return
-
-RunSP:
-    run % A_ScriptDir . "\SP_Daily.ahk"
-return
-
-RunSZ:
-    run % A_ScriptDir . "\SZ_Daily.ahk"
 return
 
 GuiPause:
